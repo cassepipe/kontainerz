@@ -352,18 +352,25 @@ class map
 		insert(first, last);
 	}
 
+	/* Copy Constructor */ map(map const& other)
+		: root_(NIL), size_(0), node_alloc_(other.get_allocator()), compare_func_(other.key_comp()) // Is this necessary ?
+	{
+		insert(other.begin(), other.end()); // There must be a better way though
+	}
+
 	/*Destructor*/ ~map()
 	{
 		this->clear();
 	}
 
-	map operator=(map const& rhs)
+	map &operator=(map const& rhs)
 	{
 		if (this != &rhs)
 		{
 			this->clear();
-			insert(rhs.begin(), rhs.last); // There must be a better way though
+			insert(rhs.begin(), rhs.end()); // There must be a better way though
 		}
+		return *this;
 	}
 
 	mapped_type& operator[]( const Key& key )
