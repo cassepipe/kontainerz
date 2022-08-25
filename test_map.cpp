@@ -79,15 +79,15 @@ struct classcomp {
 	bool	operator() (const char & lhs, const char & rhs) const {return lhs<rhs;}
 };
 
-//template <typename T, typename U, typename Comp>
-//void	printMap( NAMESPACE::map<T, U, Comp> const & toPrint, std::string const & name ) {
+template <typename T, typename U, typename Comp>
+void	printMap( NAMESPACE::map<T, U, Comp> const & toPrint, std::string const & name ) {
 
-//    std::cout << name << ":" << std::endl;
-//    for ( typename NAMESPACE::map<T, U>::iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
-//        std::cout << "\tfirst: "<< it->first << " second: " << it->second << std::endl;
-//    }
-//    std::cout << std::endl;
-//}
+	std::cout << name << ":" << std::endl;
+	for ( typename NAMESPACE::map<T, U>::iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
+		std::cout << "\tfirst: "<< it->first << " second: " << it->second << std::endl;
+	}
+	std::cout << std::endl;
+}
 
 int	test_map_constructor()
 {
@@ -100,7 +100,7 @@ int	test_map_constructor()
 	//printMap(first, "First map");
 
 	NAMESPACE::map<char, int> second(first.begin(), first.end());
-	//printMap(second, "Second map");
+	printMap(second, "Second map");
 
 	NAMESPACE::map<char, int> third (second);
 	//printMap(third, "Third map");
