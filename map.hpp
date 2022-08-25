@@ -684,12 +684,12 @@ class map
 
 	  public:
 
-		/* Constructor */ aat_iterator(node_ptr_t root, node_ptr_t current)
+		/* Constructor */ aat_iterator(node_ptr_t const& root, node_ptr_t const& current)
 			: root_(root), current_(current)
 		{ }
 
 		template <typename InputIt>
-		/* Copy Constructor */ aat_iterator(InputIt  &other)
+		/* Copy Constructor */ aat_iterator(InputIt  const& other)
 			: root_(other.get_root()), current_(other.get_current())
 		{ }
 
@@ -788,8 +788,8 @@ class map
 			return tmp;
 		}
 
-		node_ptr_t get_root() { return root_; }
-		node_ptr_t get_current() { return current_; }
+		const node_ptr_t get_root() { return root_; }
+		const node_ptr_t get_current() { return current_; }
 
 	};
 
