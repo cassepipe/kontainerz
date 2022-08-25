@@ -689,7 +689,7 @@ class map
 		{ }
 
 		template <typename InputIt>
-		/* Copy Constructor */ aat_iterator(InputIt  const& other)
+		/* Copy Constructor */ aat_iterator(InputIt & other)
 		{
 			root_ = other.get_root();
 			current_ = other.get_current();
