@@ -8,7 +8,7 @@ int test_map()
 {
 	test_map_begin() ;
 	test_map_clear() ;
-	//test_map_constructor() ;
+	test_map_constructor() ;
 	//test_map_count() ;
 	//test_map_empty() ;
 	//test_map_end() ;
@@ -83,7 +83,7 @@ template <typename T, typename U, typename Comp>
 void	printMap( NAMESPACE::map<T, U, Comp> const & toPrint, std::string const & name ) {
 
 	std::cout << name << ":" << std::endl;
-	for ( typename NAMESPACE::map<T, U>::iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
+	for ( typename NAMESPACE::map<T, U>::const_iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
 		std::cout << "\tfirst: "<< it->first << " second: " << it->second << std::endl;
 	}
 	std::cout << std::endl;
