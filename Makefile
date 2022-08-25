@@ -6,6 +6,7 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
 DIFF			= diff -s
+DIFF			= meld
 CXX				= g++
 CXX				= clang++
 SHELL			= bash
@@ -68,7 +69,7 @@ run_ft:
 				./$(FT)
 diff:			
 				$(DIFF) <( ./${FT} )  <( ./${STD}  ) 
-				#$(DIFF) <( ./${FT} 2>&1)  <( ./${STD} 2>&1 ) 
+				@#$(DIFF) <( ./${FT} 2>&1)  <( ./${STD} 2>&1 ) 
 
 
 -include $(OBJ/FT_DEPS)

@@ -42,7 +42,7 @@ class map
 	typedef value_type const&                                   const_reference;
 	typedef typename Alloc::pointer                                     pointer;
 	typedef typename Alloc::const_pointer                         const_pointer;
-	typedef aat_iterator<Value>   			                           iterator;
+	typedef aat_iterator<Value>                                        iterator;
 	typedef aat_iterator<const Value>                            const_iterator;
 	typedef ft::reverse_iterator<iterator>                     reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
@@ -248,17 +248,18 @@ class map
 
 	/*INSERTION & DELETION*/
 
+	// insert a key and value
 	iterator insert_(Key const& k, Value const& v)
 	{
 		node_ptr_t ret = NULL;;
 
-		root_ = insert_(k, v, NIL, root_, &ret);
+		root_ = insert_rec_(k, v, NIL, root_, &ret);
 		// Need this line if we want root to be its own parent, need to change update_root if commmented out
 		root_->parent = root_;
 		return iterator(root_, ret);
 	}
 
-	node_ptr_t insert_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
+	node_ptr_t insert_rec_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
 	{
 		if (current_node == NIL) // fell out of the tree?
 		{
@@ -269,9 +270,9 @@ class map
 			*ret = current_node;
 		}
 		else if (compare_func_(k, current_node->key()))        // key is smaller?
-			current_node->left = insert_(k, v, current_node, current_node->left, ret);   // ->insert left
+			current_node->left = insert_rec_(k, v, current_node, current_node->left, ret);   // ->insert left
 		else if (compare_func_(current_node->key(), k))         // key is larger?
-			current_node->right = insert_(k, v, current_node, current_node->right, ret); // ->insert right
+			current_node->right = insert_rec_(k, v, current_node, current_node->right, ret); // ->insert right
 		else
 		{
 			current_node->value() = v;
@@ -281,14 +282,14 @@ class map
 	}
 
 	// This implementation does not bother with special cases that do not need rebalancing
-	node_ptr_t remove_(Key k, node_ptr_t node)
+	node_ptr_t remove_rec_(Key k, node_ptr_t node)
 	{
 		if (node == NIL) // Fell out of tree, key does not exist
 			return node; // No-op
 		else if (compare_func_(k, node->key()))
-			node->left = remove_(k, node->left); // Look in left subtree
+			node->left = remove_rec_(k, node->left); // Look in left subtree
 		else if (compare_func_(node->key(), k))
-			node->right = remove_(k, node->right); // Look in right subtree
+			node->right = remove_rec_(k, node->right); // Look in right subtree
 		else                                       // Found it !
 		{
 			if (node->right == NIL && node->left == NIL) // It's a leaf node, remove it
@@ -302,14 +303,14 @@ class map
 			{
 				node->key()   = node->right->key();
 				node->value() = node->right->value();
-				node->right   = remove_(node->right->key(), node->right);
+				node->right   = remove_rec_(node->right->key(), node->right);
 			}
 			else // Find succesor, copy its values and remove successor instead
 			{
 				node_ptr_t successor   = in_order_successor_(node);
 				node->key()              = successor->key();
 				node->value()            = successor->value();
-				node->right              = remove_(successor->key(), node->right);
+				node->right              = remove_rec_(successor->key(), node->right);
 			}
 		}
 		return fixup_after_delete_(node);
@@ -334,11 +335,22 @@ class map
 	/* INTERFACE */
 
   public:
-	/*Constructor*/ map(Alloc alloc = Alloc()) :
+	explicit /*Constructor*/ map(const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc()) :
 		root_(NIL),
 		size_(0),
-		node_alloc_(alloc) // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
+		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
+		compare_func_(comp)
 	{ }
+
+	template< class InputIt >
+	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
+		root_(NIL),
+		size_(0),
+		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
+		compare_func_(comp)
+	{
+		insert(first, last);
+	}
 
 	/*Destructor*/ ~map()
 	{
@@ -371,6 +383,7 @@ class map
 		root_ = clear_(root_);
 	}
 
+	// Insert Key Value pair
 	ft::pair<iterator, bool> insert(pair_type_t const& pair)
 	{
 		size_type size_before = size_;
@@ -382,12 +395,15 @@ class map
 			return ft::make_pair(it, true);
 	}
 
-	void insert(iterator first, iterator last)
+	// Insert range
+	template<typename InputIt>
+	void insert(InputIt first, InputIt last)
 	{
 		for (; first != last; ++first)
 			insert(*first);
 	}
 
+	// ...
 	iterator insert(iterator hint, pair_type_t const &new_val)
 	{
 		(void)hint;
@@ -397,7 +413,7 @@ class map
 	size_type erase(Key const& k)
 	{
 		size_type size_before = size_;
-		root_ = remove_(k, root_);
+		root_ = remove_rec_(k, root_);
 		if (size_before == size_)
 			return 0;
 		return 0;
@@ -672,13 +688,21 @@ class map
 			: root_(root), current_(current)
 		{ }
 
-		/* Copy Constructor */ aat_iterator(aat_iterator const &other)
-			: root_(other.root_), current_(other.current_)
+		template <typename InputIt>
+		/* Copy Constructor */ aat_iterator(InputIt  &other)
+			: root_(other.get_root()), current_(other.get_current())
 		{ }
 
-		/* Conversion */ operator map<Key, Value, KeyCmpFn, Alloc>::const_iterator()
+		template <typename K, typename V, typename KCF, typename A>
+		/* Conversion */ operator typename map<K, V, KCF, A>::iterator()
 		{
-			return map<Key, Value, KeyCmpFn, Alloc>::const_iterator(root_, current_);
+			return map<K, V, KCF, A>::iterator(root_, current_);
+		}
+
+		template <typename K, typename V, typename KCF, typename A>
+		/* Conversion */ operator typename map<K, V, KCF, A>::const_iterator()
+		{
+			return map<K, V, KCF, A>::const_iterator(root_, current_);
 		}
 
 		aat_iterator &operator=(iterator const &rhs)
@@ -692,9 +716,11 @@ class map
 		reference operator*() const { return reinterpret_cast<reference>(current_->pair); }
 		//reference operator*() const { return current_->pair; }
 
-		bool operator==(aat_iterator const &rhs) const { return current_ == rhs.current_; }
+		template <typename It>
+		bool operator==(It it) { return current_ == it.get_current(); }
 
-		bool operator!=(aat_iterator const &rhs) const { return current_ != rhs.current_; }
+		template <typename It>
+		bool operator!=(It it) { return current_ != it.get_current(); }
 
 		// iterator will cycle forward passing through an end's marker
 		aat_iterator &operator++()
@@ -761,6 +787,10 @@ class map
 			operator--();
 			return tmp;
 		}
+
+		node_ptr_t get_root() { return root_; }
+		node_ptr_t get_current() { return current_; }
+
 	};
 
   public:
