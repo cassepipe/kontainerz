@@ -112,7 +112,7 @@ int	test_map_constructor()
 
 
 	fourth.insert( first.begin(), first.end() );
-	printMap<char, int, classcomp>(fourth, "Fourth map");
+	//printMap<char, int, classcomp>(fourth, "Fourth map");
 
 	for ( char c = 0 ; c <= 10 ; c++)
 		fifth['a' + c]=c*10;

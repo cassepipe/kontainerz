@@ -303,15 +303,13 @@ class map
 			}
 			else if (node->left == NIL) // No left child ? Means it is a black leaf node. Replace with its red child
 			{
-				node->key()   = node->right->key();
-				node->value() = node->right->value();
+				node->pair   = node->right->pair;
 				node->right   = remove_rec_(node->right->key(), node->right);
 			}
 			else // Find succesor, copy its values and remove successor instead
 			{
 				node_ptr_t successor   = in_order_successor_(node);
-				node->key()              = successor->key();
-				node->value()            = successor->value();
+				node->pair              = successor->pair;
 				node->right              = remove_rec_(successor->key(), node->right);
 			}
 		}
