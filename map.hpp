@@ -29,7 +29,7 @@ class map
 	struct AA_node;
 
 	template<typename MaybeConstValue>
-	class aat_iterator;
+	class map_iterator;
 
   public:
 	typedef Key                                                        key_type;
@@ -43,8 +43,8 @@ class map
 	typedef value_type const&                                   const_reference;
 	typedef typename Alloc::pointer                                     pointer;
 	typedef typename Alloc::const_pointer                         const_pointer;
-	typedef aat_iterator<Value>                                        iterator;
-	typedef aat_iterator<const Value>                            const_iterator;
+	typedef map_iterator<Value>                                        iterator;
+	typedef map_iterator<const Value>                            const_iterator;
 	typedef ft::reverse_iterator<iterator>                     reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
@@ -684,7 +684,7 @@ class map
 
   protected:
 	template <typename MaybeConstValue>
-	class aat_iterator
+	class map_iterator
 	{
 	  public:
 		typedef typename
@@ -703,12 +703,12 @@ class map
 
 	  public:
 
-		/* Constructor */ aat_iterator(node_ptr_t const& root, node_ptr_t const& current)
+		/* Constructor */ map_iterator(node_ptr_t const& root, node_ptr_t const& current)
 			: root_(root), current_(current)
 		{ }
 
 		template <typename InputIt>
-		/* Copy Constructor */ aat_iterator(InputIt & other)
+		/* Copy Constructor */ map_iterator(InputIt & other)
 		{
 			root_ = other.get_root();
 			current_ = other.get_current();
@@ -726,7 +726,7 @@ class map
 			return map<K, V, KCF, A>::const_iterator(root_, current_);
 		}
 
-		aat_iterator &operator=(iterator const &rhs)
+		map_iterator &operator=(iterator const &rhs)
 		{
 			root_ = rhs.root_;
 			current_ = rhs.current_;
@@ -744,7 +744,7 @@ class map
 		bool operator!=(It it) { return current_ != it.get_current(); }
 
 		// iterator will cycle forward passing through an end's marker
-		aat_iterator &operator++()
+		map_iterator &operator++()
 		{
 			root_ = update_root(root_);
 			if (root_ == NIL) // Tree empty ?
@@ -772,7 +772,7 @@ class map
 		}
 
 		// iterator will cycle backward passing through an end's marker
-		aat_iterator &operator--()
+		map_iterator &operator--()
 		{
 			root_ = update_root(root_);
 			if (root_ == NIL) // Tree empty ?
@@ -795,16 +795,16 @@ class map
 			return *this;
 		}
 
-		aat_iterator operator++(int)
+		map_iterator operator++(int)
 		{
-			aat_iterator tmp = *this;
+			map_iterator tmp = *this;
 			operator++();
 			return tmp;
 		}
 
-		aat_iterator operator--(int)
+		map_iterator operator--(int)
 		{
-			aat_iterator tmp = *this;
+			map_iterator tmp = *this;
 			operator--();
 			return tmp;
 		}
