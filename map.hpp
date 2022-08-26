@@ -108,15 +108,15 @@ class map
 
 	struct AA_node : public AA_base_node
 	{
-		std::pair<const Key, Value> pair;
+		ft::pair<const Key, Value> pair;
 
 		/*Constructor*/ AA_node(Key k, Value v, AA_node *p) :
 			AA_base_node(NIL, NIL, p, 1),
 			pair(k, v)
 		{ }
 
-		typename std::pair<const Key, Value>::first_type & key() { return pair.first; }
-		typename std::pair<const Key, Value>::second_type & value() { return pair.second;}
+		typename ft::pair<const Key, Value>::first_type & key() { return pair.first; }
+		typename ft::pair<const Key, Value>::second_type & value() { return pair.second;}
 	};
 
 	/* HELPERS */
