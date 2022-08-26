@@ -29,8 +29,8 @@ class map
 	struct AA_base_node;
 	struct AA_node;
 
-	template<typename MaybeConstValue>
 	class map_iterator;
+	class map_const_iterator;
 
   public:
 	typedef Key                                                        key_type;
@@ -44,17 +44,17 @@ class map
 	typedef value_type const&                                   const_reference;
 	typedef typename Alloc::pointer                                     pointer;
 	typedef typename Alloc::const_pointer                         const_pointer;
-	typedef map_iterator<Value>                                        iterator;
-	typedef map_iterator<const Value>                            const_iterator;
+	typedef map_iterator                                        iterator;
+	typedef map_const_iterator                            const_iterator;
 	typedef ft::reverse_iterator<iterator>                     reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
   protected:
-	// the template keyword is only here so that the < can be correctly parsed
 	typedef ft::pair<const Key, Value>                              pair_type_t;
 	typedef AA_node                                                      node_t;
 	typedef AA_node *                                                node_ptr_t;
 	typedef typename
+	// the template keyword is only here so that the < can be correctly parsed
 	Alloc::template rebind<node_t>::other                          node_alloc_t;
 
 	// Were we able to use c++11, we would have used std::allocator_traits like this
@@ -682,19 +682,14 @@ class map
 	/* NESTED ITERATOR CLASSES */
 
   protected:
-	template <typename MaybeConstValue>
 	class map_iterator
 	{
 	  public:
-		typedef typename
-		map<const Key, MaybeConstValue, KeyCmpFn, Alloc>::value_type value_type;
 		typedef value_type&                                           reference;
 		typedef value_type*                                             pointer;
 		typedef bidirectional_iterator_tag                    iterator_category;
 		typedef std::ptrdiff_t                                  difference_type;
 	  protected:
-		typedef
-		map<Key, Value, KeyCmpFn, Alloc>::node_ptr_t         node_ptr_t;
 
 		/* STATE */
 		node_ptr_t             root_;
@@ -811,8 +806,133 @@ class map
 
 		const node_ptr_t get_root() { return root_; }
 		const node_ptr_t get_current() { return current_; }
+	}; // map_iterator
 
-	};
+	class map_const_iterator
+	{
+	  public:
+		typedef value_type&                                           reference;
+		typedef value_type*                                             pointer;
+		typedef bidirectional_iterator_tag                    iterator_category;
+		typedef std::ptrdiff_t                                  difference_type;
+	  protected:
+
+		/* STATE */
+		node_ptr_t             root_;
+		node_ptr_t             current_;
+
+	  public:
+
+		/* Constructor */ map_const_iterator(node_ptr_t const& root, node_ptr_t const& current)
+			: root_(root), current_(current)
+		{ }
+
+		template <typename InputIt>
+		/* Copy Constructor */ map_const_iterator(InputIt & other)
+			: root_(other.get_root()), current_(other.get_current())
+		{ }
+
+		template <typename KCF>
+		/* Conversion */ operator typename map<Key, Value, KCF, Alloc>::iterator()
+		{
+			// Class typedef handles the rebinding
+			return map<Key, Value, KCF, Alloc>::iterator(root_, current_);
+		}
+
+		template <typename KCF>
+		/* Conversion */ operator typename map<Key, Value, KCF, Alloc>::const_iterator()
+		{
+			// Class typedef handles the rebinding
+			return map<Key, Value, KCF, Alloc>::const_iterator(root_, current_);
+		}
+
+
+		map_const_iterator &operator=(iterator const &rhs)
+		{
+			root_ = rhs.root_;
+			current_ = rhs.current_;
+			return *this;
+		}
+		pointer operator->() const { return &(this->operator*()); }
+
+		reference operator*() const { return reinterpret_cast<reference>(current_->pair); }
+		//reference operator*() const { return current_->pair; }
+
+		template <typename It>
+		bool operator==(It it) { return current_ == it.get_current(); }
+
+		template <typename It>
+		bool operator!=(It it) { return current_ != it.get_current(); }
+
+		// iterator will cycle forward passing through an end's marker
+		map_const_iterator &operator++()
+		{
+			root_ = update_root(root_);
+			if (root_ == NIL) // Tree empty ?
+				current_ = NULL;
+			else if (current_ == NULL) 
+				current_ = leftmost_(root_);
+			// If tree was empty but stuff got in since last call
+			 // If has successor...
+			else if (current_->right != NIL)
+				current_ = leftmost_(current_->right); // ... goes to successor
+			// Else if it has no successor under itself
+			else if (current_ == current_->parent->left) // If it is its parent's left child
+				current_ = current_->parent; // ... it becomes its parent
+			// Then it's its parent's right child
+			else 
+			{
+				while (current_ == current_->parent->right) // Go up the succession of right children
+					current_ = current_->parent;
+				if (current_ == current_->parent->left) // if it is its parent's left child
+					current_ = current_->parent; // ... it becomes its parent
+				else
+					current_ = NULL; // ..else NULL, end is reached
+			}
+			return *this;
+		}
+
+		// iterator will cycle backward passing through an end's marker
+		map_const_iterator &operator--()
+		{
+			root_ = update_root(root_);
+			if (root_ == NIL) // Tree empty ?
+				current_ = NULL;
+			else if (current_ == NULL) // Reached the end ?
+				current_ = rightmost_(root_);
+			else if (current_->left != NIL)
+				current_ = rightmost_(current_->left);
+			else if (current_ == current_->parent->right)
+				current_ = current_->parent;
+			else 
+			{
+				while (current_ == current_->parent->left) // Go up the succession of left children
+					current_ = current_->parent;
+				if (current_ == current_->parent->right) // if it is its parent's right child
+					current_ = current_->parent; // ... it becomes its parent
+				else
+					current_ = NULL; // ..else NULL, end is reached
+			}
+			return *this;
+		}
+
+		map_const_iterator operator++(int)
+		{
+			map_const_iterator tmp = *this;
+			operator++();
+			return tmp;
+		}
+
+		map_const_iterator operator--(int)
+		{
+			map_const_iterator tmp = *this;
+			operator--();
+			return tmp;
+		}
+
+		const node_ptr_t get_root() { return root_; }
+		const node_ptr_t get_current() { return current_; }
+	}; // map_const_iterator
 
   public:
 	iterator begin()
