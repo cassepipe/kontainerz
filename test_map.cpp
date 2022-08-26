@@ -9,7 +9,7 @@ int test_map()
 	test_map_begin() ;
 	test_map_clear() ;
 	test_map_constructor() ;
-	//test_map_count() ;
+	test_map_count() ;
 	//test_map_empty() ;
 	//test_map_end() ;
 	//test_map_equal_range() ;
@@ -97,13 +97,13 @@ int	test_map_constructor()
 	first['b']=30;
 	first['c']=50;
 	first['d']=70;
-	//printMap(first, "First map");
+	printMap(first, "First map");
 
 	NAMESPACE::map<char, int> second(first.begin(), first.end());
 	printMap(second, "Second map");
 
 	NAMESPACE::map<char, int> third (second);
-	//printMap(third, "Third map");
+	printMap(third, "Third map");
 
 	NAMESPACE::map<char, int, classcomp> fourth;
 
