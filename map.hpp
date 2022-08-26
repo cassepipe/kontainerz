@@ -1,4 +1,5 @@
 #ifndef MAP_HPP
+
 #define MAP_HPP
 
 #include <cstddef>
@@ -709,20 +710,23 @@ class map
 
 		template <typename InputIt>
 		/* Copy Constructor */ map_iterator(InputIt & other)
-			: root_(get_root()), current_(get_current())
+			: root_(other.get_root()), current_(other.get_current())
 		{ }
 
-		template <typename K, typename V, typename KCF, typename A>
-		/* Conversion */ operator typename map<K, V, KCF, A>::iterator()
+		template <typename KCF>
+		/* Conversion */ operator typename map<Key, Value, KCF, Alloc>::iterator()
 		{
-			return map<K, V, KCF, A>::iterator(root_, current_);
+			// Class typedef handles the rebinding
+			return map<Key, Value, KCF, Alloc>::iterator(root_, current_);
 		}
 
-		template <typename K, typename V, typename KCF, typename A>
-		/* Conversion */ operator typename map<K, V, KCF, A>::const_iterator()
+		template <typename KCF>
+		/* Conversion */ operator typename map<Key, Value, KCF, Alloc>::const_iterator()
 		{
-			return map<K, V, KCF, A>::const_iterator(root_, current_);
+			// Class typedef handles the rebinding
+			return map<Key, Value, KCF, Alloc>::const_iterator(root_, current_);
 		}
+
 
 		map_iterator &operator=(iterator const &rhs)
 		{
