@@ -8,6 +8,7 @@
 #include <memory>
 #include <sstream>
 #include <stack>
+#include <exception>
 #include <stdexcept>
 #include <utility>
 
@@ -373,6 +374,8 @@ class map
 		return *this;
 	}
 
+	// Element Access
+
 	mapped_type& operator[]( const Key& key )
 	{
 		// Using operator[] requires that the mapped type be default constructible
@@ -383,7 +386,16 @@ class map
 		return (*it).second;
 	}
 
-	// MODIFIERS
+	mapped_type& at( const Key& key)
+	{
+		iterator it = find(key);
+		if (it == this->end())
+			throw std::out_of_range("ft::map::at() : Invalid key");
+		else
+			return (*it).second;
+	}
+
+	// Modifiers
 
 	void clear()
 	{
