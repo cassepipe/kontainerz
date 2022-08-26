@@ -709,10 +709,8 @@ class map
 
 		template <typename InputIt>
 		/* Copy Constructor */ map_iterator(InputIt & other)
-		{
-			root_ = other.get_root();
-			current_ = other.get_current();
-	   	}
+			: root_(get_root()), current_(get_current())
+		{ }
 
 		template <typename K, typename V, typename KCF, typename A>
 		/* Conversion */ operator typename map<K, V, KCF, A>::iterator()
