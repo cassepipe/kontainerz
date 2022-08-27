@@ -155,8 +155,8 @@ class map_iterator
 			return tmp;
 		}
 
-		const node_ptr_t get_root() { return root_; }
-		const node_ptr_t get_current() { return current_; }
+		node_ptr_t get_root() { return root_; }
+		node_ptr_t get_current() { return current_; }
 }; // map_iterator
    
   
@@ -301,8 +301,8 @@ class map_const_iterator
 			return tmp;
 		}
 
-		const node_ptr_t get_root() { return root_; }
-		const node_ptr_t get_current() { return current_; }
+		node_ptr_t get_root() { return root_; }
+		node_ptr_t get_current() { return current_; }
 }; // map_const_iterator
    
 #undef NIL
