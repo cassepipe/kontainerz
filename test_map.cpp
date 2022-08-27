@@ -43,7 +43,7 @@ int	test_map_begin()
 
 	//tree.print_dot();
 
-	for ( NAMESPACE::map<char, int>::iterator it = tree.begin(); it != tree.end(); ++it)
+	for ( map<char, int>::iterator it = tree.begin(); it != tree.end(); ++it)
 		std::cout << it->first << "=>" << it->second << std::endl;
 
 	return 0;
