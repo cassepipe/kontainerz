@@ -116,7 +116,7 @@ int	test_map_constructor()
 
 	for ( char c = 0 ; c <= 10 ; c++)
 		fifth['a' + c]=c*10;
-	//printMap< char, int, bool(*)(char, char) >(fifth, "Fifth map");
+	printMap< char, int, bool(*)(char, char) >(fifth, "Fifth map");
 
 	return 0;
 }
