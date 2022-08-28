@@ -51,14 +51,14 @@ int	test_map_begin()
 
 int	test_map_clear()
 {
-	NAMESPACE::map<char, int> myMap;
+	map<char, int> myMap;
 
 	myMap['x']=100;
 	myMap['y']=200;
 	myMap['z']=300;
 
 	std::cout << "myMap contains:" << std::endl;
-	for ( NAMESPACE::map<char, int>::iterator it = myMap.begin(); it != myMap.end(); ++it)
+	for ( map<char, int>::iterator it = myMap.begin(); it != myMap.end(); ++it)
 		std::cout << it->first << "=>" << it->second << std::endl;
 
 	myMap.clear();
@@ -66,7 +66,7 @@ int	test_map_clear()
 	myMap['b']=2202;
 
 	std::cout << "myMap contains:" << std::endl;
-	for ( NAMESPACE::map<char, int>::iterator it = myMap.begin(); it != myMap.end(); ++it)
+	for ( map<char, int>::iterator it = myMap.begin(); it != myMap.end(); ++it)
 		std::cout << it->first << "=>" << it->second << std::endl;
 
 	return 0;
@@ -80,10 +80,10 @@ struct classcomp {
 };
 
 template <typename T, typename U, typename Comp>
-void	printMap( NAMESPACE::map<T, U, Comp> const & toPrint, std::string const & name ) {
+static void	printMap( map<T, U, Comp> const & toPrint, std::string const & name ) {
 
 	std::cout << name << ":" << std::endl;
-	for ( typename NAMESPACE::map<T, U>::const_iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
+	for ( typename map<T, U>::const_iterator it = toPrint.begin() ; it != toPrint.end() ; it ++ ) {
 		std::cout << "\tfirst: "<< it->first << " second: " << it->second << std::endl;
 	}
 	std::cout << std::endl;
@@ -91,7 +91,7 @@ void	printMap( NAMESPACE::map<T, U, Comp> const & toPrint, std::string const & n
 
 int	test_map_constructor()
 {
-	NAMESPACE::map<char, int> first;
+	map<char, int> first;
 
 	first['a']=10;
 	first['b']=30;
@@ -99,16 +99,16 @@ int	test_map_constructor()
 	first['d']=70;
 	printMap(first, "First map");
 
-	NAMESPACE::map<char, int> second(first.begin(), first.end());
+	map<char, int> second(first.begin(), first.end());
 	printMap(second, "Second map");
 
-	NAMESPACE::map<char, int> third (second);
+	map<char, int> third (second);
 	printMap(third, "Third map");
 
-	NAMESPACE::map<char, int, classcomp> fourth;
+	map<char, int, classcomp> fourth;
 
 	bool(*fn_pt)(char,char) = fncomp;
-	NAMESPACE::map<char, int, bool(*)(char,char)> fifth (fn_pt);
+	map<char, int, bool(*)(char,char)> fifth (fn_pt);
 
 
 	fourth.insert( first.begin(), first.end() );
@@ -123,7 +123,20 @@ int	test_map_constructor()
 
 int	test_map_count()
 {
+	map<char, int> myMap;
+	char	c;
 
+	myMap['a']=101;
+	myMap['c']=202;
+	myMap['f']=303;
+
+	for ( c = 'a'; c < 'h'; c++) {
+
+		std::cout << c << " is ";
+		if ( myMap.count(c) == 0 )
+			std::cout << "not ";
+		std::cout << "an element of myMap" << std::endl;
+	}
 	return 0;
 }
 

@@ -421,11 +421,11 @@ class map
 		while (current != NIL)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
-			searched_is_strictly_greater = compare_func_(current->key, key);
+			searched_is_strictly_greater = compare_func_(current->key(), key);
 			if (searched_is_strictly_less)
-				current = current->_left;
+				current = current->left;
 			else if (searched_is_strictly_greater)
-				current = current->_right;
+				current = current->right;
 			else // they're equal
 				return iterator(root_, current);
 		}
@@ -442,11 +442,11 @@ class map
 		while (current != NIL)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
-			searched_is_strictly_greater = compare_func_(current->key, key);
+			searched_is_strictly_greater = compare_func_(current->key(), key);
 			if (searched_is_strictly_less)
-				current = current->_left;
+				current = current->left;
 			else if (searched_is_strictly_greater)
-				current = current->_right;
+				current = current->right;
 			else // they're equal
 				return const_iterator(root_, current);
 		}
