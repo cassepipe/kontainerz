@@ -1,7 +1,7 @@
 #include "test.h"
 #include "test_vector.hpp"
 
-int  test_vector()
+void  test_vector()
 {
 	test_vector_assign();
 	test_vector_at();
@@ -31,132 +31,132 @@ int  test_vector()
 	test_vector_swap_overload();
 }
 
-int  test_vector_assign()
+void  test_vector_assign()
 {
 
 }
 
-int  test_vector_at()
+void  test_vector_at()
 {
 
 }
 
-int  test_vector_back()
+void  test_vector_back()
 {
 
 }
 
-int  test_vector_begin()
+void  test_vector_begin()
 {
 
 }
 
-int  test_vector_capacity()
+void  test_vector_capacity()
 {
 
 }
 
-int  test_vector_clear()
+void  test_vector_clear()
 {
 
 }
 
-int  test_vector_constructors()
+void  test_vector_constructors()
 {
 
 }
 
-int  test_vector_empty()
+void  test_vector_empty()
 {
 
 }
 
-int  test_vector_end()
+void  test_vector_end()
 {
 
 }
 
-int  test_vector_erase()
+void  test_vector_erase()
 {
 
 }
 
-int  test_vector_front()
+void  test_vector_front()
 {
 
 }
 
-int  test_vector_get_allocator()
+void  test_vector_get_allocator()
 {
 
 }
 
-int  test_vector_insert()
+void  test_vector_insert()
 {
 
 }
 
-int  test_vector_max_size()
+void  test_vector_max_size()
 {
 
 }
 
-int  test_vector_operator_bracket()
+void  test_vector_operator_bracket()
 {
 
 }
 
-int  test_vector_operator_equal()
+void  test_vector_operator_equal()
 {
 
 }
 
-int  test_vector_pop_back()
+void  test_vector_pop_back()
 {
 
 }
 
-int  test_vector_push_back()
+void  test_vector_push_back()
 {
 
 }
 
-int  test_vector_rbegin()
+void  test_vector_rbegin()
 {
 
 }
 
-int  test_vector_relational_operators()
+void  test_vector_relational_operators()
 {
 
 }
 
-int  test_vector_rend()
+void  test_vector_rend()
 {
 
 }
 
-int  test_vector_reserve()
+void  test_vector_reserve()
 {
 
 }
 
-int  test_vector_resize()
+void  test_vector_resize()
 {
 
 }
 
-int  test_vector_size()
+void  test_vector_size()
 {
 
 }
 
-int  test_vector_swap()
+void  test_vector_swap()
 {
 
 }
 
-int  test_vector_swap_overload()
+void  test_vector_swap_overload()
 {
 
 }

@@ -12,7 +12,6 @@
 #include <stdexcept>
 #include <utility>
 
-#include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
 #include "pair.hpp"
 #include "algorithm.hpp"
@@ -20,7 +19,7 @@
 #include "map_node.hpp"
 #include "map_iterator.hpp"
 
-#define NIL get_nil<value_type>()
+#define NIL get_nil<value_type, Alloc>()
 
 namespace ft
 {
@@ -45,16 +44,16 @@ class map
 	typedef value_type const&                                   const_reference;
 	typedef typename Alloc::pointer                                     pointer;
 	typedef typename Alloc::const_pointer                         const_pointer;
-	typedef ft::map_iterator<value_type>                               iterator;
+	typedef ft::map_iterator<value_type, Alloc>                               iterator;
 	//typedef ft::map_iterator<const value_type>                   const_iterator;
-	typedef ft::map_const_iterator< value_type>                   const_iterator;
+	typedef ft::map_const_iterator< value_type, Alloc>                   const_iterator;
 	typedef ft::reverse_iterator<iterator>                     reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
   protected:
 	typedef ft::pair<const Key, Value>                              pair_type_t;
-	typedef map_node<value_type>                                         node_t;
-	typedef map_node<value_type> *                                   node_ptr_t;
+	typedef map_node<value_type, Alloc>                                  node_t;
+	typedef node_t *                                                 node_ptr_t;
 	typedef typename
 	// the template keyword is only here so that the < can be correctly parsed
 	Alloc::template rebind<node_t>::other                          node_alloc_t;
@@ -185,9 +184,9 @@ class map
 		if (current_node == NIL) // fell out of the tree?
 		{
 			++size_;
-			// create a new leaf node
-			current_node = node_alloc_.allocate(1);
-			node_alloc_.construct(current_node, node_t(k, v, parent));
+			 current_node = node_alloc_.allocate(1);
+			 node_alloc_.construct(current_node, node_t(k, v, parent));
+			 //new (current_node) node_t(k, v, parent); // Placement new does not allocate and temp object
 			*ret = current_node;
 		}
 		else if (compare_func_(k, current_node->key()))        // key is smaller?
@@ -200,6 +199,22 @@ class map
 			*ret = current_node;
 		}
 		return split_(skew_(current_node)); // restructure and return result
+	}
+
+	bool is_a_left_child_(node_ptr_t node)
+	{
+		if (node == node->parent->left)
+			return true;
+		else 
+			return false;
+	}
+
+	bool is_a_right_child_(node_ptr_t node)
+	{
+		if (node == node->parent->right)
+			return true;
+		else 
+			return false;
 	}
 
 	// This implementation does not bother with special cases that do not need rebalancing
@@ -222,14 +237,19 @@ class map
 			}
 			else if (node->left == NIL) // No left child ? Means it is a black leaf node. Replace with its red child
 			{
-				node->pair   = node->right->pair;
-				node->right   = remove_rec_(node->right->key(), node->right);
+				// Swap node and and right child's pair
+				std::swap(node->pair, node->right->pair);
+				
+				node->right   = remove_rec_(k, node->right);
 			}
 			else // Find succesor, copy its values and remove successor instead
 			{
 				node_ptr_t successor   = in_order_successor_(node);
-				node->pair              = successor->pair;
-				node->right              = remove_rec_(successor->key(), node->right);
+
+				// Swap node and successor's pairs
+				std::swap(node->pair, successor->pair);
+
+				node->right              = remove_rec_(k, node->right);
 			}
 		}
 		return fixup_after_delete_(node);
@@ -358,13 +378,13 @@ class map
 
 	void erase( iterator it )
 	{
-		erase(*it->key());
+		this->erase((*it).first);
 	}
 
 	void erase( iterator first, iterator last )
 	{
 		for (; first != last ; ++first)
-			erase(first);
+			this->erase(first);
 	}
 
 	void swap( map& other )

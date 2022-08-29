@@ -7,14 +7,11 @@
 #include "map_node.hpp"
 #include "remove_cv.hpp"
 
-#define NIL get_nil<Pair>()
+#define NIL get_nil<Pair, Alloc>()
 
 namespace ft {
 
-template <typename Pair>
-class map_const_iterator;
-
-template <typename Pair>
+template <typename Pair, typename Alloc>
 class map_iterator
 {
 	public:
@@ -24,7 +21,7 @@ class map_iterator
 		typedef ft::bidirectional_iterator_tag                iterator_category;
 		typedef std::ptrdiff_t                                  difference_type;
 	protected:
-		typedef map_node<Pair>                                           node_t;
+		typedef map_node<Pair, Alloc>                                    node_t;
 		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
@@ -60,7 +57,7 @@ class map_iterator
 		}
 
 	public:
-		/* Constructor */ map_iterator(map_node<Pair> * root, map_node<Pair> * current)
+		/* Constructor */ map_iterator(map_node<Pair, Alloc> * root, map_node<Pair, Alloc> * current)
 			: root_(root), current_(current)
 		{ }
 
@@ -79,9 +76,10 @@ class map_iterator
 			current_ = rhs.current_;
 			return *this;
 		}
+
 		pointer operator->() const { return &(this->operator*()); }
 
-		reference operator*() const { return current_->pair; }
+		reference operator*() const { return *(current_->pair); }
 
 		template <typename It>
 			bool operator==(It it) { return current_ == it.get_current(); }
@@ -160,7 +158,7 @@ class map_iterator
 }; // map_iterator
    
   
-template <typename Pair>
+template <typename Pair, typename Alloc>
 class map_const_iterator
 {
 	public:
@@ -170,7 +168,7 @@ class map_const_iterator
 		typedef ft::bidirectional_iterator_tag                iterator_category;
 		typedef std::ptrdiff_t                                  difference_type;
 	protected:
-		typedef map_node<Pair>                                           node_t;
+		typedef map_node<Pair, Alloc>                                    node_t;
 		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
@@ -206,11 +204,11 @@ class map_const_iterator
 		}
 
 	public:
-		/* Constructor */ map_const_iterator(map_node<Pair> * root, map_node<Pair> * current)
+		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * root, map_node<Pair, Alloc> * current)
 			: root_(root), current_(current)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<const Pair> * root, map_node<const Pair> * current)
+		/* Constructor */ map_const_iterator(map_node<const Pair, Alloc> * root, map_node<const Pair, Alloc> * current)
 			: root_(root), current_(current)
 		{ }
 
@@ -227,7 +225,7 @@ class map_const_iterator
 		}
 		pointer operator->() const { return &(this->operator*()); }
 
-		reference operator*() const { return current_->pair; }
+		reference operator*() const { return *(current_->pair); }
 
 		template <typename It>
 			bool operator==(It it) { return current_ == it.get_current(); }

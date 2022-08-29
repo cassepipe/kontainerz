@@ -1,57 +1,70 @@
 #ifndef MAP_NODE_HPP
 #define MAP_NODE_HPP
 
+#include <cstddef>
+#include <memory>
+
 #include "pair.hpp"
 #include "nil.hpp"
 
 namespace ft {
 
-template <typename Pair>
-struct map_base_node;
-
-template<typename Pair>
-struct map_node;
-
-// Separation between base node and node allows us to use our tree with non default-constructible Key and Value in map
-// because having the KV Pair as member would force the call to Pair() - who in turn calls Key() and Value() - at the
-// time of creation of the NIL node
-
-template <typename Pair>
-struct map_base_node
+template <typename Pair, typename Alloc > // Alloc = std::allocator<Pair>
+struct map_node
 {
-	map_node<Pair> *left;
-	map_node<Pair> *right;
-	map_node<Pair> *parent;
-	int      level;
+	map_node<Pair, Alloc> *parent;
+	map_node<Pair, Alloc> *left;
+	map_node<Pair, Alloc> *right;
+	int             level;
+	Pair           *pair;
+	Alloc			allocator;
 
 	// To make the the nil node in get_nil()
-	/*Default Constructor*/ map_base_node() :
-		left(static_cast<map_node<Pair> *>(this)),
-		right(static_cast<map_node<Pair> *>(this)),
-		parent(static_cast<map_node<Pair> *>(this)),
-		level(0)
+	/*Default Constructor*/ map_node() :
+		parent(this),
+		left(this),
+		right(this),
+		level(0),
+		pair(NULL)
 	{ }
 
-	/*Constructor*/ map_base_node(map_node<Pair> *l, map_node<Pair> *r, map_node<Pair> *p, int lvl) :
+	/*Constructor*/ map_node(
+			typename Pair::first_type k,
+			typename Pair::second_type v,
+			map_node<Pair, Alloc> *prt,
+			map_node<Pair, Alloc> *l = get_nil<Pair, Alloc>(),
+			map_node<Pair, Alloc> *r = get_nil<Pair, Alloc>(),
+			int lvl = 1) :
+		parent(prt),
 		left(l),
 		right(r),
-		parent(p),
 		level(lvl)
-	{ }
-}; // map_base_node
+	{
+		pair = allocator.allocate(1);
+		allocator.construct(pair, Pair(k,v));
+	}
 
-template<typename Pair>
-struct map_node : public map_base_node<Pair>
-{
-	 Pair pair;
+	/* Copy Constructor */ 
+	map_node(map_node const& other) :
+		parent(other.parent),
+		left(other.left),
+		right(other.right),
+		level(other.level),
+		allocator(other.allocator)
+	{
+		pair = allocator.allocate(1);
+		allocator.construct(pair, *other.pair);
+	}
 
-	/*Constructor*/ map_node(typename Pair::first_type k, typename Pair::second_type  v, map_node *p) :
-		map_base_node<Pair>(get_nil<Pair>(), get_nil<Pair>(), p, 1),
-		pair(k, v)
-	{ }
+	~map_node()
+	{
+		allocator.destroy(pair);
+		allocator.deallocate(pair, 1);
+	}
 
-	typename Pair::first_type & key() { return pair.first; }
-	typename Pair::second_type & value() { return pair.second; }
+	// Null protect ?
+	typename Pair::first_type & key() { return pair->first; }
+	typename Pair::second_type & value() { return pair->second; }
 
 }; // map_node
 
