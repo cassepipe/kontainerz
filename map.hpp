@@ -555,7 +555,7 @@ class map
 		while (current != NIL)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
-			searched_is_strictly_greater = compare_func_(current->key, key);
+			searched_is_strictly_greater = compare_func_(current->key(), key);
 			
 			if (searched_is_strictly_less) // than current's key
 			{

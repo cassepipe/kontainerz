@@ -11,8 +11,8 @@ void test_map()
 	test_map_constructor() ;
 	test_map_count() ;
 	test_map_empty() ;
-	//test_map_end() ;
-	//test_map_equal_range() ;
+	test_map_end() ;
+	test_map_equal_range() ;
 	//test_map_erase() ;
 	//test_map_find() ;
 	//test_map_get_allocator() ;
@@ -153,20 +153,39 @@ void	test_map_empty()
 		std::cout << myMap.begin()->first << "=>" << myMap.begin()->second << std::endl;
 		myMap.erase( myMap.begin() );
 	}
-
-	
 }
 
 void	test_map_end()
 {
 
-	
+	map<char, int> myMap;
+
+	myMap['b']=100;
+	myMap['a']=200;
+	myMap['c']=300;
+
+	for ( map<char, int>::iterator it = myMap.begin(); it != myMap.end(); ++it)
+		std::cout << it->first << "=>" << it->second << std::endl;
 }
 
 void	test_map_equal_range()
 {
 
-	
+	map<char, int> myMap;
+
+	myMap['a']=10;
+	myMap['b']=20;
+	myMap['c']=30;
+
+	pair< map<char, int>::iterator, map<char, int>::iterator >	ret;
+	ret = myMap.equal_range('b');
+
+	std::cout << "lower_bound points to ";
+	std::cout << ret.first->first << "=> " << ret.first->second << std::endl;
+
+	std::cout << "upper_bound points to ";
+	std::cout << ret.second->first << "=> " << ret.second->second << std::endl;
+
 }
 
 void	test_map_erase()

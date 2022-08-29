@@ -5,8 +5,8 @@
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-DIFF			= meld
 DIFF			= diff -s
+DIFF			= meld
 CXX				= clang++
 CXX				= g++
 SHELL			= bash

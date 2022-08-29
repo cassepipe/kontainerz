@@ -57,6 +57,10 @@ class map_iterator
 		}
 
 	public:
+		/* Default constructor */ map_iterator()
+			: root_(NIL), current_(NIL)
+		{ }
+		
 		/* Constructor */ map_iterator(map_node<Pair, Alloc> * root, map_node<Pair, Alloc> * current)
 			: root_(root), current_(current)
 		{ }
@@ -204,6 +208,10 @@ class map_const_iterator
 		}
 
 	public:
+		/* Default constructor */ map_const_iterator()
+			: root_(NIL), current_(NIL)
+		{ }
+
 		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * root, map_node<Pair, Alloc> * current)
 			: root_(root), current_(current)
 		{ }

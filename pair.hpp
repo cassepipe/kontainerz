@@ -13,7 +13,7 @@ struct pair
 	T1 first;
 	T2 second;
 
-	/* Default Constructor */ pair() : first(), second()
+	/* Default Constructor */ pair() : first(T1()), second(T2())
 	{
 	}
 
