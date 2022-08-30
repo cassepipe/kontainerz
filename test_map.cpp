@@ -6,14 +6,14 @@
 
 void test_map()
 {
-	test_map_begin() ;
-	test_map_clear() ;
-	test_map_constructor() ;
-	test_map_count() ;
-	test_map_empty() ;
-	test_map_end() ;
-	test_map_equal_range() ;
-	//test_map_erase() ;
+	//test_map_begin() ;
+	//test_map_clear() ;
+	//test_map_constructor() ;
+	//test_map_count() ;
+	//test_map_empty() ;
+	//test_map_end() ;
+	//test_map_equal_range() ;
+	test_map_erase() ;
 	//test_map_find() ;
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
@@ -177,6 +177,10 @@ void	test_map_equal_range()
 	myMap['b']=20;
 	myMap['c']=30;
 
+#ifdef DEBUG
+	myMap.print_dot(1);
+#endif
+
 	pair< map<char, int>::iterator, map<char, int>::iterator >	ret;
 	ret = myMap.equal_range('b');
 
@@ -190,14 +194,52 @@ void	test_map_equal_range()
 
 void	test_map_erase()
 {
+	map<char, int> myMap;
+	map<char, int>::iterator it;
 
-	
+	myMap['a']=10;
+	myMap['b']=20;
+	myMap['c']=30;
+	myMap['d']=40;
+	myMap['e']=50;
+	myMap['f']=60;
+
+	it = myMap.find('b');
+	myMap.erase(it);
+
+	myMap.erase('c');
+
+#ifdef DEBUG
+	myMap.print_dot(1);
+#endif
+
+	it = myMap.find('e');
+	myMap.erase( it, myMap.end() );
+
+
+	for ( it = myMap.begin(); it != myMap.end(); ++it)
+		std::cout << it->first << "=>" << it->second << std::endl;
 }
 
 void	test_map_find()
 {
+	map<char, int> myMap;
+	map<char, int>::iterator it;
 
-	
+	myMap['a']=50;
+	myMap['b']=100;
+	myMap['c']=150;
+	myMap['d']=200;
+
+	it = myMap.find( 'b' );
+	if ( it != myMap.end() )
+		myMap.erase( it );
+
+	std::cout << "elements in myMap:" << std::endl;
+	std::cout << "a =>" << myMap.find( 'a' )->second << std::endl;
+	std::cout << "c =>" << myMap.find( 'c' )->second << std::endl;
+	std::cout << "d =>" << myMap.find( 'd' )->second << std::endl;
+
 }
 
 void	test_map_get_allocator()

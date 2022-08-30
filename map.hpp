@@ -373,7 +373,7 @@ class map
 		root_ = remove_rec_(k, root_);
 		if (size_before == size_)
 			return 0;
-		return 0;
+		return 1;
 	}
 
 	void erase( iterator it )
@@ -383,8 +383,13 @@ class map
 
 	void erase( iterator first, iterator last )
 	{
-		for (; first != last ; ++first)
-			this->erase(first);
+		while (first != last)
+		{
+			key_type key_to_delete = (*first).first;
+			// Need to increment first else erase would invalidate our operator
+			++first;
+			this->erase(key_to_delete);
+		}
 	}
 
 	void swap( map& other )
@@ -568,7 +573,10 @@ class map
 				best_predecessor = current;
 			}
 			else
+			{
 				best_predecessor = current;
+				break;
+			}
 		}
 		return ++iterator(root_, best_predecessor);
 	}
@@ -601,7 +609,10 @@ class map
 				best_predecessor = current;
 			}
 			else
+			{
 				best_predecessor = current;
+				break;
+			}
 		}
 		return ++iterator(root_, best_predecessor);
 	}

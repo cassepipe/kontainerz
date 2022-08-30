@@ -20,9 +20,8 @@ OBJ/FT_DEPS		= $(patsubst %.o,           %.d, $(OBJ/FT_OBJECTS))
 OBJ/STD_DEPS	= $(patsubst %.o,           %.d, $(OBJ/STD_OBJECTS))
 
 # FLAGS 
-DEBUG			= -DDEBUG
 INCLUDE_FLAGS	= -I.
-CPPFLAGS		= ${INCLUDE_FLAGS} ${DEBUG} -MMD 
+CPPFLAGS		= ${INCLUDE_FLAGS} -MMD 
 #Add -Werror before correction 
 CXXFLAGS		= -Wall -Wextra -g3 -std=c++98 #-Wno-macro-redefined 
 LDFLAGS			=
@@ -49,7 +48,7 @@ $(STD):			${OBJ/STD_OBJECTS}
 				${CXX} -o $@ ${LDFLAGS} $^ ${LDLIBS}
 
 obj/ft_%.o:		%.cpp Makefile | obj
-				${CXX} -DNAMESPACE=ft  ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
+				${CXX} -DNAMESPACE=ft -DDEBUG ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
 
 obj/std_%.o:	%.cpp Makefile | obj
 				${CXX} -DNAMESPACE=std ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
