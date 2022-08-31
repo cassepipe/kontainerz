@@ -94,20 +94,19 @@ class map_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_iterator &operator++()
 		{
+			// If tree was empty but stuff got in since last call
 			root_ = update_root_(root_);
 			if (root_ == NIL) // Tree empty ?
 				current_ = NULL;
 			else if (current_ == NULL) 
 				current_ = leftmost_(root_);
-			// If tree was empty but stuff got in since last call
 			// If has successor...
 			else if (current_->right != NIL)
 				current_ = leftmost_(current_->right); // ... goes to successor
-													   // Else if it has no successor under itself
+		   // Else if it has no successor under itself
 			else if (current_ == current_->parent->left) // If it is its parent's left child
 				current_ = current_->parent; // ... it becomes its parent
-											 // Then it's its parent's right child
-			else 
+			else // Then it's its parent's right child
 			{
 				while (current_ == current_->parent->right) // Go up the succession of right children
 					current_ = current_->parent;

@@ -64,7 +64,6 @@ class map
 	node_alloc_t        node_alloc_;
 	key_compare         compare_func_;
 
-
 	/* HELPERS */
 	static node_ptr_t in_order_successor_(node_ptr_t node)
 	{
@@ -237,19 +236,53 @@ class map
 			}
 			else if (node->left == NIL) // No left child ? Means it is a black leaf node. Replace with its red child
 			{
-				// Swap node and and right child's pair
-				std::swap(node->pair, node->right->pair);
-				
-				node->right   = remove_rec_(k, node->right);
+				node_ptr_t right_child =  node->right;
+
+				if (is_a_left_child_(node))
+					node->parent->left = right_child;
+				else if (is_a_right_child_(node))
+					node->parent->right = right_child;
+				right_child->parent = node->parent;
+
+				node_alloc_.destroy(node);
+				node_alloc_.deallocate(node, 1);
+				--size_;
+
+				return (right_child);
 			}
-			else // Find succesor, copy its values and remove successor instead
+			else // Find successor, swap the node positions
 			{
+				using std::swap;
+
 				node_ptr_t successor   = in_order_successor_(node);
 
-				// Swap node and successor's pairs
-				std::swap(node->pair, successor->pair);
+				// Rerouting children
+				node->left->parent = successor;
+				node->right->parent = successor;
+				if (successor->right != NIL)
+					successor->right->parent = node;
 
-				node->right              = remove_rec_(k, node->right);
+				//swap(node->left->parent, successor->left->parent);
+				//swap(node->right->parent, successor->right->parent);
+
+				if (is_a_right_child_(successor))
+					successor->parent->right = node;
+				else if (is_a_left_child_(successor))
+					successor->parent->left = node;
+
+				swap(node->level, successor->level);
+				swap(node->left,  successor->left);
+				swap(node->right, successor->right);
+				if (node->parent == node) // root node
+				{
+					node->parent = successor->parent;
+					successor->parent = successor;
+				}
+				else
+					swap(node->parent, successor->parent);
+
+				node = successor;
+				node->right = remove_rec_(k, node->right);
 			}
 		}
 		return fixup_after_delete_(node);
@@ -370,6 +403,9 @@ class map
 	size_type erase(Key const& k)
 	{
 		size_type size_before = size_;
+#ifdef DEBUG
+		//this->print_dot(1);
+#endif
 		root_ = remove_rec_(k, root_);
 		if (size_before == size_)
 			return 0;
