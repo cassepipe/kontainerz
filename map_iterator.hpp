@@ -120,7 +120,7 @@ class map_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_iterator &operator--()
 		{
-			root_ = update_root(root_);
+			root_ = update_root_(root_);
 			if (root_ == NIL) // Tree empty ?
 				current_ = NULL;
 			else if (current_ == NULL) // Reached the end ?

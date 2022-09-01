@@ -45,7 +45,7 @@ template <typename Iterator>
 
 	// We must write a default ctor because we have written a value constructor
 
-	/*defautl ctor*/ reverse_iterator() : current_(0) 
+	/*defautl ctor*/ reverse_iterator() : current_() // Calling Iterator()
 	{
 		  /**
 		   *  The default constructor value-initializes member @p current.
