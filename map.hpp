@@ -25,7 +25,6 @@ namespace ft
 {
 
 template <typename Key, typename Value, 
-		 //typename Pair = ft::pair<const Key, Value>,
 		 typename KeyCmpFn = std::less<Key>,
           typename Alloc = std::allocator< ft::pair< const Key, Value>  > >
 class map
@@ -216,15 +215,19 @@ class map
 			return false;
 	}
 
+#define LEFT -1
+#define RIGHT 1
+#define ROOT 0
+
 	// This implementation does not bother with special cases that do not need rebalancing
-	node_ptr_t remove_rec_(Key k, node_ptr_t node)
+	node_ptr_t remove_rec_(Key k, node_ptr_t node, int child_status)
 	{
 		if (node == NIL) // Fell out of tree, key does not exist
 			return node; // No-op
 		else if (compare_func_(k, node->key()))
-			node->left = remove_rec_(k, node->left); // Look in left subtree
+			node->left = remove_rec_(k, node->left, -1); // Look in left subtree
 		else if (compare_func_(node->key(), k))
-			node->right = remove_rec_(k, node->right); // Look in right subtree
+			node->right = remove_rec_(k, node->right, 1); // Look in right subtree
 		else                                       // Found it !
 		{
 			if (node->right == NIL && node->left == NIL) // It's a leaf node, remove it
@@ -253,40 +256,45 @@ class map
 			else // Find successor, swap the node positions
 			{
 				using std::swap;
-
-				node_ptr_t successor   = in_order_successor_(node);
-
-				// Rerouting children
-				node->left->parent = successor;
-				node->right->parent = successor;
-				if (successor->right != NIL)
-					successor->right->parent = node;
-
-				//swap(node->left->parent, successor->left->parent);
-				//swap(node->right->parent, successor->right->parent);
-
-				if (is_a_right_child_(successor))
-					successor->parent->right = node;
-				else if (is_a_left_child_(successor))
-					successor->parent->left = node;
+				node_ptr_t successor = in_order_successor_(node);
+				bool successor_is_child = (node->right->left == NIL);
 
 				swap(node->level, successor->level);
 				swap(node->left,  successor->left);
-				swap(node->right, successor->right);
-				if (node->parent == node) // root node
+				if (!successor_is_child)
 				{
-					node->parent = successor->parent;
-					successor->parent = successor;
+					swap(node->right, successor->right);
+					swap(node->parent, successor->parent);
 				}
 				else
-					swap(node->parent, successor->parent);
+				{
+					node->right = successor->right;
+					successor->right = node;
+				}
+
+				if (child_status == LEFT)
+					successor->parent->left = successor;
+				if (child_status == RIGHT)
+					successor->parent->left = successor;
+				if (child_status == ROOT)
+					successor->parent = successor;
+				if (!successor_is_child)
+					node->parent->left = node;
+				successor->right->parent  = successor;
+				successor->left->parent  = successor;
+				if (node->right != NIL)
+					node->right->parent = node;
 
 				node = successor;
-				node->right = remove_rec_(k, node->right);
+				node->right = remove_rec_(k, node->right, 1);
 			}
 		}
 		return fixup_after_delete_(node);
 	}
+
+#undef LEFT
+#undef RIGHT
+#undef ROOT
 
 	node_ptr_t clear_(node_ptr_t node)
 	{
@@ -337,11 +345,8 @@ class map
 
 	map &operator=(map const& rhs)
 	{
-		if (this != &rhs)
-		{
-			this->clear();
-			insert(rhs.begin(), rhs.end()); // There must be a better way though
-		}
+		this->clear();
+		insert(rhs.begin(), rhs.end()); // There must be a better way though
 		return *this;
 	}
 
@@ -403,10 +408,7 @@ class map
 	size_type erase(Key const& k)
 	{
 		size_type size_before = size_;
-#ifdef DEBUG
-		//this->print_dot(1);
-#endif
-		root_ = remove_rec_(k, root_);
+		root_ = remove_rec_(k, root_, 0);
 		if (size_before == size_)
 			return 0;
 		return 1;

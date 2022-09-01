@@ -33,9 +33,8 @@ class map_iterator
 		node_ptr_t update_root_(node_ptr_t root)
 		{
 			 //If the the parent of the root is NIL
-			 //while (root != NIL)
+			 //while (root->parent != NIL)
 			 //   root = root->parent;
-			
 			 //If the root is its own parent use instead :
 			while (root != NIL && root != root->parent)
 				root = root->parent;
