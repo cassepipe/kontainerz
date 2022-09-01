@@ -12,8 +12,8 @@ void test_map()
 	//test_map_count() ;
 	//test_map_empty() ;
 	//test_map_end() ;
-	test_map_equal_range() ;
-	//test_map_erase() ;
+	//test_map_equal_range() ;
+	test_map_erase() ;
 	//test_map_find() ;
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
@@ -189,7 +189,6 @@ void	test_map_equal_range()
 
 	std::cout << "upper_bound points to ";
 	std::cout << ret.second->first << "=> " << ret.second->second << std::endl;
-
 }
 
 void	test_map_erase()
@@ -220,7 +219,6 @@ void	test_map_erase()
 #ifdef DEBUG
 	myMap.print_dot(2);
 #endif
-
 
 	for ( it = myMap.begin(); it != myMap.end(); ++it)
 		std::cout << it->first << "=>" << it->second << std::endl;
