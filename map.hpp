@@ -241,11 +241,18 @@ class map
 			{
 				node_ptr_t right_child =  node->right;
 
-				if (is_a_left_child_(node))
+				if (child_status == LEFT)
+				{
 					node->parent->left = right_child;
-				else if (is_a_right_child_(node))
+					right_child->parent = node->parent;
+				}
+				else if (child_status == RIGHT)
+				{
 					node->parent->right = right_child;
-				right_child->parent = node->parent;
+					right_child->parent = node->parent;
+				}
+				else
+					right_child->parent = right_child;
 
 				node_alloc_.destroy(node);
 				node_alloc_.deallocate(node, 1);

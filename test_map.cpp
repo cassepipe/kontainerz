@@ -10,10 +10,10 @@ void test_map()
 	//test_map_clear() ;
 	//test_map_constructor() ;
 	//test_map_count() ;
-	//test_map_empty() ;
+	test_map_empty() ;
 	//test_map_end() ;
 	//test_map_equal_range() ;
-	test_map_erase() ;
+	//test_map_erase() ;
 	//test_map_find() ;
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
@@ -148,10 +148,17 @@ void	test_map_empty()
 	myMap['b']=20;
 	myMap['c']=30;
 
+#ifdef DEBUG
+	myMap.print_dot(1);
+#endif
+
 	while ( !myMap.empty() ) {
 
-		std::cout << myMap.begin()->first << "=>" << myMap.begin()->second << std::endl;
+		//std::cout << myMap.begin()->first << "=>" << myMap.begin()->second << std::endl;
 		myMap.erase( myMap.begin() );
+#ifdef DEBUG
+		myMap.print_dot(1);
+#endif
 	}
 }
 

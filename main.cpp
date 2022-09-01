@@ -6,11 +6,12 @@
 void big_test();
 int main()
 {
-	//test_map();
+	test_map();
 	//test_vector();
 	//test_stack();
-	big_test();
+	//big_test();
 }
+
 
 void big_test()
 {
@@ -24,15 +25,25 @@ void big_test()
 	tree['e']=50;
 	tree['f']=60;
 
+#ifdef DEBUG
 	tree.print_dot(1);
+#endif
 	tree.erase('b');
+#ifdef DEBUG
 	tree.print_dot(2);
+#endif
 	tree.erase('c');
+#ifdef DEBUG
 	tree.print_dot(2);
+#endif
 	tree.erase('d');
+#ifdef DEBUG
 	tree.print_dot(2);
+#endif
 	tree.erase('e');
+#ifdef DEBUG
 	tree.print_dot(2);
+#endif
 	tree.erase('f');
 
 
