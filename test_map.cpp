@@ -16,7 +16,7 @@ void test_map()
 	//test_map_erase() ;
 	//test_map_find() ;
 	//test_map_get_allocator() ;
-	test_map_insert() ;
+	//test_map_insert() ;
 	//test_map_key_comp() ;
 	//test_map_lower_bound() ;
 	//test_map_operator_bracket() ;
@@ -277,20 +277,20 @@ void	test_map_insert()
 		std::cout << " with a value of " << ret.first->second << std::endl;
 	}
 
-	//map< char, int >::iterator it = myMap.begin();
-	//myMap.insert( it, pair< char, int>( 'b', 300 ) );
-	//myMap.insert( it, pair< char, int>( 'c', 400 ) );
+	map< char, int >::iterator it = myMap.begin();
+	myMap.insert( it, pair< char, int>( 'b', 300 ) );
+	myMap.insert( it, pair< char, int>( 'c', 400 ) );
 
-	//map< char, int > anotherMap;
-	//anotherMap.insert( myMap.begin(), myMap.find('c') );
+	map< char, int > anotherMap;
+	anotherMap.insert( myMap.begin(), myMap.find('c') );
 
-	//std::cout << "myMap contains:" << std::endl;
-	//for ( it = myMap.begin(); it != myMap.end(); ++it )
-	//    std::cout << it->first << " => " << it->second << std::endl;
+	std::cout << "myMap contains:" << std::endl;
+	for ( it = myMap.begin(); it != myMap.end(); ++it )
+		std::cout << it->first << " => " << it->second << std::endl;
 
-	//std::cout << "anotherMap contains:" << std::endl;
-	//for ( it = anotherMap.begin(); it != anotherMap.end(); ++it )
-	//    std::cout << it->first << " => " << it->second << std::endl;
+	std::cout << "anotherMap contains:" << std::endl;
+	for ( it = anotherMap.begin(); it != anotherMap.end(); ++it )
+		std::cout << it->first << " => " << it->second << std::endl;
 
 }
 

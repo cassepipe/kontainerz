@@ -406,10 +406,9 @@ class map
 			insert(*first);
 	}
 
-	// ...
-	iterator insert(iterator hint, pair_type_t const &new_val)
+	template <typename It, typename P>
+	iterator insert(It , P const &new_val)
 	{
-		(void)hint;
 		return insert(new_val).first;
 	}
 
