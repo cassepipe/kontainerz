@@ -678,11 +678,18 @@ class map
 		return compare_func_;
 	}
 
+  protected:
+	static node_ptr_t leftmost_(node_ptr_t node)
+	{
+		while (node->left != NIL)
+			node = node->left;
+		return node;
+	}
 
   public:
 	iterator begin()
 	{
-		return ++iterator(root_, NULL);
+		return iterator(root_, leftmost_(root_));
 	}
 
 	iterator end()
@@ -692,7 +699,7 @@ class map
 
 	const_iterator begin() const
 	{
-		return ++const_iterator(root_, NULL);
+		return const_iterator(root_, leftmost_(root_));
 	}
 
 	const_iterator end() const

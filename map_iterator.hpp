@@ -94,6 +94,7 @@ class map_iterator
 		map_iterator &operator++()
 		{
 			// If tree was empty but stuff got in since last call
+			//root_ = update_root_(root_);
 			root_ = update_root_(current_);
 			if (current_ == NIL) // Tree empty ?
 				current_ = NULL;
@@ -120,6 +121,7 @@ class map_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_iterator &operator--()
 		{
+			//root_ = update_root_(root_);
 			root_ = update_root_(current_);
 			if (root_ == NIL) // Tree empty ?
 				current_ = NULL;
@@ -242,7 +244,8 @@ class map_const_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_const_iterator &operator++()
 		{
-			root_ = update_root_(root_);
+			//root_ = update_root_(root_);
+			root_ = update_root_(current_);
 			if (root_ == NIL) // Tree empty ?
 				current_ = NULL;
 			else if (current_ == NULL) 
@@ -270,7 +273,8 @@ class map_const_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_const_iterator &operator--()
 		{
-			root_ = update_root(root_);
+			//root_ = update_root(root_);
+			root_ = update_root(current_);
 			if (root_ == NIL) // Tree empty ?
 				current_ = NULL;
 			else if (current_ == NULL) // Reached the end ?
