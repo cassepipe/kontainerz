@@ -193,7 +193,7 @@ class map
 			current_node->right = insert_rec_(k, v, current_node, current_node->right, ret); // ->insert right
 		else
 		{
-			current_node->value() = v;
+			//current_node->value() = v; // To replace the node value
 			*ret = current_node;
 		}
 		return split_(skew_(current_node)); // restructure and return result
