@@ -18,7 +18,9 @@ void test_map()
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
 	//test_map_key_comp() ;
-	//test_map_lower_bound() ;
+
+	test_map_lower_bound() ;
+
 	//test_map_operator_bracket() ;
 	//test_map_operator_equal() ;
 	//test_map_rbegin() ;
@@ -27,7 +29,6 @@ void test_map()
 	//test_map_size() ;
 	//test_map_swap() ;
 	//test_map_swap_overload() ;
-	//test_map_tags() ;
 	//test_map_upper_bound() ;
 	//test_map_value_comp() ;
 	
@@ -330,6 +331,9 @@ void	test_map_lower_bound()
 
 	itlow = my_map.lower_bound ( 'b' );
 	itup = my_map.upper_bound ( 'd' );
+#ifdef DEBUG
+	my_map.print_dot(1);
+#endif
 
 	my_map.erase(itlow, itup);
 
