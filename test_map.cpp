@@ -7,8 +7,8 @@
 void test_map()
 {
 	//test_map_begin() ;
-	test_map_clear() ;
-	//test_map_constructor() ;
+	//test_map_clear() ;
+	test_map_constructor() ;
 	//test_map_count() ;
 	//test_map_empty() ;
 	//test_map_end() ;
