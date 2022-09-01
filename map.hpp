@@ -416,6 +416,7 @@ class map
 	{
 		size_type size_before = size_;
 		root_ = remove_rec_(k, root_, 0);
+		root_->parent = root_;
 		if (size_before == size_)
 			return 0;
 		return 1;

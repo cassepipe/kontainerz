@@ -204,21 +204,22 @@ void	test_map_erase()
 	myMap['e']=50;
 	myMap['f']=60;
 
-#ifdef DEBUG
-	myMap.print_dot(1);
-#endif
 
 	it = myMap.find('b');
 	myMap.erase(it);
 
-#ifdef DEBUG
-	myMap.print_dot(2);
-#endif
-
 	myMap.erase('c');
+
+#ifdef DEBUG
+	myMap.print_dot(1);
+#endif
 
 	it = myMap.find('e');
 	myMap.erase( it, myMap.end() );
+
+#ifdef DEBUG
+	myMap.print_dot(2);
+#endif
 
 
 	for ( it = myMap.begin(); it != myMap.end(); ++it)
