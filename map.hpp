@@ -386,7 +386,8 @@ class map
 	}
 
 	// Insert Key Value pair
-	ft::pair<iterator, bool> insert(pair_type_t const& pair)
+	template <typename P>
+	ft::pair<iterator, bool> insert(P const& pair)
 	{
 		size_type size_before = size_;
 		iterator it = insert_(pair.first, pair.second);
