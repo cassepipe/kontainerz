@@ -13,8 +13,8 @@ void test_map()
 	//test_map_empty() ;
 	//test_map_end() ;
 	//test_map_equal_range() ;
-	test_map_erase() ;
-	//test_map_find() ;
+	//test_map_erase() ;
+	test_map_find() ;
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
 	//test_map_key_comp() ;
