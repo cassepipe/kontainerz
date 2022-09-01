@@ -10,8 +10,8 @@ void test_map()
 	//test_map_clear() ;
 	//test_map_constructor() ;
 	//test_map_count() ;
-	test_map_empty() ;
-	//test_map_end() ;
+	//test_map_empty() ;
+	test_map_end() ;
 	//test_map_equal_range() ;
 	//test_map_erase() ;
 	//test_map_find() ;
