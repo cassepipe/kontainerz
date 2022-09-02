@@ -7,8 +7,8 @@ MAKEFLAGS += --no-builtin-rules
 
 DIFF			= diff -s
 DIFF			= meld
-CXX				= clang++
-CXX				= g++
+CXX				= clang++-14
+CXX				= g++-12
 SHELL			= bash
 FT				= ft_containers_test
 STD				= std_containers_test

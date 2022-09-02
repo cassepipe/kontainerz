@@ -342,7 +342,8 @@ class map
 	/* Copy Constructor */ map(map const& other)
 		: root_(NIL), size_(0), node_alloc_(other.get_allocator()), compare_func_(other.key_comp()) // Is this necessary ?
 	{
-		insert(other.begin(), other.end()); // There must be a better way though
+		if (other.root_ != NIL)
+			insert(other.begin(), other.end()); // There must be a better way though
 	}
 
 	/*Destructor*/ ~map()
@@ -353,7 +354,8 @@ class map
 	map &operator=(map const& rhs)
 	{
 		this->clear();
-		insert(rhs.begin(), rhs.end()); // There must be a better way though
+		if (rhs.root_ != NIL)
+			insert(rhs.begin(), rhs.end()); // There must be a better way though
 		return *this;
 	}
 
