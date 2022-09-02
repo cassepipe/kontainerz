@@ -174,7 +174,7 @@ class map
 
 		root_ = insert_rec_(k, v, NIL, root_, &ret);
 		root_->parent = root_;
-		return iterator(&root_, ret);
+		return iterator(root_, ret);
 	}
 
 	node_ptr_t insert_rec_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
@@ -503,7 +503,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return iterator(&root_, current);
+				return iterator(root_, current);
 		}
 		return this->end();
 	}
@@ -524,7 +524,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return const_iterator(&root_, current);
+				return const_iterator(root_, current);
 		}
 		return this->end();
 	}
@@ -562,9 +562,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator(&root_, current);
+				return iterator(root_, current);
 		}
-		return ++iterator(&root_, parent);
+		return ++iterator(root_, parent);
 	}
 
 	/* Returns lower bound not less than key */
@@ -590,9 +590,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator(&root_, current);
+				return iterator(root_, current);
 		}
-		return ++iterator(&root_, parent);
+		return ++iterator(root_, parent);
 	}
 
 
@@ -629,7 +629,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator(&root_, best_predecessor);
+		return ++iterator(root_, best_predecessor);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -665,7 +665,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator(&root_, best_predecessor);
+		return ++iterator(root_, best_predecessor);
 	}
 
 	/* OBSERVERS */
@@ -691,22 +691,22 @@ class map
   public:
 	iterator begin()
 	{
-		return iterator(&root_, leftmost_(root_));
+		return iterator(root_, leftmost_(root_));
 	}
 
 	iterator end()
 	{
-		return iterator(&root_, NIL);
+		return iterator(root_, NIL);
 	}
 
 	const_iterator begin() const
 	{
-		return const_iterator(&root_, leftmost_(root_));
+		return const_iterator(root_, leftmost_(root_));
 	}
 
 	const_iterator end() const
 	{
-		return const_iterator(&root_, NIL);
+		return const_iterator(root_, NIL);
 	}
 
 	reverse_iterator rbegin()

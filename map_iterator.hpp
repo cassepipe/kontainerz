@@ -25,7 +25,7 @@ class map_iterator
 		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
-		node_ptr_t             *root_ptr_;
+		node_ptr_t             & root_ref_;
 		node_ptr_t             current_;
 
 		/* HELPERS */
@@ -46,25 +46,33 @@ class map_iterator
 
 	public:
 		/* Default constructor */ map_iterator()
-			: root_ptr_(NULL), current_(NIL)
+			: root_ref_(NULL), current_(NIL)
 		{ }
 		
-		/* Constructor */ map_iterator(map_node<Pair, Alloc> ** root_ptr, map_node<Pair, Alloc> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_iterator(map_node<Pair, Alloc> *& root_ref, map_node<Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
-		/* Constructor */ map_iterator(map_node<const Pair> ** root_ptr, map_node<const Pair> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_iterator(map_node<Pair, Alloc> * const& root_ref, map_node<Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
+		{ }
+
+		/* Constructor */ map_iterator(map_node<const Pair> *& root_ref, map_node<const Pair> * current)
+			: root_ref_(root_ref), current_(current)
+		{ }
+
+		/* Constructor */ map_iterator(map_node<const Pair> * const& root_ref, map_node<const Pair> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_iterator(InputIt & other)
-			: root_ptr_(other.get_root()), current_(other.get_current())
+			: root_ref_(other.get_root()), current_(other.get_current())
 			{ }
 
 		map_iterator &operator=(map_iterator const &rhs)
 		{
-			root_ptr_ = rhs.root_ptr_;
+			root_ref_ = rhs.root_ref_;
 			current_ = rhs.current_;
 			return *this;
 		}
@@ -82,10 +90,10 @@ class map_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_iterator &operator++()
 		{
-			if (root_ptr_ == NULL || *root_ptr_ == NIL) // Tree empty ?
+			if (root_ref_ == NIL) // Tree empty ?
 				current_ = NIL;
 			else if (current_ == NIL) 
-				current_ = leftmost_(*root_ptr_); // root_ptr_ will never be NULL here
+				current_ = leftmost_(root_ref_); // root_ref_ will never be NULL here
 			// If has successor...
 			else if (current_->right != NIL)
 				current_ = leftmost_(current_->right); // ... goes to successor
@@ -107,10 +115,10 @@ class map_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_iterator &operator--()
 		{
-			if (root_ptr_ == NULL || *root_ptr_ == NIL) // Tree empty ?
+			if (root_ref_ == NIL) // Tree empty ?
 				current_ = NIL;
 			else if (current_ == NIL) // Reached the end ?
-				current_ = rightmost_(*root_ptr_); // root_ptr_ will never be NULL here
+				current_ = rightmost_(root_ref_); // root_ref_ will never be NULL here
 			else if (current_->left != NIL)
 				current_ = rightmost_(current_->left);
 			else if (current_ == current_->parent->right)
@@ -141,7 +149,7 @@ class map_iterator
 			return tmp;
 		}
 
-		node_ptr_t *get_root() { return root_ptr_; }
+		node_ptr_t &get_root() { return root_ref_; }
 		node_ptr_t get_current() { return current_; }
 }; // map_iterator
    
@@ -160,7 +168,7 @@ class map_const_iterator
 		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
-		map_node<Pair, Alloc>             **root_ptr_;
+		node_ptr_t			& root_ref_;
 		node_ptr_t             current_;
 
 		/* HELPERS */
@@ -181,36 +189,37 @@ class map_const_iterator
 
 	public:
 		/* Default constructor */ map_const_iterator()
-			: root_ptr_(NULL), current_(NIL)
+			: root_ref_(NULL), current_(NIL)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> ** root_ptr, map_node<Pair, Alloc> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> *& root_ref, map_node<Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * const* root_ptr, map_node<Pair, Alloc> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * const& root_ref, map_node<Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<const Pair, Alloc> ** root_ptr, map_node<const Pair, Alloc> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_const_iterator(map_node<const Pair, Alloc> *& root_ref, map_node<const Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<const Pair, Alloc> * const* root_ptr, map_node<const Pair, Alloc> * current)
-			: root_ptr_(root_ptr), current_(current)
+		/* Constructor */ map_const_iterator(map_node<const Pair, Alloc> * const& root_ref, map_node<const Pair, Alloc> * current)
+			: root_ref_(root_ref), current_(current)
 		{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_const_iterator(InputIt & other)
-			: root_ptr_(other.get_root()), current_(other.get_current())
+			: root_ref_(other.get_root()), current_(other.get_current())
 			{ }
 
 		map_const_iterator &operator=(map_const_iterator const &rhs)
 		{
-			root_ptr_ = rhs.root_ptr_;
+			root_ref_ = rhs.root_ref_;
 			current_ = rhs.current_;
 			return *this;
 		}
+
 		pointer operator->() const { return &(this->operator*()); }
 
 		reference operator*() const { return *(current_->pair); }
@@ -224,10 +233,10 @@ class map_const_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_const_iterator &operator++()
 		{
-			if (root_ptr_ == NULL || *root_ptr_ == NIL) // Tree empty ?
+			if (root_ref_ == NIL) // Tree empty ?
 				current_ = NIL;
 			else if (current_ == NIL) 
-				current_ = leftmost_(*root_ptr_); // root_ptr_ will never NULL here
+				current_ = leftmost_(root_ref_); // root_ref_ will never NULL here
 			// If tree was empty but stuff got in since last call
 			// If has successor...
 			else if (current_->right != NIL)
@@ -251,10 +260,10 @@ class map_const_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_const_iterator &operator--()
 		{
-			if (root_ptr_ == NULL || *root_ptr_ == NIL) // Tree empty ?
+			if (root_ref_ == NIL) // Tree empty ?
 				current_ = NIL;
 			else if (current_ == NIL) // Reached the end ?
-				current_ = rightmost_(*root_ptr_); // root_ptr_ will never be NULL here
+				current_ = rightmost_(root_ref_); // root_ref_ will never be NULL here
 			else if (current_->left != NIL)
 				current_ = rightmost_(current_->left);
 			else if (current_ == current_->parent->right)
@@ -285,7 +294,7 @@ class map_const_iterator
 			return tmp;
 		}
 
-		node_ptr_t *get_root() { return root_ptr_; }
+		node_ptr_t &get_root() { return root_ref_; }
 		node_ptr_t get_current() { return current_; }
 }; // map_const_iterator
    
