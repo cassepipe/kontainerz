@@ -58,7 +58,8 @@ struct map_node
 
 	~map_node()
 	{
-		allocator.destroy(pair);
+		if (pair)
+			allocator.destroy(pair);
 		allocator.deallocate(pair, 1);
 	}
 

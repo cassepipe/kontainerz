@@ -18,10 +18,9 @@ void test_map()
 	//test_map_get_allocator() ;
 	//test_map_insert() ;
 	//test_map_key_comp() ;
+	//test_map_lower_bound() ;
 
-	test_map_lower_bound() ;
-
-	//test_map_operator_bracket() ;
+	test_map_operator_bracket() ;
 	//test_map_operator_equal() ;
 	//test_map_rbegin() ;
 	//test_map_relational_operators() ;
@@ -46,8 +45,6 @@ void	test_map_begin()
 
 	for ( map<char, int>::iterator it = tree.begin(); it != tree.end(); ++it)
 		std::cout << it->first << "=>" << it->second << std::endl;
-
-	
 }
 
 void	test_map_clear()
