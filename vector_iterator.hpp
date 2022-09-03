@@ -86,7 +86,7 @@ template <typename T>
 		return *this;
 	}
 
-	vector_iterator& operator++(int)
+	vector_iterator operator++(int)
 	{
 		vector_iterator tmp = *this;
 		++current_;
@@ -102,7 +102,7 @@ template <typename T>
 		return *this;
 	}
 
-	vector_iterator& operator--(int)
+	vector_iterator operator--(int)
 	{
 		vector_iterator tmp = *this;
 		--current_;

@@ -1,6 +1,7 @@
 #ifndef TEST_MAP_HPP
 #define TEST_MAP_HPP
 
+void visual_test();
 void test_map();
 void test_map_begin();
 void test_map_clear();
