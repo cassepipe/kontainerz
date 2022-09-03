@@ -34,50 +34,24 @@ void test_vector()
 void test_vector_assign()
 {
 	{
-		//vector<int> myVec;
-		//std::cout << "vector< int > myVec;" << std::endl;
-		//std::cout << "size : " << myVec.size() << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//vector<int> my_vec;
+		//std::cout << "vector< int > my_vec;" << std::endl;
+		//std::cout << "size : " << my_vec.size() << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
 		//{
 
 		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
+		//    if (it + 1 != my_vec.end())
 		//        std::cout << " ";
 		//}
 		//std::cout << std::endl;
-		//myVec.assign(10, 42);
-		//std::cout << "myVec.assign( 10, 42 );" << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//my_vec.assign(10, 42);
+		//std::cout << "my_vec.assign( 10, 42 );" << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
 		//{
 
 		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-	}
-
-	std::cout << std::endl;
-
-	{
-		//vector<int> myVec(10, 0);
-		//std::cout << "vector< int > myVec(10, 0);" << std::endl;
-		//std::cout << "size : " << myVec.size() << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		//{
-
-		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//myVec.assign(10, 42);
-		//std::cout << "myVec.assign( 10, 42 );" << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		//{
-
-		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
+		//    if (it + 1 != my_vec.end())
 		//        std::cout << " ";
 		//}
 		//std::cout << std::endl;
@@ -86,57 +60,101 @@ void test_vector_assign()
 	std::cout << std::endl;
 
 	{
-		//vector<int> myVec(10, 42);
-		//std::cout << "vector< int > myVec(10, 42);" << std::endl;
-		//std::cout << "size : " << myVec.size() << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		//{
-		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//myVec.assign(0, 3);
-		//std::cout << "myVec.assign( 0, 3 );" << std::endl;
-		//std::cout << "size : " << myVec.size() << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//vector<int> my_vec(10, 0);
+		//std::cout << "vector< int > my_vec(10, 0);" << std::endl;
+		//std::cout << "size : " << my_vec.size() << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
 		//{
 
 		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
+		//    if (it + 1 != my_vec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//my_vec.assign(10, 42);
+		//std::cout << "my_vec.assign( 10, 42 );" << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
+		//{
+
+		//    std::cout << *it;
+		//    if (it + 1 != my_vec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	{
+		//vector<int> my_vec(10, 42);
+		//std::cout << "vector< int > my_vec(10, 42);" << std::endl;
+		//std::cout << "size : " << my_vec.size() << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
+		//{
+		//    std::cout << *it;
+		//    if (it + 1 != my_vec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//my_vec.assign(0, 3);
+		//std::cout << "my_vec.assign( 0, 3 );" << std::endl;
+		//std::cout << "size : " << my_vec.size() << std::endl;
+		//for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
+		//{
+
+		//    std::cout << *it;
+		//    if (it + 1 != my_vec.end())
 		//        std::cout << " ";
 		//}
 		//std::cout << std::endl;
 	}
 
 	{
-		vector<int> myVec;
+		vector<int> my_vec;
 		for (vector<int>::size_type i = 0; i < 42; ++i)
-			myVec.push_back(i + 1);
-		std::cout << "myVec" << std::endl;
-		std::cout << "size : " << myVec.size() << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+			my_vec.push_back(i + 1);
+		std::cout << "my_vec" << std::endl;
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
 		{
 
 			std::cout << *it;
-			if (it + 1 != myVec.end())
+			if (it + 1 != my_vec.end())
 				std::cout << " ";
 		}
 
 		std::cout << std::endl;
 
+		{
+			vector<int> my_range_vec;
+			my_range_vec.assign(my_vec.begin(), my_vec.end());
+			//std::cout << "vector< int > my_range_vec;" << std::endl;
+			//std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.end() );" << std::endl;
+			//std::cout << "my_range_vec" << std::endl;
+			//std::cout << "size : " << my_range_vec.size() << std::endl;
+			//for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
+			//{
+
+			//    std::cout << *it;
+			//    if (it + 1 != my_range_vec.end())
+			//        std::cout << " ";
+			//}
+		}
+
+		std::cout << std::endl;
+
 		//{
-		//    vector<int> myRangeVec;
-		//    myRangeVec.assign(myVec.begin(), myVec.end());
-		//    std::cout << "vector< int > myRangeVec;" << std::endl;
-		//    std::cout << "myRangeVec.assign( myVec.begin(), myVec.end() );" << std::endl;
-		//    std::cout << "myRangeVec" << std::endl;
-		//    std::cout << "size : " << myRangeVec.size() << std::endl;
-		//    for (vector<int>::iterator it = myRangeVec.begin(); it != myRangeVec.end(); it++)
+		//    vector<int> my_range_vec;
+		//    my_range_vec.assign(my_vec.begin(), my_vec.begin() + 5);
+		//    std::cout << "vector< int > my_range_vec;" << std::endl;
+		//    std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() + 5 );" << std::endl;
+		//    std::cout << "my_range_vec" << std::endl;
+		//    std::cout << "size : " << my_range_vec.size() << std::endl;
+		//    for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
 		//    {
 
 		//        std::cout << *it;
-		//        if (it + 1 != myRangeVec.end())
+		//        if (it + 1 != my_range_vec.end())
 		//            std::cout << " ";
 		//    }
 		//}
@@ -144,35 +162,17 @@ void test_vector_assign()
 		std::cout << std::endl;
 
 		//{
-		//    vector<int> myRangeVec;
-		//    myRangeVec.assign(myVec.begin(), myVec.begin() + 5);
-		//    std::cout << "vector< int > myRangeVec;" << std::endl;
-		//    std::cout << "myRangeVec.assign( myVec.begin(), myVec.begin() + 5 );" << std::endl;
-		//    std::cout << "myRangeVec" << std::endl;
-		//    std::cout << "size : " << myRangeVec.size() << std::endl;
-		//    for (vector<int>::iterator it = myRangeVec.begin(); it != myRangeVec.end(); it++)
+		//    vector<int> my_range_vec;
+		//    my_range_vec.assign(my_vec.begin(), my_vec.begin());
+		//    std::cout << "vector< int > my_range_vec;" << std::endl;
+		//    std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() );" << std::endl;
+		//    std::cout << "my_range_vec" << std::endl;
+		//    std::cout << "size : " << my_range_vec.size() << std::endl;
+		//    for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
 		//    {
 
 		//        std::cout << *it;
-		//        if (it + 1 != myRangeVec.end())
-		//            std::cout << " ";
-		//    }
-		//}
-
-		std::cout << std::endl;
-
-		//{
-		//    vector<int> myRangeVec;
-		//    myRangeVec.assign(myVec.begin(), myVec.begin());
-		//    std::cout << "vector< int > myRangeVec;" << std::endl;
-		//    std::cout << "myRangeVec.assign( myVec.begin(), myVec.begin() );" << std::endl;
-		//    std::cout << "myRangeVec" << std::endl;
-		//    std::cout << "size : " << myRangeVec.size() << std::endl;
-		//    for (vector<int>::iterator it = myRangeVec.begin(); it != myRangeVec.end(); it++)
-		//    {
-
-		//        std::cout << *it;
-		//        if (it + 1 != myRangeVec.end())
+		//        if (it + 1 != my_range_vec.end())
 		//            std::cout << " ";
 		//    }
 		//}

@@ -74,7 +74,7 @@ template <typename T>
 	// Random access requirement
 	reference operator[](int i) const
 	{
-		return (current_ + i);
+		return *(current_ + i);
 	}
 	
 	/// INCREMENT OPERATORS
@@ -147,6 +147,13 @@ template <typename T>
 		return vector_iterator(current_);
 	}
 
+	// To get the distance between to iterators
+	template<typename RightIterator, typename LeftIterator>
+	friend difference_type operator-(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+	{
+		return rhs.current_ - lhs.current_;
+	}
+
 	//Allow for const to non const comparisons
 	template<typename RightIterator, typename LeftIterator>
 	friend bool operator==(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
@@ -185,6 +192,7 @@ bool operator<=(const vector_iterator<RightIterator>& lhs, const vector_iterator
 {
 	return !(lhs > rhs);
 }
+
 
 } //namespace ft
 

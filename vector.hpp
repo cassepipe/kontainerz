@@ -360,7 +360,7 @@ class vector
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
 		deallocate_data_();
-		size_     = std::distance(first, last);
+		size_     = last - first;
 		data_     = allocator_.allocate(size_ * sizeof(value_type));
 		capacity_ = size_;
 		for (size_type i = 0; i < size_; ++i)
@@ -419,7 +419,7 @@ class vector
 	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
 	{
 		pointer pos = &(*position);
-		size_type distance = std::distance(first, last);
+		size_type distance = last - first;
 		size_type new_size = size_ + distance;
 		if (new_size > capacity_)
 			reserve(new_size * 2);
@@ -445,7 +445,7 @@ class vector
 			return end;
 		if (first == last)
 			return last;
-		size_type distance = std::distance(first, last);
+		size_type distance = last - first;
 		size_ -= distance;
 		for (; last < end; --distance, ++first, ++last)
 		{
