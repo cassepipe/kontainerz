@@ -846,12 +846,14 @@ bool	operator<=( map< Key, T, Compare, Allocator > const & x, map< Key, T, Compa
 
 // specialized algorithms
 namespace std {
+
 template< class Key, class T, class Compare, class Allocator >
 void	swap( ft::map< Key, T, Compare, Allocator > & x, ft::map< Key, T, Compare, Allocator > & y )
 {
 	x.swap( y );
 	return ;
 }
+
 } // namespace std
 
 #endif /* MAP_HPP */
