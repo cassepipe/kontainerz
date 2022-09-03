@@ -5,8 +5,8 @@ void test_vector()
 {
 	//test_vector_assign();
 	test_vector_at();
-	//test_vector_back();
-	//test_vector_begin();
+	test_vector_back();
+	test_vector_begin();
 	//test_vector_capacity();
 	//test_vector_clear();
 	//test_vector_constructors();
@@ -206,20 +206,52 @@ void test_vector_at()
 	}
 	{
 		vector< int > my_vec(10);
-		const vector< int > myConstVec(10);
-		const int constI = myConstVec.at(0);
-		//int i = my_vec.at(0);
-		//std::cout << constI << " " << i << std::endl;
+		const vector< int > my_const_vec(10);
+		const int constI = my_const_vec.at(0);
+		int i = my_vec.at(0);
+		std::cout << constI << " " << i << std::endl;
 	}
 }
 
-//void test_vector_back()
-//{
-//}
+void test_vector_back()
+{
+	{
+		vector< int > my_vec(1, 42);
+		std::cout << my_vec.back() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		for ( int i = 0; i < 42; i++ )
+			my_vec.push_back( i + 1 );
+		std::cout << my_vec.back() << std::endl;
+	}
+	{
+		vector< int > my_vec( 10, 42 );
+		const vector< int > my_const_vec( 10, 42 );
+		const int constI = my_const_vec.back();
+		int i = my_vec.back();
+		std::cout << constI << " " << i << std::endl;
+	}
+}
 
-//void test_vector_begin()
-//{
-//}
+void test_vector_begin()
+{
+	{
+		vector< int > my_vec( 10, 42 );
+		std::cout << *(my_vec.begin()) << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		std::cout << (my_vec.begin() == my_vec.end()) << std::endl;
+	}
+	{
+		vector< int > my_vec(10, 42);
+		const vector< int > my_const_vec(10, 42);
+		vector< int >::iterator it = my_vec.begin();
+		vector< int >::const_iterator constIt = my_const_vec.begin();
+		//std::cout << *constIt << " " << *it << std::endl;
+	}
+}
 
 //void test_vector_capacity()
 //{
