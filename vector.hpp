@@ -97,6 +97,24 @@ class vector
 		allocator_.deallocate(data_, capacity_);
 	}
 
+	void reserve_(size_type n)
+	{
+		if (n > allocator_.max_size())
+			throw std::length_error("vector::reserve");
+		else if (n > capacity_)
+		{
+			pointer tmp = allocator_.allocate(n * sizeof(value_type));
+			for (size_type i = 0; i < size_; ++i)
+			{
+				allocator_.construct(&tmp[i], data_[i]);
+				allocator_.destroy(&data_[i]);
+			}
+			deallocate_data_();
+			data_     = tmp;
+			capacity_ = n;
+		}
+	}
+
   public:
 	/** INTERFACE **/
 
@@ -362,11 +380,10 @@ class vector
 			allocator_.construct(&data_[i], val);
 	}
 
-
 	void push_back(const value_type& val)
 	{
 		if (capacity_ == size_)
-			reserve(size_ * 2);
+			reserve(size_ ? size_ * 2 : 1);
 		allocator_.construct(&data_[size_], val);
 		++size_;
 	}

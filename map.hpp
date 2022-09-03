@@ -199,22 +199,6 @@ class map
 		return split_(skew_(current_node)); // restructure and return result
 	}
 
-	bool is_a_left_child_(node_ptr_t node)
-	{
-		if (node == node->parent->left)
-			return true;
-		else 
-			return false;
-	}
-
-	bool is_a_right_child_(node_ptr_t node)
-	{
-		if (node == node->parent->right)
-			return true;
-		else 
-			return false;
-	}
-
 #define LEFT -1
 #define RIGHT 1
 #define ROOT 0
@@ -438,9 +422,6 @@ class map
 			// Need to increment first else erase would invalidate our operator
 			++first;
 			this->erase(key_to_delete);
-#ifdef DEBUG
-			print_dot(1);
-#endif
 		}
 	}
 

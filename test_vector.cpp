@@ -34,71 +34,71 @@ void test_vector()
 void test_vector_assign()
 {
 	{
-		vector<int> myVec;
-		std::cout << "vector< int > myVec;" << std::endl;
-		std::cout << "size : " << myVec.size() << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		{
+		//vector<int> myVec;
+		//std::cout << "vector< int > myVec;" << std::endl;
+		//std::cout << "size : " << myVec.size() << std::endl;
+		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//{
 
-			std::cout << *it;
-			if (it + 1 != myVec.end())
-				std::cout << " ";
-		}
-		std::cout << std::endl;
-		myVec.assign(10, 42);
-		std::cout << "myVec.assign( 10, 42 );" << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		{
+		//    std::cout << *it;
+		//    if (it + 1 != myVec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//myVec.assign(10, 42);
+		//std::cout << "myVec.assign( 10, 42 );" << std::endl;
+		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//{
 
-			std::cout << *it;
-			if (it + 1 != myVec.end())
-				std::cout << " ";
-		}
-		std::cout << std::endl;
+		//    std::cout << *it;
+		//    if (it + 1 != myVec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
 	}
 
 	std::cout << std::endl;
 
 	{
-		vector<int> myVec(10, 0);
-		std::cout << "vector< int > myVec(10, 0);" << std::endl;
-		std::cout << "size : " << myVec.size() << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		{
+		//vector<int> myVec(10, 0);
+		//std::cout << "vector< int > myVec(10, 0);" << std::endl;
+		//std::cout << "size : " << myVec.size() << std::endl;
+		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//{
 
-			std::cout << *it;
-			if (it + 1 != myVec.end())
-				std::cout << " ";
-		}
-		std::cout << std::endl;
-		myVec.assign(10, 42);
-		std::cout << "myVec.assign( 10, 42 );" << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		{
+		//    std::cout << *it;
+		//    if (it + 1 != myVec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//myVec.assign(10, 42);
+		//std::cout << "myVec.assign( 10, 42 );" << std::endl;
+		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//{
 
-			std::cout << *it;
-			if (it + 1 != myVec.end())
-				std::cout << " ";
-		}
-		std::cout << std::endl;
+		//    std::cout << *it;
+		//    if (it + 1 != myVec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
 	}
 
 	std::cout << std::endl;
 
 	{
-		vector<int> myVec(10, 42);
-		std::cout << "vector< int > myVec(10, 42);" << std::endl;
-		std::cout << "size : " << myVec.size() << std::endl;
-		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		{
-			std::cout << *it;
-			if (it + 1 != myVec.end())
-				std::cout << " ";
-		}
-		std::cout << std::endl;
-		myVec.assign(0, 3);
-		std::cout << "myVec.assign( 0, 3 );" << std::endl;
-		std::cout << "size : " << myVec.size() << std::endl;
+		//vector<int> myVec(10, 42);
+		//std::cout << "vector< int > myVec(10, 42);" << std::endl;
+		//std::cout << "size : " << myVec.size() << std::endl;
+		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		//{
+		//    std::cout << *it;
+		//    if (it + 1 != myVec.end())
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//myVec.assign(0, 3);
+		//std::cout << "myVec.assign( 0, 3 );" << std::endl;
+		//std::cout << "size : " << myVec.size() << std::endl;
 		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
 		//{
 
@@ -110,18 +110,18 @@ void test_vector_assign()
 	}
 
 	{
-		//vector<int> myVec;
-		//for (vector<int>::size_type i = 0; i < 42; ++i)
-		//    myVec.push_back(i + 1);
-		//std::cout << "myVec" << std::endl;
-		//std::cout << "size : " << myVec.size() << std::endl;
-		//for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
-		//{
+		vector<int> myVec;
+		for (vector<int>::size_type i = 0; i < 42; ++i)
+			myVec.push_back(i + 1);
+		std::cout << "myVec" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for (vector<int>::iterator it = myVec.begin(); it != myVec.end(); it++)
+		{
 
-		//    std::cout << *it;
-		//    if (it + 1 != myVec.end())
-		//        std::cout << " ";
-		//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
 
 		std::cout << std::endl;
 
