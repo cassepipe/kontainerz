@@ -69,7 +69,7 @@ class vector
 
 	/** HELPER FUNCTIONS **/
 
-	size_type range_check_(size_type n)
+	size_type range_check_(size_type n) const
 	{
 		if (n >= size_)
 		{
