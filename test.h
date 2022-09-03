@@ -21,8 +21,4 @@ using NAMESPACE::map;
 using std::cout;
 using std::string;
 
-typedef int (*func_ptr_t)();
-
-int test(func_ptr_t);
-
 #endif /* TEST_H */
