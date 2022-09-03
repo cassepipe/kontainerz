@@ -151,7 +151,7 @@ template <typename T>
 	template<typename RightIterator, typename LeftIterator>
 	friend difference_type operator-(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
 	{
-		return rhs.current_ - lhs.current_;
+		return lhs.current_ - rhs.current_;
 	}
 
 	//Allow for const to non const comparisons

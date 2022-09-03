@@ -57,7 +57,7 @@ void test_vector_assign()
 		//std::cout << std::endl;
 	}
 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 
 	{
 		//vector<int> my_vec(10, 0);
@@ -83,7 +83,7 @@ void test_vector_assign()
 		//std::cout << std::endl;
 	}
 
-	std::cout << std::endl;
+	//std::cout << std::endl;
 
 	{
 		//vector<int> my_vec(10, 42);
@@ -113,17 +113,16 @@ void test_vector_assign()
 		vector<int> my_vec;
 		for (vector<int>::size_type i = 0; i < 42; ++i)
 			my_vec.push_back(i + 1);
-		std::cout << "my_vec" << std::endl;
-		std::cout << "size : " << my_vec.size() << std::endl;
+		//std::cout << "my_vec" << std::endl;
+		//std::cout << "size : " << my_vec.size() << std::endl;
 		for (vector<int>::iterator it = my_vec.begin(); it != my_vec.end(); it++)
 		{
-
-			std::cout << *it;
+			//std::cout << *it;
 			if (it + 1 != my_vec.end())
 				std::cout << " ";
 		}
 
-		std::cout << std::endl;
+		//std::cout << std::endl;
 
 		{
 			vector<int> my_range_vec;
