@@ -15,10 +15,6 @@ template <typename T, typename Alloc>
 map_node<T, Alloc> *get_nil()
 {
 	static map_node<T, Alloc> nil; 
-#ifdef DEBUG
-	if (nil.parent != &nil)
-		throw std::logic_error("NIL's parent has been modified !");
-#endif
 	return &nil;
 }
 

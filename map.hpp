@@ -43,9 +43,8 @@ class map
 	typedef value_type const&                                   const_reference;
 	typedef typename Alloc::pointer                                     pointer;
 	typedef typename Alloc::const_pointer                         const_pointer;
-	typedef ft::map_iterator<value_type, Alloc>                               iterator;
-	//typedef ft::map_iterator<const value_type>                   const_iterator;
-	typedef ft::map_const_iterator< value_type, Alloc>                   const_iterator;
+	typedef ft::map_iterator<value_type, Alloc>                        iterator;
+	typedef ft::map_const_iterator< value_type, Alloc>           const_iterator;
 	typedef ft::reverse_iterator<iterator>                     reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
@@ -174,7 +173,8 @@ class map
 
 		root_ = insert_rec_(k, v, NIL, root_, &ret);
 		root_->parent = root_;
-		return iterator(root_, ret);
+		NIL->parent = root_;
+		return iterator( ret);
 	}
 
 	node_ptr_t insert_rec_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
@@ -419,6 +419,7 @@ class map
 		size_type size_before = size_;
 		root_ = remove_rec_(k, root_, 0);
 		root_->parent = root_;
+		NIL->parent = root_;
 		if (size_before == size_)
 			return 0;
 		return 1;
@@ -503,7 +504,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return iterator(root_, current);
+				return iterator( current);
 		}
 		return this->end();
 	}
@@ -524,7 +525,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return const_iterator(root_, current);
+				return const_iterator( current);
 		}
 		return this->end();
 	}
@@ -562,9 +563,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator(root_, current);
+				return iterator( current);
 		}
-		return ++iterator(root_, parent);
+		return ++iterator( parent);
 	}
 
 	/* Returns lower bound not less than key */
@@ -590,9 +591,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator(root_, current);
+				return iterator( current);
 		}
-		return ++iterator(root_, parent);
+		return ++iterator( parent);
 	}
 
 
@@ -629,7 +630,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator(root_, best_predecessor);
+		return ++iterator( best_predecessor);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -665,7 +666,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator(root_, best_predecessor);
+		return ++iterator( best_predecessor);
 	}
 
 	/* OBSERVERS */
@@ -691,22 +692,22 @@ class map
   public:
 	iterator begin()
 	{
-		return iterator(root_, leftmost_(root_));
+		return iterator( leftmost_(root_));
 	}
 
 	iterator end()
 	{
-		return iterator(root_, NIL);
+		return iterator( NIL);
 	}
 
 	const_iterator begin() const
 	{
-		return const_iterator(root_, leftmost_(root_));
+		return const_iterator( leftmost_(root_));
 	}
 
 	const_iterator end() const
 	{
-		return const_iterator(root_, NIL);
+		return const_iterator( NIL);
 	}
 
 	reverse_iterator rbegin()
