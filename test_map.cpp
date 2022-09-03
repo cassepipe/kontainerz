@@ -525,11 +525,11 @@ void test_map_value_comp()
 
 	std::cout << "my_map contains" << std::endl;
 
-	// pair< char, int > highest = *my_map.rbegin();
+	 pair< char, int > highest = *my_map.rbegin();
 
-	// map< char, int >::iterator it = my_map.begin();
-	// do {
+	 map< char, int >::iterator it = my_map.begin();
+	 do {
 
-	//    std::cout << it->first << " => " << it->second << std::endl;
-	//} while ( my_map.value_comp()( *it++,  highest ) );
+		std::cout << it->first << " => " << it->second << std::endl;
+	} while ( my_map.value_comp()( *it++,  highest ) );
 }

@@ -9,7 +9,7 @@ int main()
 	test_map();
 	//test_vector();
 	//test_stack();
-	//big_test();
+	big_test();
 }
 
 

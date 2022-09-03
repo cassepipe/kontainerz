@@ -733,14 +733,12 @@ class map
 	/* VALUE COMPARE */
 
 	/* This exists only for forwarding the key_comp function*/
-	class value_compare : public std::binary_function<pair_type_t, pair_type_t, bool>
+	struct value_compare : public std::binary_function<pair_type_t, pair_type_t, bool>
 	{
-		protected:
 		KeyCmpFn comp;
 		value_compare(KeyCmpFn c) : comp(c)
 		{ }
 
-		public:
 		value_compare() : comp()
 		{ }
 		bool operator()(pair_type_t const& x, pair_type_t const& y) const { return comp(x.first, y.first); }
@@ -749,7 +747,6 @@ class map
 	typename map<Key, Value, KeyCmpFn, Alloc>::value_compare value_comp() const
 	{
 		return value_compare(compare_func_);
-
 	}
 
 #ifdef DEBUG

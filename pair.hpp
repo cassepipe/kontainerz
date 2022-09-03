@@ -25,18 +25,10 @@ struct pair
 	{
 	}
 
-	//pair& operator=(pair const& rhs)
-	//{
-	//    this->first = rhs.first;
-	//    this->second = rhs.second;
-	//    return *this;
-	//}
-
-	// Why is this in the libstdc++ ? I don't know
-	//template <typename U1, typename U2>
-	//pair(const pair<U1, U2>& p) : first(p.first), second(p.second)
-	//{
-	//}
+	template <typename U1, typename U2>
+	pair(const pair<U1, U2>& p) : first(p.first), second(p.second)
+	{
+	}
 };
 
 template <typename T1, typename T2>
