@@ -9,8 +9,8 @@ void test_vector()
 	test_vector_begin();
 	test_vector_capacity();
 	test_vector_clear();
-	//test_vector_constructors();
-	//test_vector_empty();
+	test_vector_constructors();
+	test_vector_empty();
 	//test_vector_end();
 	//test_vector_erase();
 	//test_vector_front();
@@ -407,82 +407,245 @@ void test_vector_clear()
 	}
 }
 
-//void test_vector_constructors()
-//{
-//}
+void test_vector_constructors()
+{
 
-//void test_vector_empty()
-//{
-//}
+	{
+		vector< int > empty;
+		std::cout << "size : " << empty.size() << std::endl;
+		std::cout << "empty : " << empty.empty() << std::endl;
+	}
+	{
+		NAMESPACE::vector< std::string > empty;
+		std::cout << "size : " << empty.size() << std::endl;
+		std::cout << "empty : " << empty.empty() << std::endl;
+	}
+	{
+		NAMESPACE::vector< NAMESPACE::vector< int > > empty;
+		std::cout << "size : " << empty.size() << std::endl;
+		std::cout << "empty : " << empty.empty() << std::endl;
+	}
+	{
+		NAMESPACE::vector< int > myVec(10);
+		std::cout << "vector< int > myVec(10);" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for ( NAMESPACE::vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
 
-//void test_vector_end()
-//{
-//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	{
+		NAMESPACE::vector< int > myVec(10, 42);
+		std::cout << "vector< int > myVec(10, 42);" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for ( NAMESPACE::vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
 
-//void test_vector_erase()
-//{
-//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	{
+		NAMESPACE::vector< int > myVec(0);
+		std::cout << "vector< int > myVec(0);" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for ( NAMESPACE::vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
 
-//void test_vector_front()
-//{
-//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
 
-//void test_vector_get_allocator()
-//{
-//}
+	{
 
-//void test_vector_insert()
-//{
-//}
+		NAMESPACE::vector< int > myVec;
+		for ( NAMESPACE::vector< int >::size_type i = 0; i < 42 ; ++i )
+			myVec.push_back(i + 1);
+		std::cout << "myVec" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for ( NAMESPACE::vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
 
-//void test_vector_max_size()
-//{
-//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+		{
+			NAMESPACE::vector< int > myRangeVec( myVec.begin(), myVec.end());
+			std::cout << "vector< int > myRangeVec( myVec.begin(), myVec.end());" << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_operator_bracket()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+		}
+		std::cout << std::endl;
+		{
+			NAMESPACE::vector< int > myRangeVec( myVec.begin(), myVec.begin() + 5);
+			std::cout << "vector< int > myRangeVec( myVec.begin(), myVec.begin() + 5);" << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_operator_equal()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+		}
+		std::cout << std::endl;
+		{
+			NAMESPACE::vector< int > myRangeVec( myVec.begin(), myVec.begin());
+			std::cout << "vector< int > myRangeVec( myVec.begin(), myVec.begin());" << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_pop_back()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+		}
+	}
 
-//void test_vector_push_back()
-//{
-//}
+	{
+		NAMESPACE::vector< int > myVec;
+		for ( NAMESPACE::vector< int >::size_type i = 0; i < 42 ; ++i )
+			myVec.push_back(i + 1);
+		std::cout << "myVec" << std::endl;
+		std::cout << "size : " << myVec.size() << std::endl;
+		for ( NAMESPACE::vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
 
-//void test_vector_rbegin()
-//{
-//}
+			std::cout << *it;
+			if (it + 1 != myVec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+		{
+			NAMESPACE::vector< int > myRangeVec( myVec);
+			myVec.clear();
+			std::cout << "vector< int > myRangeVec( myVec );" << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_relational_operators()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "myVec.clear();" << std::endl;
+			std::cout << "myVec" << std::endl;
+			std::cout << "size : " << myVec.size() << std::endl;
+			std::cout << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_rend()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+		}
+		std::cout << std::endl;
+		{
+			NAMESPACE::vector< int > myRangeVec( myVec );
+			std::cout << "vector< int > myRangeVec( myVec );" << std::endl;
+			std::cout << "myRangeVec" << std::endl;
+			std::cout << "size : " << myRangeVec.size() << std::endl;
+			for ( NAMESPACE::vector< int >::iterator it = myRangeVec.begin() ; it != myRangeVec.end() ; it++ ) {
 
-//void test_vector_reserve()
-//{
-//}
+				std::cout << *it;
+				if (it + 1 != myRangeVec.end())
+					std::cout << " ";
+			}
+		}
+	}
+}
 
-//void test_vector_resize()
-//{
-//}
+void test_vector_empty()
+{
+}
 
-//void test_vector_size()
-//{
-//}
+void test_vector_end()
+{
+}
 
-//void test_vector_swap()
-//{
-//}
+void test_vector_erase()
+{
+}
 
-//void test_vector_swap_overload()
-//{
-//}
+void test_vector_front()
+{
+}
+
+void test_vector_get_allocator()
+{
+}
+
+void test_vector_insert()
+{
+}
+
+void test_vector_max_size()
+{
+}
+
+void test_vector_operator_bracket()
+{
+}
+
+void test_vector_operator_equal()
+{
+}
+
+void test_vector_pop_back()
+{
+}
+
+void test_vector_push_back()
+{
+}
+
+void test_vector_rbegin()
+{
+}
+
+void test_vector_relational_operators()
+{
+}
+
+void test_vector_rend()
+{
+}
+
+void test_vector_reserve()
+{
+}
+
+void test_vector_resize()
+{
+}
+
+void test_vector_size()
+{
+}
+
+void test_vector_swap()
+{
+}
+
+void test_vector_swap_overload()
+{
+}
