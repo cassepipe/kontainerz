@@ -1,0 +1,82 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang++-14",
+      "-DNAMESPACE=ft",
+      "-DDEBUG",
+      "-I.",
+      "-Wall",
+      "-Wextra",
+      "-g3",
+      "-std=c++98",
+      "-fsanitize=address,undefined",
+      "-c",
+      "-o",
+      "obj/ft_main.o",
+      "main.cpp"
+    ],
+    "directory": "/home/cassepipe/kontainerz",
+    "file": "/home/cassepipe/kontainerz/main.cpp",
+    "output": "/home/cassepipe/kontainerz/obj/ft_main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++-14",
+      "-DNAMESPACE=ft",
+      "-DDEBUG",
+      "-I.",
+      "-Wall",
+      "-Wextra",
+      "-g3",
+      "-std=c++98",
+      "-fsanitize=address,undefined",
+      "-c",
+      "-o",
+      "obj/ft_test_map.o",
+      "test_map.cpp"
+    ],
+    "directory": "/home/cassepipe/kontainerz",
+    "file": "/home/cassepipe/kontainerz/test_map.cpp",
+    "output": "/home/cassepipe/kontainerz/obj/ft_test_map.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++-14",
+      "-DNAMESPACE=ft",
+      "-DDEBUG",
+      "-I.",
+      "-Wall",
+      "-Wextra",
+      "-g3",
+      "-std=c++98",
+      "-fsanitize=address,undefined",
+      "-c",
+      "-o",
+      "obj/ft_test_stack.o",
+      "test_stack.cpp"
+    ],
+    "directory": "/home/cassepipe/kontainerz",
+    "file": "/home/cassepipe/kontainerz/test_stack.cpp",
+    "output": "/home/cassepipe/kontainerz/obj/ft_test_stack.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++-14",
+      "-DNAMESPACE=ft",
+      "-DDEBUG",
+      "-I.",
+      "-Wall",
+      "-Wextra",
+      "-g3",
+      "-std=c++98",
+      "-fsanitize=address,undefined",
+      "-c",
+      "-o",
+      "obj/ft_test_vector.o",
+      "test_vector.cpp"
+    ],
+    "directory": "/home/cassepipe/kontainerz",
+    "file": "/home/cassepipe/kontainerz/test_vector.cpp",
+    "output": "/home/cassepipe/kontainerz/obj/ft_test_vector.o"
+  }
+]

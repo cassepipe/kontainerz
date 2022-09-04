@@ -148,47 +148,47 @@ template <typename T>
 	}
 
 	// To get the distance between to iterators
-	template<typename RightIterator, typename LeftIterator>
-	friend difference_type operator-(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+	template<typename LeftIterator, typename RightIterator>
+	friend difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 	{
 		return lhs.current_ - rhs.current_;
 	}
 
 	//Allow for const to non const comparisons
-	template<typename RightIterator, typename LeftIterator>
-	friend bool operator==(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+	template<typename LeftIterator, typename RightIterator>
+	friend bool operator==(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 	{
 		return lhs.current_ == rhs.current_;
 	}
 
-	template<typename RightIterator, typename LeftIterator>
-	friend bool operator<(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+	template<typename LeftIterator, typename RightIterator>
+	friend bool operator<(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 	{
 		return lhs.current_ < rhs.current_;
 	}
 
 }; // class vector_iterator
 
-template<typename RightIterator, typename LeftIterator>
-bool operator!=(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+template<typename LeftIterator, typename RightIterator>
+bool operator!=(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return !(lhs == rhs);
 }
 
-template<typename RightIterator, typename LeftIterator>
-bool operator>(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+template<typename LeftIterator, typename RightIterator>
+bool operator>(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return rhs < lhs;
 }
 
-template<typename RightIterator, typename LeftIterator>
-bool operator>=(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+template<typename LeftIterator, typename RightIterator>
+bool operator>=(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return !(lhs < rhs);
 }
 
-template<typename RightIterator, typename LeftIterator>
-bool operator<=(const vector_iterator<RightIterator>& lhs, const vector_iterator<LeftIterator>& rhs)
+template<typename LeftIterator, typename RightIterator>
+bool operator<=(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return !(lhs > rhs);
 }
