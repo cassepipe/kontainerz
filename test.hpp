@@ -1,13 +1,13 @@
 #ifndef TEST_H
 #define TEST_H
 
-# include "vector.hpp"
+#include "vector.hpp"
 
 #include <iostream>
 #include <string>
 
 #ifndef NAMESPACE
-# define NAMESPACE ft
+#define NAMESPACE ft
 #endif
 
 using NAMESPACE::vector;
