@@ -8,7 +8,7 @@ void test_vector()
 	test_vector_back();
 	test_vector_begin();
 	test_vector_capacity();
-	//test_vector_clear();
+	test_vector_clear();
 	//test_vector_constructors();
 	//test_vector_empty();
 	//test_vector_end();

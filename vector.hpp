@@ -474,7 +474,6 @@ class vector
 			allocator_.destroy(&data_[size_]);
 		}
 		++size_;
-		capacity_ = 0;
 	}
 };
 
