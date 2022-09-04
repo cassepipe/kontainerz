@@ -149,6 +149,7 @@ class vector
 
 	// Copy constructor. Shall perform deep copy using operator=
 	vector(const vector& other)
+		: allocator_(other.allocator_), data_(NULL), size_(0), capacity_(0)
 	{
 		this->operator=(other);
 	}

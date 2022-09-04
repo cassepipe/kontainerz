@@ -287,12 +287,27 @@ void test_vector_capacity()
 		std::cout << my_vec.capacity() << std::endl;
 	}
 	{
-		//vector< int > my_vec;
-		//for (int i = 0 ; i < 42 ; i++)
-		//    my_vec.push_back(i + 1);
-		//std::cout << "my_vec: " << my_vec.capacity() << std::endl;
-		//vector< int > my_copy_vec( my_vec );
-		//std::cout << "my_copy_vec: " << my_copy_vec.capacity() << std::endl;
+		vector< int > my_vec;
+		for (int i = 0 ; i < 42 ; i++)
+			my_vec.push_back(i + 1);
+		std::cout << "my_vec: " << my_vec.capacity() << std::endl;
+		vector< int > my_copy_vec( my_vec );
+		std::cout << "my_copy_vec: " << my_copy_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > myVec;
+		myVec.assign(7, 42);
+		std::cout << "myVec: " << myVec.capacity() << std::endl;
+	}
+	{
+		vector< int > myVec;
+		for ( int i = 0 ; i < 42 ; i++ )
+			myVec.push_back( i + 1 );
+		std::cout << "myVec: " << myVec.capacity() << std::endl;
+		std::cout << std::endl;
+		vector< int > myRangeVec;
+		myRangeVec.assign( myVec.begin() + 4, myVec.end() - 8 );
+		std::cout << "myRangeVec: " << myRangeVec.capacity() << std::endl;
 	}
 }
 
