@@ -469,7 +469,7 @@ class vector
 
 	void clear()
 	{
-		for (--size_; size_ >= 0; --size_)
+		while (size_--)
 		{
 			allocator_.destroy(&data_[size_]);
 		}

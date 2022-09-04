@@ -295,25 +295,117 @@ void test_vector_capacity()
 		std::cout << "my_copy_vec: " << my_copy_vec.capacity() << std::endl;
 	}
 	{
-		vector< int > myVec;
-		myVec.assign(7, 42);
-		std::cout << "myVec: " << myVec.capacity() << std::endl;
+		vector< int > my_vec;
+		my_vec.assign(7, 42);
+		std::cout << "my_vec: " << my_vec.capacity() << std::endl;
 	}
 	{
-		vector< int > myVec;
+		vector< int > my_vec;
 		for ( int i = 0 ; i < 42 ; i++ )
-			myVec.push_back( i + 1 );
-		std::cout << "myVec: " << myVec.capacity() << std::endl;
+			my_vec.push_back( i + 1 );
+		std::cout << "my_vec: " << my_vec.capacity() << std::endl;
 		std::cout << std::endl;
 		vector< int > myRangeVec;
-		myRangeVec.assign( myVec.begin() + 4, myVec.end() - 8 );
+		myRangeVec.assign( my_vec.begin() + 4, my_vec.end() - 8 );
 		std::cout << "myRangeVec: " << myRangeVec.capacity() << std::endl;
 	}
 }
 
-//void test_vector_clear()
-//{
-//}
+void test_vector_clear()
+{
+	{
+		vector< int > my_vec(10, 42);
+		std::cout << "size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+		my_vec.clear();
+		std::cout << "After clear(), size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		std::cout << "size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+		my_vec.clear();
+		std::cout << "After clear(), size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< vector< int > > my_vec( 10, vector< int > ( 15, 42 ) );
+		int	i = 1;
+		for ( vector< vector< int > >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++) {
+			std::cout << "inner vector #" << i << ", size : " << it->size() << " capacity : " << it->capacity() << std::endl;
+			i++;
+		}
+		std::cout << " outer vector, size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+		std::cout << "Now let's clear all inner vectors" << std::endl;
+		i = 1;
+		for ( vector< vector< int > >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++) {
+			it->clear();
+			std::cout << "After clear inner vector #" << i << ", size : " << it->size() << " capacity : " << it->capacity() << std::endl;
+			i++;
+		}
+		std::cout << "Now let's clear outer vector" << std::endl;
+		my_vec.clear();
+		std::cout << "After clear(), size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec(10, 42);
+		std::cout << "size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+		my_vec.clear();
+		std::cout << "After clear(), size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+		my_vec.clear();
+		std::cout << "After second clear(), size : " << my_vec.size() << " capacity : " << my_vec.capacity() << std::endl;
+	}
+	{
+
+		vector< int > my_vec;
+		for ( vector< int >::size_type i = 0; i < 42 ; ++i )
+			my_vec.push_back(i + 1);
+		std::cout << "my_vec" << std::endl;
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++ ) {
+
+			std::cout << *it;
+			if (it + 1 != my_vec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+		my_vec.clear();
+		my_vec.push_back(101010);
+		my_vec.push_back(33);
+		std::cout << "my_vec" << std::endl;
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++ ) {
+
+			std::cout << *it;
+			if (it + 1 != my_vec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		for ( vector< int >::size_type i = 0; i < 42 ; ++i )
+			my_vec.push_back(i + 1);
+		std::cout << "my_vec" << std::endl;
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++ ) {
+
+			std::cout << *it;
+			if (it + 1 != my_vec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+		my_vec.clear();
+		my_vec.push_back(101010);
+		my_vec.push_back(33);
+		std::cout << "my_vec" << std::endl;
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++ ) {
+
+			std::cout << *it;
+			if (it + 1 != my_vec.end())
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
+}
 
 //void test_vector_constructors()
 //{
