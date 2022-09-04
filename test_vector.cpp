@@ -7,7 +7,7 @@ void test_vector()
 	test_vector_at();
 	test_vector_back();
 	test_vector_begin();
-	//test_vector_capacity();
+	test_vector_capacity();
 	//test_vector_clear();
 	//test_vector_constructors();
 	//test_vector_empty();
@@ -249,13 +249,52 @@ void test_vector_begin()
 		const vector< int > my_const_vec(10, 42);
 		vector< int >::iterator it = my_vec.begin();
 		vector< int >::const_iterator constIt = my_const_vec.begin();
-		//std::cout << *constIt << " " << *it << std::endl;
+		std::cout << *constIt << " " << *it << std::endl;
 	}
 }
 
-//void test_vector_capacity()
-//{
-//}
+void test_vector_capacity()
+{
+	{
+		vector< int > my_vec;
+		std::cout << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		my_vec.push_back(42);
+		std::cout << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		std::cout << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		std::cout << my_vec.capacity() << std::endl;
+	}
+	{
+		vector< int > my_vec;
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		my_vec.push_back(42);
+		std::cout << my_vec.capacity() << std::endl;
+	}
+	{
+		//vector< int > my_vec;
+		//for (int i = 0 ; i < 42 ; i++)
+		//    my_vec.push_back(i + 1);
+		//std::cout << "my_vec: " << my_vec.capacity() << std::endl;
+		//vector< int > my_copy_vec( my_vec );
+		//std::cout << "my_copy_vec: " << my_copy_vec.capacity() << std::endl;
+	}
+}
 
 //void test_vector_clear()
 //{
