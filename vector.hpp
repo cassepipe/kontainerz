@@ -355,7 +355,7 @@ class vector
 
 	template <class InputIterator>
 	void assign(InputIterator first, InputIterator last,
-	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
+	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0) // Unnamed default parameter, weird, I know
 	{
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();

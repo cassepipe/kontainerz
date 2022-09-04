@@ -149,27 +149,60 @@ template <typename T>
 
 	// To get the distance between to iterators
 	template<typename LeftIterator, typename RightIterator>
-	friend difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
-	{
-		return lhs.current_ - rhs.current_;
-	}
+	friend difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs);
+	//{
+	//    return lhs.current_ - rhs.current_;
+	//}
 
 	//Allow for const to non const comparisons
 	template<typename LeftIterator, typename RightIterator>
-	friend bool operator==(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
-	{
-		return lhs.current_ == rhs.current_;
-	}
+	friend bool operator==(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs);
+	//{
+	//    return lhs.current_ == rhs.current_;
+	//}
 
 	template<typename LeftIterator, typename RightIterator>
-	friend bool operator<(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
-	{
-		return lhs.current_ < rhs.current_;
-	}
+	friend bool operator<(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs);
+	//{
+	//    return lhs.current_ < rhs.current_;
+	//}
 
 }; // class vector_iterator
 
-template<typename LeftIterator, typename RightIterator>
+////Pas le choix si tu veux faire marcher des expressions telles que (-3 -it)
+//vector_iterator operator+(difference_type i, const vector_iterator& it)
+//{
+//    return vector_iterator(it.current__ + i);
+//}
+
+//vector_iterator operator-(difference_type i, const vector_iterator& it)
+//{
+//    return vector_iterator(it.current__ - i);
+//}
+
+// To get the distance between to iterators
+	template<typename LeftIterator, typename RightIterator>
+typename LeftIterator::difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
+{
+	return lhs.current_ - rhs.current_;
+}
+
+//Allow for const to non const comparisons
+	template<typename LeftIterator, typename RightIterator>
+bool operator==(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
+{
+	return lhs.current_ == rhs.current_;
+}
+
+	template<typename LeftIterator, typename RightIterator>
+bool operator<(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
+{
+	return lhs.current_ < rhs.current_;
+}
+
+// NON_FRIEND FUNCTIONS
+
+	template<typename LeftIterator, typename RightIterator>
 bool operator!=(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return !(lhs == rhs);

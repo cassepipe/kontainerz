@@ -8,8 +8,8 @@ DIFF			= meld
 DIFF			= diff -s
 CXX				= g++-12
 CXX				= clang++-14
-SHELL			= bash
 SHELL			= zsh
+SHELL			= bash
 FT				= ft_containers_test
 STD				= std_containers_test
 
@@ -67,8 +67,8 @@ re:				fclean all
 run_ft:			
 				./$(FT)
 diff:			
-				$(DIFF) =( ./${FT} )  =( ./${STD}  ) 
-				@#$(DIFF) <( ./${FT} )  <( ./${STD}  ) 
+				@#$(DIFF) =( ./${FT} )  =( ./${STD}  ) 
+				$(DIFF) <( ./${FT} )  <( ./${STD}  ) 
 				@#$(DIFF) <( ./${FT} 2>&1)  <( ./${STD} 2>&1 ) 
 
 
