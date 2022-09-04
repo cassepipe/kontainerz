@@ -149,7 +149,7 @@ template <typename T>
 
 	// To get the distance between to iterators
 	template<typename LeftIterator, typename RightIterator>
-	friend difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs);
+	friend typename vector_iterator<LeftIterator>::difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs);
 
 	//Allow for const to non const comparisons
 	template<typename LeftIterator, typename RightIterator>
@@ -173,7 +173,7 @@ template <typename T>
 
 // To get the distance between to iterators
 	template<typename LeftIterator, typename RightIterator>
-typename LeftIterator::difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
+typename vector_iterator<LeftIterator>::difference_type operator-(const vector_iterator<LeftIterator>& lhs, const vector_iterator<RightIterator>& rhs)
 {
 	return lhs.current_ - rhs.current_;
 }

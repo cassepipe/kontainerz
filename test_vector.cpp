@@ -124,60 +124,57 @@ void test_vector_assign()
 
 		std::cout << std::endl;
 
-		// Prevents linkage
 		{
-			//vector<int> my_range_vec;
-			//my_range_vec.assign(my_vec.begin(), my_vec.end());
-			//std::cout << "vector< int > my_range_vec;" << std::endl;
-			//std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.end() );" << std::endl;
-			//std::cout << "my_range_vec" << std::endl;
-			//std::cout << "size : " << my_range_vec.size() << std::endl;
-			//for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
-			//{
+			vector<int> my_range_vec;
+			my_range_vec.assign(my_vec.begin(), my_vec.end());
+			std::cout << "vector< int > my_range_vec;" << std::endl;
+			std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.end() );" << std::endl;
+			std::cout << "my_range_vec" << std::endl;
+			std::cout << "size : " << my_range_vec.size() << std::endl;
+			for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
+			{
 
-			//    std::cout << *it;
-			//    if (it + 1 != my_range_vec.end())
-			//        std::cout << " ";
-			//}
+				std::cout << *it;
+				if (it + 1 != my_range_vec.end())
+					std::cout << " ";
+			}
 		}
 
 		std::cout << std::endl;
 		
-		// Prevents linkage
-	//    {
-	//        vector<int> my_range_vec;
-	//        my_range_vec.assign(my_vec.begin(), my_vec.begin() + 5);
-	//        std::cout << "vector< int > my_range_vec;" << std::endl;
-	//        std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() + 5 );" << std::endl;
-	//        std::cout << "my_range_vec" << std::endl;
-	//        std::cout << "size : " << my_range_vec.size() << std::endl;
-	//        for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
-	//        {
+		{
+			vector<int> my_range_vec;
+			my_range_vec.assign(my_vec.begin(), my_vec.begin() + 5);
+			std::cout << "vector< int > my_range_vec;" << std::endl;
+			std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() + 5 );" << std::endl;
+			std::cout << "my_range_vec" << std::endl;
+			std::cout << "size : " << my_range_vec.size() << std::endl;
+			for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
+			{
 
-	//            std::cout << *it;
-	//            if (it + 1 != my_range_vec.end())
-	//                std::cout << " ";
-	//        }
-	//    }
+				std::cout << *it;
+				if (it + 1 != my_range_vec.end())
+					std::cout << " ";
+			}
+		}
 
 		std::cout << std::endl;
 
-		// Prevent linkage
-	//    {
-	//        vector<int> my_range_vec;
-	//        my_range_vec.assign(my_vec.begin(), my_vec.begin());
-	//        std::cout << "vector< int > my_range_vec;" << std::endl;
-	//        std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() );" << std::endl;
-	//        std::cout << "my_range_vec" << std::endl;
-	//        std::cout << "size : " << my_range_vec.size() << std::endl;
-	//        for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
-	//        {
+		{
+			vector<int> my_range_vec;
+			my_range_vec.assign(my_vec.begin(), my_vec.begin());
+			std::cout << "vector< int > my_range_vec;" << std::endl;
+			std::cout << "my_range_vec.assign( my_vec.begin(), my_vec.begin() );" << std::endl;
+			std::cout << "my_range_vec" << std::endl;
+			std::cout << "size : " << my_range_vec.size() << std::endl;
+			for (vector<int>::iterator it = my_range_vec.begin(); it != my_range_vec.end(); it++)
+			{
 
-	//            std::cout << *it;
-	//            if (it + 1 != my_range_vec.end())
-	//                std::cout << " ";
-	//        }
-	//    }
+				std::cout << *it;
+				if (it + 1 != my_range_vec.end())
+					std::cout << " ";
+			}
+		}
 	}
 }
 
