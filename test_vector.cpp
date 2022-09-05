@@ -12,9 +12,9 @@ void test_vector()
 	//test_vector_empty();
 	//test_vector_end();
 	//test_vector_erase();
-	test_vector_front();
-	test_vector_get_allocator();
-	// test_vector_insert();
+	//test_vector_front();
+	//test_vector_get_allocator();
+	test_vector_insert();
 	// test_vector_max_size();
 	// test_vector_operator_bracket();
 	// test_vector_operator_equal();
@@ -753,29 +753,29 @@ void test_vector_front()
 		}
 	}
 	{
-		NAMESPACE::vector< NAMESPACE::vector< int > > myVec( 5, NAMESPACE::vector< int > () );
+		vector< vector< int > > myVec( 5, vector< int > () );
 		int i = 1;
-		for ( NAMESPACE::vector< NAMESPACE::vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
 			for ( int j = 1 ; j < 21 ; j++ ) {
 				it->push_back( j * i );
 			}
 			i++;
 		}
-		for ( NAMESPACE::vector< NAMESPACE::vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
 
-			for ( NAMESPACE::vector< NAMESPACE::vector< int > >::iterator it2 = it ; it2 != myVec.end() ; it2++ ) {
+			for ( vector< vector< int > >::iterator it2 = it ; it2 != myVec.end() ; it2++ ) {
 
-				for ( NAMESPACE::vector< int >::iterator it3 = it2->begin() ; it3 != it2->end() ; it3++ ) {
+				for ( vector< int >::iterator it3 = it2->begin() ; it3 != it2->end() ; it3++ ) {
 					it->front() += *it3;
 				}
 			}
 		}
 
 		i = 1;
-		for ( NAMESPACE::vector< NAMESPACE::vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
 
 			std::cout << "vector #"	<< i << " : ";
-			for ( NAMESPACE::vector< int >::iterator it2 = it->begin() ; it2 != it->end() ; it2++ ) {
+			for ( vector< int >::iterator it2 = it->begin() ; it2 != it->end() ; it2++ ) {
 
 				std::cout << *it2;
 				if ( it2 + 1 != it->end() )
@@ -789,7 +789,7 @@ void test_vector_front()
 
 void test_vector_get_allocator()
 {
-	NAMESPACE::vector<int>	myvector;
+	vector<int>	myvector;
 	int *	p;
 	unsigned int	i;
 
@@ -810,6 +810,58 @@ void test_vector_get_allocator()
 
 void test_vector_insert()
 {
+	{
+		vector< int > myVec;
+		myVec.insert( myVec.begin(), 42);
+		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+
+		//    std::cout << *it;
+		//    if ( it + 1 != myVec.end() )
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//std::cout << std::endl;
+
+		//myVec.insert( myVec.begin(), 33);
+		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+
+		//    std::cout << *it;
+		//    if ( it + 1 != myVec.end() )
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//std::cout << std::endl;
+
+		//myVec.insert( myVec.begin() + 1, 101010);
+		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+
+		//    std::cout << *it;
+		//    if ( it + 1 != myVec.end() )
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//std::cout << std::endl;
+
+		//myVec.insert( myVec.end(), 9);
+		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+
+		//    std::cout << *it;
+		//    if ( it + 1 != myVec.end() )
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+		//myVec.clear();
+		//std::cout << std::endl;
+
+		//myVec.insert( myVec.end(), 101);
+		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+
+		//    std::cout << *it;
+		//    if ( it + 1 != myVec.end() )
+		//        std::cout << " ";
+		//}
+		//std::cout << std::endl;
+	}
 }
 
 void test_vector_max_size()

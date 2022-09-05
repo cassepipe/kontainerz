@@ -404,15 +404,18 @@ class vector
 	void insert(iterator position, size_type n, const value_type& val)
 	{
 		pointer pos = &(*position);
+		size_type distance = n;
 		size_type new_size = size_ + n;
 		if (new_size > capacity_)
 			reserve(new_size * 2);
-		for (; size_ < new_size; ++size_, ++pos)
+
+		for (--size_, --new_size; size_ < new_size; ++size_, ++pos)
 		{
-			allocator_.construct(pos + n,  data_[size_]);
+			allocator_.construct(pos + distance,  data_[size_]);
 			allocator_.destroy(pos);
-			allocator_.construct(pos, val);
+			allocator_.construct(pos, *position);
 		}
+		++size_;
 	}
 
 	template <class InputIterator>
