@@ -1,5 +1,4 @@
-#include "test_vector.hpp"
-#include "test.h"
+#include "test.hpp"
 
 void test_vector()
 {

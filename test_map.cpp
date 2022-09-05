@@ -1,8 +1,4 @@
-#include <exception>
-#include <iostream>
-
-#include "test.h"
-#include "test_map.hpp"
+#include "test.hpp"
 
 void test_map()
 {

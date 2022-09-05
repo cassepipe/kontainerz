@@ -1,5 +1,4 @@
-#include "test_stack.hpp"
-#include "test.h"
+#include "test.hpp"
 
 void test_stack()
 {

@@ -4,6 +4,10 @@
 #include "map.hpp"
 #include "vector.hpp"
 
+#include "test_vector.hpp"
+#include "test_stack.hpp"
+#include "test_map.hpp"
+
 #include <map>
 #include <stack>
 #include <vector>
@@ -15,7 +19,7 @@
 using NAMESPACE::make_pair;
 using NAMESPACE::pair;
 using NAMESPACE::vector;
-// using NAMESPACE::stack;
+using NAMESPACE::stack;
 using NAMESPACE::map;
 
 using std::cout;
