@@ -1,7 +1,4 @@
-#include "test.h"
-#include "test_vector.hpp"
-#include "test_stack.hpp"
-#include "test_map.hpp"
+#include "test.hpp"
 
 int main()
 {

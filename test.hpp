@@ -19,7 +19,7 @@
 using NAMESPACE::make_pair;
 using NAMESPACE::pair;
 using NAMESPACE::vector;
-using NAMESPACE::stack;
+//using NAMESPACE::stack;
 using NAMESPACE::map;
 
 using std::cout;

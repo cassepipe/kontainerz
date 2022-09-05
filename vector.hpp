@@ -448,10 +448,12 @@ class vector
 			return last;
 		size_type distance = last - first;
 		size_ -= distance;
-		for (; last < end; --distance, ++first, ++last)
+		for (; last < end ; ++first, ++last)
 		{
 			allocator_.destroy(&(*first));
 			allocator_.construct(&(*first), *last);
+			if (distance)
+				--distance;
 		}
 		for (; distance > 0; --distance, ++first)
 		{
