@@ -1,35 +1,5 @@
 #include "test.hpp"
 
-void test_vector()
-{
-	// test_vector_assign();
-	// test_vector_at();
-	// test_vector_back();
-	// test_vector_begin();
-	// test_vector_capacity();
-	// test_vector_clear();
-	// test_vector_constructors();
-	//test_vector_empty();
-	//test_vector_end();
-	//test_vector_erase();
-	//test_vector_front();
-	//test_vector_get_allocator();
-	test_vector_insert();
-	// test_vector_max_size();
-	// test_vector_operator_bracket();
-	// test_vector_operator_equal();
-	// test_vector_pop_back();
-	// test_vector_push_back();
-	// test_vector_rbegin();
-	// test_vector_relational_operators();
-	// test_vector_rend();
-	// test_vector_reserve();
-	// test_vector_resize();
-	// test_vector_size();
-	// test_vector_swap();
-	// test_vector_swap_overload();
-}
-
 void test_vector_assign()
 {
 	{
@@ -739,31 +709,31 @@ void test_vector_erase()
 void test_vector_front()
 {
 	{
-		vector< int > myVec;
+		vector< int > my_vec;
 		for ( vector< int >::size_type i = 0; i < 42 ; ++i ) {
-			myVec.push_back(i + 1);
-			myVec.front() += i;
+			my_vec.push_back(i + 1);
+			my_vec.front() += i;
 		}
-		std::cout << "size : " << myVec.size() << std::endl;
-		for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; it++ ) {
+		std::cout << "size : " << my_vec.size() << std::endl;
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++ ) {
 
 			std::cout << *it;
-			if (it + 1 != myVec.end())
+			if (it + 1 != my_vec.end())
 				std::cout << " ";
 		}
 	}
 	{
-		vector< vector< int > > myVec( 5, vector< int > () );
+		vector< vector< int > > my_vec( 5, vector< int > () );
 		int i = 1;
-		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++) {
 			for ( int j = 1 ; j < 21 ; j++ ) {
 				it->push_back( j * i );
 			}
 			i++;
 		}
-		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++) {
 
-			for ( vector< vector< int > >::iterator it2 = it ; it2 != myVec.end() ; it2++ ) {
+			for ( vector< vector< int > >::iterator it2 = it ; it2 != my_vec.end() ; it2++ ) {
 
 				for ( vector< int >::iterator it3 = it2->begin() ; it3 != it2->end() ; it3++ ) {
 					it->front() += *it3;
@@ -772,7 +742,7 @@ void test_vector_front()
 		}
 
 		i = 1;
-		for ( vector< vector< int > >::iterator it = myVec.begin() ; it != myVec.end() ; it++) {
+		for ( vector< vector< int > >::iterator it = my_vec.begin() ; it != my_vec.end() ; it++) {
 
 			std::cout << "vector #"	<< i << " : ";
 			for ( vector< int >::iterator it2 = it->begin() ; it2 != it->end() ; it2++ ) {
@@ -811,56 +781,53 @@ void test_vector_get_allocator()
 void test_vector_insert()
 {
 	{
-		vector< int > myVec;
-		myVec.insert( myVec.begin(), 42);
-		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+		vector< int > my_vec;
+		my_vec.insert( my_vec.begin(), 42);
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; ++it ) {
 
-		//    std::cout << *it;
-		//    if ( it + 1 != myVec.end() )
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//std::cout << std::endl;
+			std::cout << *it;
+			if ( it + 1 != my_vec.end() )
+				std::cout << " ";
+		}
+		std::cout << std::endl;
 
-		//myVec.insert( myVec.begin(), 33);
-		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+		my_vec.insert( my_vec.begin(), 33);
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; ++it ) {
 
-		//    std::cout << *it;
-		//    if ( it + 1 != myVec.end() )
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//std::cout << std::endl;
+			std::cout << *it;
+			if ( it + 1 != my_vec.end() )
+				std::cout << " ";
+		}
+		std::cout << std::endl;
 
-		//myVec.insert( myVec.begin() + 1, 101010);
-		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+		my_vec.insert( my_vec.begin() + 1, 101010);
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; ++it ) {
 
-		//    std::cout << *it;
-		//    if ( it + 1 != myVec.end() )
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//std::cout << std::endl;
+			std::cout << *it;
+			if ( it + 1 != my_vec.end() )
+				std::cout << " ";
+		}
+		std::cout << std::endl;
 
-		//myVec.insert( myVec.end(), 9);
-		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+		my_vec.insert( my_vec.end(), 9);
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; ++it ) {
 
-		//    std::cout << *it;
-		//    if ( it + 1 != myVec.end() )
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
-		//myVec.clear();
-		//std::cout << std::endl;
+			std::cout << *it;
+			if ( it + 1 != my_vec.end() )
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+		my_vec.clear();
+		std::cout << std::endl;
 
-		//myVec.insert( myVec.end(), 101);
-		//for ( vector< int >::iterator it = myVec.begin() ; it != myVec.end() ; ++it ) {
+		my_vec.insert( my_vec.end(), 101);
+		for ( vector< int >::iterator it = my_vec.begin() ; it != my_vec.end() ; ++it ) {
 
-		//    std::cout << *it;
-		//    if ( it + 1 != myVec.end() )
-		//        std::cout << " ";
-		//}
-		//std::cout << std::endl;
+			std::cout << *it;
+			if ( it + 1 != my_vec.end() )
+				std::cout << " ";
+		}
+		std::cout << std::endl;
 	}
 }
 
@@ -915,3 +882,34 @@ void test_vector_swap()
 void test_vector_swap_overload()
 {
 }
+
+void test_vector()
+{
+	// test_vector_assign();
+	// test_vector_at();
+	// test_vector_back();
+	// test_vector_begin();
+	// test_vector_capacity();
+	// test_vector_clear();
+	// test_vector_constructors();
+	//test_vector_empty();
+	//test_vector_end();
+	//test_vector_erase();
+	//test_vector_front();
+	//test_vector_get_allocator();
+	test_vector_insert();
+	// test_vector_max_size();
+	// test_vector_operator_bracket();
+	// test_vector_operator_equal();
+	// test_vector_pop_back();
+	// test_vector_push_back();
+	// test_vector_rbegin();
+	// test_vector_relational_operators();
+	// test_vector_rend();
+	// test_vector_reserve();
+	// test_vector_resize();
+	// test_vector_size();
+	// test_vector_swap();
+	// test_vector_swap_overload();
+}
+

@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <memory>
 #include <sstream>
+#include <cstring>
 
 namespace ft
 {
@@ -351,6 +352,20 @@ class vector
 	{
 		return allocator_;
 	}
+	
+	void shift_elements_right_by_(T* elements, size_type n)
+	{
+		if (this->empty() == false)
+		{
+			T *end = &*this->end();
+			for (; elements != end; ++elements)
+			{
+				allocator_.construct(elements + n, *elements); // If vector is empty this will blow up
+				allocator_.destroy(elements);
+			}
+		}
+	}
+	
 
 	/* Modifiers */
 
@@ -397,40 +412,53 @@ class vector
 
 	iterator insert(iterator position, const value_type& val)
 	{
-		insert(position, 1, val);
-		return position;
+
+		T              *pos;
+		difference_type idx      = &*position - data_;
+		size_type       newsize_ = size_ + 1;
+
+		if (newsize_ > capacity_)
+			reserve(newsize_ * 2);
+		pos = data_ + idx;
+		shift_elements_right_by_(pos, 1);
+		for ( ; size_ < newsize_; ++size_, ++pos)
+		{
+			allocator_.construct(pos, val);
+		}
+		return iterator(data_ + idx + 1);
 	}
 
 	void insert(iterator position, size_type n, const value_type& val)
 	{
-		pointer pos = &(*position);
-		size_type distance = n;
-		size_type new_size = size_ + n;
-		if (new_size > capacity_)
-			reserve(new_size * 2);
+		T              *pos;
+		difference_type idx      = &*position - data_;
+		size_type       newsize_ = size_ + n;
 
-		for (--size_, --new_size; size_ < new_size; ++size_, ++pos)
+		if (newsize_ > capacity_)
+			reserve(newsize_ * 2);
+		pos = data_ + idx;
+		shift_elements_right_by_(pos, n);
+		for ( ; size_ < newsize_; ++size_, ++pos)
 		{
-			allocator_.construct(pos + distance,  data_[size_]);
-			allocator_.destroy(pos);
-			allocator_.construct(pos, *position);
+			allocator_.construct(pos, val);
 		}
-		++size_;
 	}
 
 	template <class InputIterator>
 	void insert(iterator position, InputIterator first, InputIterator last,
 	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
 	{
-		pointer pos = &(*position);
-		size_type distance = last - first;
-		size_type new_size = size_ + distance;
-		if (new_size > capacity_)
-			reserve(new_size * 2);
-		for (; size_ < new_size; ++size_, ++pos, ++first)
+		T              *pos;
+		difference_type n        = last - first;
+		difference_type idx      = &*position - data_;
+		size_type       newsize_ = size_ + n;
+
+		if (newsize_ > capacity_)
+			reserve(newsize_ * 2);
+		pos = data_ + idx;
+		shift_elements_right_by_(pos, n);
+		for ( ; size_ < newsize_; ++size_, ++pos, ++first)
 		{
-			allocator_.construct(pos + distance,  data_[size_]);
-			allocator_.destroy(pos);
 			allocator_.construct(pos, *first);
 		}
 	}

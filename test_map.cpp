@@ -1,32 +1,5 @@
 #include "test.hpp"
 
-void test_map()
-{
-	test_map_begin();
-	test_map_clear();
-	test_map_constructor();
-	test_map_count();
-	test_map_empty();
-	test_map_end();
-	test_map_equal_range();
-	test_map_erase();
-	test_map_find();
-	test_map_get_allocator();
-	test_map_insert();
-	test_map_key_comp();
-	test_map_lower_bound();
-	test_map_operator_bracket();
-	test_map_operator_equal();
-	test_map_rbegin();
-	test_map_relational_operators();
-	test_map_rend();
-	test_map_size();
-	test_map_swap();
-	test_map_swap_overload();
-	test_map_upper_bound();
-	test_map_value_comp();
-}
-
 void visual_test()
 {
 	map<char, int>           tree;
@@ -563,4 +536,31 @@ void test_map_value_comp()
 
 		std::cout << it->first << " => " << it->second << std::endl;
 	} while (my_map.value_comp()(*it++, highest));
+}
+
+void test_map()
+{
+	test_map_begin();
+	test_map_clear();
+	test_map_constructor();
+	test_map_count();
+	test_map_empty();
+	test_map_end();
+	test_map_equal_range();
+	test_map_erase();
+	test_map_find();
+	test_map_get_allocator();
+	test_map_insert();
+	test_map_key_comp();
+	test_map_lower_bound();
+	test_map_operator_bracket();
+	test_map_operator_equal();
+	test_map_rbegin();
+	test_map_relational_operators();
+	test_map_rend();
+	test_map_size();
+	test_map_swap();
+	test_map_swap_overload();
+	test_map_upper_bound();
+	test_map_value_comp();
 }

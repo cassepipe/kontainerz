@@ -23,8 +23,8 @@ OBJ/STD_DEPS	= $(patsubst %.o,           %.d, $(OBJ/STD_OBJECTS))
 INCLUDE_FLAGS	= -I.
 CPPFLAGS		= ${INCLUDE_FLAGS} -MMD 
 #Add -Werror before correction 
-CXXFLAGS		= -Wall -Wextra -g3 -std=c++98 #-Wno-macro-redefined 
-LDFLAGS			=
+CXXFLAGS		= -Wall -Wextra -g3 -std=c++98 
+LDFLAGS			= 
 LDLIBS			= 
 #Our beloved address sanitizer
 ASAN_FLAG		=  -fsanitize=address,undefined
