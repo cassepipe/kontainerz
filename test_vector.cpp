@@ -833,6 +833,22 @@ void test_vector_insert()
 
 void test_vector_max_size()
 {
+	{
+		vector< int > myVec;
+		std::cout << "max_size : " << myVec.max_size() << std::endl;
+	}
+	{
+		vector< char > myVec;
+		std::cout << "max_size : " << myVec.max_size() << std::endl;
+	}
+	{
+		vector< std::string > myVec;
+		std::cout << "max_size : " << myVec.max_size() << std::endl;
+	}
+	{
+		vector< vector< int > >	myVec;
+		std::cout << "max_size : " << myVec.max_size() << std::endl;
+	}
 }
 
 void test_vector_operator_bracket()
@@ -897,8 +913,8 @@ void test_vector()
 	//test_vector_erase();
 	//test_vector_front();
 	//test_vector_get_allocator();
-	test_vector_insert();
-	// test_vector_max_size();
+	//test_vector_insert();
+	 test_vector_max_size();
 	// test_vector_operator_bracket();
 	// test_vector_operator_equal();
 	// test_vector_pop_back();
