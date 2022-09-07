@@ -1088,29 +1088,65 @@ void test_vector_reserve()
 
 void test_vector_resize()
 {
-		vector< int > my_vec;
-		for (int i = 1 ; i < 10 ; i++)
-			my_vec.push_back(i);
-		my_vec.resize(5);
-		my_vec.resize(8, 100);
-		my_vec.resize(13);
-		cout << "my vector contains:";
-		for (vector< int >::size_type i = 0 ; i< my_vec.size(); ++i)
-			cout << ' ' << my_vec[i];
-		cout << std::endl;
+	vector< int > my_vec;
+	for (int i = 1 ; i < 10 ; i++)
+		my_vec.push_back(i);
+	my_vec.resize(5);
+	my_vec.resize(8, 100);
+	my_vec.resize(13);
+	cout << "my vector contains:";
+	for (vector< int >::size_type i = 0 ; i< my_vec.size(); ++i)
+		cout << ' ' << my_vec[i];
+	cout << std::endl;
 }
 
 void test_vector_size()
 {
+	vector< int > my_vec;
+	std::cout << "0. size : " << my_vec.size() << std::endl;
 
+	for (int i=0; i<10; i++) my_vec.push_back(i);
+	std::cout << "1. size : " << my_vec.size() << std::endl;
+
+	my_vec.insert(my_vec.end(),10,100);
+	std::cout << "2. size : " << my_vec.size() << std::endl;
+
+	my_vec.pop_back();
+	std::cout << "3. size : " << my_vec.size() << std::endl;
 }
 
 void test_vector_swap()
 {
+	vector< int > foo (3, 100);
+	vector< int > bar (5, 200);
+	foo.swap(bar);
+	std::cout << "foo contains:";
+	for (unsigned int i=0; i<foo.size(); i++)
+		std::cout << ' ' << foo[i];
+	std::cout << std::endl;
+	std::cout << "bar contains:";
+	for (unsigned int i=0; i<bar.size(); i++)
+		std::cout << ' ' << bar[i];
+	std::cout << std::endl;
 }
 
 void test_vector_swap_overload()
 {
+	vector< int > foo (3, 100);
+	vector< int > bar (5, 200);
+
+	std::swap(foo, bar);
+
+	std::cout << "foo contains:";
+	for (unsigned int i=0; i<foo.size(); i++)
+		std::cout << ' ' << foo[i];
+	std::cout << std::endl;
+
+	std::cout << "bar contains:";
+	for (unsigned int i=0; i<bar.size(); i++)
+		std::cout << ' ' << bar[i];
+	std::cout << std::endl;
+
 }
 
 void test_vector()
@@ -1137,7 +1173,7 @@ void test_vector()
 	//test_vector_relational_operators();
 	//test_vector_rend();
 	//test_vector_reserve();
-	test_vector_resize();
+	//test_vector_resize();
 	test_vector_size();
 	test_vector_swap();
 	test_vector_swap_overload();
