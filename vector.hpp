@@ -210,22 +210,22 @@ class vector
 
 	reverse_iterator rbegin()
 	{
-		return reverse_iterator(data_);
+		return reverse_iterator(this->end());
 	}
 
 	const_reverse_iterator rbegin() const
 	{
-		return const_reverse_iterator(data_);
+		return const_reverse_iterator(this->end());
 	}
 
 	reverse_iterator rend()
 	{
-		return reverse_iterator(data_ + size_);
+		return reverse_iterator(this->begin());
 	}
 
 	const_reverse_iterator rend() const
 	{
-		return const_reverse_iterator(data_ + size_);
+		return const_reverse_iterator(this->begin());
 	}
 
 	/* Capacity */
