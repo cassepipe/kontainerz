@@ -63,11 +63,6 @@ struct is_integral_helper<long>
 	static bool const value = true; 
 };
 template <>
-struct is_integral_helper<long long>
-{
-	static bool const value = true; 
-};
-template <>
 struct is_integral_helper<unsigned char>
 {
 	static bool const value = true; 
@@ -86,12 +81,6 @@ struct is_integral_helper<unsigned int>
 
 template <>
 struct is_integral_helper<unsigned long>
-{
-	static bool const value = true; 
-};
-
-template <>
-struct is_integral_helper<unsigned long long>
 {
 	static bool const value = true; 
 };
