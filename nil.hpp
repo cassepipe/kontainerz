@@ -18,6 +18,6 @@ map_node<T, Alloc> *get_nil()
 	return &nil;
 }
 
-};
+}
 
 #endif /* NIL_HPP */
