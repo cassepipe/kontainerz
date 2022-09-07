@@ -513,7 +513,7 @@ class vector
 template <class T, class Alloc>
 bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
-	typedef typename vector<const T, Alloc>::iterator const_iterator;
+	typedef typename vector<T, Alloc>::const_iterator const_iterator;
 
 	if (lhs.size() != rhs.size())
 		return false;
@@ -541,7 +541,7 @@ bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 template <class T, class Alloc>
 bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
-	typedef typename vector<const T, Alloc>::iterator const_iterator;
+	typedef typename vector<T, Alloc>::const_iterator const_iterator;
 
 	const_iterator lit   = lhs.begin();
 	const_iterator llast = --(lhs.end());
