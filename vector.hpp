@@ -508,17 +508,19 @@ class vector
 		}
 		++size_;
 	}
-}; // class vector
+};
 
 template <class T, class Alloc>
 bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
+	typedef typename vector<const T, Alloc>::iterator const_iterator;
+
 	if (lhs.size() != rhs.size())
 		return false;
 
-	const T *lit  = &*lhs.begin();
-	const T *lend = &*lhs.end();
-	const T *rit  = &*rhs.begin();
+	const_iterator lit  = lhs.begin();
+	const_iterator lend = lhs.end();
+	const_iterator rit  = rhs.begin();
 
 	while (lit != lend)
 	{
@@ -539,10 +541,12 @@ bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 template <class T, class Alloc>
 bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 {
-	const T *lit   = &*lhs.begin();
-	const T *llast = &*--(lhs.end());
-	const T *rit   = &*rhs.begin();
-	const T *rlast = &*--(rhs.end());
+	typedef typename vector<const T, Alloc>::iterator const_iterator;
+
+	const_iterator lit   = lhs.begin();
+	const_iterator llast = --(lhs.end());
+	const_iterator rit   = rhs.begin();
+	const_iterator rlast = --(rhs.end());
 
 	// This loop stops on the first diff or once vector end is reach
 	while (lit != llast && rit != rlast && *lit == *rit)
