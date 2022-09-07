@@ -69,6 +69,6 @@ struct map_node
 
 }; // map_node
 
-}; // namespace ft
+} // namespace ft
 
 #endif /* MAP_NODE_HPP */
