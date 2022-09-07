@@ -1039,35 +1039,32 @@ void test_vector_rend()
 
 void test_vector_reserve()
 {
-
 	{
 		vector<int>::size_type sz;
 
 		vector<int> foo;
 		sz = foo.capacity();
-		std::cout << "making foo grow:\n";
+		cout << "making foo grow:\n";
 		for (int i=0; i<100; ++i) {
 			foo.push_back(i);
 			if (sz!=foo.capacity()) {
 				sz = foo.capacity();
-				std::cout << "capacity changed: " << sz << '\n';
+				cout << "capacity changed: " << sz << '\n';
 			}
 		}
 
 		vector<int> bar;
 		sz = bar.capacity();
 		bar.reserve(100);   // this is the only difference with foo above
-		std::cout << "making bar grow:\n";
+		cout << "making bar grow:\n";
 		for (int i=0; i<100; ++i) {
 			bar.push_back(i);
 			if (sz!=bar.capacity()) {
 				sz = bar.capacity();
-				std::cout << "capacity changed: " << sz << '\n';
+				cout << "capacity changed: " << sz << '\n';
 			}
 		}
 	}
-
-
 	{
 
 		vector< int > my_vec;
@@ -1075,7 +1072,7 @@ void test_vector_reserve()
 		try {
 			my_vec.reserve( my_vec.max_size() + 1 );
 		} catch ( const std::exception & e ) {
-			std::cout << e.what() << std::endl;
+			cout << e.what() << std::endl;
 		}
 	}
 
@@ -1084,17 +1081,28 @@ void test_vector_reserve()
 		//try {
 		//    my_vec.reserve( my_vec.max_size() - 1 );
 		//} catch ( const std::exception & e ) {
-		//    std::cout << e.what() << std::endl;
+		//    cout << e.what() << std::endl;
 		//}
 	}
 }
 
 void test_vector_resize()
 {
+		vector< int > my_vec;
+		for (int i = 1 ; i < 10 ; i++)
+			my_vec.push_back(i);
+		my_vec.resize(5);
+		my_vec.resize(8, 100);
+		my_vec.resize(13);
+		cout << "my vector contains:";
+		for (vector< int >::size_type i = 0 ; i< my_vec.size(); ++i)
+			cout << ' ' << my_vec[i];
+		cout << std::endl;
 }
 
 void test_vector_size()
 {
+
 }
 
 void test_vector_swap()
@@ -1126,9 +1134,9 @@ void test_vector()
 	//test_vector_pop_back();
 	//test_vector_push_back();
 	//test_vector_rbegin();
-	test_vector_relational_operators();
-	test_vector_rend();
-	test_vector_reserve();
+	//test_vector_relational_operators();
+	//test_vector_rend();
+	//test_vector_reserve();
 	test_vector_resize();
 	test_vector_size();
 	test_vector_swap();

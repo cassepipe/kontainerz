@@ -257,7 +257,7 @@ class vector
 				deallocate_data_();
 				data_ = tmp;
 			}
-			for (--size_; size_ < n; ++size_)
+			for (; size_ < n; ++size_)
 				allocator_.construct(&data_[size_], val); 
 			capacity_ = size_;
 		}
