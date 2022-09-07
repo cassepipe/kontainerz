@@ -1007,15 +1007,15 @@ void test_vector_rbegin()
 
 void test_vector_relational_operators()
 {
-	//vector< int > foo (3, 100);
-	//vector< int > bar (5, 200);
+	vector< int > foo (3, 100);
+	vector< int > bar (5, 200);
 
-	//if (foo==bar) cout << "foo and bar are equal" << endl;
-	//if (foo!=bar) cout << "foo and bar are not equal" << endl;
-	//if (foo< bar) cout << "foo is less than bar" << endl;
-	//if (foo> bar) cout << "foo is greater than bar" << endl;
-	//if (foo<=bar) cout << "foo is less than or equal to bar" << endl;
-	//if (foo>=bar) cout << "foo is greater than or equal to bar" << endl;
+	if (foo==bar) cout << "foo and bar are equal" << endl;
+	if (foo!=bar) cout << "foo and bar are not equal" << endl;
+	if (foo< bar) cout << "foo is less than bar" << endl;
+	if (foo> bar) cout << "foo is greater than bar" << endl;
+	if (foo<=bar) cout << "foo is less than or equal to bar" << endl;
+	if (foo>=bar) cout << "foo is greater than or equal to bar" << endl;
 
 }
 
@@ -1039,6 +1039,54 @@ void test_vector_rend()
 
 void test_vector_reserve()
 {
+
+	{
+		vector<int>::size_type sz;
+
+		vector<int> foo;
+		sz = foo.capacity();
+		std::cout << "making foo grow:\n";
+		for (int i=0; i<100; ++i) {
+			foo.push_back(i);
+			if (sz!=foo.capacity()) {
+				sz = foo.capacity();
+				std::cout << "capacity changed: " << sz << '\n';
+			}
+		}
+
+		vector<int> bar;
+		sz = bar.capacity();
+		bar.reserve(100);   // this is the only difference with foo above
+		std::cout << "making bar grow:\n";
+		for (int i=0; i<100; ++i) {
+			bar.push_back(i);
+			if (sz!=bar.capacity()) {
+				sz = bar.capacity();
+				std::cout << "capacity changed: " << sz << '\n';
+			}
+		}
+	}
+
+
+	{
+
+		vector< int > my_vec;
+
+		try {
+			my_vec.reserve( my_vec.max_size() + 1 );
+		} catch ( const std::exception & e ) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	{
+		//vector< int > my_vec;
+		//try {
+		//    my_vec.reserve( my_vec.max_size() - 1 );
+		//} catch ( const std::exception & e ) {
+		//    std::cout << e.what() << std::endl;
+		//}
+	}
 }
 
 void test_vector_resize()
@@ -1077,7 +1125,7 @@ void test_vector()
 	//test_vector_operator_equal();
 	//test_vector_pop_back();
 	//test_vector_push_back();
-	test_vector_rbegin();
+	//test_vector_rbegin();
 	test_vector_relational_operators();
 	test_vector_rend();
 	test_vector_reserve();

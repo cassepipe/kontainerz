@@ -508,7 +508,7 @@ class vector
 		}
 		++size_;
 	}
-};
+}; // class vector
 
 template <class T, class Alloc>
 bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
@@ -516,10 +516,9 @@ bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 	if (lhs.size() != rhs.size())
 		return false;
 
-	typename vector<T, Alloc>::iterator lit  = lhs.begin();
-	typename vector<T, Alloc>::iterator lend = lhs.end();
-	typename vector<T, Alloc>::iterator rit  = rhs.begin();
-	typename vector<T, Alloc>::iterator rend = rhs.end();
+	typename vector<T, Alloc>::const_iterator lit  = lhs.begin();
+	typename vector<T, Alloc>::const_iterator lend = lhs.end();
+	typename vector<T, Alloc>::const_iterator rit  = rhs.begin();
 
 	while (lit != lend)
 	{
