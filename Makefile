@@ -48,7 +48,8 @@ $(STD):			${OBJ/STD_OBJECTS}
 				${CXX} -o $@ ${LDFLAGS} $^ ${LDLIBS}
 
 obj/ft_%.o:		%.cpp Makefile | obj
-				${CXX} -DNAMESPACE=ft -DDEBUG ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
+				${CXX} -DNAMESPACE=ft ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
+				@#${CXX} -DNAMESPACE=ft -DDEBUG ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
 
 obj/std_%.o:	%.cpp Makefile | obj
 				${CXX} -DNAMESPACE=std ${CPPFLAGS} ${CXXFLAGS} -c $< -o $@
