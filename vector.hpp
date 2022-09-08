@@ -99,21 +99,16 @@ class vector
 		allocator_.deallocate(data_, capacity_);
 	}
 
-	void reserve_(size_type n)
+	void shift_elements_right_by_(T* elements, size_type n)
 	{
-		if (n > allocator_.max_size())
-			throw std::length_error("vector::reserve");
-		else if (n > capacity_)
+		if (this->empty() == false)
 		{
-			pointer tmp = allocator_.allocate(n * sizeof(value_type));
-			for (size_type i = 0; i < size_; ++i)
+			T *end = &*this->end();
+			for (; elements != end; ++elements)
 			{
-				allocator_.construct(&tmp[i], data_[i]);
-				allocator_.destroy(&data_[i]);
+				allocator_.construct(elements + n, *elements); // If vector is empty this will blow up
+				allocator_.destroy(elements);
 			}
-			deallocate_data_();
-			data_     = tmp;
-			capacity_ = n;
 		}
 	}
 
@@ -354,25 +349,18 @@ class vector
 		return allocator_;
 	}
 	
-	void shift_elements_right_by_(T* elements, size_type n)
-	{
-		if (this->empty() == false)
-		{
-			T *end = &*this->end();
-			for (; elements != end; ++elements)
-			{
-				allocator_.construct(elements + n, *elements); // If vector is empty this will blow up
-				allocator_.destroy(elements);
-			}
-		}
-	}
-	
-
 	/* Modifiers */
 
+   protected:
 	template <class InputIterator>
-	void assign(InputIterator first, InputIterator last,
-	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0) // Unnamed default parameter, weird, I know
+	void assign(InputIterator first, InputIterator last, input_iterator_tag)
+	{
+		for(; first != last ; ++first)
+			this->push_back(*first);
+	}
+
+	template <class RandomAccessIterator>
+	void assign(RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
 	{
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
@@ -382,6 +370,14 @@ class vector
 		capacity_ = size_;
 		for (size_type i = 0; i < size_; ++i)
 			allocator_.construct(&data_[i], first[i]);
+	}
+
+  public:
+	template <class InputIterator>
+	void assign(InputIterator first, InputIterator last,
+	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0) // Unnamed default parameter, weird, I know
+	{
+		assign(first, last, typename InputIterator::iterator_category());
 	}
 
 	void assign(size_type n, const value_type& val)
