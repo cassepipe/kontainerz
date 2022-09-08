@@ -449,7 +449,7 @@ class vector
 	void insert(iterator position, InputIterator first, InputIterator last, input_iterator_tag)
 	{
 		vector tmp(first, last);
-		insert(this->begin(), tmp.begin(), tmp.end());
+		insert(position, tmp.begin(), tmp.end());
 	}
 
 	template <typename RandomAccessIterator>
