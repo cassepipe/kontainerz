@@ -441,6 +441,7 @@ class vector
 		}
 	}
 
+  protected:
 	template <typename InputIterator>
 	void insert(iterator position, InputIterator first, InputIterator last, input_iterator_tag)
 	{
@@ -466,11 +467,12 @@ class vector
 		}
 	}
 
-	template <typename InputIterator>
-	void insert(iterator position, InputIterator first, InputIterator last,
-	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
+  public:
+	template <typename Iterator>
+	void insert(iterator position, Iterator first, Iterator last,
+	            typename enable_if<!is_integral<Iterator>::value, int>::type = 0)
 	{
-		insert(position, first, last, typename InputIterator::iterator_category());
+		insert(position, first, last, typename Iterator::iterator_category());
 	}
 
 	iterator erase(iterator position)

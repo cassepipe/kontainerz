@@ -1149,6 +1149,28 @@ void test_vector_swap_overload()
 
 }
 
+void test_vector_insert_from_input_other_its()
+{
+	list<int> mylist(10, 24);
+	vector<int> myvec(10, 42);
+
+	list<int>::iterator first_it = mylist.begin();
+	for (int i = 3; i; --i)
+		++first_it;
+	//first_it point the fourth element
+
+	list<int>::iterator last_it = mylist.begin();
+	for (int i = 6; i; --i)
+		++last_it;
+	//last_it point the eighth element
+
+	myvec.insert(++myvec.begin(), first_it, last_it);
+
+	for (int i = 0; i < myvec.size() ; ++i)
+		std::cout << myvec[i] << " ";
+	std::cout << '\n';
+}
+
 void test_vector()
 {
 	// test_vector_assign();
@@ -1177,5 +1199,6 @@ void test_vector()
 	test_vector_size();
 	test_vector_swap();
 	test_vector_swap_overload();
+	test_vector_insert_from_input_other_its();
 }
 

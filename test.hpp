@@ -7,6 +7,7 @@
 #include <map>
 #include <stack>
 #include <vector>
+#include <list>
 
 #ifndef NAMESPACE
 #define NAMESPACE ft
@@ -21,6 +22,7 @@ using NAMESPACE::map;
 using std::cout;
 using std::endl;
 using std::string;
+using std::list;
 
 void test_vector();
 void test_stack();
