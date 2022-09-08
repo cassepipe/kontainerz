@@ -14,15 +14,16 @@
 #define VECTOR_HPP
 
 #include "enable_if.hpp"
+#include "distance.hpp"
 #include "is_integral.hpp"
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
 #include <algorithm>
-#include <assert.h>
 #include <cstddef>
 #include <memory>
 #include <sstream>
 #include <cstring>
+#include <iterator>
 
 namespace ft
 {
@@ -376,7 +377,7 @@ class vector
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
 		deallocate_data_();
-		size_     = last - first;
+		size_     = ft::distance(first, last);
 		data_     = allocator_.allocate(size_ * sizeof(value_type));
 		capacity_ = size_;
 		for (size_type i = 0; i < size_; ++i)
@@ -444,12 +445,18 @@ class vector
 		}
 	}
 
-	template <class InputIterator>
-	void insert(iterator position, InputIterator first, InputIterator last,
-	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
+	template <typename InputIterator>
+	void insert(iterator position, InputIterator first, InputIterator last, input_iterator_tag)
+	{
+		vector tmp(first, last);
+		insert(tmp.begin(), tmp.end());
+	}
+
+	template <typename RandomAccessIterator>
+	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
 	{
 		T              *pos;
-		difference_type n        = last - first;
+		difference_type n        = ft::distance(first, last);
 		difference_type idx      = &*position - data_;
 		size_type       newsize_ = size_ + n;
 
@@ -461,6 +468,13 @@ class vector
 		{
 			allocator_.construct(pos, *first);
 		}
+	}
+
+	template <typename InputIterator>
+	void insert(iterator position, InputIterator first, InputIterator last,
+	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0)
+	{
+		insert(position, first, last, typename InputIterator::iterator_category());
 	}
 
 	iterator erase(iterator position)
@@ -477,7 +491,7 @@ class vector
 			return end;
 		if (first == last)
 			return last;
-		size_type distance = last - first;
+		size_type distance = ft::distance(first, last);
 		size_ -= distance;
 		for (; last < end ; ++first, ++last)
 		{
