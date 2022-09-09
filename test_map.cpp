@@ -540,15 +540,15 @@ void test_map_value_comp()
 
 void test_map()
 {
-	visual_test();
+	//visual_test();
 	//test_map_begin();
 	//test_map_clear();
-	//test_map_constructor();
+	test_map_constructor();
 	//test_map_count();
 	//test_map_empty();
 	//test_map_end();
 	//test_map_equal_range();
-	//test_map_erase();
+	test_map_erase();
 	//test_map_find();
 	//test_map_get_allocator();
 	//test_map_insert();

@@ -1,13 +1,12 @@
 ##################
 ##  VARIABLES   ##
 ##################
-MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
 DIFF			= meld
 DIFF			= diff -s
-CXX				= clang++-14
 CXX				= g++-12
+CXX				= clang++-14
 SHELL			= zsh
 SHELL			= bash
 FT				= ft_containers_test
@@ -23,11 +22,11 @@ OBJ/STD_DEPS	= $(patsubst %.o,           %.d, $(OBJ/STD_OBJECTS))
 INCLUDE_FLAGS	= -I.
 CPPFLAGS		= ${INCLUDE_FLAGS} -MMD 
 #Add -Werror before correction 
-CXXFLAGS		= -Wall -Wextra -g3 -std=c++98 -pedantic-errors
+CXXFLAGS		= -Wall -Wextra -g2 -std=c++98 -pedantic-errors
 LDFLAGS			= 
 LDLIBS			= 
 #Our beloved address sanitizer
-ASAN_FLAG		=  -fsanitize=address,undefined
+ASAN_FLAG		=  -fsanitize=address,undefined -g3
 CXXFLAGS		+=	$(ASAN_FLAG)	
 LDFLAGS			+=	$(ASAN_FLAG)	
 

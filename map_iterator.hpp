@@ -7,8 +7,6 @@
 #include "map_node.hpp"
 #include "remove_cv.hpp"
 
-#define NIL get_nil<Pair, Alloc>()
-
 namespace ft {
 
 template <typename Pair, typename Alloc>
@@ -22,51 +20,59 @@ class map_iterator
 		typedef std::ptrdiff_t                                  difference_type;
 	protected:
 		typedef map_node<Pair, Alloc>                                    node_t;
-		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
-		node_ptr_t             current_;
+		const node_t *             current_;
+		const node_t *             nil_;
 
 		/* HELPERS */
 
-		static node_ptr_t leftmost_(node_ptr_t node)
+		node_t * leftmost_(node_t * node)
 		{
-			while (node->left != NIL)
+			while (node->left != nil_)
 				node = node->left;
 			return node;
 		}
 
-		static node_ptr_t rightmost_(node_ptr_t node)
+		node_t * rightmost_(node_t * node)
 		{
-			while (node->right != NIL)
+			while (node->right != nil_)
 				node = node->right;
 			return node;
 		}
 
 	public:
 		/* Default constructor */ map_iterator()
-			: current_(NIL)
+			: current_(NULL), nil_(NULL)
 		{ }
 		
-		/* Constructor */ map_iterator(map_node<Pair, Alloc> * current)
-			: current_(current)
+		/* Constructor */ map_iterator(map_node<Pair, Alloc> * current, map_node<Pair, Alloc> * nil)
+			: current_(current), nil_(nil)
 		{ }
 
-		/* Constructor */ map_iterator(map_node<const Pair> * current)
-			: current_(current)
+		/* Constructor */ map_iterator(map_node<const Pair> * current, map_node<const Pair> * nil)
+			: current_(current), nil_(nil)
 		{ }
 
+		/* Constructor */ map_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
+			: current_(current), nil_(nil)
+		{ }
+
+		/* Constructor */ map_iterator(const map_node<const Pair> * current, const map_node<const Pair> * nil)
+			: current_(current), nil_(nil)
+		{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_iterator(InputIt & other)
-			: current_(other.get_current())
+			: current_(other.get_current()), nil_(other.get_nil())
 			{ }
 
-		map_iterator &operator=(map_iterator const &rhs)
-		{
-			current_ = rhs.current_;
-			return *this;
-		}
+		//map_iterator &operator=(map_iterator const &rhs)
+		//{
+		//    current_ = rhs.current_;
+		//    nil_ = rhs.nil_;
+		//    return *this;
+		//}
 
 		pointer operator->() const { return &(this->operator*()); }
 
@@ -81,12 +87,12 @@ class map_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_iterator &operator++()
 		{
-			if (NIL->parent == NIL) // Tree empty ?
-				current_ = NIL;
-			else if (current_ == NIL) 
-				current_ = leftmost_(NIL->parent); 
+			if (nil_->parent == nil_) // Tree empty ?
+				current_ = nil_;
+			else if (current_ == nil_) 
+				current_ = leftmost_(nil_->parent); 
 			// If has successor...
-			else if (current_->right != NIL)
+			else if (current_->right != nil_)
 				current_ = leftmost_(current_->right); // ... goes to successor
 		   // Else if it has no successor under itself
 			else if (current_ == current_->parent->left) // If it is its parent's left child
@@ -98,7 +104,7 @@ class map_iterator
 				if (current_ == current_->parent->left) // if it is its parent's left child
 					current_ = current_->parent; // ... it becomes its parent
 				else
-					current_ = NIL; // ..else NIL, end is reached
+					current_ = nil_; // ..else nil_, end is reached
 			}
 			return *this;
 		}
@@ -106,11 +112,11 @@ class map_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_iterator &operator--()
 		{
-			if (NIL->parent == NIL) // Tree empty ?
-				current_ = NIL;
-			else if (current_ == NIL) // Reached the end ?
-				current_ = rightmost_(NIL->parent); // root_ref_ will never be NULL here
-			else if (current_->left != NIL)
+			if (nil_->parent == nil_) // Tree empty ?
+				current_ = nil_;
+			else if (current_ == nil_) // Reached the end ?
+				current_ = rightmost_(nil_->parent); // root_ref_ will never be NULL here
+			else if (current_->left != nil_)
 				current_ = rightmost_(current_->left);
 			else if (current_ == current_->parent->right)
 				current_ = current_->parent;
@@ -140,7 +146,8 @@ class map_iterator
 			return tmp;
 		}
 
-		node_ptr_t get_current() { return current_; }
+		const node_t * get_current() { return current_; }
+		const node_t * get_nil() { return nil_; }
 }; // map_iterator
    
   
@@ -155,50 +162,59 @@ class map_const_iterator
 		typedef std::ptrdiff_t                                  difference_type;
 	protected:
 		typedef map_node<Pair, Alloc>                                    node_t;
-		typedef node_t *                                             node_ptr_t;
 
 		/* STATE */
-		node_ptr_t             current_;
+		const node_t *             current_;
+		const node_t *             nil_;
 
 		/* HELPERS */
 
-		static node_ptr_t leftmost_(node_ptr_t node)
+		node_t * leftmost_(node_t * node)
 		{
-			while (node->left != NIL)
+			while (node->left != nil_)
 				node = node->left;
 			return node;
 		}
 
-		static node_ptr_t rightmost_(node_ptr_t node)
+		node_t * rightmost_(node_t * node)
 		{
-			while (node->right != NIL)
+			while (node->right != nil_)
 				node = node->right;
 			return node;
 		}
 
 	public:
 		/* Default constructor */ map_const_iterator()
-			:  current_(NIL)
+			:  current_(nil_)
 		{ }
 
-		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * current)
-			:  current_(current)
+		/* Constructor */ map_const_iterator(map_node<Pair, Alloc> * current , map_node<Pair, Alloc> * nil)
+			:  current_(current), nil_(nil)
 		{ }
 
-		/* Constructor */ map_const_iterator( map_node<const Pair, Alloc> * current)
-			:  current_(current)
+		/* Constructor */ map_const_iterator( map_node<const Pair, Alloc> * current, map_node<const Pair, Alloc> * nil)
+			:  current_(current), nil_(nil)
+		{ }
+
+		/* Constructor */ map_const_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
+			:  current_(current), nil_(nil)
+		{ }
+
+		/* Constructor */ map_const_iterator( const map_node<const Pair, Alloc> * current, const map_node<const Pair, Alloc> * nil)
+			:  current_(current), nil_(nil)
 		{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_const_iterator(InputIt & other)
-			: current_(other.get_current())
+			: current_(other.get_current()), nil_(other.get_nil())
 			{ }
 
-		map_const_iterator &operator=(map_const_iterator const &rhs)
-		{
-			current_ = rhs.current_;
-			return *this;
-		}
+		//map_const_iterator &operator=(map_const_iterator const &rhs)
+		//{
+		//    current_ = rhs.current_;
+		//    nil_ = rhs.nil_;
+		//    return *this;
+		//}
 
 		pointer operator->() const { return &(this->operator*()); }
 
@@ -213,13 +229,13 @@ class map_const_iterator
 		// iterator will cycle forward passing through an end's marker
 		map_const_iterator &operator++()
 		{
-			if (NIL->parent == NIL) // Tree empty ?
-				current_ = NIL;
-			else if (current_ == NIL) 
-				current_ = leftmost_(NIL->parent);
+			if (nil_->parent == nil_) // Tree empty ?
+				current_ = nil_;
+			else if (current_ == nil_) 
+				current_ = leftmost_(nil_->parent);
 			// If tree was empty but stuff got in since last call
 			// If has successor...
-			else if (current_->right != NIL)
+			else if (current_->right != nil_)
 				current_ = leftmost_(current_->right); // ... goes to successor
 													   // Else if it has no successor under itself
 			else if (current_ == current_->parent->left) // If it is its parent's left child
@@ -232,7 +248,7 @@ class map_const_iterator
 				if (current_ == current_->parent->left) // if it is its parent's left child
 					current_ = current_->parent; // ... it becomes its parent
 				else
-					current_ = NIL; // ..else NIL, end is reached
+					current_ = nil_; // ..else nil_, end is reached
 			}
 			return *this;
 		}
@@ -240,11 +256,11 @@ class map_const_iterator
 		// iterator will cycle backward passing through an end's marker
 		map_const_iterator &operator--()
 		{
-			if (NIL->parent == NIL) // Tree empty ?
-				current_ = NIL;
-			else if (current_ == NIL) // Reached the end ?
-				current_ = rightmost_(NIL->parent);
-			else if (current_->left != NIL)
+			if (nil_->parent == nil_) // Tree empty ?
+				current_ = nil_;
+			else if (current_ == nil_) // Reached the end ?
+				current_ = rightmost_(nil_->parent);
+			else if (current_->left != nil_)
 				current_ = rightmost_(current_->left);
 			else if (current_ == current_->parent->right)
 				current_ = current_->parent;
@@ -255,7 +271,7 @@ class map_const_iterator
 				if (current_ == current_->parent->right) // if it is its parent's right child
 					current_ = current_->parent; // ... it becomes its parent
 				else
-					current_ = NIL; // ..else NIL, end is reached
+					current_ = nil_; // ..else nil_, end is reached
 			}
 			return *this;
 		}
@@ -274,10 +290,10 @@ class map_const_iterator
 			return tmp;
 		}
 
-		node_ptr_t get_current() { return current_; }
+		const node_t * get_current() { return current_; }
+		const node_t * get_nil() { return nil_; }
 }; // map_const_iterator
    
-#undef NIL
    
 } // namespace ft
 

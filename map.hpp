@@ -15,11 +15,8 @@
 #include "reverse_iterator.hpp"
 #include "pair.hpp"
 #include "algorithm.hpp"
-#include "nil.hpp"
 #include "map_node.hpp"
 #include "map_iterator.hpp"
-
-#define NIL get_nil<value_type, Alloc>()
 
 namespace ft
 {
@@ -57,13 +54,15 @@ class map
 	Alloc::template rebind<node_t>::other                          node_alloc_t;
 
 	/* STATE */
+	node_t				nil_;
+	node_ptr_t			NIL;
 	node_ptr_t          root_;
 	size_type           size_;
 	node_alloc_t        node_alloc_;
 	key_compare         compare_func_;
 
 	/* HELPERS */
-	static node_ptr_t in_order_successor_(node_ptr_t node)
+	node_ptr_t in_order_successor_(node_ptr_t node)
 	{
 		if (node->right == NIL)
 			return node;
@@ -74,7 +73,7 @@ class map
 		return node;
 	}
 
-	static node_ptr_t in_order_predecessor_(node_ptr_t node)
+	node_ptr_t in_order_predecessor_(node_ptr_t node)
 	{
 		if (node->left == NIL)
 			return node;
@@ -87,7 +86,7 @@ class map
 
 	/*TREE BALANCING*/
 
-	static node_ptr_t skew_(node_ptr_t root)
+	node_ptr_t skew_(node_ptr_t root)
 	{
 		if (root->level && root->left->level == root->level) // red node to our left?
 			return rotate_right_(root);
@@ -95,7 +94,7 @@ class map
 			return root; // else no change neeeded
 	}
 
-	static node_ptr_t rotate_right_(node_ptr_t oldroot)
+	node_ptr_t rotate_right_(node_ptr_t oldroot)
 	{
 		// Right rotation
 		node_ptr_t newroot = oldroot->left;
@@ -112,7 +111,7 @@ class map
 		return newroot;
 	}
 
-	static node_ptr_t split_(node_ptr_t root)
+	node_ptr_t split_(node_ptr_t root)
 	{
 		if (root->level && root->right->right->level == root->level) // 2 red nodes on our right ?
 			return rotate_left_(root);
@@ -120,7 +119,7 @@ class map
 			return root; // else no change needed
 	}
 
-	static node_ptr_t rotate_left_(node_ptr_t oldroot)
+	node_ptr_t rotate_left_(node_ptr_t oldroot)
 	{
 		//Left rotation
 		node_ptr_t newroot = oldroot->right;
@@ -140,7 +139,7 @@ class map
 		return newroot;
 	}
 
-	static void update_level_(node_ptr_t node)
+	void update_level_(node_ptr_t node)
 	{
 		int ideal_level = 1 + std::min(node->left->level, node->right->level);
 		// node's level above ideal ?
@@ -153,7 +152,7 @@ class map
 	}
 
 	// Update node's level and then three skews and two splits do the trick
-	static node_ptr_t fixup_after_delete_(node_ptr_t node)
+	node_ptr_t fixup_after_delete_(node_ptr_t node)
 	{
 		update_level_(node);
 		node               = skew_(node);
@@ -173,8 +172,8 @@ class map
 
 		root_ = insert_rec_(k, v, NIL, root_, &ret);
 		root_->parent = root_;
-		NIL->parent = root_;
-		return iterator( ret);
+		nil_.parent = root_;
+		return iterator( ret, NIL);
 	}
 
 	node_ptr_t insert_rec_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
@@ -183,7 +182,7 @@ class map
 		{
 			++size_;
 			 current_node = node_alloc_.allocate(1);
-			 node_alloc_.construct(current_node, node_t(k, v, parent));
+			 node_alloc_.construct(current_node, node_t(k, v, parent, NIL, NIL));
 			 //new (current_node) node_t(k, v, parent); // Placement new does not allocate and temp object
 			*ret = current_node;
 		}
@@ -307,6 +306,8 @@ class map
 
   public:
 	explicit /*Constructor*/ map(const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc()) :
+		nil_(),
+		NIL(&nil_),
 		root_(NIL),
 		size_(0),
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
@@ -315,6 +316,8 @@ class map
 
 	template< class InputIt >
 	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
+		nil_(),
+		NIL(&nil_),
 		root_(NIL),
 		size_(0),
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
@@ -323,8 +326,13 @@ class map
 		insert(first, last);
 	}
 
-	/* Copy Constructor */ map(map const& other)
-		: root_(NIL), size_(0), node_alloc_(other.get_allocator()), compare_func_(other.key_comp()) // Is this necessary ?
+	/* Copy Constructor */ map(map const& other) :
+		nil_(other.nil_),
+		NIL(other.NIL),
+		root_(other.NIL),
+		size_(0),
+		node_alloc_(other.get_allocator()),
+		compare_func_(other.key_comp()) // Is this necessary ?
 	{
 		if (other.root_ != NIL)
 			insert(other.begin(), other.end()); // There must be a better way though
@@ -403,7 +411,7 @@ class map
 		size_type size_before = size_;
 		root_ = remove_rec_(k, root_, 0);
 		root_->parent = root_;
-		NIL->parent = root_;
+		nil_.parent = root_;
 		if (size_before == size_)
 			return 0;
 		return 1;
@@ -485,7 +493,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return iterator( current);
+				return iterator( current, NIL);
 		}
 		return this->end();
 	}
@@ -506,7 +514,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return const_iterator( current);
+				return const_iterator( current, NIL);
 		}
 		return this->end();
 	}
@@ -544,9 +552,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator( current);
+				return iterator( current, NIL);
 		}
-		return ++iterator( parent);
+		return ++iterator( parent, NIL);
 	}
 
 	/* Returns lower bound not less than key */
@@ -572,9 +580,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator( current);
+				return iterator( current, NIL);
 		}
-		return ++iterator( parent);
+		return ++iterator( parent, NIL);
 	}
 
 
@@ -611,7 +619,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator( best_predecessor);
+		return ++iterator( best_predecessor, NIL);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -647,7 +655,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator( best_predecessor);
+		return ++iterator( best_predecessor, NIL);
 	}
 
 	/* OBSERVERS */
@@ -663,7 +671,7 @@ class map
 	}
 
   protected:
-	static node_ptr_t leftmost_(node_ptr_t node)
+	node_ptr_t leftmost_(node_ptr_t node)
 	{
 		while (node->left != NIL)
 			node = node->left;
@@ -673,22 +681,22 @@ class map
   public:
 	iterator begin()
 	{
-		return iterator( leftmost_(root_));
+		return ++iterator( NIL, NIL);
 	}
 
 	iterator end()
 	{
-		return iterator( NIL);
+		return iterator( NIL, NIL);
 	}
 
 	const_iterator begin() const
 	{
-		return const_iterator( leftmost_(root_));
+		return ++const_iterator( NIL, NIL );
 	}
 
 	const_iterator end() const
 	{
-		return const_iterator( NIL);
+		return const_iterator( NIL, NIL);
 	}
 
 	reverse_iterator rbegin()
@@ -782,7 +790,6 @@ class map
 	}
 # undef DEFAULT_FILENAME
 #endif /* ifdef DEBUG */
-#undef NIL
 }; // class AA_tree
    
 template< class Key, class T, class Compare, class Allocator >

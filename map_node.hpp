@@ -32,13 +32,14 @@ struct map_node
 			typename Pair::first_type k,
 			typename Pair::second_type v,
 			map_node<Pair, Alloc> *prt,
-			map_node<Pair, Alloc> *l = get_nil<Pair, Alloc>(),
-			map_node<Pair, Alloc> *r = get_nil<Pair, Alloc>(),
+			map_node<Pair, Alloc> *l,
+			map_node<Pair, Alloc> *r,
 			int lvl = 1) :
 		parent(prt),
 		left(l),
 		right(r),
-		level(lvl)
+		level(lvl),
+		pair(NULL)
 	{
 		pair = allocator.allocate(1);
 		allocator.construct(pair, Pair(k,v));
@@ -50,17 +51,23 @@ struct map_node
 		left(other.left),
 		right(other.right),
 		level(other.level),
+		pair(NULL),
 		allocator(other.allocator)
 	{
-		pair = allocator.allocate(1);
-		allocator.construct(pair, *other.pair);
+		if (other.pair)
+		{
+			pair = allocator.allocate(1);
+			allocator.construct(pair, *other.pair);
+		}
 	}
 
 	~map_node()
 	{
 		if (pair)
+		{
 			allocator.destroy(pair);
-		allocator.deallocate(pair, 1);
+			allocator.deallocate(pair, 1);
+		}
 	}
 
 	// Null protect ?
