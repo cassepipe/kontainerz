@@ -3,28 +3,22 @@
 
 #include "vector.hpp"
 
-namespade ft {
+namespace ft {
 
-template< class T, class Container = ft::vector<T> >
+template< typename Type, typename Container = ft::vector<Type> >
 class stack
 {
-	typedef container_type    Container
-	typedef value_type        Container::value_type
-	typedef size_type         Container::size_type
-	typedef reference         Container::reference
-	typedef const_reference   Container::const_reference
-
-	/* State */
-
   protected:
+	/* State */
 
 	Container	container_;
 
   public:
-
-	stack() :
-		stack(Container())
-	{ }
+	typedef Container                            container_type;
+	typedef typename Container::value_type       value_type;
+	typedef typename Container::size_type        size_type;
+	typedef typename Container::reference        reference;
+	typedef typename Container::const_reference  const_reference;
 
 	explicit stack( const Container& cont = Container() ) :
 		container_(cont)
@@ -72,18 +66,18 @@ class stack
 
 	void push( const value_type& value )
 	{
-		container_.push_back(value)
+		container_.push_back(value);
 	}
 
 	void pop()
 	{
-		container_.pop_back()
+		container_.pop_back();
 	}
 
-	template< class T, class Container >
+	template< class T, class C >
 	friend bool operator==( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs );
 
-	template< class T, class Container >
+	template< class T, class C >
 	friend bool operator<( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs );
 
 }; // class stack
@@ -109,7 +103,7 @@ bool operator<( const std::stack<T,Container>& lhs, const std::stack<T,Container
 template< class T, class Container >
 bool operator<=( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
 {
-	return !(lsh > rhs)
+	return !(lhs > rhs);
 }
 
 template< class T, class Container >

@@ -3,11 +3,11 @@
 
 #include "map.hpp"
 #include "vector.hpp"
+#include "stack.hpp"
 
 #include <map>
 #include <stack>
 #include <vector>
-#include <list>
 
 #ifndef NAMESPACE
 #define NAMESPACE ft
@@ -16,13 +16,12 @@
 using NAMESPACE::make_pair;
 using NAMESPACE::pair;
 using NAMESPACE::vector;
-//using NAMESPACE::stack;
+using NAMESPACE::stack;
 using NAMESPACE::map;
 
 using std::cout;
 using std::endl;
 using std::string;
-using std::list;
 
 void test_vector();
 void test_stack();
