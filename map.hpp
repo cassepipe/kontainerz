@@ -54,11 +54,10 @@ class map
 	Alloc::template rebind<node_t>::other                          node_alloc_t;
 
 	/* STATE */
-	node_t				nil_;
+	node_alloc_t        node_alloc_;
 	node_ptr_t			NIL;
 	node_ptr_t          root_;
 	size_type           size_;
-	node_alloc_t        node_alloc_;
 	key_compare         compare_func_;
 
 	/* HELPERS */
@@ -172,7 +171,7 @@ class map
 
 		root_ = insert_rec_(k, v, NIL, root_, &ret);
 		root_->parent = root_;
-		nil_.parent = root_;
+		NIL->parent = root_;
 		return iterator( ret, NIL);
 	}
 
@@ -306,47 +305,56 @@ class map
 
   public:
 	explicit /*Constructor*/ map(const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc()) :
-		nil_(),
-		NIL(&nil_),
-		root_(NIL),
-		size_(0),
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
+		NIL(NULL),
+		root_(NULL),
+		size_(0),
 		compare_func_(comp)
-	{ }
+	{
+		NIL = node_alloc_.allocate(1);
+		node_alloc_.construct(NIL, node_t());
+		root_ = NIL;
+	}
 
 	template< class InputIt >
 	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
-		nil_(),
-		NIL(&nil_),
-		root_(NIL),
-		size_(0),
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
+		NIL(NULL),
+		root_(NULL),
+		size_(0),
 		compare_func_(comp)
 	{
+		NIL = node_alloc_.allocate(1);
+		node_alloc_.construct(NIL, node_t());
+		root_ = NIL;
 		insert(first, last);
 	}
 
 	/* Copy Constructor */ map(map const& other) :
-		nil_(other.nil_),
-		NIL(other.NIL),
+		node_alloc_(other.get_allocator()),
+		NIL(NULL),
 		root_(other.NIL),
 		size_(0),
-		node_alloc_(other.get_allocator()),
 		compare_func_(other.key_comp()) // Is this necessary ?
 	{
-		if (other.root_ != NIL)
+		NIL = node_alloc_.allocate(1);
+		node_alloc_.construct(NIL, node_t());
+		root_ = NIL;
+		if (other.empty() == false)
 			insert(other.begin(), other.end()); // There must be a better way though
 	}
 
 	/*Destructor*/ ~map()
 	{
 		this->clear();
+		node_alloc_.destroy(NIL);
+		node_alloc_.deallocate(NIL, 1);
 	}
 
 	map &operator=(map const& rhs)
 	{
 		this->clear();
-		if (rhs.root_ != NIL)
+		if (rhs.empty() == false)
 			insert(rhs.begin(), rhs.end()); // There must be a better way though
 		return *this;
 	}
@@ -411,7 +419,7 @@ class map
 		size_type size_before = size_;
 		root_ = remove_rec_(k, root_, 0);
 		root_->parent = root_;
-		nil_.parent = root_;
+		NIL->parent = root_;
 		if (size_before == size_)
 			return 0;
 		return 1;
@@ -437,14 +445,9 @@ class map
 	{
 		if (this != &other)
 		{
-			node_ptr_t tmp_root = root_;
-			size_type tmp_size = size_;
-
-			root_ = other.root_;
-			size_ = other.size_;
-
-			other.root_ = tmp_root;
-			other.size_ = tmp_size;
+			std::swap(root_, other.root_);
+			std::swap(size_, other.size_);
+			std::swap(NIL, other.NIL);
 		}
 	}
 

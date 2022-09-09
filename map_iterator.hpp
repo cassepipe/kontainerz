@@ -54,25 +54,18 @@ class map_iterator
 			: current_(current), nil_(nil)
 		{ }
 
-		/* Constructor */ map_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
-			: current_(current), nil_(nil)
-		{ }
+		//[> Constructor <] map_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
+		//    : current_(current), nil_(nil)
+		//{ }
 
-		/* Constructor */ map_iterator(const map_node<const Pair> * current, const map_node<const Pair> * nil)
-			: current_(current), nil_(nil)
-		{ }
+		//[> Constructor <] map_iterator(const map_node<const Pair> * current, const map_node<const Pair> * nil)
+		//    : current_(current), nil_(nil)
+		//{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_iterator(InputIt & other)
 			: current_(other.get_current()), nil_(other.get_nil())
 			{ }
-
-		//map_iterator &operator=(map_iterator const &rhs)
-		//{
-		//    current_ = rhs.current_;
-		//    nil_ = rhs.nil_;
-		//    return *this;
-		//}
 
 		pointer operator->() const { return &(this->operator*()); }
 
@@ -196,25 +189,18 @@ class map_const_iterator
 			:  current_(current), nil_(nil)
 		{ }
 
-		/* Constructor */ map_const_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
-			:  current_(current), nil_(nil)
-		{ }
+		//[> Constructor <] map_const_iterator(const map_node<Pair, Alloc> * current, const map_node<Pair, Alloc> * nil)
+		//    :  current_(current), nil_(nil)
+		//{ }
 
-		/* Constructor */ map_const_iterator( const map_node<const Pair, Alloc> * current, const map_node<const Pair, Alloc> * nil)
-			:  current_(current), nil_(nil)
-		{ }
+		//[> Constructor <] map_const_iterator( const map_node<const Pair, Alloc> * current, const map_node<const Pair, Alloc> * nil)
+		//    :  current_(current), nil_(nil)
+		//{ }
 
 		template <typename InputIt>
 			/* Copy Constructor */ map_const_iterator(InputIt & other)
 			: current_(other.get_current()), nil_(other.get_nil())
 			{ }
-
-		//map_const_iterator &operator=(map_const_iterator const &rhs)
-		//{
-		//    current_ = rhs.current_;
-		//    nil_ = rhs.nil_;
-		//    return *this;
-		//}
 
 		pointer operator->() const { return &(this->operator*()); }
 
