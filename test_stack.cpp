@@ -2,6 +2,19 @@
 
 void test_stack_constructor()
 {
+	vector<int> my_vector (2, 200);
+	std::vector<int> my_std_vector (2, 200);
+
+	stack<int> first;
+	stack<int, vector<int> > second (my_vector);
+
+	stack<int, std::vector<int> > third;
+	stack<int, std::vector<int> > fourth (my_std_vector);
+
+	std::cout << "size of first: " << first.size() << std::endl;
+	std::cout << "size of second: " << second.size() << std::endl;
+	std::cout << "size of third: " << third.size() << std::endl;
+	std::cout << "size of fourth: " << fourth.size() << std::endl;
 }
 
 void test_stack_empty()

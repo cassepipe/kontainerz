@@ -28,11 +28,6 @@ class stack
 		container_(other.container_)
 	{ }
 
-	~stack()
-	{
-		~Container();
-	}
-
 	stack& operator=( const stack& other )
 	{
 		*this = other.container_;
