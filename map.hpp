@@ -55,7 +55,7 @@ class map
 
 	/* STATE */
 	node_alloc_t        node_alloc_;
-	node_ptr_t			NIL;
+	node_ptr_t			nil_;
 	node_ptr_t          root_;
 	size_type           size_;
 	key_compare         compare_func_;
@@ -63,22 +63,22 @@ class map
 	/* HELPERS */
 	node_ptr_t in_order_successor_(node_ptr_t node)
 	{
-		if (node->right == NIL)
+		if (node->right == nil_)
 			return node;
 		else
 			node = node->right;
-		while (node->left != NIL)
+		while (node->left != nil_)
 			node = node->left;
 		return node;
 	}
 
 	node_ptr_t in_order_predecessor_(node_ptr_t node)
 	{
-		if (node->left == NIL)
+		if (node->left == nil_)
 			return node;
 		else
 			node = node->left;
-		while (node->right != NIL)
+		while (node->right != nil_)
 			node = node->right;
 		return node;
 	}
@@ -100,7 +100,7 @@ class map
 
 		newroot->parent = oldroot->parent; // Parenting
 		oldroot->parent = newroot;
-		if (newroot->right != NIL)
+		if (newroot->right != nil_)
 			newroot->right->parent = oldroot;
 
 		oldroot->left        = newroot->right;
@@ -125,7 +125,7 @@ class map
 
 		newroot->parent = oldroot->parent; // Parenting
 		oldroot->parent = newroot;
-		if (newroot->left != NIL)
+		if (newroot->left != nil_)
 			newroot->left->parent = oldroot;
 
 		oldroot->right       = newroot->left;
@@ -169,19 +169,19 @@ class map
 	{
 		node_ptr_t ret = NULL;;
 
-		root_ = insert_rec_(k, v, NIL, root_, &ret);
+		root_ = insert_rec_(k, v, nil_, root_, &ret);
 		root_->parent = root_;
-		NIL->parent = root_;
-		return iterator( ret, NIL);
+		nil_->parent = root_;
+		return iterator( ret, nil_);
 	}
 
 	node_ptr_t insert_rec_(Key const& k, Value const& v, node_ptr_t parent, node_ptr_t current_node, node_ptr_t *ret)
 	{
-		if (current_node == NIL) // fell out of the tree?
+		if (current_node == nil_) // fell out of the tree?
 		{
 			++size_;
 			 current_node = node_alloc_.allocate(1);
-			 node_alloc_.construct(current_node, node_t(k, v, parent, NIL, NIL));
+			 node_alloc_.construct(current_node, node_t(k, v, parent, nil_, nil_));
 			 //new (current_node) node_t(k, v, parent); // Placement new does not allocate and temp object
 			*ret = current_node;
 		}
@@ -204,7 +204,7 @@ class map
 	// This implementation does not bother with special cases that do not need rebalancing
 	node_ptr_t remove_rec_(Key k, node_ptr_t node, int child_status)
 	{
-		if (node == NIL) // Fell out of tree, key does not exist
+		if (node == nil_) // Fell out of tree, key does not exist
 			return node; // No-op
 		else if (compare_func_(k, node->key()))
 			node->left = remove_rec_(k, node->left, -1); // Look in left subtree
@@ -212,14 +212,14 @@ class map
 			node->right = remove_rec_(k, node->right, 1); // Look in right subtree
 		else                                       // Found it !
 		{
-			if (node->right == NIL && node->left == NIL) // It's a leaf node, remove it
+			if (node->right == nil_ && node->left == nil_) // It's a leaf node, remove it
 			{
 				node_alloc_.destroy(node);
 				node_alloc_.deallocate(node, 1);
 				--size_;
-				return NIL;
+				return nil_;
 			}
-			else if (node->left == NIL) // No left child ? Means it is a black leaf node. Replace with its red child
+			else if (node->left == nil_) // No left child ? Means it is a black leaf node. Replace with its red child
 			{
 				node_ptr_t right_child =  node->right;
 
@@ -246,7 +246,7 @@ class map
 			{
 				using std::swap;
 				node_ptr_t successor = in_order_successor_(node);
-				bool successor_is_child = (node->right->left == NIL);
+				bool successor_is_child = (node->right->left == nil_);
 
 				swap(node->level, successor->level);
 				swap(node->left,  successor->left);
@@ -271,7 +271,7 @@ class map
 					node->parent->left = node;
 				successor->right->parent  = successor;
 				successor->left->parent  = successor;
-				if (node->right != NIL)
+				if (node->right != nil_)
 					node->right->parent = node;
 
 				node = successor;
@@ -287,29 +287,29 @@ class map
 
 	node_ptr_t clear_(node_ptr_t node)
 	{
-		if (node->left != NIL)
+		if (node->left != nil_)
 			node->left = clear_(node->left);
-		if (node->right != NIL)
+		if (node->right != nil_)
 			node->right = clear_(node->right);
-		// If both have returned NIL, our node is now a leaf node
-		if (node != NIL && node->right == NIL && node->left == NIL) // It's a leaf node, remove it
+		// If both have returned nil_, our node is now a leaf node
+		if (node != nil_ && node->right == nil_ && node->left == nil_) // It's a leaf node, remove it
 		{
 			delete node;
 			--size_;
-			return NIL;
+			return nil_;
 		}
-		return NIL;
+		return nil_;
 	}
 
 	node_ptr_t init_NIL()
 	{
-		NIL = node_alloc_.allocate(1);
-		NIL->parent = NIL;
-		NIL->left = NIL;
-		NIL->right = NIL;
-		NIL->level = 0;
-		NIL->pair = NULL;
-		return NIL;
+		nil_ = node_alloc_.allocate(1);
+		nil_->parent = nil_;
+		nil_->left = nil_;
+		nil_->right = nil_;
+		nil_->level = 0;
+		nil_->pair = NULL;
+		return nil_;
 	}
 
 	/* INTERFACE */
@@ -317,8 +317,8 @@ class map
   public:
 	explicit /*Constructor*/ map(const KeyCmpFn& comp_fn = KeyCmpFn(), const Alloc& alloc = Alloc()) :
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
-		NIL(init_NIL()),
-		root_(NIL),
+		nil_(init_NIL()),
+		root_(nil_),
 		size_(0),
 		compare_func_(comp_fn)
 	{ }
@@ -326,8 +326,8 @@ class map
 	template< class InputIt >
 	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp_fn = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
-		NIL(init_NIL()),
-		root_(NIL),
+		nil_(init_NIL()),
+		root_(nil_),
 		size_(0),
 		compare_func_(comp_fn)
 	{
@@ -336,8 +336,8 @@ class map
 
 	/* Copy Constructor */ map(map const& other) :
 		node_alloc_(other.get_allocator()),
-		NIL(init_NIL()),
-		root_(NIL),
+		nil_(init_NIL()),
+		root_(nil_),
 		size_(0),
 		compare_func_(other.key_comp()) // Is this necessary ?
 	{
@@ -348,8 +348,8 @@ class map
 	/*Destructor*/ ~map()
 	{
 		this->clear();
-		node_alloc_.destroy(NIL);
-		node_alloc_.deallocate(NIL, 1);
+		node_alloc_.destroy(nil_);
+		node_alloc_.deallocate(nil_, 1);
 	}
 
 	map &operator=(map const& rhs)
@@ -420,7 +420,7 @@ class map
 		size_type size_before = size_;
 		root_ = remove_rec_(k, root_, 0);
 		root_->parent = root_;
-		NIL->parent = root_;
+		nil_->parent = root_;
 		if (size_before == size_)
 			return 0;
 		return 1;
@@ -448,7 +448,7 @@ class map
 		{
 			std::swap(root_, other.root_);
 			std::swap(size_, other.size_);
-			std::swap(NIL, other.NIL);
+			std::swap(nil_, other.nil_);
 		}
 	}
 
@@ -488,7 +488,7 @@ class map
 		bool searched_is_strictly_greater;
 
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key(), key);
@@ -497,7 +497,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return iterator( current, NIL);
+				return iterator( current, nil_);
 		}
 		return this->end();
 	}
@@ -509,7 +509,7 @@ class map
 		bool searched_is_strictly_greater; 
 
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key(), key);
@@ -518,7 +518,7 @@ class map
 			else if (searched_is_strictly_greater)
 				current = current->right;
 			else // they're equal
-				return const_iterator( current, NIL);
+				return const_iterator( current, nil_);
 		}
 		return this->end();
 	}
@@ -541,11 +541,11 @@ class map
 		node_ptr_t current;
 		node_ptr_t parent;
 
-		if (root_ == NIL) // Empty tree
+		if (root_ == nil_) // Empty tree
 			return this->end();
 		parent = NULL;
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key(), key);
@@ -556,9 +556,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator( current, NIL);
+				return iterator( current, nil_);
 		}
-		return ++iterator( parent, NIL);
+		return ++iterator( parent, nil_);
 	}
 
 	/* Returns lower bound not less than key */
@@ -569,11 +569,11 @@ class map
 		node_ptr_t current;
 		node_ptr_t parent;
 
-		if (root_ == NIL) // Empty tree
+		if (root_ == nil_) // Empty tree
 			return this->end();
 		parent = NULL;
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key(), key);
@@ -584,9 +584,9 @@ class map
 			else if (searched_is_strictly_greater) // than current's key
 				current = current->right;
 			else // searched and current kes are equal
-				return iterator( current, NIL);
+				return iterator( current, nil_);
 		}
-		return ++iterator( parent, NIL);
+		return ++iterator( parent, nil_);
 	}
 
 
@@ -598,11 +598,11 @@ class map
 		node_ptr_t current;
 		node_ptr_t best_predecessor;
 
-		if (root_ == NIL) // Empty tree
+		if (root_ == nil_) // Empty tree
 			return this->end();
 		best_predecessor = NULL;
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key(), key);
@@ -623,7 +623,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator( best_predecessor, NIL);
+		return ++iterator( best_predecessor, nil_);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -634,11 +634,11 @@ class map
 		node_ptr_t current;
 		node_ptr_t best_predecessor;
 
-		if (root_ == NIL) // Empty tree
+		if (root_ == nil_) // Empty tree
 			return this->end();
 		best_predecessor = NULL;
 		current = root_;
-		while (current != NIL)
+		while (current != nil_)
 		{
 			searched_is_strictly_less = compare_func_(key, current->key());
 			searched_is_strictly_greater = compare_func_(current->key, key);
@@ -659,7 +659,7 @@ class map
 				break;
 			}
 		}
-		return ++iterator( best_predecessor, NIL);
+		return ++iterator( best_predecessor, nil_);
 	}
 
 	/* OBSERVERS */
@@ -677,7 +677,7 @@ class map
   protected:
 	node_ptr_t leftmost_(node_ptr_t node)
 	{
-		while (node->left != NIL)
+		while (node->left != nil_)
 			node = node->left;
 		return node;
 	}
@@ -685,22 +685,22 @@ class map
   public:
 	iterator begin()
 	{
-		return ++iterator( NIL, NIL);
+		return ++iterator( nil_, nil_);
 	}
 
 	iterator end()
 	{
-		return iterator( NIL, NIL);
+		return iterator( nil_, nil_);
 	}
 
 	const_iterator begin() const
 	{
-		return ++const_iterator( NIL, NIL );
+		return ++const_iterator( nil_, nil_ );
 	}
 
 	const_iterator end() const
 	{
-		return const_iterator( NIL, NIL);
+		return const_iterator( nil_, nil_);
 	}
 
 	reverse_iterator rbegin()
@@ -747,10 +747,10 @@ class map
 
 	void print_node(std::stringstream &ss, node_ptr_t node)
 	{
-		if (node != NIL)
+		if (node != nil_)
 		{
 			ss << node->key() << " [label=< <b>" << node->key() << "</b><br/> <sub>" << node->parent->key() << "</sub>>]\n\t";
-			if (node->left != NIL)
+			if (node->left != nil_)
 			{
 				if (node->left->level == node->level)
 				{
@@ -760,7 +760,7 @@ class map
 				ss << node->key() << " -> " << node->left->key() << "\n\t";
 				print_node(ss, node->left);
 			}
-			if (node->right != NIL)
+			if (node->right != nil_)
 			{
 				if (node->right->level == node->level)
 				{
