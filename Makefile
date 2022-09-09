@@ -3,10 +3,10 @@
 ##################
 MAKEFLAGS += --no-builtin-rules
 
-DIFF			= diff -s
 DIFF			= meld
+DIFF			= diff -s
+CXX				= clang++-14 -gdwarf-4
 CXX				= g++-12
-CXX				= clang++-14
 SHELL			= zsh
 SHELL			= bash
 FT				= ft_containers_test
@@ -22,11 +22,11 @@ OBJ/STD_DEPS	= $(patsubst %.o,           %.d, $(OBJ/STD_OBJECTS))
 INCLUDE_FLAGS	= -I.
 CPPFLAGS		= ${INCLUDE_FLAGS} -MMD 
 #Add -Werror before correction 
-CXXFLAGS		= -Wall -Wextra -std=c++98 -pedantic-errors
+CXXFLAGS		= -Wall -Wextra -std=c++98 -g3 -pedantic-errors 
 LDFLAGS			= 
 LDLIBS			= 
 #Our beloved address sanitizer
-ASAN_FLAG		=  -fsanitize=address,undefined -g3
+ASAN_FLAG		=  -fsanitize=address,undefined 
 CXXFLAGS		+=	$(ASAN_FLAG)	
 LDFLAGS			+=	$(ASAN_FLAG)	
 
