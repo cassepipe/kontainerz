@@ -19,15 +19,6 @@ struct map_node
 	Pair           *pair;
 	Alloc			allocator;
 
-	// To make the the nil node in get_nil()
-	/*Default Constructor*/ map_node() :
-		parent(this),
-		left(this),
-		right(this),
-		level(0),
-		pair(NULL)
-	{ }
-
 	/*Constructor*/ map_node(
 			typename Pair::first_type k,
 			typename Pair::second_type v,

@@ -301,45 +301,46 @@ class map
 		return NIL;
 	}
 
+	node_ptr_t init_NIL()
+	{
+		NIL = node_alloc_.allocate(1);
+		NIL->parent = NIL;
+		NIL->left = NIL;
+		NIL->right = NIL;
+		NIL->level = 0;
+		NIL->pair = NULL;
+		return NIL;
+	}
+
 	/* INTERFACE */
 
   public:
-	explicit /*Constructor*/ map(const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc()) :
+	explicit /*Constructor*/ map(const KeyCmpFn& comp_fn = KeyCmpFn(), const Alloc& alloc = Alloc()) :
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
-		NIL(NULL),
-		root_(NULL),
+		NIL(init_NIL()),
+		root_(NIL),
 		size_(0),
-		compare_func_(comp)
-	{
-		NIL = node_alloc_.allocate(1);
-		node_alloc_.construct(NIL, node_t());
-		root_ = NIL;
-	}
+		compare_func_(comp_fn)
+	{ }
 
 	template< class InputIt >
-	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
+	/* Range Constructor */ map( InputIt first, InputIt last, const KeyCmpFn& comp_fn = KeyCmpFn(), const Alloc& alloc = Alloc() ) :
 		node_alloc_(alloc), // node_alloc_ and alloc are different types, implicit conversion thanks to allocator's special ctor
-		NIL(NULL),
-		root_(NULL),
+		NIL(init_NIL()),
+		root_(NIL),
 		size_(0),
-		compare_func_(comp)
+		compare_func_(comp_fn)
 	{
-		NIL = node_alloc_.allocate(1);
-		node_alloc_.construct(NIL, node_t());
-		root_ = NIL;
 		insert(first, last);
 	}
 
 	/* Copy Constructor */ map(map const& other) :
 		node_alloc_(other.get_allocator()),
-		NIL(NULL),
-		root_(other.NIL),
+		NIL(init_NIL()),
+		root_(NIL),
 		size_(0),
 		compare_func_(other.key_comp()) // Is this necessary ?
 	{
-		NIL = node_alloc_.allocate(1);
-		node_alloc_.construct(NIL, node_t());
-		root_ = NIL;
 		if (other.empty() == false)
 			insert(other.begin(), other.end()); // There must be a better way though
 	}

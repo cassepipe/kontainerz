@@ -3,8 +3,8 @@
 ##################
 MAKEFLAGS += --no-builtin-rules
 
-DIFF			= meld
 DIFF			= diff -s
+DIFF			= meld
 CXX				= g++-12
 CXX				= clang++-14
 SHELL			= zsh
@@ -22,7 +22,7 @@ OBJ/STD_DEPS	= $(patsubst %.o,           %.d, $(OBJ/STD_OBJECTS))
 INCLUDE_FLAGS	= -I.
 CPPFLAGS		= ${INCLUDE_FLAGS} -MMD 
 #Add -Werror before correction 
-CXXFLAGS		= -Wall -Wextra -g2 -std=c++98 -pedantic-errors
+CXXFLAGS		= -Wall -Wextra -std=c++98 -pedantic-errors
 LDFLAGS			= 
 LDLIBS			= 
 #Our beloved address sanitizer
