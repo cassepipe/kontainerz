@@ -89,10 +89,8 @@ void test_stack_size()
 {
 	stack<int> myInts;
 	cout << "0. size: " << myInts.size() << endl;
-
 	for (int i=0; i<5; i++) myInts.push(i);
 	cout << "1. size: " << myInts.size() << endl;
-
 	myInts.pop();
 	cout << "2. size: " << myInts.size() << endl;
 }
@@ -103,9 +101,7 @@ void test_stack_top()
 
 	myStack.push(10);
 	myStack.push(20);
-
 	myStack.top() -= 5;
-
 	cout << "myStack.top() is now " << myStack.top() << endl;
 }
 

@@ -50,7 +50,6 @@ class vector
 
 	// Why ptrdiff_t ? Because it is the signed equivalent of size_t.
 	// Good for pointer arithmetics
-	// TODO
 	typedef std::ptrdiff_t difference_type;
 	typedef std::size_t    size_type;
 
@@ -257,10 +256,11 @@ class vector
 				allocator_.construct(&data_[size_], val); 
 			capacity_ = size_;
 		}
-		else
+		else if (size_ != 0)
 		{
-			for (--size_; size_ >= n; --size_)
+			for (--size_; size_ > n; --size_)
 				allocator_.destroy(&data_[size_]);
+			allocator_.destroy(&data_[size_--]);
 			++size_;
 			capacity_ = size_;
 		}
