@@ -379,7 +379,16 @@ class map
 		return (*it).second;
 	}
 
-	mapped_type& at(const Key& key) const
+	mapped_type& at(const Key& key) 
+	{
+		iterator it = find(key);
+		if (it == this->end())
+			throw std::out_of_range("ft::map::at() : Invalid key");
+		else
+			return (*it).second;
+	}
+
+	mapped_type const& at(const Key& key) const
 	{
 		iterator it = find(key);
 		if (it == this->end())
