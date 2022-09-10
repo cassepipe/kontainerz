@@ -14,7 +14,7 @@
 
 int main()
 {
-	test_map();
+	//test_map();
 	test_vector();
-	test_stack();
+	//test_stack();
 }

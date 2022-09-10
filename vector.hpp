@@ -142,7 +142,7 @@ class vector
 	       typename enable_if< !is_integral< InputIterator >::value, void* >::type = 0)
 	    : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
 	{
-		assign(first, last);
+		assign(first, last, typename ft::iterator_traits< InputIterator >::iterator_category());
 	}
 
 	// Copy constructor. Shall perform deep copy using operator=

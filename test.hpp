@@ -21,6 +21,8 @@
 #include <stack>
 #include <vector>
 
+#include <memory>
+
 #ifndef NAMESPACE
 #define NAMESPACE ft
 #endif
