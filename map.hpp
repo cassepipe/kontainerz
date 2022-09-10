@@ -37,7 +37,6 @@ template < typename Key, typename Value, typename KeyCmpFn = std::less< Key >,
            typename Alloc = std::allocator< ft::pair< const Key, Value > > >
 class map
 {
-  protected:
   public:
 	typedef Key                                         key_type;
 	typedef Value                                       mapped_type;
@@ -743,6 +742,8 @@ class map
 	/* This exists only for forwarding the key_comp function*/
 	struct value_compare : public std::binary_function< pair_type_t, pair_type_t, bool >
 	{
+		friend class map;
+
 		KeyCmpFn comp;
 		value_compare(KeyCmpFn c) : comp(c)
 		{
