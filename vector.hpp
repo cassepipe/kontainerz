@@ -354,14 +354,14 @@ class vector
 
   protected:
 	template < class InputIterator >
-	void assign(InputIterator first, InputIterator last, input_iterator_tag)
+	void assign(InputIterator first, InputIterator last, std::input_iterator_tag)
 	{
 		for (; first != last; ++first)
 			this->push_back(*first);
 	}
 
 	template < class RandomAccessIterator >
-	void assign(RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
+	void assign(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
