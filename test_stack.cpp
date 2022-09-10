@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_stack.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cassepipe <norminet@42.fr>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/10 13:52:25 by cassepipe         #+#    #+#             */
+/*   Updated: 2022/09/10 13:52:25 by cassepipe        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "test.hpp"
 
 void test_stack_constructor()
 {
-	vector<int>      my_vector(2, 200);
-	std::vector<int> my_std_vector(2, 200);
+	vector< int >      my_vector(2, 200);
+	std::vector< int > my_std_vector(2, 200);
 
-	stack<int>              first;
-	stack<int, vector<int> > second(my_vector);
+	stack< int >                first;
+	stack< int, vector< int > > second(my_vector);
 
-	stack<int, std::vector<int> > third;
-	stack<int, std::vector<int> > fourth(my_std_vector);
+	stack< int, std::vector< int > > third;
+	stack< int, std::vector< int > > fourth(my_std_vector);
 
 	cout << "size of first: " << first.size() << endl;
 	cout << "size of second: " << second.size() << endl;
@@ -19,8 +31,8 @@ void test_stack_constructor()
 
 void test_stack_empty()
 {
-	stack<int> myStack;
-	int                   sum = 0;
+	stack< int > myStack;
+	int          sum = 0;
 	for (int i = 1; i <= 10; i++)
 		myStack.push(i);
 	while (!myStack.empty())
@@ -33,7 +45,7 @@ void test_stack_empty()
 
 void test_stack_pop()
 {
-	stack<int> myStack;
+	stack< int > myStack;
 
 	for (int i = 0; i < 5; ++i)
 		myStack.push(i);
@@ -49,7 +61,7 @@ void test_stack_pop()
 
 void test_stack_push()
 {
-	stack<int> myStack;
+	stack< int > myStack;
 
 	for (int i = 0; i < 5; ++i)
 		myStack.push(i);
@@ -65,11 +77,11 @@ void test_stack_push()
 void test_stack_relationalOperators()
 {
 
-	std::vector<int> fooVec(3, 100);
-	std::vector<int> barVec(5, 200);
+	std::vector< int > fooVec(3, 100);
+	std::vector< int > barVec(5, 200);
 
-	stack< int, std::vector<int> > foo(fooVec);
-	stack< int, std::vector<int> > bar(barVec);
+	stack< int, std::vector< int > > foo(fooVec);
+	stack< int, std::vector< int > > bar(barVec);
 
 	if (foo == bar)
 		cout << "foo and bar are equal" << endl;
@@ -87,9 +99,10 @@ void test_stack_relationalOperators()
 
 void test_stack_size()
 {
-	stack<int> myInts;
+	stack< int > myInts;
 	cout << "0. size: " << myInts.size() << endl;
-	for (int i=0; i<5; i++) myInts.push(i);
+	for (int i = 0; i < 5; i++)
+		myInts.push(i);
 	cout << "1. size: " << myInts.size() << endl;
 	myInts.pop();
 	cout << "2. size: " << myInts.size() << endl;
@@ -97,7 +110,7 @@ void test_stack_size()
 
 void test_stack_top()
 {
-	stack<int> myStack;
+	stack< int > myStack;
 
 	myStack.push(10);
 	myStack.push(20);

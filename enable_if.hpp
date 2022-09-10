@@ -13,14 +13,14 @@
 #ifndef ENABLE_IF_HPP
 #define ENABLE_IF_HPP
 
-//Oh by the way, in c++98, only class/struct templates may have default parameters
+// Oh by the way, in c++98, only class/struct templates may have default parameters
 template < bool Cond, typename T = void >
 struct enable_if
 {
 };
 
-template <typename T>
-struct enable_if<true, T>
+template < typename T >
+struct enable_if< true, T >
 {
 	typedef T type;
 };

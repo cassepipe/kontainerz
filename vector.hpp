@@ -13,21 +13,21 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "enable_if.hpp"
 #include "distance.hpp"
+#include "enable_if.hpp"
 #include "is_integral.hpp"
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
 #include <algorithm>
 #include <cstddef>
-#include <memory>
-#include <sstream>
 #include <cstring>
 #include <iterator>
+#include <memory>
+#include <sstream>
 
 namespace ft
 {
-template <typename T, typename Alloc = std::allocator<T> > // Space is actually required I think
+template < typename T, typename Alloc = std::allocator< T > > // Space is actually required I think
 class vector
 {
   public:
@@ -43,10 +43,10 @@ class vector
 	// to remove the extra const. Note that vector<const T> still won't compile
 	// because of that leads std::allocator to having two functions with the
 	// same type signature. Writing our own const-friendly allocator would work
-	typedef vector_iterator<value_type>              iterator;
-	typedef vector_iterator<const value_type>        const_iterator;
-	typedef ft::reverse_iterator<iterator>           reverse_iterator;
-	typedef ft::reverse_iterator<const_iterator>     const_reverse_iterator; // Why do I need ft:: ?
+	typedef vector_iterator< value_type >          iterator;
+	typedef vector_iterator< const value_type >    const_iterator;
+	typedef ft::reverse_iterator< iterator >       reverse_iterator;
+	typedef ft::reverse_iterator< const_iterator > const_reverse_iterator; // Why do I need ft:: ?
 
 	// Why ptrdiff_t ? Because it is the signed equivalent of size_t.
 	// Good for pointer arithmetics
@@ -102,7 +102,7 @@ class vector
 	{
 		if (this->empty() == false)
 		{
-			T *end = &*this->end();
+			T* end = &*this->end();
 			for (; elements != end; ++elements)
 			{
 				allocator_.construct(elements + n, *elements); // If vector is empty this will blow up
@@ -118,7 +118,7 @@ class vector
 	// It is explicit because we won't allow anything to be converted implicity to an allocator
 	// to an allocator.
 	explicit vector(const allocator_type& alloc = allocator_type())
-		 : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
+	    : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
 	{
 		assign(0, value_type());
 	}
@@ -126,7 +126,7 @@ class vector
 	// Fill constructor
 	// If a call is like "vector<Obj>(5));" and passes then the value of Obj() is passed by default
 	explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
-		: allocator_(alloc), data_(NULL), size_(0), capacity_(0)
+	    : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
 	{
 		assign(n, val);
 	}
@@ -135,17 +135,16 @@ class vector
 	// Do some enable_if<> = 0 wizardry to ensure InputIterator is not a number
 	// For an explanation of the use of enable_if ->
 	// https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brings-to-code/
-	template <class InputIterator>
+	template < class InputIterator >
 	vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-	       typename enable_if<!is_integral<InputIterator>::value, void*>::type = 0)
-		: allocator_(alloc), data_(NULL), size_(0), capacity_(0)
+	       typename enable_if< !is_integral< InputIterator >::value, void* >::type = 0)
+	    : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
 	{
 		assign(first, last);
 	}
 
 	// Copy constructor. Shall perform deep copy using operator=
-	vector(const vector& other)
-		: allocator_(other.allocator_), data_(NULL), size_(0), capacity_(0)
+	vector(const vector& other) : allocator_(other.allocator_), data_(NULL), size_(0), capacity_(0)
 	{
 		this->operator=(other);
 	}
@@ -253,7 +252,7 @@ class vector
 				data_ = tmp;
 			}
 			for (; size_ < n; ++size_)
-				allocator_.construct(&data_[size_], val); 
+				allocator_.construct(&data_[size_], val);
 			capacity_ = size_;
 		}
 		else if (size_ != 0)
@@ -348,18 +347,18 @@ class vector
 	{
 		return allocator_;
 	}
-	
+
 	/* Modifiers */
 
-   protected:
-	template <class InputIterator>
+  protected:
+	template < class InputIterator >
 	void assign(InputIterator first, InputIterator last, input_iterator_tag)
 	{
-		for(; first != last ; ++first)
+		for (; first != last; ++first)
 			this->push_back(*first);
 	}
 
-	template <class RandomAccessIterator>
+	template < class RandomAccessIterator >
 	void assign(RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
 	{
 		// Clear, deallocate, allocate, copy data
@@ -373,9 +372,10 @@ class vector
 	}
 
   public:
-	template <class InputIterator>
+	template < class InputIterator >
 	void assign(InputIterator first, InputIterator last,
-	            typename enable_if<!is_integral<InputIterator>::value, int>::type = 0) // Unnamed default parameter, weird, I know
+	            typename enable_if< !is_integral< InputIterator >::value, int >::type =
+	                0) // Unnamed default parameter, weird, I know
 	{
 		assign(first, last, typename InputIterator::iterator_category());
 	}
@@ -410,7 +410,7 @@ class vector
 	iterator insert(iterator position, const value_type& val)
 	{
 
-		T              *pos;
+		T*              pos;
 		difference_type idx      = &*position - data_;
 		size_type       newsize_ = size_ + 1;
 
@@ -418,7 +418,7 @@ class vector
 			reserve(newsize_ * 2);
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, 1);
-		for ( ; size_ < newsize_; ++size_, ++pos)
+		for (; size_ < newsize_; ++size_, ++pos)
 		{
 			allocator_.construct(pos, val);
 		}
@@ -427,7 +427,7 @@ class vector
 
 	void insert(iterator position, size_type n, const value_type& val)
 	{
-		T              *pos;
+		T*              pos;
 		difference_type idx      = &*position - data_;
 		size_type       newsize_ = size_ + n;
 
@@ -435,24 +435,24 @@ class vector
 			reserve(newsize_ * 2);
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, n);
-		for ( ; size_ < newsize_; ++size_, ++pos)
+		for (; size_ < newsize_; ++size_, ++pos)
 		{
 			allocator_.construct(pos, val);
 		}
 	}
 
   protected:
-	template <typename InputIterator>
+	template < typename InputIterator >
 	void insert(iterator position, InputIterator first, InputIterator last, input_iterator_tag)
 	{
 		vector tmp(first, last);
 		insert(position, tmp.begin(), tmp.end());
 	}
 
-	template <typename RandomAccessIterator>
+	template < typename RandomAccessIterator >
 	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
 	{
-		T              *pos;
+		T*              pos;
 		difference_type n        = ft::distance(first, last);
 		difference_type idx      = &*position - data_;
 		size_type       newsize_ = size_ + n;
@@ -461,16 +461,16 @@ class vector
 			reserve(newsize_ * 2);
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, n);
-		for ( ; size_ < newsize_; ++size_, ++pos, ++first)
+		for (; size_ < newsize_; ++size_, ++pos, ++first)
 		{
 			allocator_.construct(pos, *first);
 		}
 	}
 
   public:
-	template <typename Iterator>
+	template < typename Iterator >
 	void insert(iterator position, Iterator first, Iterator last,
-	            typename enable_if<!is_integral<Iterator>::value, int>::type = 0)
+	            typename enable_if< !is_integral< Iterator >::value, int >::type = 0)
 	{
 		insert(position, first, last, typename Iterator::iterator_category());
 	}
@@ -491,7 +491,7 @@ class vector
 			return last;
 		size_type distance = ft::distance(first, last);
 		size_ -= distance;
-		for (; last < end ; ++first, ++last)
+		for (; last < end; ++first, ++last)
 		{
 			allocator_.destroy(&(*first));
 			allocator_.construct(&(*first), *last);
@@ -502,14 +502,14 @@ class vector
 		{
 			allocator_.destroy(&(*first));
 		}
-		return (first); 
+		return (first);
 	}
 
 	void swap(vector& x)
 	{
-		vector<T> tmp = *this;
-		*this         = x;
-		x             = tmp;
+		vector< T > tmp = *this;
+		*this           = x;
+		x               = tmp;
 	}
 
 	void clear()
@@ -522,10 +522,10 @@ class vector
 	}
 };
 
-template <class T, class Alloc>
-bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator==(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
-	typedef typename vector<T, Alloc>::const_iterator const_iterator;
+	typedef typename vector< T, Alloc >::const_iterator const_iterator;
 
 	if (lhs.size() != rhs.size())
 		return false;
@@ -544,16 +544,16 @@ bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 	return true;
 }
 
-template <class T, class Alloc>
-bool operator!=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator!=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs == rhs);
 }
 
-template <class T, class Alloc>
-bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator<(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
-	typedef typename vector<T, Alloc>::const_iterator const_iterator;
+	typedef typename vector< T, Alloc >::const_iterator const_iterator;
 
 	const_iterator lit   = lhs.begin();
 	const_iterator llast = --(lhs.end());
@@ -575,21 +575,21 @@ bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
 	return (*lit < *rit);
 }
 
-template <class T, class Alloc>
-bool operator>=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator>=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs < rhs);
 }
 
-template <class T, class Alloc>
-bool operator>(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator>(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	// We just swap the order of ther args to use operator<
 	return rhs < lhs;
 }
 
-template <class T, class Alloc>
-bool operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs)
+template < class T, class Alloc >
+bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs > rhs);
 }

@@ -1,94 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_integral.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cassepipe <norminet@42.fr>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/10 13:51:31 by cassepipe         #+#    #+#             */
+/*   Updated: 2022/09/10 13:51:31 by cassepipe        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef IS_INTEGRAL_HPP
 #define IS_INTEGRAL_HPP
 
 #include "remove_cv.hpp"
 
+// Checks whether T is an integral type.
+// Provides the member constant value which is equal to true, if T is the type bool, char, char16_t, char32_t,
+// wchar_t, short, int, long, long long, or any implementation-defined extended integer types, including any signed,
+// unsigned, and cv-qualified variants. Otherwise, value is equal to false.
 
-//Checks whether T is an integral type. 
-//Provides the member constant value which is equal to true, if T is the type bool, char, char16_t, char32_t,
-//wchar_t, short, int, long, long long, or any implementation-defined extended integer types, including any signed, unsigned, and cv-qualified variants. 
-//Otherwise, value is equal to false.
-
-template <typename T>
+template < typename T >
 struct is_integral_helper
 {
 	static bool const value = false; // Can't initialize without static in c++98
 };
 
-//Specializations
+// Specializations
 //
 template <>
-struct is_integral_helper<bool>
+struct is_integral_helper< bool >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 
 template <>
-struct is_integral_helper<char>
+struct is_integral_helper< char >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 
-//template <>
-//struct is_integral_helper<char16_t>
+// template <>
+// struct is_integral_helper<char16_t>
 //{
-//    static bool const value = true; 
+//    static bool const value = true;
 //};
 
-//template <>
-//struct is_integral_helper<char32_t>
+// template <>
+// struct is_integral_helper<char32_t>
 //{
-//    static bool const value = true; 
+//    static bool const value = true;
 //};
 
 template <>
-struct is_integral_helper<wchar_t>
+struct is_integral_helper< wchar_t >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 
 template <>
-struct is_integral_helper<short>
+struct is_integral_helper< short >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 template <>
-struct is_integral_helper<int>
+struct is_integral_helper< int >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 template <>
-struct is_integral_helper<long>
+struct is_integral_helper< long >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 template <>
-struct is_integral_helper<unsigned char>
+struct is_integral_helper< unsigned char >
 {
-	static bool const value = true; 
+	static bool const value = true;
 };
 template <>
-struct is_integral_helper<unsigned short>
+struct is_integral_helper< unsigned short >
 {
-	static bool const value = true; 
-};
-
-template <>
-struct is_integral_helper<unsigned int>
-{
-	static bool const value = true; 
+	static bool const value = true;
 };
 
 template <>
-struct is_integral_helper<unsigned long>
+struct is_integral_helper< unsigned int >
 {
-	static bool const value = true; 
+	static bool const value = true;
+};
+
+template <>
+struct is_integral_helper< unsigned long >
+{
+	static bool const value = true;
 };
 
 // The trick for const values
 
-template <typename T>
-struct is_integral : public is_integral_helper< typename remove_cv<T>::type >
+template < typename T >
+struct is_integral : public is_integral_helper< typename remove_cv< T >::type >
 {
 };
 
