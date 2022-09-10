@@ -125,12 +125,12 @@ class vector_iterator
 	// Pas le choix si tu veux faire marcher des expressions telles que (-3 -it)
 	friend vector_iterator operator+(difference_type i, const vector_iterator& it)
 	{
-		return vector_iterator(it.current__ + i);
+		return vector_iterator(it.current_ + i);
 	}
 
 	friend vector_iterator operator-(difference_type i, const vector_iterator& it)
 	{
-		return vector_iterator(it.current__ - i);
+		return vector_iterator(it.current_ - i);
 	}
 
 	vector_iterator operator+=(difference_type i)
@@ -164,12 +164,12 @@ class vector_iterator
 ////Pas le choix si tu veux faire marcher des expressions telles que (-3 -it)
 // vector_iterator operator+(difference_type i, const vector_iterator& it)
 //{
-//    return vector_iterator(it.current__ + i);
+//    return vector_iterator(it.current_ + i);
 //}
 
 // vector_iterator operator-(difference_type i, const vector_iterator& it)
 //{
-//    return vector_iterator(it.current__ - i);
+//    return vector_iterator(it.current_ - i);
 //}
 
 // To get the distance between to iterators
