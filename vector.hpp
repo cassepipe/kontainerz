@@ -96,7 +96,8 @@ class vector
 
 	void deallocate_data_()
 	{
-		allocator_.deallocate(data_, capacity_);
+		if (data_)
+			allocator_.deallocate(data_, capacity_);
 	}
 
 	void shift_elements_right_by_(T* elements, size_type n)
