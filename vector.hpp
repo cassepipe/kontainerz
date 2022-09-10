@@ -13,10 +13,10 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "iterator_traits.hpp"
 #include "distance.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
+#include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
 #include <algorithm>
@@ -379,7 +379,7 @@ class vector
 	            typename enable_if< !is_integral< InputIterator >::value, int >::type =
 	                0) // Unnamed default parameter, weird, I know
 	{
-		assign(first, last, typename ft::iterator_traits<InputIterator>::iterator_category());
+		assign(first, last, typename ft::iterator_traits< InputIterator >::iterator_category());
 	}
 
 	void assign(size_type n, const value_type& val)
@@ -445,14 +445,14 @@ class vector
 
   protected:
 	template < typename InputIterator >
-	void insert(iterator position, InputIterator first, InputIterator last, input_iterator_tag)
+	void insert(iterator position, InputIterator first, InputIterator last, std::input_iterator_tag)
 	{
 		vector tmp(first, last);
 		insert(position, tmp.begin(), tmp.end());
 	}
 
 	template < typename RandomAccessIterator >
-	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last, random_access_iterator_tag)
+	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
 		T*              pos;
 		difference_type n        = ft::distance(first, last);
@@ -474,7 +474,7 @@ class vector
 	void insert(iterator position, Iterator first, Iterator last,
 	            typename enable_if< !is_integral< Iterator >::value, int >::type = 0)
 	{
-		insert(position, first, last, typename ft::iterator_traits<Iterator>::iterator_category());
+		insert(position, first, last, typename ft::iterator_traits< Iterator >::iterator_category());
 	}
 
 	iterator erase(iterator position)

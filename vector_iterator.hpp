@@ -31,11 +31,11 @@ class vector_iterator
 
 	// Why ptrdiff_t ? Because it is the signed equivalent of size_t.
 	// No, ssize_t is not.
-	typedef ft::random_access_iterator_tag iterator_category;
-	typedef std::ptrdiff_t                 difference_type;
-	typedef T                              value_type;
-	typedef T*                             pointer;
-	typedef T&                             reference;
+	typedef std::random_access_iterator_tag iterator_category;
+	typedef std::ptrdiff_t                  difference_type;
+	typedef T                               value_type;
+	typedef T*                              pointer;
+	typedef T&                              reference;
 
 	/// CONSTRUCTORS
 

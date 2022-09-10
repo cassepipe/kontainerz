@@ -28,7 +28,7 @@ class map_iterator
 	typedef Pair                           value_type;
 	typedef value_type&                    reference;
 	typedef value_type*                    pointer;
-	typedef ft::bidirectional_iterator_tag iterator_category;
+	typedef std::bidirectional_iterator_tag iterator_category;
 	typedef std::ptrdiff_t                 difference_type;
 
   protected:
@@ -114,7 +114,7 @@ class map_iterator
 		// If has successor...
 		else if (current_->right != nil_)
 			current_ = leftmost_(current_->right);   // ... goes to successor
-		                                             // Else if it has no successor under itself
+			                                         // Else if it has no successor under itself
 		else if (current_ == current_->parent->left) // If it is its parent's left child
 			current_ = current_->parent;             // ... it becomes its parent
 		else                                         // Then it's its parent's right child
@@ -183,7 +183,7 @@ class map_const_iterator
 	typedef Pair const                     value_type;
 	typedef value_type&                    reference;
 	typedef value_type*                    pointer;
-	typedef ft::bidirectional_iterator_tag iterator_category;
+	typedef std::bidirectional_iterator_tag iterator_category;
 	typedef std::ptrdiff_t                 difference_type;
 
   protected:
@@ -229,7 +229,7 @@ class map_const_iterator
 	//{ }
 
 	//[> Constructor <] map_const_iterator( const map_node<const Pair, Alloc> * current, const map_node<const Pair,
-	//Alloc> * nil)
+	// Alloc> * nil)
 	//    :  current_(current), nil_(nil)
 	//{ }
 

@@ -378,7 +378,7 @@ class map
 		return (*it).second;
 	}
 
-	mapped_type& at(const Key& key) 
+	mapped_type& at(const Key& key)
 	{
 		iterator it = find(key);
 		if (it == this->end())
