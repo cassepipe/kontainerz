@@ -70,45 +70,45 @@ class stack
 	}
 
 	template< class T, class C >
-	friend bool operator==( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs );
+	friend bool operator==( const stack<T,C>& lhs, const stack<T,C>& rhs );
 
 	template< class T, class C >
-	friend bool operator<( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs );
+	friend bool operator<( const stack<T,C>& lhs, const stack<T,C>& rhs );
 
 }; // class stack
    
 template< class T, class Container >
-bool operator==( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator==( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return lhs.container_ == rhs.container_;
 }
 
 template< class T, class Container >
-bool operator!=( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator!=( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return !(lhs == rhs);
 }
 
 template< class T, class Container >
-bool operator<( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator<( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return lhs.container_ < rhs.container_;
 }
 
 template< class T, class Container >
-bool operator<=( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator<=( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return !(lhs > rhs);
 }
 
 template< class T, class Container >
-bool operator>( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator>( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return rhs < lhs;
 }
 
 template< class T, class Container >
-bool operator>=( const std::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+bool operator>=( const stack<T,Container>& lhs, const stack<T,Container>& rhs )
 {
 	return !(lhs < rhs);
 }

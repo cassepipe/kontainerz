@@ -2,8 +2,8 @@
 #define TEST_H
 
 #include "map.hpp"
-#include "vector.hpp"
 #include "stack.hpp"
+#include "vector.hpp"
 
 #include <map>
 #include <stack>
@@ -14,10 +14,10 @@
 #endif
 
 using NAMESPACE::make_pair;
-using NAMESPACE::pair;
-using NAMESPACE::vector;
-using NAMESPACE::stack;
 using NAMESPACE::map;
+using NAMESPACE::pair;
+using NAMESPACE::stack;
+using NAMESPACE::vector;
 
 using std::cout;
 using std::endl;
