@@ -474,7 +474,7 @@ class vector
 	void insert(iterator position, Iterator first, Iterator last,
 	            typename enable_if< !is_integral< Iterator >::value, int >::type = 0)
 	{
-		insert(position, first, last, typename Iterator::iterator_category());
+		insert(position, first, last, typename ft::iterator_traits<Iterator>::iterator_category());
 	}
 
 	iterator erase(iterator position)
