@@ -15,7 +15,6 @@
 
 #include "iterator_traits.hpp"
 #include "map_node.hpp"
-#include "nil.hpp"
 #include "remove_cv.hpp"
 #include <cstddef>
 
@@ -65,7 +64,7 @@ class map_iterator
 	{
 	}
 
-	/* Constructor */ map_iterator(map_node< const Pair >* current, map_node< const Pair >* nil)
+	/* Constructor */ map_iterator(map_node< const Pair, Alloc >* current, map_node< const Pair, Alloc >* nil)
 	    : current_(current), nil_(nil)
 	{
 	}

@@ -16,7 +16,6 @@
 #include <cstddef>
 #include <memory>
 
-#include "nil.hpp"
 #include "pair.hpp"
 
 namespace ft

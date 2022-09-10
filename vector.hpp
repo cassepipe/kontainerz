@@ -13,6 +13,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include "iterator_traits.hpp"
 #include "distance.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
@@ -377,7 +378,7 @@ class vector
 	            typename enable_if< !is_integral< InputIterator >::value, int >::type =
 	                0) // Unnamed default parameter, weird, I know
 	{
-		assign(first, last, typename InputIterator::iterator_category());
+		assign(first, last, typename ft::iterator_traits<InputIterator>::iterator_category());
 	}
 
 	void assign(size_type n, const value_type& val)
