@@ -1107,7 +1107,6 @@ void test_vector_resize()
 	for (vector< int >::size_type i = 0 ; i< my_vec.size(); ++i)
 		cout << ' ' << my_vec[i];
 	cout << std::endl;
-
 }
 
 void test_vector_size()
