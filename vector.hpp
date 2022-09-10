@@ -168,7 +168,7 @@ class vector
 			if (rhs.size_ > capacity_) // If we don't have enough room, let's make some
 			{
 				deallocate_data_();
-				data_     = allocator_.allocate(rhs.size_ * sizeof(value_type));
+				data_     = allocator_.allocate(rhs.size_);
 				capacity_ = rhs.size_;
 			}
 			size_ = rhs.size_;
@@ -243,7 +243,7 @@ class vector
 			if (n > capacity_)
 			{
 				// Then put data in bigger container
-				pointer tmp = allocator_.allocate(n * sizeof(value_type));
+				pointer tmp = allocator_.allocate(n);
 				for (size_type i = 0; i < size_; ++i)
 				{
 					allocator_.construct(&tmp[i], data_[i]);
@@ -285,7 +285,7 @@ class vector
 			throw std::length_error("vector::reserve");
 		else if (n > capacity_)
 		{
-			pointer tmp = allocator_.allocate(n * sizeof(value_type));
+			pointer tmp = allocator_.allocate(n);
 			for (size_type i = 0; i < size_; ++i)
 			{
 				allocator_.construct(&tmp[i], data_[i]);
@@ -366,7 +366,7 @@ class vector
 		destroy_data_();
 		deallocate_data_();
 		size_     = ft::distance(first, last);
-		data_     = allocator_.allocate(size_ * sizeof(value_type));
+		data_     = allocator_.allocate(size_);
 		capacity_ = size_;
 		for (size_type i = 0; i < size_; ++i)
 			allocator_.construct(&data_[i], first[i]);
@@ -387,7 +387,7 @@ class vector
 		destroy_data_();
 		deallocate_data_();
 		size_     = n;
-		data_     = allocator_.allocate(size_ * sizeof(value_type));
+		data_     = allocator_.allocate(size_);
 		capacity_ = size_;
 		;
 		for (size_type i = 0; i < size_; ++i)
