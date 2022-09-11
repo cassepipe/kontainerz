@@ -109,7 +109,7 @@ class reverse_iterator
 		return *this;
 	}
 
-	reverse_iterator& operator++(int)
+	reverse_iterator operator++(int)
 	{
 		reverse_iterator tmp = *this;
 		--current_;
@@ -124,7 +124,7 @@ class reverse_iterator
 		return *this;
 	}
 
-	reverse_iterator& operator--(int)
+	reverse_iterator operator--(int)
 	{
 		reverse_iterator tmp = *this;
 		++current_;
