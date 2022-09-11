@@ -65,11 +65,11 @@ class reverse_iterator
 	}
 
 	template < class OtherIter >
-	reverse_iterator(const reverse_iterator< OtherIter >& rev_it) : current_(rev_it.current_)
+	reverse_iterator(const reverse_iterator< OtherIter >& rev_it) : current_(rev_it.base())
 	{
 		/**
-		 *  A %reverse_iterator across other types can be copied if the
-		 *  underlying %iterator can be converted to the type of @c current.
+		 *  A reverse_iterator across other types can be copied if the
+		 *  underlying iterator can be converted to the type of current_.
 		 */
 	}
 
