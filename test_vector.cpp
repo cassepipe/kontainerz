@@ -1619,31 +1619,31 @@ void vec_test_assign_range()
 
 void test_vector()
 {
-	// test_vector_assign();
-	// test_vector_at();
-	// test_vector_back();
-	// test_vector_begin();
-	// test_vector_capacity();
-	// test_vector_clear();
-	// test_vector_constructors();
-	// test_vector_empty();
-	// test_vector_end();
-	// test_vector_erase();
-	// test_vector_front();
-	// test_vector_get_allocator();
-	// test_vector_insert();
-	// test_vector_max_size();
-	// test_vector_operator_bracket();
-	// test_vector_operator_equal();
-	// test_vector_pop_back();
-	// test_vector_push_back();
-	// test_vector_rbegin();
-	// test_vector_relational_operators();
-	// test_vector_rend();
-	// test_vector_reserve();
-	// test_vector_resize();
-	// test_vector_size();
-	// test_vector_swap();
-	// test_vector_swap_overload();
+	 test_vector_assign();
+	 test_vector_at();
+	 test_vector_back();
+	 test_vector_begin();
+	 test_vector_capacity();
+	 test_vector_clear();
+	 test_vector_constructors();
+	 test_vector_empty();
+	 test_vector_end();
+	 test_vector_erase();
+	 test_vector_front();
+	 test_vector_get_allocator();
+	 test_vector_insert();
+	 test_vector_max_size();
+	 test_vector_operator_bracket();
+	 test_vector_operator_equal();
+	 test_vector_pop_back();
+	 test_vector_push_back();
+	 test_vector_rbegin();
+	 test_vector_relational_operators();
+	 test_vector_rend();
+	 test_vector_reserve();
+	 test_vector_resize();
+	 test_vector_size();
+	 test_vector_swap();
+	 test_vector_swap_overload();
 	vec_test_assign_range();
 }

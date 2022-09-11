@@ -287,12 +287,15 @@ class vector
 		else if (n > capacity_)
 		{
 			pointer tmp = allocator_.allocate(n);
-			for (size_type i = 0; i < size_; ++i)
+			if (data_)
 			{
-				allocator_.construct(&tmp[i], data_[i]);
-				allocator_.destroy(&data_[i]);
+				for (size_type i = 0; i < size_; ++i)
+				{
+					allocator_.construct(&tmp[i], data_[i]);
+					allocator_.destroy(&data_[i]);
+				}
+				deallocate_data_();
 			}
-			deallocate_data_();
 			data_     = tmp;
 			capacity_ = n;
 		}
@@ -353,30 +356,69 @@ class vector
 	/* Modifiers */
 
   protected:
+
+	void reserve_(pointer & old_data, size_type new_capacity, size_type & old_capacity)
+	{
+		if (new_capacity > allocator_.max_size())
+			throw std::length_error("vector::reserve");
+		else if (new_capacity > old_capacity)
+		{
+			pointer new_data = allocator_.allocate(new_capacity);
+			if (old_data)
+			{
+				for (size_type i = 0; i < old_capacity; ++i) // Since we're calling because old buffer is full then old_capacity == old_data
+				{
+					allocator_.construct(&new_data[i], old_data[i]);
+					allocator_.destroy(&old_data[i]);
+				}
+				allocator_.deallocate(old_data, old_capacity);
+			}
+			old_data = new_data;
+			old_capacity = new_capacity;
+		}
+	}
+	
 	template < class InputIterator >
 	void assign(InputIterator first, InputIterator last, std::input_iterator_tag)
 	{
+		pointer tmp = NULL;
+		size_type new_size = 0;
+		size_type new_capacity = 0;
 		for (; first != last; ++first)
-			this->push_back(*first);
+		{
+			if (new_capacity == new_size)
+				reserve_(tmp, new_size ? new_size * 2 : 1, new_capacity);
+			allocator_.construct(&tmp[new_size], *first);
+			++new_size;
+		}
+
+		destroy_data_();
+		deallocate_data_();
+
+		size_ = new_size;
+		capacity_ = new_capacity;
+		data_ = tmp;
 	}
 
 	template < class RandomAccessIterator >
 	void assign(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
-		// Clear, deallocate, allocate, copy data
+		size_type new_size  = ft::distance(first, last);
+		pointer tmp         = allocator_.allocate(new_size);
+		for (size_type i = 0; i < new_size; ++i)
+			allocator_.construct(&tmp[i], first[i]);
+
 		destroy_data_();
 		deallocate_data_();
-		size_     = ft::distance(first, last);
-		data_     = allocator_.allocate(size_);
+
+		size_ = new_size;
 		capacity_ = size_;
-		for (size_type i = 0; i < size_; ++i)
-			allocator_.construct(&data_[i], first[i]);
+		data_ = tmp;
 	}
 
   public:
 	template < class InputIterator >
-	void assign(InputIterator first, InputIterator last,
-	            typename enable_if< !is_integral< InputIterator >::value, int >::type =
+	void assign(InputIterator first, InputIterator last, typename enable_if< !is_integral< InputIterator >::value, int >::type =
 	                0) // Unnamed default parameter, weird, I know
 	{
 		assign(first, last, typename ft::iterator_traits< InputIterator >::iterator_category());
