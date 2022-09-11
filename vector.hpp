@@ -19,6 +19,7 @@
 #include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
+#include "algorithm.hpp"
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
