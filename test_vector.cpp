@@ -1249,7 +1249,7 @@ void print_range(It begin, It end)
 	cout << endl;
 }
 
-void vec_test_assign_range()
+void test_vector_assign_range()
 {
 	long s_long[32];
 	init_array(s_long, 32);
@@ -1617,6 +1617,73 @@ void vec_test_assign_range()
 	}
 }
 
+void test_vector_comparisons_ge()
+{
+    {
+        vector<long> v1;
+        vector<long> v2;
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal\n";
+        }
+    };
+
+    {
+        vector<long> v1(5, 64);
+        vector<long> v2;
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal.\n";
+        }
+    }
+
+    {
+        vector<long> v1;
+        vector<long> v2(5, 32);
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal..\n";
+        }
+    }
+
+    {
+        vector<long> v1(5, 64);
+        vector<long> v2(5, 48);
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal...\n";
+        }
+    }
+
+    {
+        vector<long> v1(5, 64);
+        vector<long> v2(5, 64);
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal....\n";
+        }
+    }
+
+    {
+        vector<long> v1(5, 64);
+        vector<long> v2(4, 64);
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal.....\n";
+        }
+    }
+
+    {
+        vector<long> v1(4);
+        vector<long> v2(5);
+
+        if (v1 >= v2) {
+            cout << "Greater than or equal......\n";
+        }
+    }
+}
+
+
 void test_vector()
 {
 	 test_vector_assign();
@@ -1645,5 +1712,6 @@ void test_vector()
 	 test_vector_size();
 	 test_vector_swap();
 	 test_vector_swap_overload();
-	vec_test_assign_range();
+	 test_vector_assign_range();
+	 test_vector_comparisons_ge();
 }

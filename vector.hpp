@@ -566,26 +566,12 @@ class vector
 	}
 };
 
-template < class T, class Alloc >
-bool operator==(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
-{
-	typedef typename vector< T, Alloc >::const_iterator const_iterator;
+template< class T, class Allocator >
+bool	operator==( vector< T, Allocator >const & lhs, vector< T, Allocator > const & rhs ) {
 
-	if (lhs.size() != rhs.size())
+	if ( lhs.size() != rhs.size() )
 		return false;
-
-	const_iterator lit  = lhs.begin();
-	const_iterator lend = lhs.end();
-	const_iterator rit  = rhs.begin();
-
-	while (lit != lend)
-	{
-		if (*lit != *rit)
-			return false;
-		++rit;
-		++lit;
-	}
-	return true;
+	return ft::equal( lhs.begin(), lhs.end(), rhs.begin() );
 }
 
 template < class T, class Alloc >
@@ -594,29 +580,10 @@ bool operator!=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 	return !(lhs == rhs);
 }
 
-template < class T, class Alloc >
-bool operator<(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
-{
-	typedef typename vector< T, Alloc >::const_iterator const_iterator;
+template< class T, class Allocator >
+bool	operator<( vector< T, Allocator >const & lhs, vector< T, Allocator > const & rhs ) {
 
-	const_iterator lit   = lhs.begin();
-	const_iterator llast = --(lhs.end());
-	const_iterator rit   = rhs.begin();
-	const_iterator rlast = --(rhs.end());
-
-	// This loop stops on the first diff or once vector end is reach
-	while (lit != llast && rit != rlast && *lit == *rit)
-	{
-		++rit;
-		++lit;
-	}
-	// Special case where one is the subset of another
-	if (*lit == *rit) // Means the loop stopped because one end was reached
-	{
-		// One is strictly a subset of the other
-		return (lit == llast and rit != rlast);
-	}
-	return (*lit < *rit);
+	return	ft::lexicographical_compare( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
 }
 
 template < class T, class Alloc >
