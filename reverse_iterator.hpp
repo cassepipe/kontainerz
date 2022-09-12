@@ -165,45 +165,53 @@ class reverse_iterator
 
 /// NON-MEMBER RELATIONAL OPERATORS
 
-template < typename _Iterator >
-bool operator==(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+bool operator==(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return lhs.base() == rhs.base();
 }
 
-template < typename _Iterator >
-bool operator!=(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+bool operator!=(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return !(lhs == rhs);
 }
 
 // This helps define all the following ones
 // Remember that reverse_iterator comparisons are the inverse of their underlying pointers'comparison
-template < typename _Iterator >
-bool operator<(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+bool operator<(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return rhs.base() < lhs.base();
 }
 
-template < typename _Iterator >
-bool operator>(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+bool operator>(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return rhs < lhs;
 }
 
-template < typename _Iterator >
-bool operator<=(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+bool operator<=(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return !(rhs < lhs);
 }
 
-template < typename _Iterator >
-bool operator>=(const reverse_iterator< _Iterator >& lhs, const reverse_iterator< _Iterator >& rhs)
+template < typename LeftIterator , typename RightIterator>
+bool operator>=(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return !(lhs < rhs);
 }
 
 /// NON-MEMBER ARITHMETIC OPERATORS
+
+// To get the distance between to reverse iterators
+template < class Iterator >
+	typename reverse_iterator< Iterator >::difference_type
+		operator-(const reverse_iterator< Iterator > & lhs, const reverse_iterator< Iterator >& rhs) 
+{
+	return  rhs.base() - lhs.base();
+}
 
 // To support expression such as ( -n - iterator ) and have it  return an iterator
 template < class Iterator >
@@ -220,13 +228,6 @@ reverse_iterator< Iterator > operator-(typename reverse_iterator< Iterator >::di
 	return reverse_iterator< Iterator >(rev_it.base() + n);
 }
 
-// To get the distance between to iterators
-template < class Iterator >
-	typename reverse_iterator< Iterator >::difference_type
-		operator-(const reverse_iterator< Iterator > & lhs, const reverse_iterator< Iterator >& rhs) 
-{
-	return  rhs.base() - lhs.base();
-}
 
 } // namespace ft
 
