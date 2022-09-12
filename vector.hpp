@@ -114,6 +114,19 @@ class vector
 		}
 	}
 
+	void shift_elements_left_by_(T* elements, size_type n)
+	{
+		if (this->empty() == false)
+		{
+			T* end = &*this->end();
+			for (; elements != end; ++elements)
+			{
+				allocator_.construct(elements - n, *elements); // If vector is empty this will blow up
+				allocator_.destroy(elements);
+			}
+		}
+	}
+
   public:
 	/** INTERFACE **/
 
@@ -244,6 +257,8 @@ class vector
 		{
 			if (n > capacity_)
 			{
+				if (n > allocator_.max_size())
+					throw std::length_error("ft::vector::resize");
 				// Then put data in bigger container
 				pointer tmp = allocator_.allocate(n);
 				for (size_type i = 0; i < size_; ++i)
@@ -405,13 +420,15 @@ class vector
 	void assign(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
 		size_type new_size  = ft::distance(first, last);
+		if (new_size > allocator_.max_size())
+			throw std::length_error("vector::assign");
 		pointer tmp         = allocator_.allocate(new_size);
+
 		for (size_type i = 0; i < new_size; ++i)
 			allocator_.construct(&tmp[i], first[i]);
 
 		destroy_data_();
 		deallocate_data_();
-
 		size_ = new_size;
 		capacity_ = size_;
 		data_ = tmp;
@@ -430,6 +447,8 @@ class vector
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
 		deallocate_data_();
+		if (n > allocator_.max_size())
+			throw std::length_error("ft::vector::assign");
 		size_     = n;
 		data_     = allocator_.allocate(size_);
 		capacity_ = size_;
@@ -535,18 +554,12 @@ class vector
 		if (first == last)
 			return last;
 		size_type distance = ft::distance(first, last);
+
+		iterator it = first;
+		for (; it != last ; ++it)
+			allocator_.destroy(&(*first));
+		shift_elements_left_by_(&(*it), distance); // Depends on size_
 		size_ -= distance;
-		for (; last < end; ++first, ++last)
-		{
-			allocator_.destroy(&(*first));
-			allocator_.construct(&(*first), *last);
-			if (distance)
-				--distance;
-		}
-		for (; distance > 0; --distance, ++first)
-		{
-			allocator_.destroy(&(*first));
-		}
 		return (first);
 	}
 
