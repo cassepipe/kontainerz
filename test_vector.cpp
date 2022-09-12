@@ -1988,36 +1988,36 @@ void vec_test_riterator()
 		PRINT_LINE("It:", *it);
 		PRINT_LINE("Cit:", *cit);
 		PRINT_LINE("It + 10:", it[10]);
-        //PRINT_LINE("Cit + 10:", cit[10]);
+		PRINT_LINE("Cit + 10:", cit[10]);
     }
 
     {
-        //longvector v(b_long, b_long + b_size);
+		longvector v(b_long, b_long + b_size);
 
-        //long (*fn)(const long&) = &times2;
+		long (*fn)(const long&) = &times2;
 
-        //std::transform(v.rbegin(), v.rend() - 10, v.rbegin(), fn);
+		std::transform(v.rbegin(), v.rend() - 10, v.rbegin(), fn);
 
-        //CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        //std::reverse(v.rbegin(), v.rend());
+		std::reverse(v.rbegin(), v.rend());
 
-        //CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
     }
 
     {
-        //const longvector v(b_long, b_long + b_size);
+		const longvector v(b_long, b_long + b_size);
 
-        //void (*fn)(const long&) = &print;
+		void (*fn)(const long&) = &print;
 
-        //std::for_each(v.rbegin(), v.rend(), fn);
+		std::for_each(v.rbegin(), v.rend(), fn);
     }
 
     {
-        //intvector v(s_int, s_int + s_size);
-        //intvector::reverse_iterator it = v.rbegin();
-        //intvector::const_reverse_iterator cit(it);
-        //(void)cit;
+		intvector v(s_int, s_int + s_size);
+		intvector::reverse_iterator it = v.rbegin();
+		intvector::const_reverse_iterator cit(it);
+		(void)cit;
     }
 }
 
