@@ -883,8 +883,8 @@ void test_vector_max_size()
 	}
 	{
 		// This one will differ, I can explain
-		// vector< vector< vector <int >  > >	my_vec;
-		// cout << "max_size : " << my_vec.max_size() << endl;
+		 vector< vector< vector <int >  > >	my_vec;
+		 cout << "max_size : " << my_vec.max_size() << endl;
 	}
 }
 
@@ -2161,41 +2161,76 @@ void vec_test_riterator_comparisons()
     }
 }
 
+void vec_test_swap()
+{
+    SETUP_ARRAYS();
+
+    {
+        strvector v1(s_string, s_string + s_size);
+        strvector v2(b_string, b_string + b_size);
+
+        v1.swap(v2);
+
+        CHECK_AND_PRINT_ALL(v1);
+        CHECK_AND_PRINT_ALL(v2);
+
+        std::swap(v1, v2);
+
+        CHECK_AND_PRINT_ALL(v1);
+        CHECK_AND_PRINT_ALL(v2);
+
+        v1.resize(0);
+
+        v1.swap(v2);
+
+        CHECK_AND_PRINT_ALL(v1);
+        CHECK_AND_PRINT_ALL(v2);
+
+        v1.resize(0);
+
+        std::swap(v1, v2);
+
+        CHECK_AND_PRINT_ALL(v1);
+        CHECK_AND_PRINT_ALL(v2);
+    }
+}
+
 void test_vector()
 {
-// 	 test_vector_assign();
-// 	 test_vector_at();
-// 	 test_vector_back();
-// 	 test_vector_begin();
-// 	 test_vector_capacity();
-// 	 test_vector_clear();
-// 	 test_vector_constructors();
-// 	 test_vector_empty();
-// 	 test_vector_end();
-// 	 test_vector_erase();
-// 	 test_vector_front();
-// 	 test_vector_get_allocator();
-// 	 test_vector_insert();
-// 	 test_vector_max_size();
-// 	 test_vector_operator_bracket();
-// 	 test_vector_operator_equal();
-// 	 test_vector_pop_back();
-// 	 test_vector_push_back();
-// 	 test_vector_rbegin();
-// 	 test_vector_relational_operators();
-// 	 test_vector_rend();
-// 	 test_vector_reserve();
-// 	 test_vector_resize();
-// 	 test_vector_size();
-// 	 test_vector_swap();
-// 	 test_vector_swap_overload();
-	 //test_vector_assign_range();
-	 //test_vector_comparisons_ge();
-	 //vec_test_erase();
-	 //vec_test_erase_mixed();
-	 //vec_test_insert();
-	 //vec_test_insert_size();
-	 //vec_test_resize();
-	 vec_test_riterator();
-	 vec_test_riterator_comparisons();
+   /*   test_vector_assign();*/
+	  /*test_vector_at();*/
+	  /*test_vector_back();*/
+	  /*test_vector_begin();*/
+	  /*test_vector_capacity();*/
+	  /*test_vector_clear();*/
+	  /*test_vector_constructors();*/
+	  /*test_vector_empty();*/
+	  /*test_vector_end();*/
+	  /*test_vector_erase();*/
+	  /*test_vector_front();*/
+	  /*test_vector_get_allocator();*/
+	  //test_vector_insert();
+	  test_vector_max_size();
+   /*   test_vector_operator_bracket();*/
+	 /* test_vector_operator_equal();*/
+	 /* test_vector_pop_back();*/
+	 /* test_vector_push_back();*/
+	 /* test_vector_rbegin();*/
+	 /* test_vector_relational_operators();*/
+	 /* test_vector_rend();*/
+	 /* test_vector_reserve();*/
+	 /* test_vector_resize();*/
+	 /* test_vector_size();*/
+	 /* test_vector_swap();*/
+	 /* test_vector_swap_overload();*/
+	 /*test_vector_assign_range();*/
+	 /*test_vector_comparisons_ge();*/
+	 /*vec_test_erase();*/
+	 /*vec_test_erase_mixed();*/
+	 /*vec_test_insert();*/
+	 /*vec_test_insert_size();*/
+	 /*vec_test_resize();*/
+	 /*vec_test_riterator();*/
+	 /*vec_test_riterator_comparisons();*/
+	 //vec_test_swap();
 }
