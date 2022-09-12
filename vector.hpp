@@ -91,8 +91,9 @@ class vector
 
 	void destroy_data_()
 	{
-		for (size_type i = 0; i < size_; ++i)
-			allocator_.destroy(&data_[i]);
+		if (data_)
+			for (size_type i = 0; i < size_; ++i)
+				allocator_.destroy(&data_[i]);
 	}
 
 	void deallocate_data_()
