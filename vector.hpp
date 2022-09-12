@@ -364,7 +364,7 @@ class vector
 		return data_[size_ - 1];
 	}
 
-	allocator_type& get_allocator() const
+	allocator_type get_allocator() const
 	{
 		return allocator_;
 	}
