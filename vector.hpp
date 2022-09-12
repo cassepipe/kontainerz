@@ -108,7 +108,7 @@ class vector
 			pointer end = &(*this->end());
 			if (elements < end)
 			{
-				for (--end; end != elements; --end)
+				for (--end, --elements; end != elements; --end)
 				{
 					allocator_.construct(end + n, *end); // If vector is empty this will blow up
 					allocator_.destroy(end);
