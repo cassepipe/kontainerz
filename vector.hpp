@@ -253,7 +253,7 @@ class vector
 	size_type max_size() const
 	{
 		//return allocator_.max_size();
-		return std::min(allocator_.max_size(), (long unsigned int)std::numeric_limits<long int>::max())
+		return std::min(allocator_.max_size(), (long unsigned int)std::numeric_limits<long int>::max());
 	}
 
 	// Resize to a specific size
