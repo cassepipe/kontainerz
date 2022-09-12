@@ -568,13 +568,22 @@ class map
 
 			parent = current;
 			if (searched_is_strictly_less) // than current's key
+			{
+				parent = current;
 				current = current->left;
+			}
 			else if (searched_is_strictly_greater) // than current's key
+			{
+				parent = current;
 				current = current->right;
-			else // searched and current kes are equal
+			}
+			else // searched and current keys are equal
 				return iterator(current, nil_);
 		}
-		return ++iterator(parent, nil_);
+		if (searched_is_strictly_less)
+			return iterator(parent, nil_);
+		else
+			return ++iterator(parent, nil_);
 	}
 
 	/* Returns lower bound not less than key */
@@ -596,13 +605,22 @@ class map
 
 			parent = current;
 			if (searched_is_strictly_less) // than current's key
+			{
+				parent = current;
 				current = current->left;
+			}
 			else if (searched_is_strictly_greater) // than current's key
+			{
+				parent = current;
 				current = current->right;
-			else // searched and current kes are equal
-				return iterator(current, nil_);
+			}
+			else // searched and current keys are equal
+				return const_iterator(current, nil_);
 		}
-		return ++iterator(parent, nil_);
+		if (searched_is_strictly_less)
+			return const_iterator(parent, nil_);
+		else
+			return ++const_iterator(parent, nil_);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -624,21 +642,21 @@ class map
 
 			if (searched_is_strictly_less) // than current's key
 			{
-				current          = current->left;
 				best_predecessor = current;
+				current          = current->left;
 			}
 			else if (searched_is_strictly_greater) // than current's key
 			{
-				current          = current->right;
 				best_predecessor = current;
+				current          = current->right;
 			}
 			else
-			{
-				best_predecessor = current;
-				break;
-			}
+				return ++iterator(current, nil_);
 		}
-		return ++iterator(best_predecessor, nil_);
+		if (searched_is_strictly_less)
+			return iterator(best_predecessor, nil_);
+		else
+			return ++iterator(best_predecessor, nil_);
 	}
 
 	/* Returns iterator to the first element greater than key */
@@ -660,21 +678,21 @@ class map
 
 			if (searched_is_strictly_less) // than current's key
 			{
-				current          = current->left;
 				best_predecessor = current;
+				current          = current->left;
 			}
 			else if (searched_is_strictly_greater) // than current's key
 			{
-				current          = current->right;
 				best_predecessor = current;
+				current          = current->right;
 			}
 			else
-			{
-				best_predecessor = current;
-				break;
-			}
+				return ++const_iterator(current, nil_);
 		}
-		return ++iterator(best_predecessor, nil_);
+		if (searched_is_strictly_less)
+			return const_iterator(best_predecessor, nil_);
+		else
+			return ++const_iterator(best_predecessor, nil_);
 	}
 
 	/* OBSERVERS */
