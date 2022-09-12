@@ -1693,13 +1693,13 @@ void vec_test_insert()
 
 		it = v.insert(v.end(), b_string[23]);
 
-		PRINT_LINE("It:", *it);
-		CHECK_AND_PRINT_ALL(v);
+		//PRINT_LINE("It:", *it);
+		//CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin(), b_string[19]);
+		//it = v.insert(v.begin(), b_string[19]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		//PRINT_LINE("It:", *it);
+		//CHECK_AND_PRINT_ALL(v);
 
         //it = v.insert(v.begin() + 1, b_string[0]);
 

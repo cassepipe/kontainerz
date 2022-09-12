@@ -103,22 +103,25 @@ class vector
 
 	void shift_elements_right_by_(T* elements, size_type n)
 	{
-		if (this->empty() == false)
-		{
-			T* end = &*this->end();
-			for (; elements != end; ++elements)
+		if (this->empty() == false && n != 0)
+ 		{
+			pointer end = &(*this->end());
+			if (elements < end)
 			{
-				allocator_.construct(elements + n, *elements); // If vector is empty this will blow up
-				allocator_.destroy(elements);
+				for (--end; end != elements; --end)
+				{
+					allocator_.construct(end + n, *end); // If vector is empty this will blow up
+					allocator_.destroy(end);
+				}
 			}
 		}
 	}
 
 	void shift_elements_left_by_(T* elements, size_type n)
 	{
-		if (this->empty() == false)
+		if (this->empty() == false && n != 0)
 		{
-			T* end = &*this->end();
+			pointer end = &*this->end();
 			for (; elements != end; ++elements)
 			{
 				allocator_.construct(elements - n, *elements); // If vector is empty this will blow up
