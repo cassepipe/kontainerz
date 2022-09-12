@@ -1679,6 +1679,73 @@ void vec_test_erase_mixed()
     }
 }
 
+void vec_test_insert()
+{
+    SETUP_ARRAYS();
+
+    {
+        strvector v;
+
+        strvector::iterator it = v.insert(v.end(), b_string[54]);
+
+        PRINT_LINE("It:", *it);
+        CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.end(), b_string[23]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin(), b_string[19]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin() + 1, b_string[0]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin() + 1, b_string[1]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin() + 2, b_string[2]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin() + 3, b_string[3]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.begin() + 2, b_string[4]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.end(), b_string[5]);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+    }
+
+    {
+        //intvector v;
+
+        //intvector::iterator it = v.insert(v.begin(), 64);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+
+        //it = v.insert(v.end(), 420);
+
+        //PRINT_LINE("It:", *it);
+        //CHECK_AND_PRINT_ALL(v);
+    }
+}
 
 void test_vector()
 {
@@ -1710,6 +1777,7 @@ void test_vector()
 // 	 test_vector_swap_overload();
 	 //test_vector_assign_range();
 	 //test_vector_comparisons_ge();
-	 vec_test_erase();
-	 vec_test_erase_mixed();
+	 //vec_test_erase();
+	 //vec_test_erase_mixed();
+	 vec_test_insert();
 }

@@ -476,30 +476,30 @@ class vector
 
 		T*              pos;
 		difference_type idx      = &*position - data_;
-		size_type       newsize_ = size_ + 1;
+		size_type       new_size = size_ + 1;
 
-		if (newsize_ > capacity_)
-			reserve(newsize_ * 2);
+		if (new_size > capacity_)
+			reserve(new_size * 2);
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, 1);
-		for (; size_ < newsize_; ++size_, ++pos)
+		for (; size_ < new_size; ++size_, ++pos)
 		{
 			allocator_.construct(pos, val);
 		}
-		return iterator(data_ + idx + 1);
+		return iterator(data_ + idx);
 	}
 
 	void insert(iterator position, size_type n, const value_type& val)
 	{
 		T*              pos;
 		difference_type idx      = &*position - data_;
-		size_type       newsize_ = size_ + n;
+		size_type       new_size = size_ + n;
 
-		if (newsize_ > capacity_)
-			reserve(newsize_ * 2);
+		if (new_size > capacity_)
+			reserve(new_size * 2);
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, n);
-		for (; size_ < newsize_; ++size_, ++pos)
+		for (; size_ < new_size; ++size_, ++pos)
 		{
 			allocator_.construct(pos, val);
 		}
