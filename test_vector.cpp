@@ -1698,52 +1698,52 @@ void vec_test_insert()
 
 		it = v.insert(v.begin(), b_string[19]);
 
-		//PRINT_LINE("It:", *it);
-		//CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin() + 1, b_string[0]);
+		it = v.insert(v.begin() + 1, b_string[0]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin() + 1, b_string[1]);
+		it = v.insert(v.begin() + 1, b_string[1]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin() + 2, b_string[2]);
+		it = v.insert(v.begin() + 2, b_string[2]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin() + 3, b_string[3]);
+		it = v.insert(v.begin() + 3, b_string[3]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.begin() + 2, b_string[4]);
+		it = v.insert(v.begin() + 2, b_string[4]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.end(), b_string[5]);
+		it = v.insert(v.end(), b_string[5]);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
     }
 
     {
-        //intvector v;
+		intvector v;
 
-        //intvector::iterator it = v.insert(v.begin(), 64);
+		intvector::iterator it = v.insert(v.begin(), 64);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //it = v.insert(v.end(), 420);
+		it = v.insert(v.end(), 420);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
     }
 }
 
