@@ -883,8 +883,8 @@ void test_vector_max_size()
 	}
 	{
 		// This one will differ, I can explain
-		 vector< vector< vector <int >  > >	my_vec;
-		 cout << "max_size : " << my_vec.max_size() << endl;
+		// vector< vector< vector <int >  > >	my_vec;
+		// cout << "max_size : " << my_vec.max_size() << endl;
 	}
 }
 
@@ -1220,7 +1220,7 @@ void test_vector_swap_overload()
 
 #include "prelude.hpp"
 #include "vector_prelude.hpp"
-  
+
 void test_vector_assign_range()
 {
 	SETUP_ARRAYS()
@@ -1537,120 +1537,128 @@ void test_vector_assign_range()
 
 void test_vector_comparisons_ge()
 {
-    {
-        vector<long> v1;
-        vector<long> v2;
+	{
+		vector< long > v1;
+		vector< long > v2;
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal\n";
-        }
-    };
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal\n";
+		}
+	};
 
-    {
-        vector<long> v1(5, 64);
-        vector<long> v2;
+	{
+		vector< long > v1(5, 64);
+		vector< long > v2;
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal.\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal.\n";
+		}
+	}
 
-    {
-        vector<long> v1;
-        vector<long> v2(5, 32);
+	{
+		vector< long > v1;
+		vector< long > v2(5, 32);
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal..\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal..\n";
+		}
+	}
 
-    {
-        vector<long> v1(5, 64);
-        vector<long> v2(5, 48);
+	{
+		vector< long > v1(5, 64);
+		vector< long > v2(5, 48);
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal...\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal...\n";
+		}
+	}
 
-    {
-        vector<long> v1(5, 64);
-        vector<long> v2(5, 64);
+	{
+		vector< long > v1(5, 64);
+		vector< long > v2(5, 64);
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal....\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal....\n";
+		}
+	}
 
-    {
-        vector<long> v1(5, 64);
-        vector<long> v2(4, 64);
+	{
+		vector< long > v1(5, 64);
+		vector< long > v2(4, 64);
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal.....\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal.....\n";
+		}
+	}
 
-    {
-        vector<long> v1(4);
-        vector<long> v2(5);
+	{
+		vector< long > v1(4);
+		vector< long > v2(5);
 
-        if (v1 >= v2) {
-            cout << "Greater than or equal......\n";
-        }
-    }
+		if (v1 >= v2)
+		{
+			cout << "Greater than or equal......\n";
+		}
+	}
 }
 
 void vec_test_erase()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intvector v(b_int, b_int + b_size - 5);
+	{
+		intvector v(b_int, b_int + b_size - 5);
 
-        intvector::iterator it = v.erase(v.begin() + 26);
+		intvector::iterator it = v.erase(v.begin() + 26);
 
-        PRINT_LINE("It:", *it);
-        CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        it = v.erase(it);
+		it = v.erase(it);
 
-        PRINT_LINE("It:", *it);
-        CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        it = v.erase(v.end() - 1);
+		it = v.erase(v.end() - 1);
 
-        PRINT_LINE("It:", *it);
-        CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        it = v.erase(v.begin());
+		it = v.erase(v.begin());
 
-        PRINT_LINE("It:", *it);
-        CHECK_AND_PRINT_ALL(v);
-    }
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
+	}
 
-    {
-        intvector v(1, 5);
+	{
+		intvector v(1, 5);
 
-        intvector::iterator it = v.erase(v.begin());
+		intvector::iterator it = v.erase(v.begin());
 
-        if (it != v.end()) {
-            PRINT_MSG("Wrong iterator");
-        }
-        CHECK_AND_PRINT_ALL(v);
-    }
+		if (it != v.end())
+		{
+			PRINT_MSG("Wrong iterator");
+		}
+		CHECK_AND_PRINT_ALL(v);
+	}
 }
 
 void vec_test_erase_mixed()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        strvector v(b_string, b_string + b_size);
+	{
+		strvector v(b_string, b_string + b_size);
 
-        v.erase(v.begin(), v.begin());
+		v.erase(v.begin(), v.begin());
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
 		v.erase(v.end(), v.end());
 
@@ -1676,20 +1684,20 @@ void vec_test_erase_mixed()
 		v.erase(v.begin(), v.end());
 
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 }
 
 void vec_test_insert()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        strvector v;
+	{
+		strvector v;
 
-        strvector::iterator it = v.insert(v.end(), b_string[54]);
+		strvector::iterator it = v.insert(v.end(), b_string[54]);
 
-        PRINT_LINE("It:", *it);
-        CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
 		it = v.insert(v.end(), b_string[23]);
 
@@ -1730,9 +1738,9 @@ void vec_test_insert()
 
 		PRINT_LINE("It:", *it);
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 
-    {
+	{
 		intvector v;
 
 		intvector::iterator it = v.insert(v.begin(), 64);
@@ -1744,54 +1752,54 @@ void vec_test_insert()
 
 		PRINT_LINE("It:", *it);
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 }
 
 #include <stdint.h>
 
 void vec_test_insert_size()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intvector v;
+	{
+		intvector v;
 
-        v.insert(v.begin(), 0, 64);
+		v.insert(v.begin(), 0, 64);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.end(), 0, 64);
+		v.insert(v.end(), 0, 64);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.end(), 10, 64);
+		v.insert(v.end(), 10, 64);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.begin(), 5, -1);
+		v.insert(v.begin(), 5, -1);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.begin() + 1, 1, -9);
+		v.insert(v.begin() + 1, 1, -9);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.begin() + 7, 21, 88);
+		v.insert(v.begin() + 7, 21, 88);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.begin(), 0, 2);
+		v.insert(v.begin(), 0, 2);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.insert(v.end(), 0, 4);
+		v.insert(v.end(), 0, 4);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
 		v.insert(v.end(), 18, 420);
 
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 
 	//{
 	//    strvector v(5000, "Test");
@@ -1807,66 +1815,68 @@ void vec_test_insert_size()
 
 void vec_test_resize()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        strvector v;
+	{
+		strvector v;
 
-        v.resize(14, "HelloWorld");
+		v.resize(14, "HelloWorld");
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.resize(6, "ABC");
+		v.resize(6, "ABC");
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.resize(14, b_string[18]);
+		v.resize(14, b_string[18]);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.resize(15, b_string[57]);
+		v.resize(15, b_string[57]);
 
-        CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
 
-        v.resize(64, "I-like-vectors");
+		v.resize(64, "I-like-vectors");
 
-        CHECK_AND_PRINT_ALL(v);
-    }
+		CHECK_AND_PRINT_ALL(v);
+	}
 
-    //{
-    //    NAMESPACE::vector<big_struct, track_allocator<big_struct> > v;
+	//{
+	//    NAMESPACE::vector<big_struct, track_allocator<big_struct> > v;
 
-    //    try {
-    //        v.resize(v.max_size() + 1);
-    //        PRINT_MSG("Bad reserve");
-    //    } catch (std::length_error&) {
-    //        PRINT_MSG("Length exception");
-    //    }
-    //    CATCH_UNHANDLED_EX();
-    //}
+	//    try {
+	//        v.resize(v.max_size() + 1);
+	//        PRINT_MSG("Bad reserve");
+	//    } catch (std::length_error&) {
+	//        PRINT_MSG("Length exception");
+	//    }
+	//    CATCH_UNHANDLED_EX();
+	//}
 }
 
 #include <algorithm>
 
 void vec_test_riterator()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-		intvector v1;
+	{
+		intvector       v1;
 		const intvector v2;
 
-		if (v1.rbegin() != v1.rend()) {
+		if (v1.rbegin() != v1.rend())
+		{
 			PRINT_MSG("Iterator error");
 		}
 
 		intvector::const_reverse_iterator it = v2.rbegin();
-		if (it != v2.rend()) {
+		if (it != v2.rend())
+		{
 			PRINT_MSG("Iterator error");
 		}
-    }
+	}
 
-    {
+	{
 		intvector v(b_int, b_int + b_size);
 
 		intvector::reverse_iterator it1 = v.rbegin();
@@ -1890,12 +1900,12 @@ void vec_test_riterator()
 		*it1 = -1;
 
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 
-    {
+	{
 		strvector v(b_string, b_string + b_size);
 
-		strvector::reverse_iterator it = v.rbegin();
+		strvector::reverse_iterator       it  = v.rbegin();
 		strvector::const_reverse_iterator cit = v.rbegin() + 34;
 
 		PRINT_LINE("It:", *it);
@@ -1952,7 +1962,7 @@ void vec_test_riterator()
 		PRINT_LINE("Cit:", *(cit + 7));
 		PRINT_LINE("Size:", v.rend() - v.rbegin());
 
-		it = v.rbegin() + 25;
+		it  = v.rbegin() + 25;
 		cit = v.rbegin() + 25;
 
 		PRINT_LINE("It:", *it);
@@ -1989,9 +1999,9 @@ void vec_test_riterator()
 		PRINT_LINE("Cit:", *cit);
 		PRINT_LINE("It + 10:", it[10]);
 		PRINT_LINE("Cit + 10:", cit[10]);
-    }
+	}
 
-    {
+	{
 		longvector v(b_long, b_long + b_size);
 
 		long (*fn)(const long&) = &times2;
@@ -2003,234 +2013,273 @@ void vec_test_riterator()
 		std::reverse(v.rbegin(), v.rend());
 
 		CHECK_AND_PRINT_ALL(v);
-    }
+	}
 
-    {
+	{
 		const longvector v(b_long, b_long + b_size);
 
 		void (*fn)(const long&) = &print;
 
 		std::for_each(v.rbegin(), v.rend(), fn);
-    }
+	}
 
-    {
-		intvector v(s_int, s_int + s_size);
-		intvector::reverse_iterator it = v.rbegin();
+	{
+		intvector                         v(s_int, s_int + s_size);
+		intvector::reverse_iterator       it = v.rbegin();
 		intvector::const_reverse_iterator cit(it);
 		(void)cit;
-    }
+	}
 }
 
 void vec_test_riterator_comparisons()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intvector v(b_int, b_int + b_size);
+	{
+		intvector v(b_int, b_int + b_size);
 
-        intvector::reverse_iterator it = v.rbegin();
-        intvector::reverse_iterator it2 = v.rbegin();
-        intvector::const_reverse_iterator cit = v.rbegin();
-        intvector::const_reverse_iterator cit2 = v.rbegin();
+		intvector::reverse_iterator       it   = v.rbegin();
+		intvector::reverse_iterator       it2  = v.rbegin();
+		intvector::const_reverse_iterator cit  = v.rbegin();
+		intvector::const_reverse_iterator cit2 = v.rbegin();
 
-		if (it == v.rbegin()) {
+		if (it == v.rbegin())
+		{
 			PRINT_MSG("Equal iterators")
 		}
-		if (cit == v.rbegin()) {
+		if (cit == v.rbegin())
+		{
 			PRINT_MSG("Equal const iterators")
 		}
-		if (cit == it) {
+		if (cit == it)
+		{
 			PRINT_MSG("Equal const iterators.")
 		}
 
 		++it;
 		cit += 6;
 
-		if (it != v.rend()) {
+		if (it != v.rend())
+		{
 			PRINT_MSG("Not Equal iterators")
 		}
-		if (cit != v.rend()) {
+		if (cit != v.rend())
+		{
 			PRINT_MSG("Not Equal const iterators")
 		}
-		if (cit != it) {
+		if (cit != it)
+		{
 			PRINT_MSG("Not Equal const iterators.")
 		}
 
-		if (it < it + 1) {
+		if (it < it + 1)
+		{
 			PRINT_MSG("Less than")
 		}
-		if (it + 1 < it) {
+		if (it + 1 < it)
+		{
 			PRINT_MSG("Less than.")
 		}
-		if (it < it) {
+		if (it < it)
+		{
 			PRINT_MSG("Less than..")
 		}
-		if (cit < cit + 1) {
+		if (cit < cit + 1)
+		{
 			PRINT_MSG("Less than...")
 		}
-		if (cit + 1 < cit) {
+		if (cit + 1 < cit)
+		{
 			PRINT_MSG("Less than....")
 		}
-		if (cit < cit) {
+		if (cit < cit)
+		{
 			PRINT_MSG("Less than....")
 		}
-		if (it2 < cit2 + 1) {
+		if (it2 < cit2 + 1)
+		{
 			PRINT_MSG("Less than.....")
 		}
-		if (it2 < cit2) {
+		if (it2 < cit2)
+		{
 			PRINT_MSG("Less than......")
 		}
 
-		if (it <= it + 1) {
+		if (it <= it + 1)
+		{
 			PRINT_MSG("Less than or equal")
 		}
-		if (it + 1 <= it) {
+		if (it + 1 <= it)
+		{
 			PRINT_MSG("Less than or equal.")
 		}
-		if (it <= it) {
+		if (it <= it)
+		{
 			PRINT_MSG("Less than or equal..")
 		}
-		if (cit <= cit + 1) {
+		if (cit <= cit + 1)
+		{
 			PRINT_MSG("Less than or equal...")
 		}
-		if (cit + 1 <= cit) {
+		if (cit + 1 <= cit)
+		{
 			PRINT_MSG("Less than or equal....")
 		}
-		if (cit <= cit) {
+		if (cit <= cit)
+		{
 			PRINT_MSG("Less than or equal.....")
 		}
-		if (it2 <= cit2 + 1) {
+		if (it2 <= cit2 + 1)
+		{
 			PRINT_MSG("Less than or equal......")
 		}
-		if (it2 <= cit2) {
+		if (it2 <= cit2)
+		{
 			PRINT_MSG("Less than or equal.......")
 		}
 
-		if (it > it + 1) {
+		if (it > it + 1)
+		{
 			PRINT_MSG("Greater than")
 		}
-		if (it + 1 > it) {
+		if (it + 1 > it)
+		{
 			PRINT_MSG("Greater than.")
 		}
-		if (it > it) {
+		if (it > it)
+		{
 			PRINT_MSG("Greater than..")
 		}
-		if (cit > cit + 1) {
+		if (cit > cit + 1)
+		{
 			PRINT_MSG("Greater than...")
 		}
-		if (cit + 1 > cit) {
+		if (cit + 1 > cit)
+		{
 			PRINT_MSG("Greater than....")
 		}
-		if (cit > cit) {
+		if (cit > cit)
+		{
 			PRINT_MSG("Greater than....")
 		}
-		if (it2 + 1 > cit2) {
+		if (it2 + 1 > cit2)
+		{
 			PRINT_MSG("Greater than.....")
 		}
-		if (it2 > cit2) {
+		if (it2 > cit2)
+		{
 			PRINT_MSG("Greater than......")
 		}
 
-		if (it >= it + 1) {
+		if (it >= it + 1)
+		{
 			PRINT_MSG("Greater than or equal")
 		}
-		if (it + 1 >= it) {
+		if (it + 1 >= it)
+		{
 			PRINT_MSG("Greater than or equal.")
 		}
-		if (it >= it) {
+		if (it >= it)
+		{
 			PRINT_MSG("Greater than or equal..")
 		}
-		if (cit >= cit + 1) {
+		if (cit >= cit + 1)
+		{
 			PRINT_MSG("Greater than or equal...")
 		}
-		if (cit + 1 >= cit) {
+		if (cit + 1 >= cit)
+		{
 			PRINT_MSG("Greater than or equal....")
 		}
-		if (cit >= cit) {
+		if (cit >= cit)
+		{
 			PRINT_MSG("Greater than or equal.....")
 		}
-		if (it2 >= cit2 + 1) {
+		if (it2 >= cit2 + 1)
+		{
 			PRINT_MSG("Greater than or equal......")
 		}
-		if (it2 + 1 >= cit2) {
+		if (it2 + 1 >= cit2)
+		{
 			PRINT_MSG("Greater than or equal.......")
 		}
-		if (it2 >= cit2) {
+		if (it2 >= cit2)
+		{
 			PRINT_MSG("Greater than or equal........")
 		}
-    }
+	}
 }
 
 void vec_test_swap()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        strvector v1(s_string, s_string + s_size);
-        strvector v2(b_string, b_string + b_size);
+	{
+		strvector v1(s_string, s_string + s_size);
+		strvector v2(b_string, b_string + b_size);
 
-        v1.swap(v2);
+		v1.swap(v2);
 
-        CHECK_AND_PRINT_ALL(v1);
-        CHECK_AND_PRINT_ALL(v2);
+		CHECK_AND_PRINT_ALL(v1);
+		CHECK_AND_PRINT_ALL(v2);
 
-        std::swap(v1, v2);
+		std::swap(v1, v2);
 
-        CHECK_AND_PRINT_ALL(v1);
-        CHECK_AND_PRINT_ALL(v2);
+		CHECK_AND_PRINT_ALL(v1);
+		CHECK_AND_PRINT_ALL(v2);
 
-        v1.resize(0);
+		v1.resize(0);
 
-        v1.swap(v2);
+		v1.swap(v2);
 
-        CHECK_AND_PRINT_ALL(v1);
-        CHECK_AND_PRINT_ALL(v2);
+		CHECK_AND_PRINT_ALL(v1);
+		CHECK_AND_PRINT_ALL(v2);
 
-        v1.resize(0);
+		v1.resize(0);
 
-        std::swap(v1, v2);
+		std::swap(v1, v2);
 
-        CHECK_AND_PRINT_ALL(v1);
-        CHECK_AND_PRINT_ALL(v2);
-    }
+		CHECK_AND_PRINT_ALL(v1);
+		CHECK_AND_PRINT_ALL(v2);
+	}
 }
 
 void test_vector()
 {
-   /*   test_vector_assign();*/
-	  /*test_vector_at();*/
-	  /*test_vector_back();*/
-	  /*test_vector_begin();*/
-	  /*test_vector_capacity();*/
-	  /*test_vector_clear();*/
-	  /*test_vector_constructors();*/
-	  /*test_vector_empty();*/
-	  /*test_vector_end();*/
-	  /*test_vector_erase();*/
-	  /*test_vector_front();*/
-	  /*test_vector_get_allocator();*/
-	  //test_vector_insert();
-	  test_vector_max_size();
-   /*   test_vector_operator_bracket();*/
-	 /* test_vector_operator_equal();*/
-	 /* test_vector_pop_back();*/
-	 /* test_vector_push_back();*/
-	 /* test_vector_rbegin();*/
-	 /* test_vector_relational_operators();*/
-	 /* test_vector_rend();*/
-	 /* test_vector_reserve();*/
-	 /* test_vector_resize();*/
-	 /* test_vector_size();*/
-	 /* test_vector_swap();*/
-	 /* test_vector_swap_overload();*/
-	 /*test_vector_assign_range();*/
-	 /*test_vector_comparisons_ge();*/
-	 /*vec_test_erase();*/
-	 /*vec_test_erase_mixed();*/
-	 /*vec_test_insert();*/
-	 /*vec_test_insert_size();*/
-	 /*vec_test_resize();*/
-	 /*vec_test_riterator();*/
-	 /*vec_test_riterator_comparisons();*/
-	 //vec_test_swap();
+	test_vector_assign();
+	test_vector_at();
+	test_vector_back();
+	test_vector_begin();
+	test_vector_capacity();
+	test_vector_clear();
+	test_vector_constructors();
+	test_vector_empty();
+	test_vector_end();
+	test_vector_erase();
+	test_vector_front();
+	test_vector_get_allocator();
+	test_vector_insert();
+	test_vector_max_size();
+	test_vector_operator_bracket();
+	test_vector_operator_equal();
+	test_vector_pop_back();
+	test_vector_push_back();
+	test_vector_rbegin();
+	test_vector_relational_operators();
+	test_vector_rend();
+	test_vector_reserve();
+	test_vector_resize();
+	test_vector_size();
+	test_vector_swap();
+	test_vector_swap_overload();
+	test_vector_assign_range();
+	test_vector_comparisons_ge();
+	vec_test_erase();
+	vec_test_erase_mixed();
+	vec_test_insert();
+	vec_test_insert_size();
+	vec_test_resize();
+	vec_test_riterator();
+	vec_test_riterator_comparisons();
+	vec_test_swap();
 }

@@ -25,11 +25,11 @@ template < typename Pair, typename Alloc >
 class map_iterator
 {
   public:
-	typedef Pair                           value_type;
-	typedef value_type&                    reference;
-	typedef value_type*                    pointer;
+	typedef Pair                            value_type;
+	typedef value_type&                     reference;
+	typedef value_type*                     pointer;
 	typedef std::bidirectional_iterator_tag iterator_category;
-	typedef std::ptrdiff_t                 difference_type;
+	typedef std::ptrdiff_t                  difference_type;
 
   protected:
 	typedef map_node< Pair, Alloc > node_t;
@@ -180,11 +180,11 @@ template < typename Pair, typename Alloc >
 class map_const_iterator
 {
   public:
-	typedef Pair const                     value_type;
-	typedef value_type&                    reference;
-	typedef value_type*                    pointer;
+	typedef Pair const                      value_type;
+	typedef value_type&                     reference;
+	typedef value_type*                     pointer;
 	typedef std::bidirectional_iterator_tag iterator_category;
-	typedef std::ptrdiff_t                 difference_type;
+	typedef std::ptrdiff_t                  difference_type;
 
   protected:
 	typedef map_node< Pair, Alloc > node_t;

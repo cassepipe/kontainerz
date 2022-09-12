@@ -13,20 +13,20 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include "algorithm.hpp"
 #include "distance.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
 #include "iterator_traits.hpp"
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
-#include "algorithm.hpp"
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
 #include <iterator>
+#include <limits>
 #include <memory>
 #include <sstream>
-#include <limits>
 
 namespace ft
 {
@@ -106,7 +106,7 @@ class vector
 	void shift_elements_right_by_(T* elements, size_type n)
 	{
 		if (this->empty() == false && n != 0)
- 		{
+		{
 			pointer end = &(*this->end());
 			if (elements < end)
 			{
@@ -252,8 +252,8 @@ class vector
 
 	size_type max_size() const
 	{
-		//return allocator_.max_size();
-		return std::min(allocator_.max_size(), (long unsigned int)std::numeric_limits<long int>::max());
+		// return allocator_.max_size();
+		return std::min(allocator_.max_size(), (long unsigned int)std::numeric_limits< long int >::max());
 	}
 
 	// Resize to a specific size
@@ -378,8 +378,7 @@ class vector
 	/* Modifiers */
 
   protected:
-
-	void reserve_(pointer & old_data, size_type new_capacity, size_type & old_capacity)
+	void reserve_(pointer& old_data, size_type new_capacity, size_type& old_capacity)
 	{
 		if (new_capacity > allocator_.max_size())
 			throw std::length_error("vector::reserve");
@@ -388,23 +387,24 @@ class vector
 			pointer new_data = allocator_.allocate(new_capacity);
 			if (old_data)
 			{
-				for (size_type i = 0; i < old_capacity; ++i) // Since we're calling because old buffer is full then old_capacity == old_data
+				for (size_type i = 0; i < old_capacity;
+				     ++i) // Since we're calling because old buffer is full then old_capacity == old_data
 				{
 					allocator_.construct(&new_data[i], old_data[i]);
 					allocator_.destroy(&old_data[i]);
 				}
 				allocator_.deallocate(old_data, old_capacity);
 			}
-			old_data = new_data;
+			old_data     = new_data;
 			old_capacity = new_capacity;
 		}
 	}
-	
+
 	template < class InputIterator >
 	void assign(InputIterator first, InputIterator last, std::input_iterator_tag)
 	{
-		pointer tmp = NULL;
-		size_type new_size = 0;
+		pointer   tmp          = NULL;
+		size_type new_size     = 0;
 		size_type new_capacity = 0;
 		for (; first != last; ++first)
 		{
@@ -417,32 +417,33 @@ class vector
 		destroy_data_();
 		deallocate_data_();
 
-		size_ = new_size;
+		size_     = new_size;
 		capacity_ = new_capacity;
-		data_ = tmp;
+		data_     = tmp;
 	}
 
 	template < class RandomAccessIterator >
 	void assign(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
-		size_type new_size  = ft::distance(first, last);
+		size_type new_size = ft::distance(first, last);
 		if (new_size > allocator_.max_size())
 			throw std::length_error("vector::assign");
-		pointer tmp         = allocator_.allocate(new_size);
+		pointer tmp = allocator_.allocate(new_size);
 
 		for (size_type i = 0; i < new_size; ++i)
 			allocator_.construct(&tmp[i], first[i]);
 
 		destroy_data_();
 		deallocate_data_();
-		size_ = new_size;
+		size_     = new_size;
 		capacity_ = size_;
-		data_ = tmp;
+		data_     = tmp;
 	}
 
   public:
 	template < class InputIterator >
-	void assign(InputIterator first, InputIterator last, typename enable_if< !is_integral< InputIterator >::value, int >::type =
+	void assign(InputIterator first, InputIterator last,
+	            typename enable_if< !is_integral< InputIterator >::value, int >::type =
 	                0) // Unnamed default parameter, weird, I know
 	{
 		assign(first, last, typename ft::iterator_traits< InputIterator >::iterator_category());
@@ -520,7 +521,8 @@ class vector
 	}
 
 	template < typename RandomAccessIterator >
-	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
+	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last,
+	            std::random_access_iterator_tag)
 	{
 		T*              pos;
 		difference_type n        = ft::distance(first, last);
@@ -562,7 +564,7 @@ class vector
 		size_type distance = ft::distance(first, last);
 
 		iterator it = first;
-		for (; it != last ; ++it)
+		for (; it != last; ++it)
 			allocator_.destroy(&(*it));
 		shift_elements_left_by_(&(*it), distance); // Depends on size_
 		size_ -= distance;
@@ -586,12 +588,13 @@ class vector
 	}
 };
 
-template< class T, class Allocator >
-bool	operator==( vector< T, Allocator >const & lhs, vector< T, Allocator > const & rhs ) {
+template < class T, class Allocator >
+bool operator==(vector< T, Allocator > const& lhs, vector< T, Allocator > const& rhs)
+{
 
-	if ( lhs.size() != rhs.size() )
+	if (lhs.size() != rhs.size())
 		return false;
-	return ft::equal( lhs.begin(), lhs.end(), rhs.begin() );
+	return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 
 template < class T, class Alloc >
@@ -600,10 +603,11 @@ bool operator!=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 	return !(lhs == rhs);
 }
 
-template< class T, class Allocator >
-bool	operator<( vector< T, Allocator >const & lhs, vector< T, Allocator > const & rhs ) {
+template < class T, class Allocator >
+bool operator<(vector< T, Allocator > const& lhs, vector< T, Allocator > const& rhs)
+{
 
-	return	ft::lexicographical_compare( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template < class T, class Alloc >
@@ -626,5 +630,17 @@ bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 }
 
 } // namespace ft
+
+namespace std
+{
+
+template < class T, class Alloc >
+void swap(ft::vector< T, Alloc >& x, ft::vector< T, Alloc >& y)
+{
+	x.swap(y);
+	return;
+}
+
+} // namespace std
 
 #endif /* VECTOR_HPP */

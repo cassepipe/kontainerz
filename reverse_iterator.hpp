@@ -99,7 +99,7 @@ class reverse_iterator
 
 	reference operator[](difference_type i) const
 	{
-		return *(*this + i); //Returns a reverse iterator that we then dereference
+		return *(*this + i); // Returns a reverse iterator that we then dereference
 	}
 
 	// INCREMENT OPERATORS
@@ -160,7 +160,6 @@ class reverse_iterator
 		current_ += i;
 		return *this;
 	}
-
 };
 
 /// NON-MEMBER RELATIONAL OPERATORS
@@ -197,7 +196,7 @@ bool operator<=(const reverse_iterator< LeftIterator >& lhs, const reverse_itera
 	return !(rhs < lhs);
 }
 
-template < typename LeftIterator , typename RightIterator>
+template < typename LeftIterator, typename RightIterator >
 bool operator>=(const reverse_iterator< LeftIterator >& lhs, const reverse_iterator< RightIterator >& rhs)
 {
 	return !(lhs < rhs);
@@ -207,10 +206,10 @@ bool operator>=(const reverse_iterator< LeftIterator >& lhs, const reverse_itera
 
 // To get the distance between to reverse iterators
 template < class Iterator >
-	typename reverse_iterator< Iterator >::difference_type
-		operator-(const reverse_iterator< Iterator > & lhs, const reverse_iterator< Iterator >& rhs) 
+typename reverse_iterator< Iterator >::difference_type operator-(const reverse_iterator< Iterator >& lhs,
+                                                                 const reverse_iterator< Iterator >& rhs)
 {
-	return  rhs.base() - lhs.base();
+	return rhs.base() - lhs.base();
 }
 
 // To support expression such as ( -n - iterator ) and have it  return an iterator
@@ -227,7 +226,6 @@ reverse_iterator< Iterator > operator-(typename reverse_iterator< Iterator >::di
 {
 	return reverse_iterator< Iterator >(rev_it.base() + n);
 }
-
 
 } // namespace ft
 
