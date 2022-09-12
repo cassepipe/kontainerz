@@ -99,7 +99,7 @@ class reverse_iterator
 
 	reference operator[](difference_type i) const
 	{
-		return (*this + i);
+		return *(*this + i); //Returns a reverse iterator that we then dereference
 	}
 
 	// INCREMENT OPERATORS
