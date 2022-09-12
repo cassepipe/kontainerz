@@ -401,6 +401,7 @@ class map
 	void clear()
 	{
 		root_ = clear_(root_);
+		root_->parent = nil_;
 	}
 
 	// Insert Key Value pair

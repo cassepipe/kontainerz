@@ -677,31 +677,132 @@ void map_test_at()
     }
 }
 
+void map_test_assignment()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m1;
+        intmap m2;
+
+        m1 = m2;
+
+        PRINT_ALL(m1);
+
+        m2 = intmap(intstr_arr, intstr_arr + intstr_size);
+
+        PRINT_ALL(m2);
+
+        m1 = m2;
+
+        PRINT_ALL(m1);
+
+        m1 = intmap(intstr_arr, intstr_arr + 10);
+
+        PRINT_ALL(m1);
+
+        m2 = m1;
+
+        PRINT_ALL(m2);
+    }
+
+    {
+        strmap m1;
+        strmap m2;
+
+        m1 = m2;
+
+        PRINT_ALL(m1);
+
+        m2 = strmap(strstr_arr, strstr_arr + strstr_size);
+
+        PRINT_ALL(m2);
+
+        m1 = m2;
+
+        PRINT_ALL(m1);
+
+        m1 = strmap(strstr_arr, strstr_arr + 10);
+
+        PRINT_ALL(m1);
+
+        m2 = m1;
+
+        PRINT_ALL(m2);
+    }
+}
+
+void map_test_clear()
+{
+    SETUP_ARRAYS();
+
+    {
+        strmap m;
+
+        //PRINT_ALL(m);
+
+        //m.clear();
+
+#ifdef DEBUG
+		m.print_dot(1);
+#endif
+
+		//PRINT_ALL(m);
+
+
+        m.insert(strstr_arr, strstr_arr + 16);
+		
+#ifdef DEBUG
+		m.print_dot(1);
+#endif
+
+		//PRINT_ALL(m);
+
+        m.clear();
+
+#ifdef DEBUG
+		m.print_dot(1);
+#endif
+
+	{                                 
+		PRINT_LINE("Size:", m.size()); 
+	}
+	{                                      
+		std::cout << "\nMap content:\n";   
+		print_map(m.begin(), m.end()); 
+		std::cout << std::endl;            
+	}
+
+    }
+}
+
 void test_map()
 {
-	visual_test();
-	test_map_begin();
-	test_map_clear();
-	test_map_constructor();
-	test_map_count();
-	test_map_empty();
-	test_map_end();
-	test_map_equal_range();
-	test_map_erase();
-	test_map_find();
-	test_map_get_allocator();
-	test_map_insert();
-	test_map_key_comp();
-	test_map_lower_bound();
-	test_map_operator_bracket();
-	test_map_operator_equal();
-	test_map_rbegin();
-	test_map_relational_operators();
-	test_map_rend();
-	test_map_size();
-	test_map_swap();
-	test_map_swap_overload();
-	test_map_upper_bound();
-	test_map_value_comp();
-	 map_test_at();
+	//visual_test();
+	//test_map_begin();
+	//test_map_clear();
+	//test_map_constructor();
+	//test_map_count();
+	//test_map_empty();
+	//test_map_end();
+	//test_map_equal_range();
+	//test_map_erase();
+	//test_map_find();
+	//test_map_get_allocator();
+	//test_map_insert();
+	//test_map_key_comp();
+	//test_map_lower_bound();
+	//test_map_operator_bracket();
+	//test_map_operator_equal();
+	//test_map_rbegin();
+	//test_map_relational_operators();
+	//test_map_rend();
+	//test_map_size();
+	//test_map_swap();
+	//test_map_swap_overload();
+	//test_map_upper_bound();
+	//test_map_value_comp();
+	 //map_test_at();
+	 //map_test_assignment();
+	 map_test_clear();
 }
