@@ -571,7 +571,8 @@ class vector
 		return (first);
 	}
 
-	void swap(vector& x)
+	template <typename A>
+	void swap(vector<T, A>& x)
 	{
 		vector< T > tmp = *this;
 		*this           = x;
