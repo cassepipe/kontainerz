@@ -557,7 +557,7 @@ class vector
 
 		iterator it = first;
 		for (; it != last ; ++it)
-			allocator_.destroy(&(*first));
+			allocator_.destroy(&(*it));
 		shift_elements_left_by_(&(*it), distance); // Depends on size_
 		size_ -= distance;
 		return (first);
