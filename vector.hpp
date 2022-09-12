@@ -589,7 +589,7 @@ class vector
 	}
 };
 
-template < class T, class Allocator >
+template < typename T, typename Allocator >
 bool operator==(vector< T, Allocator > const& lhs, vector< T, Allocator > const& rhs)
 {
 
@@ -598,36 +598,42 @@ bool operator==(vector< T, Allocator > const& lhs, vector< T, Allocator > const&
 	return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 
-template < class T, class Alloc >
+template < typename T, typename Alloc >
 bool operator!=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs == rhs);
 }
 
-template < class T, class Allocator >
+template < typename T, typename Allocator >
 bool operator<(vector< T, Allocator > const& lhs, vector< T, Allocator > const& rhs)
 {
 
 	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
-template < class T, class Alloc >
+template < typename T, typename Alloc >
 bool operator>=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs < rhs);
 }
 
-template < class T, class Alloc >
+template < typename T, typename Alloc >
 bool operator>(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	// We just swap the order of ther args to use operator<
 	return rhs < lhs;
 }
 
-template < class T, class Alloc >
+template < typename T, typename Alloc >
 bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs > rhs);
+}
+
+template <typename T, typename Alloc>
+inline void swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+{
+    lhs.swap(rhs);
 }
 
 } // namespace ft
@@ -635,10 +641,10 @@ bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 namespace std
 {
 
-template < class T, class Alloc >
-void swap(ft::vector< T, Alloc >& x, ft::vector< T, Alloc >& y)
+template < typename T, typename Alloc >
+void swap(ft::vector< T, Alloc >& lhs, ft::vector< T, Alloc >& rhs)
 {
-	x.swap(y);
+	lhs.swap(rhs);
 	return;
 }
 
