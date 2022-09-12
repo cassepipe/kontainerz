@@ -48,20 +48,21 @@ class reverse_iterator
 	/*defautl ctor*/ reverse_iterator() : current_() // Calling Iterator()
 	{
 		/**
-		 *  The default constructor value-initializes member @p current.
+		 *  The default constructor value-initializes member current.
 		 *  If it is a pointer, that means it is zero-initialized.
 		 */
 
 		// 235 No specification of default ctor for reverse_iterator
 		// 1012. reverse_iterator default ctor should value initialize
-
-		// What if Iterator is not a pointer but a class, what does it mean to set a class to 0/NULL ?
-		// Does it call the class' copy constructor ?
 	}
 
 	explicit /*value ctor*/ reverse_iterator(iterator_type it) : current_(it)
 	{
-		// It has to be explicit, we can't derive a reverse iterator from a pointer with this class
+		// It has to be explicit, we can't derive a reverse iterator from a pointer here
+	}
+
+	explicit reverse_iterator(const reverse_iterator& rev_it) : current_(rev_it.current_)
+	{
 	}
 
 	template < class OtherIter >
@@ -159,6 +160,7 @@ class reverse_iterator
 		current_ += i;
 		return *this;
 	}
+
 };
 
 /// NON-MEMBER RELATIONAL OPERATORS
@@ -216,6 +218,14 @@ reverse_iterator< Iterator > operator-(typename reverse_iterator< Iterator >::di
                                        const reverse_iterator< Iterator >&                    rev_it)
 {
 	return reverse_iterator< Iterator >(rev_it.base() + n);
+}
+
+// To get the distance between to iterators
+template < class Iterator >
+	typename reverse_iterator< Iterator >::difference_type
+		operator-(const reverse_iterator< Iterator > & lhs, const reverse_iterator< Iterator >& rhs) 
+{
+	return  rhs.base() - lhs.base();
 }
 
 } // namespace ft
