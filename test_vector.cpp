@@ -1668,14 +1668,14 @@ void vec_test_erase_mixed()
 
 		CHECK_AND_PRINT_ALL(v);
 
-        //strvector::iterator it = v.erase(v.begin() + 9);
+		strvector::iterator it = v.erase(v.begin() + 9);
 
-        //PRINT_LINE("It:", *it);
-        //CHECK_AND_PRINT_ALL(v);
+		PRINT_LINE("It:", *it);
+		CHECK_AND_PRINT_ALL(v);
 
-        //v.erase(v.begin(), v.end());
+		v.erase(v.begin(), v.end());
 
-        //CHECK_AND_PRINT_ALL(v);
+		CHECK_AND_PRINT_ALL(v);
     }
 }
 
