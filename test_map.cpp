@@ -1392,29 +1392,29 @@ void map_test_equal_range()
     SETUP_ARRAYS();
 
     {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        m.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
-        m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        m.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+		m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
+		m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
+		m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
+		m.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
+		m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
+		m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
+		m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
+		m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
+		m.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
 #ifdef DEBUG
 		m.print_dot(1);
 #endif
 
-        NAMESPACE::pair<intmap::iterator, intmap::iterator> eq = m.equal_range(98583944);
+		NAMESPACE::pair<intmap::iterator, intmap::iterator> eq = m.equal_range(98583944);
 
-        PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
 		eq = m.equal_range(209485948);
 
@@ -1464,80 +1464,311 @@ void map_test_equal_range()
     }
 
     {
-        //intmap temp(intstr_arr, intstr_arr + intstr_size);
+		intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        //temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        //temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        //temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        //temp.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
-        //temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        //temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        //temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        //temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        //temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        //temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        //temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        //temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        //temp.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+		temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
+		temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
+		temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
+		temp.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
+		temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
+		temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
+		temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
+		temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
+		temp.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
-        //const intmap m(temp);
+		const intmap m(temp);
 
-        //NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
-        //    m.equal_range(98583944);
+		NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
+			m.equal_range(98583944);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(209485948);
+		eq = m.equal_range(209485948);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(19458942);
+		eq = m.equal_range(19458942);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(19458941);
+		eq = m.equal_range(19458941);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(19458943);
+		eq = m.equal_range(19458943);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(-1);
+		eq = m.equal_range(-1);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(3);
+		eq = m.equal_range(3);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(4);
+		eq = m.equal_range(4);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(5);
+		eq = m.equal_range(5);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(0);
+		eq = m.equal_range(0);
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
 
-        //eq = m.equal_range(std::numeric_limits<int>::max());
+		eq = m.equal_range(std::numeric_limits<int>::max());
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
     }
 
     {
-        //const intmap m;
+		const intmap m;
 
-        //NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
-        //    m.equal_range(std::numeric_limits<int>::max());
+		NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
+			m.equal_range(std::numeric_limits<int>::max());
 
-        //PRINT_EQ_RANGE(eq, m.end());
+		PRINT_EQ_RANGE(eq, m.end());
     }
 }
 
+
+void map_test_erase()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m(intstr_arr, intstr_arr + 25);
+
+        intmap::iterator it = m.begin();
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        it = m.begin();
+
+        std::advance(it, 21);
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        it = m.end();
+
+        std::advance(it, -10);
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        it = m.end();
+
+        std::advance(it, -3);
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        it = m.end();
+
+        std::advance(it, -1);
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        it = m.begin();
+
+        std::advance(it, 1);
+
+        m.erase(it);
+
+        PRINT_ALL(m);
+
+        for (it = m.begin(); it != m.end(); it = m.begin()) {
+            m.erase(it);
+            PRINT_ALL(m);
+        }
+    }
+}
+
+void map_test_erase_key()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m;
+
+        intmap::size_type size = m.erase(64);
+
+        PRINT_LINE("Erased?:", size);
+    }
+
+    {
+        intmap m(intstr_arr, intstr_arr + 16);
+
+        intmap::size_type size = m.erase(64);
+
+        PRINT_LINE("Erased?:", size);
+
+        m.erase(m.begin(), m.end());
+
+        m.insert(NAMESPACE::make_pair(23, "23n"));
+        m.insert(NAMESPACE::make_pair(25, "asdasdfsdfsafdsf"));
+        m.insert(NAMESPACE::make_pair(1, "asdssdfdfdffffff"));
+        m.insert(NAMESPACE::make_pair(2, "dsfdffffdfdfdsdfdffa"));
+        m.insert(NAMESPACE::make_pair(3, "sssdfs"));
+        m.insert(NAMESPACE::make_pair(75, "dfse"));
+        m.insert(NAMESPACE::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+        m.insert(NAMESPACE::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+        m.insert(NAMESPACE::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+        m.insert(NAMESPACE::make_pair(0, "98y4rtuohwidsjusdossefsse"));
+
+        size = m.erase(64);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(0);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(75);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(1);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(2);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(3);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(23);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(23);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(30);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(-22);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(-23);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(-23);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(25);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(-23);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase(25);
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+    }
+
+    {
+        strmap m;
+
+        strmap::size_type size = m.erase("");
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        m.insert(NAMESPACE::make_pair("", ""));
+        m.insert(NAMESPACE::make_pair("123", "kjhgfdsdffghsfghdfgh"));
+        m.insert(NAMESPACE::make_pair("1234", "gfdsadgg"));
+        m.insert(NAMESPACE::make_pair("123456789123456789123456789", "49857459898674568464"));
+        m.insert(NAMESPACE::make_pair("0", "2345456456456456"));
+        m.insert(NAMESPACE::make_pair("", ""));
+        m.insert(NAMESPACE::make_pair("", "9459845984598498"));
+        m.insert(NAMESPACE::make_pair("000000000000000000000000", "1111111111111111111111111111"));
+
+        size = m.erase("1");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("123");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("123");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("1234");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("123456789123456789123456789");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("000000000000000000000000");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("0");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+
+        size = m.erase("000000000000000000000000");
+
+        PRINT_LINE("Erased?:", size);
+        PRINT_ALL(m);
+    }
+}
 
 void test_map()
 {
@@ -1580,5 +1811,7 @@ void test_map()
  //map_test_ctor_copy();
  //map_test_ctor_range();
  //map_test_empty();
- map_test_equal_range();
+ //map_test_equal_range();
+ map_test_erase();
+ map_test_erase_key();
 }

@@ -5,8 +5,8 @@ MAKEFLAGS += --no-builtin-rules
 
 DIFF			= meld
 DIFF			= diff -s
-CXX				= clang++-14 -gdwarf-4
 CXX				= g++-12
+CXX				= clang++-14 -gdwarf-4
 SHELL			= zsh
 SHELL			= bash
 FT				= ft_containers_test
@@ -26,7 +26,7 @@ CXXFLAGS		= -Wall -Wextra -std=c++98 -g3 -pedantic-errors
 LDFLAGS			=
 LDLIBS			=
 #Our beloved address sanitizer
-ASAN_FLAG		=  -fsanitize=address,undefined
+ASAN_FLAG		=  -fsanitize=address
 CXXFLAGS		+=	$(ASAN_FLAG)
 LDFLAGS			+=	$(ASAN_FLAG)
 

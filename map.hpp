@@ -431,7 +431,8 @@ class map
 		return insert(new_val).first;
 	}
 
-	size_type erase(Key const& k)
+	template <typename K>
+	size_type erase(K const& k)
 	{
 		size_type size_before = size_;
 		root_                 = remove_rec_(k, root_, 0);
