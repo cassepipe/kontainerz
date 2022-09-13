@@ -911,6 +911,13 @@ bool operator<=(map< Key, T, Compare, Allocator > const& x, map< Key, T, Compare
 	return !(y < x);
 }
 
+template < class Key, class T, class Compare, class Allocator >
+void swap(ft::map< Key, T, Compare, Allocator >& x, ft::map< Key, T, Compare, Allocator >& y)
+{
+	x.swap(y);
+	return;
+}
+
 } // namespace ft
 
 // specialized algorithms

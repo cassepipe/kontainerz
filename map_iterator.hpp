@@ -211,7 +211,7 @@ class map_const_iterator
 	}
 
   public:
-	/* Default constructor */ map_const_iterator() : current_(nil_)
+	/* Default constructor */ map_const_iterator() : current_(NULL), nil_(NULL)
 	{
 	}
 
