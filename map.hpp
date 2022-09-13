@@ -283,7 +283,7 @@ class map
 					if (child_status == LEFT)
 						successor->parent->left = successor;
 					if (child_status == RIGHT)
-						successor->parent->left = successor;
+						successor->parent->right = successor;
 					if (child_status == ROOT)
 						successor->parent = successor;
 					node->parent->left = node;
@@ -486,6 +486,9 @@ class map
 			// Need to increment first else erase would invalidate our operator
 			++first;
 			this->erase(key_to_delete);
+#ifdef DEBUG
+			print_dot(1);
+#endif
 		}
 	}
 

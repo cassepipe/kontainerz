@@ -78,7 +78,8 @@ void init_array_int_str(NAMESPACE::pair< int, std::string >* arr, std::size_t si
 
 	for (std::size_t i = 0; i < size; ++i)
 	{
-		arr[i] = NAMESPACE::make_pair(rand(), x[i]);
+		//arr[i] = NAMESPACE::make_pair(rand(), x[i]);
+		arr[i] = NAMESPACE::make_pair(i, x[i]);
 	}
 }
 
@@ -93,7 +94,8 @@ void init_array_str_str(NAMESPACE::pair< std::string, std::string >* arr, std::s
 	    "Tf9dsqBADfMeWVQGG3Zk", "dS2LouElpUXsXNCClr4B", "tsvf3JaWNg5JlSDZs1Dm", "oWurB8fBAIBQq1ZnlFiR",
 	    "8YllXP80XunEXhqnjkZc", "Spt36tVcEkIFjwogWli0", "c25H1u6DF9RVdagn81DA", "AjWfT7TlXgzSKOywpoTH",
 	    "ZwTg8WNnmXOJKdW6ZeJv", "E9aYpoCXd1kbSWhdLOnf", "QN1iAuoSNQ5WvHeSeSSL", "7g5wfNllowIaqMUVjywr",
-	    "b38gJrosdk9xEQ2K8Gbu", "KdVdRVLHJg9Bazc4cpM7", "COJeGmQEzjXwqKCAnd6J", "2k6XCpXEkP7QoST6uYoy"};
+	    "b38gJrosdk9xEQ2K8Gbu", "KdVdRVLHJg9Bazc4cpM7", "COJeGmQEzjXwqKCAnd6J", "2k6XCpXEkP7QoST6uYoy"
+	};
 
 	std::string y[32] = {
 	    "TZ3QuE3ZNUbFrEpQhgcY", "BX2lyPzOWRIznb34T5OT", "v7lPrSeDokdBIUXR9QGh", "nAQxkuEYL5k1Er7FspKu",
@@ -103,7 +105,8 @@ void init_array_str_str(NAMESPACE::pair< std::string, std::string >* arr, std::s
 	    "gGd4FiUEJwgvhOCSHu9g", "9K0ZhqlbyDCJXYXHoEIN", "VTmk8m7rbEGl8ntGpTCQ", "eRJ98PUF2tSMX6zpDOi4",
 	    "wFMJIDAbjYnJkxMxkAtL", "JCOXV4iPcIt72DcNnbuY", "LsnOUrHHD2FNFH5DMvbc", "YVPp2jPqK3jmif7yY14r",
 	    "JBMhRRtLY3QX3x1ZVDCs", "Uwo5PD2RLMx5ByW9Rscq", "O4Q6DPBJHOelMtBKc9GQ", "Bq0H2eqnuCYqyj9F5Lkn",
-	    "P2fJf0TYN92iUXkwELjG", "f656ltXlumpc7YyPVjan", "YQfr76LAA1xKokfq8HpL", "6utvLeZ9t0IM4OkdfAQ2"};
+	    "P2fJf0TYN92iUXkwELjG", "f656ltXlumpc7YyPVjan", "YQfr76LAA1xKokfq8HpL", "6utvLeZ9t0IM4OkdfAQ2"
+	};
 
 	for (std::size_t i = 0; i < size; ++i)
 	{

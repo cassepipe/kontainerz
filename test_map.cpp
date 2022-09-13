@@ -1777,48 +1777,135 @@ void map_test_erase_key()
     }
 }
 
+void map_test_erase_range()
+{
+    SETUP_ARRAYS();
+
+    {
+		strmap m;
+
+		m.erase(m.begin(), m.end());
+
+		PRINT_ALL(m);
+
+		m.insert(strstr_arr, strstr_arr + strstr_size);
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		m.erase(m.begin(), m.end());
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		PRINT_ALL(m);
+    }
+
+    {
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+
+		intmap::iterator it(m.begin());
+		intmap::iterator end(it);
+
+		std::advance(end, 1);
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		m.erase(it, end);
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		PRINT_ALL(m);
+
+		it = m.begin();
+		end = it;
+		std::advance(it, 24);
+		std::advance(end, 30);
+
+		m.erase(it, end);
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		PRINT_ALL(m);
+
+		it = m.begin();
+		end = it;
+		std::advance(it, 34);
+		std::advance(end, 55);
+
+		m.erase(it, end);
+
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
+		PRINT_ALL(m);
+
+		it = m.begin();
+		end = it;
+		std::advance(end, 1);
+
+		m.erase(it, end);
+
+		PRINT_ALL(m);
+
+		m.erase(m.begin(), m.end());
+
+		PRINT_ALL(m);
+    }
+}
+
 void test_map()
 {
 	visual_test();
-	//test_map_begin();
-	//test_map_clear();
-	//test_map_constructor();
-	//test_map_count();
-	//test_map_empty();
-	//test_map_end();
-	//test_map_equal_range();
-	//test_map_erase();
-	//test_map_find();
-	//test_map_get_allocator();
-	//test_map_insert();
-	//test_map_key_comp();
-	//test_map_lower_bound();
-	//test_map_operator_bracket();
-	//test_map_operator_equal();
-	//test_map_rbegin();
-	//test_map_relational_operators();
-	//test_map_rend();
-	//test_map_size();
-	//test_map_swap();
-	//test_map_swap_overload();
-	//test_map_upper_bound();
-	//test_map_value_comp();
-	 //map_test_at();
-	 //map_test_assignment();
-	 //map_test_clear();
- //    map_test_compare();
- //    map_test_comparisons_eq();
- //    map_test_comparisons_ge();
- //map_test_comparisons_gt();
- //map_test_comparisons_le();
- //map_test_comparisons_lt();
- //map_test_comparisons_ne();
- //map_test_count();
- //map_test_ctor();
- //map_test_ctor_copy();
- //map_test_ctor_range();
- //map_test_empty();
- //map_test_equal_range();
+	test_map_begin();
+	test_map_clear();
+	test_map_constructor();
+	test_map_count();
+	test_map_empty();
+	test_map_end();
+	test_map_equal_range();
+	test_map_erase();
+	test_map_find();
+	test_map_get_allocator();
+	test_map_insert();
+	test_map_key_comp();
+	test_map_lower_bound();
+	test_map_operator_bracket();
+	test_map_operator_equal();
+	test_map_rbegin();
+	test_map_relational_operators();
+	test_map_rend();
+	test_map_size();
+	test_map_swap();
+	test_map_swap_overload();
+	test_map_upper_bound();
+	test_map_value_comp();
+	 map_test_at();
+	 map_test_assignment();
+	 map_test_clear();
+	 map_test_compare();
+	 map_test_comparisons_eq();
+	 map_test_comparisons_ge();
+ map_test_comparisons_gt();
+ map_test_comparisons_le();
+ map_test_comparisons_lt();
+ map_test_comparisons_ne();
+ map_test_count();
+ map_test_ctor();
+ map_test_ctor_copy();
+ map_test_ctor_range();
+ map_test_empty();
+ map_test_equal_range();
  map_test_erase();
  map_test_erase_key();
+	 map_test_erase_range();
 }
