@@ -78,8 +78,8 @@ void init_array_int_str(NAMESPACE::pair< int, std::string >* arr, std::size_t si
 
 	for (std::size_t i = 0; i < size; ++i)
 	{
-		//arr[i] = NAMESPACE::make_pair(rand(), x[i]);
-		arr[i] = NAMESPACE::make_pair(i, x[i]);
+		arr[i] = NAMESPACE::make_pair(rand(), x[i]);
+		//arr[i] = NAMESPACE::make_pair(i, x[i]);
 	}
 }
 

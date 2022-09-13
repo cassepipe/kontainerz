@@ -1863,49 +1863,166 @@ void map_test_erase_range()
     }
 }
 
+void map_test_find()
+{
+    SETUP_ARRAYS();
+
+    {
+        strmap m(strstr_arr, strstr_arr + strstr_size);
+
+        strmap::iterator it = m.find("ABCD");
+
+        if (it != m.end()) {
+            PRINT_PAIR_REF(*it);
+        }
+
+        m.insert(NAMESPACE::make_pair("12345", "etsriueruy394w"));
+        m.insert(NAMESPACE::make_pair("abcd", "sfdge4ta4tqtawefa"));
+        m.insert(NAMESPACE::make_pair("123", "adfgagrawetawtawef"));
+        m.insert(NAMESPACE::make_pair("1234", "asdfgaetfawfasdf"));
+        m.insert(NAMESPACE::make_pair("ab", "adfawtawefgzsdfg"));
+        m.insert(NAMESPACE::make_pair("yz", "gftrjr5y4agwe3ta"));
+        m.insert(NAMESPACE::make_pair("64", "mhj,i;y9o67eysetrgerg"));
+
+        it = m.find("12345");
+
+		if (it != m.end()) {
+			PRINT_PAIR_REF(*it);
+		}
+
+		it = m.find("1234");
+
+		if (it != m.end()) {
+			PRINT_PAIR_REF(*it);
+		}
+
+		it = m.find("123");
+
+		if (it != m.end()) {
+			PRINT_PAIR_REF(*it);
+		}
+
+		it = m.find("123");
+
+		if (it != m.end()) {
+			PRINT_PAIR_REF(*it);
+		}
+
+		it = m.find("z");
+
+		if (it != m.end()) {
+			PRINT_PAIR_REF(*it);
+		}
+
+		const strmap cm(m);
+
+		strmap::const_iterator cit = cm.find("ABCD");
+
+		if (cit != cm.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = cm.find("64");
+
+		if (cit != cm.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = m.find("12345");
+
+		if (cit != m.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = m.find("1234");
+
+		if (cit != m.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = m.find("123");
+
+		if (cit != m.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = m.find("123");
+
+		if (cit != m.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+
+		cit = m.find("z");
+
+		if (cit != m.end()) {
+			PRINT_PAIR_REF(*cit);
+		}
+    }
+
+    {
+		const intmap cm;
+
+		if (cm.find(0) != cm.end()) {
+			PRINT_PAIR_PTR(cm.find(0));
+		}
+
+		intmap m;
+
+		m.insert(NAMESPACE::make_pair(123, "Hello"));
+
+		if (m.find(0) != m.end()) {
+			PRINT_PAIR_PTR(m.find(0));
+		}
+		if (m.find(123) != m.end()) {
+			PRINT_PAIR_PTR(m.find(123));
+		}
+    }
+}
+
 void test_map()
 {
-	visual_test();
-	test_map_begin();
-	test_map_clear();
-	test_map_constructor();
-	test_map_count();
-	test_map_empty();
-	test_map_end();
-	test_map_equal_range();
-	test_map_erase();
-	test_map_find();
-	test_map_get_allocator();
-	test_map_insert();
-	test_map_key_comp();
-	test_map_lower_bound();
-	test_map_operator_bracket();
-	test_map_operator_equal();
-	test_map_rbegin();
-	test_map_relational_operators();
-	test_map_rend();
-	test_map_size();
-	test_map_swap();
-	test_map_swap_overload();
-	test_map_upper_bound();
-	test_map_value_comp();
-	 map_test_at();
-	 map_test_assignment();
-	 map_test_clear();
-	 map_test_compare();
-	 map_test_comparisons_eq();
-	 map_test_comparisons_ge();
- map_test_comparisons_gt();
- map_test_comparisons_le();
- map_test_comparisons_lt();
- map_test_comparisons_ne();
- map_test_count();
- map_test_ctor();
- map_test_ctor_copy();
- map_test_ctor_range();
- map_test_empty();
- map_test_equal_range();
- map_test_erase();
- map_test_erase_key();
+ //   visual_test();
+ //   test_map_begin();
+ //   test_map_clear();
+ //   test_map_constructor();
+ //   test_map_count();
+ //   test_map_empty();
+ //   test_map_end();
+ //   test_map_equal_range();
+ //   test_map_erase();
+ //   test_map_find();
+ //   test_map_get_allocator();
+ //   test_map_insert();
+ //   test_map_key_comp();
+ //   test_map_lower_bound();
+ //   test_map_operator_bracket();
+ //   test_map_operator_equal();
+ //   test_map_rbegin();
+ //   test_map_relational_operators();
+ //   test_map_rend();
+ //   test_map_size();
+ //   test_map_swap();
+ //   test_map_swap_overload();
+ //   test_map_upper_bound();
+ //   test_map_value_comp();
+ //    map_test_at();
+ //    map_test_assignment();
+ //    map_test_clear();
+ //    map_test_compare();
+ //    map_test_comparisons_eq();
+ //    map_test_comparisons_ge();
+ //map_test_comparisons_gt();
+ //map_test_comparisons_le();
+ //map_test_comparisons_lt();
+ //map_test_comparisons_ne();
+ //map_test_count();
+ //map_test_ctor();
+ //map_test_ctor_copy();
+ //map_test_ctor_range();
+ //map_test_empty();
+ //map_test_equal_range();
+ //map_test_erase();
+ //map_test_erase_key();
 	 map_test_erase_range();
+ map_test_find();
 }

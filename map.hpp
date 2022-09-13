@@ -531,7 +531,8 @@ class map
 		return 1;
 	}
 
-	iterator find(const Key& key)
+	template < typename K >
+	iterator find(const K& key)
 	{
 		node_ptr_t current;
 		bool       searched_is_strictly_less;
@@ -552,7 +553,8 @@ class map
 		return this->end();
 	}
 
-	const_iterator find(const Key& key) const
+	template < typename K >
+	const_iterator find(const K& key) const
 	{
 		node_ptr_t current;
 		bool       searched_is_strictly_less;

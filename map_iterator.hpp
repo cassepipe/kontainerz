@@ -187,7 +187,8 @@ class map_const_iterator
 	typedef std::ptrdiff_t                  difference_type;
 
   protected:
-	typedef map_node< Pair, Alloc > node_t;
+	typedef map_node< Pair, Alloc >         node_t;
+	typedef map_iterator<Pair, Alloc>       non_const_iterator_t;
 
 	/* STATE */
 	const node_t* current_;
@@ -235,6 +236,11 @@ class map_const_iterator
 
 	template < typename InputIt >
 	/* Copy Constructor */ map_const_iterator(InputIt& other) : current_(other.get_current()), nil_(other.get_nil())
+	{
+	}
+
+	map_const_iterator(non_const_iterator_t it)
+		: current_(it.get_current()), nil_(it.get_nil())
 	{
 	}
 
