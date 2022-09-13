@@ -29,21 +29,24 @@ void visual_test()
 #endif
 	tree.erase('b');
 #ifdef DEBUG
-	tree.print_dot(2);
+	tree.print_dot(1);
 #endif
 	tree.erase('c');
 #ifdef DEBUG
-	tree.print_dot(3);
+	tree.print_dot(1);
 #endif
 	tree.erase('d');
 #ifdef DEBUG
-	tree.print_dot(4);
+	tree.print_dot(1);
 #endif
 	tree.erase('e');
 #ifdef DEBUG
-	tree.print_dot(5);
+	tree.print_dot(1);
 #endif
 	tree.erase('f');
+#ifdef DEBUG
+	tree.print_dot(1);
+#endif
 }
 
 void test_map_begin()
@@ -1570,6 +1573,10 @@ void map_test_erase()
 
         it = m.end();
 
+#ifdef DEBUG
+	m.print_dot(1);
+#endif
+
         std::advance(it, -3);
 
         m.erase(it);
@@ -1772,7 +1779,7 @@ void map_test_erase_key()
 
 void test_map()
 {
-	//visual_test();
+	visual_test();
 	//test_map_begin();
 	//test_map_clear();
 	//test_map_constructor();

@@ -256,40 +256,70 @@ class map
 			{
 				using std::swap;
 				node_ptr_t successor          = in_order_successor_(node);
-				bool       successor_is_child = (node->right->left == nil_);
+				bool       successor_is_child = (node->right == successor);
 
-				swap(node->level, successor->level);
-				swap(node->left, successor->left);
-				if (!successor_is_child)
+				if (successor_is_child)
 				{
-					swap(node->right, successor->right);
-					swap(node->parent, successor->parent);
+					successor->parent = node->parent;
+					if (child_status == ROOT)
+						successor->parent = successor;
+					successor->left = node->left;
+					successor->left->parent = successor;
+					successor->level++;
+
+					node_alloc_.destroy(node);
+					node_alloc_.deallocate(node, 1);
+					--size_;
+
+					node = successor;
 				}
 				else
 				{
-					node->right      = successor->right;
-					successor->right = node;
-				}
+					swap(node->level, successor->level);
+					swap(node->left, successor->left);
+					swap(node->right, successor->right);
+					swap(node->parent, successor->parent);
 
-				if (child_status == LEFT)
-					successor->parent->left = successor;
-				if (child_status == RIGHT)
-					successor->parent->left = successor;
-				if (child_status == ROOT)
-					successor->parent = successor;
-				if (!successor_is_child)
+					if (child_status == LEFT)
+						successor->parent->left = successor;
+					if (child_status == RIGHT)
+						successor->parent->left = successor;
+					if (child_status == ROOT)
+						successor->parent = successor;
 					node->parent->left = node;
-				successor->right->parent = successor;
-				successor->left->parent  = successor;
-				if (node->right != nil_)
-					node->right->parent = node;
+					successor->right->parent = successor;
+					successor->left->parent  = successor;
+					if (node->right != nil_)
+						node->right->parent = node;
 
-				node        = successor;
-				node->right = remove_rec_(k, node->right, 1);
+					node        = successor;
+					node->right = remove_rec_(k, node->right, 1);
+				}
 			}
 		}
 		return fixup_after_delete_(node);
 	}
+					//if (successor->left != nil_)
+					//    std::swap(successor->left->parent, node->left->parent);
+					//else
+					//    node->left->parent = successor;
+					//if (successor->right != nil_)
+					//    std::swap(successor->right->parent, node->right->parent);
+					//else
+					//    node->right->parent = successor;
+					//std::swap(successor->left, node->left);
+					//std::swap(successor->right, node->right);
+
+					//std::swap(successor->right, node->right);
+
+					//std::swap(successor->parent, node->parent);
+					//if (child_status == ROOT)
+					//    successor->parent = successor;
+
+					//node = successor;
+					//node->right = remove_rec_(k, node->right, 1);
+
+
 
 #undef LEFT
 #undef RIGHT
