@@ -252,8 +252,11 @@ class vector
 
 	size_type max_size() const
 	{
-		// return allocator_.max_size();
-		return std::min(allocator_.max_size(), (long unsigned int)std::numeric_limits< long int >::max());
+		// std::distance(begin(), end()) cannot be greater than PTRDIFF_MAX,
+		// and realistically we can't store more than PTRDIFF_MAX/sizeof(T)
+		// (even if std::allocator_traits::max_size says we can).
+		const size_t diffmax = std::numeric_limits<difference_type>::max() / sizeof(value_type);
+		return (std::min)(diffmax, allocator_.max_size());
 	}
 
 	// Resize to a specific size
@@ -263,7 +266,7 @@ class vector
 		{
 			if (n > capacity_)
 			{
-				if (n > allocator_.max_size())
+				if (n > this->max_size())
 					throw std::length_error("ft::vector::resize");
 				// Then put data in bigger container
 				pointer tmp = allocator_.allocate(n);
@@ -304,7 +307,7 @@ class vector
 
 	void reserve(size_type n)
 	{
-		if (n > allocator_.max_size())
+		if (static_cast<difference_type>(n) < 0 || n > this->max_size())
 			throw std::length_error("vector::reserve");
 		else if (n > capacity_)
 		{
@@ -380,7 +383,7 @@ class vector
   protected:
 	void reserve_(pointer& old_data, size_type new_capacity, size_type& old_capacity)
 	{
-		if (new_capacity > allocator_.max_size())
+		if (static_cast<difference_type>(new_capacity) < 0 || new_capacity > this->max_size())
 			throw std::length_error("vector::reserve");
 		else if (new_capacity > old_capacity)
 		{
@@ -426,7 +429,7 @@ class vector
 	void assign(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag)
 	{
 		size_type new_size = ft::distance(first, last);
-		if (new_size > allocator_.max_size())
+		if (new_size > this->max_size())
 			throw std::length_error("vector::assign");
 		pointer tmp = allocator_.allocate(new_size);
 
@@ -454,7 +457,7 @@ class vector
 		// Clear, deallocate, allocate, copy data
 		destroy_data_();
 		deallocate_data_();
-		if (n > allocator_.max_size())
+		if (n > this->max_size())
 			throw std::length_error("ft::vector::assign");
 		size_     = n;
 		data_     = allocator_.allocate(size_);

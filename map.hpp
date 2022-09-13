@@ -23,6 +23,7 @@
 #include <stack>
 #include <stdexcept>
 #include <utility>
+#include <limits>
 
 #include "algorithm.hpp"
 #include "map_iterator.hpp"
