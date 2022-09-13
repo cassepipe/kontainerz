@@ -1979,6 +1979,685 @@ void map_test_find()
     }
 }
 
+void map_test_get_allocator()
+{
+    intmap m;
+
+	std::allocator<NAMESPACE::pair<const int, std::string> > alloc = m.get_allocator();
+
+    NAMESPACE::pair<const int, std::string>* buff = alloc.allocate(64);
+
+    alloc.deallocate(buff, 64);
+}
+
+void map_test_index_operator()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m(intstr_arr, intstr_arr + intstr_size);
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m[64]);
+        PRINT_SIZE(m);
+
+        m[64] = "Hello";
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m[64]);
+        PRINT_SIZE(m);
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m[0]);
+        PRINT_SIZE(m);
+
+        m[0] = "ABCDEF";
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m[0]);
+        PRINT_SIZE(m);
+    }
+
+    {
+        strmap m(strstr_arr, strstr_arr + strstr_size);
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m["Index"]);
+        PRINT_SIZE(m);
+
+        m["Index"] = "World";
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m["Index"]);
+        PRINT_SIZE(m);
+
+        m["abcd"] = "World";
+
+        PRINT_SIZE(m);
+        PRINT_LINE("Value:", m["abcd"]);
+        PRINT_SIZE(m);
+    }
+}
+
+#define PRINT_INS_PAIR(p)                                                                          \
+    {                                                                                              \
+        PRINT_PAIR_REF(*p.first);                                                                  \
+        PRINT_LINE("Inserted:", p.second ? "true" : "false");                                      \
+    }
+
+void map_test_insert()
+{
+    SETUP_ARRAYS();
+
+    {
+        typedef NAMESPACE::pair<intmap::iterator, bool> ins_pair;
+
+        intmap m;
+
+        ins_pair p = m.insert(NAMESPACE::make_pair(64, "64str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair(64, "Double"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair(0, "0str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair(-23, "-23str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair(64, "dfgs"));
+
+        PRINT_INS_PAIR(p);
+    }
+    {
+        typedef NAMESPACE::pair<strmap::iterator, bool> ins_pair;
+
+        strmap m;
+
+        ins_pair p = m.insert(NAMESPACE::make_pair("64", "64str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair("64n", "Double"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair("0n", "0str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair("-23n", "-23str"));
+
+        PRINT_INS_PAIR(p);
+
+        p = m.insert(NAMESPACE::make_pair("64n", "dfgs"));
+
+        PRINT_INS_PAIR(p);
+    }
+}
+
+
+void map_test_insert_hint()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m;
+
+        intmap::iterator it = m.insert(m.end(), NAMESPACE::make_pair(64, "Gamepak"));
+
+        PRINT_PAIR_REF(*it);
+
+        it = m.insert(m.end(), NAMESPACE::make_pair(64, "Test"));
+
+        PRINT_PAIR_REF(*it);
+
+        it = m.insert(m.end(), NAMESPACE::make_pair(100, "100$"));
+
+        PRINT_PAIR_REF(*it);
+
+        it = m.end();
+        --it;
+
+        it = m.insert(it, NAMESPACE::make_pair(100, "12345"));
+
+        PRINT_PAIR_REF(*it);
+
+        it = m.insert(it, NAMESPACE::make_pair(69, "420"));
+
+        PRINT_PAIR_REF(*it);
+    }
+}
+
+void map_test_insert_range()
+{
+    SETUP_ARRAYS();
+
+    {
+        strmap m;
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr, strstr_arr + 5);
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr + 5, strstr_arr + 14);
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr, strstr_arr + 9);
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr + 26, strstr_arr + strstr_size);
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr + 14, strstr_arr + 26);
+
+        PRINT_ALL(m);
+    }
+
+    {
+        intmap m;
+
+        PRINT_ALL(m);
+
+        m.insert(intstr_arr + 16, intstr_arr + 16);
+
+        PRINT_ALL(m);
+
+        m.insert(intstr_arr + 1, intstr_arr + 7);
+
+        PRINT_ALL(m);
+
+        m.insert(intstr_arr, intstr_arr + 1);
+
+        PRINT_ALL(m);
+
+        m.insert(intstr_arr, intstr_arr + 17);
+
+        PRINT_ALL(m);
+
+        m.insert(intstr_arr, intstr_arr + intstr_size);
+
+        PRINT_ALL(m);
+    }
+}
+
+void map_test_iterator()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m;
+
+        PRINT_ALL(m);
+    }
+
+    {
+        strmap m(strstr_arr, strstr_arr + strstr_size);
+
+        strmap::iterator it = m.begin();
+        strmap::iterator it2 = m.begin();
+        strmap::const_iterator cit = m.begin();
+        strmap::const_iterator cit2 = m.begin();
+
+        if (it == it2) {
+            PRINT_MSG("Equal");
+        }
+        if (it == cit) {
+            PRINT_MSG("Equal.");
+        }
+        if (cit == cit2) {
+            PRINT_MSG("Equal..");
+        }
+        if (it != it2) {
+            PRINT_MSG("Not Equal");
+        }
+        if (it != cit) {
+            PRINT_MSG("Not Equal.");
+        }
+        if (cit != cit2) {
+            PRINT_MSG("Not Equal..");
+        }
+
+        PRINT_PAIR_PTR(++it);
+        PRINT_PAIR_PTR(++cit);
+
+        if (it == it2) {
+            PRINT_MSG("Equal...");
+        }
+        if (it == cit) {
+            PRINT_MSG("Equal....");
+        }
+        if (cit == cit2) {
+            PRINT_MSG("Equal.....");
+        }
+        if (it != it2) {
+            PRINT_MSG("Not Equal...");
+        }
+        if (it != cit) {
+            PRINT_MSG("Not Equal....");
+        }
+        if (cit != cit2) {
+            PRINT_MSG("Not Equal.....");
+        }
+
+        ++it2;
+
+        if (it == it2) {
+            PRINT_MSG("Equal........");
+        }
+
+        --it;
+        --it2;
+
+        if (it == it2) {
+            PRINT_MSG("Equal.........");
+        }
+    }
+
+    {
+        intmap m(intstr_arr, intstr_arr + intstr_size);
+
+        intmap::iterator it = m.begin();
+        intmap::iterator it2 = m.begin();
+        intmap::const_iterator cit = m.begin();
+        intmap::const_iterator cit2 = m.begin();
+
+        PRINT_ALL(m);
+
+        it->second = "Hello";
+
+        PRINT_PAIR_PTR(m.begin());
+        PRINT_PAIR_REF(*it);
+        PRINT_PAIR_PTR(++it);
+        PRINT_PAIR_PTR(it2++);
+        PRINT_PAIR_REF(*it++);
+        PRINT_PAIR_PTR(cit++);
+        PRINT_PAIR_PTR(cit2++);
+        PRINT_PAIR_PTR(++cit);
+        PRINT_PAIR_PTR(++cit2);
+        PRINT_PAIR_PTR(it2);
+        PRINT_PAIR_PTR(cit2);
+        PRINT_PAIR_PTR(it++);
+        PRINT_PAIR_PTR(it++);
+        PRINT_PAIR_PTR(it++);
+        PRINT_PAIR_PTR(it2++);
+        PRINT_PAIR_PTR(it2++);
+        PRINT_PAIR_PTR(++it2);
+        PRINT_PAIR_REF(*cit);
+        PRINT_PAIR_REF(*cit--);
+        PRINT_PAIR_REF(*it--);
+        PRINT_PAIR_PTR(it--);
+        PRINT_PAIR_PTR(--it);
+        PRINT_PAIR_PTR(--cit2);
+        PRINT_PAIR_PTR(cit2);
+        PRINT_PAIR_REF(*cit2);
+        PRINT_PAIR_REF(*it2);
+        it = it2;
+        PRINT_PAIR_REF(*it);
+        PRINT_PAIR_REF(*it2);
+        cit = cit2;
+        PRINT_PAIR_REF(*cit);
+        PRINT_PAIR_REF(*cit2);
+    }
+}
+
+void map_test_key_comp()
+{
+    SETUP_ARRAYS();
+
+    {
+        strmap m(strstr_arr, strstr_arr + strstr_size);
+
+        strmap::iterator it = m.begin();
+
+        strmap::const_iterator cit = m.begin();
+        strmap::key_compare comp = m.key_comp();
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(cit, 5);
+        std::advance(it, 14);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, 7);
+        std::advance(cit, 3);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, -3);
+        std::advance(cit, 12);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, -1);
+        std::advance(cit, 1);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+    }
+
+    {
+        intmap m(intstr_arr, intstr_arr + intstr_size);
+
+        intmap::iterator it = m.begin();
+
+        intmap::const_iterator cit = m.begin();
+
+        intmap::key_compare comp = m.key_comp();
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, 14);
+        std::advance(cit, 5);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, 7);
+        std::advance(cit, 3);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, -3);
+        std::advance(cit, 12);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+
+        std::advance(it, -1);
+        std::advance(cit, 1);
+
+        if (comp(it->first, cit->first)) {
+            PRINT_MSG("Less");
+        } else {
+            PRINT_MSG("Not Less");
+        }
+    }
+}
+
+#include <limits>
+
+void map_test_lower_bound()
+{
+    SETUP_ARRAYS();
+
+    {
+        intmap m(intstr_arr, intstr_arr + intstr_size);
+
+        m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
+        m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
+        m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
+        m.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
+        m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
+        m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
+        m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
+        m.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        intmap::iterator b = m.lower_bound(98583944);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(239485948);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458942);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458941);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458943);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(-1);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(3);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(4);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(5);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(0);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, m.end());
+
+        m.insert(NAMESPACE::make_pair(std::numeric_limits<int>::max(), "max"));
+
+        b = m.lower_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, m.end());
+    }
+
+    {
+        intmap temp(intstr_arr, intstr_arr + intstr_size);
+
+        temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
+        temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
+        temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
+        temp.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
+        temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
+        temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
+        temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
+        temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
+        temp.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+
+        const intmap m(temp);
+
+        intmap::const_iterator b = m.lower_bound(98583944);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(239485948);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458942);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458941);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(19458943);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(-1);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(3);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(4);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(5);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(0);
+
+        PRINT_BOUND(b, m.end());
+
+        b = m.lower_bound(std::numeric_limits<int>::max());
+
+        PRINT_BOUND(b, m.end());
+    }
+
+    {
+        const intmap m;
+
+        intmap::const_iterator b = m.lower_bound(5);
+
+        PRINT_BOUND(b, m.end());
+    }
+}
+
+void map_test_random()
+{
+    SETUP_ARRAYS();
+
+    {
+        strmap m(strstr_arr, strstr_arr + 16);
+
+        strmap::iterator it = m.find("Hello");
+
+        if (it != m.end()) {
+            PRINT_PAIR_REF(*it);
+        }
+
+        try {
+            std::string& ref = m.at("World!");
+
+            PRINT_LINE("Val:", ref);
+        } catch (std::out_of_range& e) {
+            PRINT_MSG("Exception");
+        }
+        CATCH_UNHANDLED_EX();
+
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr, strstr_arr + strstr_size);
+
+        PRINT_ALL(m);
+
+        m.erase(m.begin());
+
+        PRINT_ALL(m);
+
+        it = m.begin();
+        std::advance(it, 10);
+
+        m.erase(it, m.end());
+
+        PRINT_ALL(m);
+
+        strmap::size_type s = m.erase("1234");
+
+        PRINT_ALL(m);
+        PRINT_LINE("S:", s);
+
+        m.clear();
+
+        PRINT_ALL(m);
+
+        it = m.insert(m.begin(), NAMESPACE::make_pair("", "test"));
+
+        PRINT_LINE("Count:", m.count(""));
+
+        PRINT_PAIR_REF(*it);
+        PRINT_ALL(m);
+
+        m.insert(strstr_arr, strstr_arr + strstr_size);
+
+        strmap n(strstr_arr, strstr_arr + 10);
+
+        m.swap(n);
+
+        PRINT_ALL(m);
+        PRINT_ALL(n);
+
+        PRINT_EQ_RANGE(m.equal_range("abcd"), m.end());
+        PRINT_BOUND(m.lower_bound("123"), m.end());
+        PRINT_BOUND(m.upper_bound("jhg456"), m.end());
+
+        PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
+
+        m["hello"] = "world";
+
+        PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
+    }
+
+    {
+		NAMESPACE::map<int, int, std::less<int>, std::allocator<NAMESPACE::pair<const int, int> > >
+			m;
+
+		for (int i = 0; i < 50000; ++i) {
+			m.insert(NAMESPACE::make_pair(rand(), rand()));
+		}
+
+		PRINT_ALL(m);
+
+		//m.erase(m.begin(), m.end());
+
+		//PRINT_ALL(m);
+    }
+}
+
+
 void test_map()
 {
  //   visual_test();
@@ -2023,6 +2702,15 @@ void test_map()
  //map_test_equal_range();
  //map_test_erase();
  //map_test_erase_key();
-	 map_test_erase_range();
- map_test_find();
+	 //map_test_erase_range();
+ //map_test_find();
+ //map_test_get_allocator();
+ //map_test_index_operator();
+ //map_test_insert();
+ //map_test_insert_hint();
+ //map_test_insert_range();
+ //map_test_iterator();
+ //map_test_key_comp();
+ //map_test_lower_bound();
+ map_test_random();
 }
