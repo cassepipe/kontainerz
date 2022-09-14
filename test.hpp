@@ -36,6 +36,7 @@ using NAMESPACE::vector;
 using std::cout;
 using std::endl;
 using std::string;
+using std::swap;
 
 void test_vector();
 void test_stack();

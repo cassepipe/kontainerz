@@ -579,7 +579,7 @@ void map_test_at()
     {
         intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(NAMESPACE::make_pair(64, "64"));
+        m.insert(make_pair(64, "64"));
 
         try {
             std::string& x = m.at(64);
@@ -594,7 +594,7 @@ void map_test_at()
     {
         strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        m.insert(NAMESPACE::make_pair("Hello", "World"));
+        m.insert(make_pair("Hello", "World"));
 
         try {
             std::string& x = m.at("Hello");
@@ -635,7 +635,7 @@ void map_test_at()
     {
         intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        temp.insert(NAMESPACE::make_pair(64, "64"));
+        temp.insert(make_pair(64, "64"));
 
         const intmap m(temp);
 
@@ -652,7 +652,7 @@ void map_test_at()
     {
         strmap temp(strstr_arr, strstr_arr + strstr_size);
 
-        temp.insert(NAMESPACE::make_pair("Hello", "World"));
+        temp.insert(make_pair("Hello", "World"));
 
         const strmap m(temp);
 
@@ -771,8 +771,8 @@ void map_test_compare()
     SETUP_ARRAYS();
 
     {
-        NAMESPACE::map<int, std::string, std::greater<int>,
-                       std::allocator<NAMESPACE::pair<const int, std::string> > >
+        map<int, std::string, std::greater<int>,
+                       std::allocator<pair<const int, std::string> > >
             m(intstr_arr, intstr_arr + intstr_size);
 
         PRINT_ALL(m);
@@ -832,11 +832,11 @@ void map_test_comparisons_eq()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(5, "Hello"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n == m) {
             PRINT_MSG("Equal.....");
@@ -847,7 +847,7 @@ void map_test_comparisons_eq()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
+        n.insert(make_pair(5, "Hello"));
 
         if (n == m) {
             PRINT_MSG("Equal......");
@@ -908,11 +908,11 @@ void map_test_comparisons_ge()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(5, "Hello"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n > m) {
             PRINT_MSG("Greater.....");
@@ -923,7 +923,7 @@ void map_test_comparisons_ge()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
+        n.insert(make_pair(5, "Hello"));
 
         if (n > m) {
             PRINT_MSG("Greater......");
@@ -984,11 +984,11 @@ void map_test_comparisons_gt()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(5, "Hello"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n >= m) {
             PRINT_MSG("Greater or Equal.....");
@@ -999,7 +999,7 @@ void map_test_comparisons_gt()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
+        n.insert(make_pair(5, "Hello"));
 
         if (n >= m) {
             PRINT_MSG("Greater or Equal......");
@@ -1061,11 +1061,11 @@ void map_test_comparisons_le()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(std::numeric_limits<int>::max(), "zxcvzx"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(std::numeric_limits<int>::max(), "zxcvzx"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n <= m) {
             PRINT_MSG("Less or Equal.....");
@@ -1076,7 +1076,7 @@ void map_test_comparisons_le()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "zxcvxz"));
+        n.insert(make_pair(5, "zxcvxz"));
 
         if (n <= m) {
             PRINT_MSG("Less or Equal......");
@@ -1137,11 +1137,11 @@ void map_test_comparisons_lt()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(5, "Hello"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n < m) {
             PRINT_MSG("Less.....");
@@ -1152,7 +1152,7 @@ void map_test_comparisons_lt()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
+        n.insert(make_pair(5, "Hello"));
 
         if (n < m) {
             PRINT_MSG("Less......");
@@ -1214,11 +1214,11 @@ void map_test_comparisons_ne()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n;
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
-        n.insert(NAMESPACE::make_pair(7, "Hello"));
-        n.insert(NAMESPACE::make_pair(8, "Hello"));
-        n.insert(NAMESPACE::make_pair(1, "Hello"));
-        n.insert(NAMESPACE::make_pair(0, "Hello"));
+        n.insert(make_pair(5, "Hello"));
+        n.insert(make_pair(7, "Hello"));
+        n.insert(make_pair(8, "Hello"));
+        n.insert(make_pair(1, "Hello"));
+        n.insert(make_pair(0, "Hello"));
 
         if (n != m) {
             PRINT_MSG("Not Equal.....");
@@ -1229,7 +1229,7 @@ void map_test_comparisons_ne()
         intmap m(intstr_arr, intstr_arr + 5);
         intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(NAMESPACE::make_pair(5, "Hello"));
+        n.insert(make_pair(5, "Hello"));
 
         if (n != m) {
             PRINT_MSG("Not Equal......");
@@ -1257,12 +1257,12 @@ void map_test_count()
 
         PRINT_LINE("Count:", c);
 
-        m.insert(NAMESPACE::make_pair(34, "seiurhg8347wo83twerw"));
-        m.insert(NAMESPACE::make_pair(2, "dsghesrzarherheat43"));
-        m.insert(NAMESPACE::make_pair(9, "awgfawe4t3A4YSDFGAS"));
-        m.insert(NAMESPACE::make_pair(3, "dzfg45yrthsdfgshju"));
-        m.insert(NAMESPACE::make_pair(22, "j564wedfshgj6ee5yegrs"));
-        m.insert(NAMESPACE::make_pair(10, "cfngcvcx56;oiliuee"));
+        m.insert(make_pair(34, "seiurhg8347wo83twerw"));
+        m.insert(make_pair(2, "dsghesrzarherheat43"));
+        m.insert(make_pair(9, "awgfawe4t3A4YSDFGAS"));
+        m.insert(make_pair(3, "dzfg45yrthsdfgshju"));
+        m.insert(make_pair(22, "j564wedfshgj6ee5yegrs"));
+        m.insert(make_pair(10, "cfngcvcx56;oiliuee"));
 
         c = m.count(34);
 
@@ -1303,7 +1303,7 @@ void map_test_ctor()
 
     // Compare/Allocator
     {
-		std::allocator<NAMESPACE::pair<const std::string, std::string> > alloc;
+		std::allocator<pair<const std::string, std::string> > alloc;
         strmap m(std::less<std::string>(), alloc);
 
         PRINT_ALL(m);
@@ -1341,7 +1341,7 @@ void map_test_ctor_range()
     SETUP_ARRAYS();
 
     {
-		std::allocator<NAMESPACE::pair<const int, std::string> > alloc;
+		std::allocator<pair<const int, std::string> > alloc;
         intmap m(intstr_arr, intstr_arr + intstr_size, std::less<int>(), alloc);
 
         PRINT_ALL(m);
@@ -1373,7 +1373,7 @@ void map_test_empty()
 
         PRINT_LINE("Empty:", m.empty() ? "true" : "false");
 
-        m.insert(NAMESPACE::make_pair("Hello", "World"));
+        m.insert(make_pair("Hello", "World"));
 
         PRINT_LINE("Empty:", m.empty() ? "true" : "false");
 
@@ -1397,25 +1397,25 @@ void map_test_equal_range()
     {
 		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-		m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-		m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-		m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-		m.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
-		m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-		m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-		m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-		m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-		m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-		m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-		m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-		m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-		m.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+		m.insert(make_pair(34, "kljd9834iuhwet"));
+		m.insert(make_pair(3468, "dfghe45sywu4hsr"));
+		m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+		m.insert(make_pair(1954894589, "jtt5454wujtjse"));
+		m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+		m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		m.insert(make_pair(4, "asdfhfjgh54w3ag"));
+		m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		m.insert(make_pair(453834782, "juytje54yaerdrj"));
+		m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+		m.insert(make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
 #ifdef DEBUG
 		m.print_dot(1);
 #endif
 
-		NAMESPACE::pair<intmap::iterator, intmap::iterator> eq = m.equal_range(98583944);
+		pair<intmap::iterator, intmap::iterator> eq = m.equal_range(98583944);
 
 		PRINT_EQ_RANGE(eq, m.end());
 
@@ -1459,7 +1459,7 @@ void map_test_equal_range()
 
 		PRINT_EQ_RANGE(eq, m.end());
 
-		m.insert(NAMESPACE::make_pair(std::numeric_limits<int>::max(), "max"));
+		m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
 
 		eq = m.equal_range(std::numeric_limits<int>::max());
 
@@ -1469,23 +1469,23 @@ void map_test_equal_range()
     {
 		intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-		temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-		temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-		temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-		temp.insert(NAMESPACE::make_pair(1954894589, "jtt5454wujtjse"));
-		temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-		temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-		temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-		temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-		temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-		temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-		temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-		temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-		temp.insert(NAMESPACE::make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
+		temp.insert(make_pair(34, "kljd9834iuhwet"));
+		temp.insert(make_pair(3468, "dfghe45sywu4hsr"));
+		temp.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+		temp.insert(make_pair(1954894589, "jtt5454wujtjse"));
+		temp.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+		temp.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		temp.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		temp.insert(make_pair(4, "asdfhfjgh54w3ag"));
+		temp.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		temp.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		temp.insert(make_pair(453834782, "juytje54yaerdrj"));
+		temp.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+		temp.insert(make_pair(1245689793, "jr67e5674574668679789ruyerdtadh"));
 
 		const intmap m(temp);
 
-		NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
+		pair<intmap::const_iterator, intmap::const_iterator> eq =
 			m.equal_range(98583944);
 
 		PRINT_EQ_RANGE(eq, m.end());
@@ -1534,7 +1534,7 @@ void map_test_equal_range()
     {
 		const intmap m;
 
-		NAMESPACE::pair<intmap::const_iterator, intmap::const_iterator> eq =
+		pair<intmap::const_iterator, intmap::const_iterator> eq =
 			m.equal_range(std::numeric_limits<int>::max());
 
 		PRINT_EQ_RANGE(eq, m.end());
@@ -1627,16 +1627,16 @@ void map_test_erase_key()
 
         m.erase(m.begin(), m.end());
 
-        m.insert(NAMESPACE::make_pair(23, "23n"));
-        m.insert(NAMESPACE::make_pair(25, "asdasdfsdfsafdsf"));
-        m.insert(NAMESPACE::make_pair(1, "asdssdfdfdffffff"));
-        m.insert(NAMESPACE::make_pair(2, "dsfdffffdfdfdsdfdffa"));
-        m.insert(NAMESPACE::make_pair(3, "sssdfs"));
-        m.insert(NAMESPACE::make_pair(75, "dfse"));
-        m.insert(NAMESPACE::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
-        m.insert(NAMESPACE::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
-        m.insert(NAMESPACE::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
-        m.insert(NAMESPACE::make_pair(0, "98y4rtuohwidsjusdossefsse"));
+        m.insert(make_pair(23, "23n"));
+        m.insert(make_pair(25, "asdasdfsdfsafdsf"));
+        m.insert(make_pair(1, "asdssdfdfdffffff"));
+        m.insert(make_pair(2, "dsfdffffdfdfdsdfdffa"));
+        m.insert(make_pair(3, "sssdfs"));
+        m.insert(make_pair(75, "dfse"));
+        m.insert(make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+        m.insert(make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+        m.insert(make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+        m.insert(make_pair(0, "98y4rtuohwidsjusdossefsse"));
 
         size = m.erase(64);
 
@@ -1721,14 +1721,14 @@ void map_test_erase_key()
         PRINT_LINE("Erased?:", size);
         PRINT_ALL(m);
 
-        m.insert(NAMESPACE::make_pair("", ""));
-        m.insert(NAMESPACE::make_pair("123", "kjhgfdsdffghsfghdfgh"));
-        m.insert(NAMESPACE::make_pair("1234", "gfdsadgg"));
-        m.insert(NAMESPACE::make_pair("123456789123456789123456789", "49857459898674568464"));
-        m.insert(NAMESPACE::make_pair("0", "2345456456456456"));
-        m.insert(NAMESPACE::make_pair("", ""));
-        m.insert(NAMESPACE::make_pair("", "9459845984598498"));
-        m.insert(NAMESPACE::make_pair("000000000000000000000000", "1111111111111111111111111111"));
+        m.insert(make_pair("", ""));
+        m.insert(make_pair("123", "kjhgfdsdffghsfghdfgh"));
+        m.insert(make_pair("1234", "gfdsadgg"));
+        m.insert(make_pair("123456789123456789123456789", "49857459898674568464"));
+        m.insert(make_pair("0", "2345456456456456"));
+        m.insert(make_pair("", ""));
+        m.insert(make_pair("", "9459845984598498"));
+        m.insert(make_pair("000000000000000000000000", "1111111111111111111111111111"));
 
         size = m.erase("1");
 
@@ -1876,13 +1876,13 @@ void map_test_find()
             PRINT_PAIR_REF(*it);
         }
 
-        m.insert(NAMESPACE::make_pair("12345", "etsriueruy394w"));
-        m.insert(NAMESPACE::make_pair("abcd", "sfdge4ta4tqtawefa"));
-        m.insert(NAMESPACE::make_pair("123", "adfgagrawetawtawef"));
-        m.insert(NAMESPACE::make_pair("1234", "asdfgaetfawfasdf"));
-        m.insert(NAMESPACE::make_pair("ab", "adfawtawefgzsdfg"));
-        m.insert(NAMESPACE::make_pair("yz", "gftrjr5y4agwe3ta"));
-        m.insert(NAMESPACE::make_pair("64", "mhj,i;y9o67eysetrgerg"));
+        m.insert(make_pair("12345", "etsriueruy394w"));
+        m.insert(make_pair("abcd", "sfdge4ta4tqtawefa"));
+        m.insert(make_pair("123", "adfgagrawetawtawef"));
+        m.insert(make_pair("1234", "asdfgaetfawfasdf"));
+        m.insert(make_pair("ab", "adfawtawefgzsdfg"));
+        m.insert(make_pair("yz", "gftrjr5y4agwe3ta"));
+        m.insert(make_pair("64", "mhj,i;y9o67eysetrgerg"));
 
         it = m.find("12345");
 
@@ -1968,7 +1968,7 @@ void map_test_find()
 
 		intmap m;
 
-		m.insert(NAMESPACE::make_pair(123, "Hello"));
+		m.insert(make_pair(123, "Hello"));
 
 		if (m.find(0) != m.end()) {
 			PRINT_PAIR_PTR(m.find(0));
@@ -1983,9 +1983,9 @@ void map_test_get_allocator()
 {
     intmap m;
 
-	std::allocator<NAMESPACE::pair<const int, std::string> > alloc = m.get_allocator();
+	std::allocator<pair<const int, std::string> > alloc = m.get_allocator();
 
-    NAMESPACE::pair<const int, std::string>* buff = alloc.allocate(64);
+    pair<const int, std::string>* buff = alloc.allocate(64);
 
     alloc.deallocate(buff, 64);
 }
@@ -2050,52 +2050,52 @@ void map_test_insert()
     SETUP_ARRAYS();
 
     {
-        typedef NAMESPACE::pair<intmap::iterator, bool> ins_pair;
+        typedef pair<intmap::iterator, bool> ins_pair;
 
         intmap m;
 
-        ins_pair p = m.insert(NAMESPACE::make_pair(64, "64str"));
+        ins_pair p = m.insert(make_pair(64, "64str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair(64, "Double"));
+        p = m.insert(make_pair(64, "Double"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair(0, "0str"));
+        p = m.insert(make_pair(0, "0str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair(-23, "-23str"));
+        p = m.insert(make_pair(-23, "-23str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair(64, "dfgs"));
+        p = m.insert(make_pair(64, "dfgs"));
 
         PRINT_INS_PAIR(p);
     }
     {
-        typedef NAMESPACE::pair<strmap::iterator, bool> ins_pair;
+        typedef pair<strmap::iterator, bool> ins_pair;
 
         strmap m;
 
-        ins_pair p = m.insert(NAMESPACE::make_pair("64", "64str"));
+        ins_pair p = m.insert(make_pair("64", "64str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair("64n", "Double"));
+        p = m.insert(make_pair("64n", "Double"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair("0n", "0str"));
+        p = m.insert(make_pair("0n", "0str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair("-23n", "-23str"));
+        p = m.insert(make_pair("-23n", "-23str"));
 
         PRINT_INS_PAIR(p);
 
-        p = m.insert(NAMESPACE::make_pair("64n", "dfgs"));
+        p = m.insert(make_pair("64n", "dfgs"));
 
         PRINT_INS_PAIR(p);
     }
@@ -2109,26 +2109,26 @@ void map_test_insert_hint()
     {
         intmap m;
 
-        intmap::iterator it = m.insert(m.end(), NAMESPACE::make_pair(64, "Gamepak"));
+        intmap::iterator it = m.insert(m.end(), make_pair(64, "Gamepak"));
 
         PRINT_PAIR_REF(*it);
 
-        it = m.insert(m.end(), NAMESPACE::make_pair(64, "Test"));
+        it = m.insert(m.end(), make_pair(64, "Test"));
 
         PRINT_PAIR_REF(*it);
 
-        it = m.insert(m.end(), NAMESPACE::make_pair(100, "100$"));
+        it = m.insert(m.end(), make_pair(100, "100$"));
 
         PRINT_PAIR_REF(*it);
 
         it = m.end();
         --it;
 
-        it = m.insert(it, NAMESPACE::make_pair(100, "12345"));
+        it = m.insert(it, make_pair(100, "12345"));
 
         PRINT_PAIR_REF(*it);
 
-        it = m.insert(it, NAMESPACE::make_pair(69, "420"));
+        it = m.insert(it, make_pair(69, "420"));
 
         PRINT_PAIR_REF(*it);
     }
@@ -2428,19 +2428,19 @@ void map_test_lower_bound()
     {
         intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        m.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
-        m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        m.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+        m.insert(make_pair(34, "kljd9834iuhwet"));
+        m.insert(make_pair(3468, "dfghe45sywu4hsr"));
+        m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+        m.insert(make_pair(89548945894, "jtt5454wujtjse"));
+        m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+        m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        m.insert(make_pair(4, "asdfhfjgh54w3ag"));
+        m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        m.insert(make_pair(453834782, "juytje54yaerdrj"));
+        m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+        m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         intmap::iterator b = m.lower_bound(98583944);
 
@@ -2486,7 +2486,7 @@ void map_test_lower_bound()
 
         PRINT_BOUND(b, m.end());
 
-        m.insert(NAMESPACE::make_pair(std::numeric_limits<int>::max(), "max"));
+        m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
 
         b = m.lower_bound(std::numeric_limits<int>::max());
 
@@ -2496,19 +2496,19 @@ void map_test_lower_bound()
     {
         intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        temp.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
-        temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        temp.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+        temp.insert(make_pair(34, "kljd9834iuhwet"));
+        temp.insert(make_pair(3468, "dfghe45sywu4hsr"));
+        temp.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+        temp.insert(make_pair(89548945894, "jtt5454wujtjse"));
+        temp.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+        temp.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        temp.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        temp.insert(make_pair(4, "asdfhfjgh54w3ag"));
+        temp.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        temp.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        temp.insert(make_pair(453834782, "juytje54yaerdrj"));
+        temp.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+        temp.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         const intmap m(temp);
 
@@ -2614,7 +2614,7 @@ void map_test_random()
 
         //PRINT_ALL(m);
 
-        //it = m.insert(m.begin(), NAMESPACE::make_pair("", "test"));
+        //it = m.insert(m.begin(), make_pair("", "test"));
 
         //PRINT_LINE("Count:", m.count(""));
 
@@ -2642,12 +2642,12 @@ void map_test_random()
     }
 
     {
-		NAMESPACE::map<int, int, std::less<int>, std::allocator<NAMESPACE::pair<const int, int> > >
+		map<int, int, std::less<int>, std::allocator<pair<const int, int> > >
 			m;
 
 		for (int i = 0; i < 500000; ++i) {
-			//m.insert(NAMESPACE::make_pair(rand(), rand()));
-			m.insert(NAMESPACE::make_pair(i, i));
+			//m.insert(make_pair(rand(), rand()));
+			m.insert(make_pair(i, i));
 		}
 
 		PRINT_ALL(m);
@@ -2790,7 +2790,7 @@ void map_test_swap()
         intmap m1(intstr_arr, intstr_arr + 32);
         intmap m2;
 
-        NAMESPACE::swap(m1, m2);
+        swap(m1, m2);
 
         PRINT_ALL(m1);
         PRINT_ALL(m2);
@@ -2807,8 +2807,8 @@ void map_test_swap()
         PRINT_ALL(m1);
         PRINT_ALL(m2);
 
-        m1.insert(NAMESPACE::make_pair(64, "N64"));
-        NAMESPACE::swap(m1, m2);
+        m1.insert(make_pair(64, "N64"));
+        swap(m1, m2);
 
         PRINT_ALL(m1);
         PRINT_ALL(m2);
@@ -2831,7 +2831,7 @@ void map_test_swap()
 
 #define CHECK_TYPEDEF(type)                                                                        \
     {                                                                                              \
-        NAMESPACE::map<int, unsigned int>::type a = NAMESPACE::map<int, unsigned int>::type();     \
+        map<int, unsigned int>::type a = map<int, unsigned int>::type();     \
         (void)a;                                                                                   \
     }
 
@@ -2852,10 +2852,10 @@ void map_check_typedefs()
     CHECK_TYPEDEF(const_reverse_iterator);
 
     {
-        NAMESPACE::map<int, unsigned int>::value_type b =
-            NAMESPACE::map<int, unsigned int>::value_type(-11, 85);
-        NAMESPACE::map<int, unsigned int>::reference c = b;
-        NAMESPACE::map<int, unsigned int>::const_reference d = b;
+        map<int, unsigned int>::value_type b =
+            map<int, unsigned int>::value_type(-11, 85);
+        map<int, unsigned int>::reference c = b;
+        map<int, unsigned int>::const_reference d = b;
         (void)b;
         (void)c;
         (void)d;
@@ -2869,19 +2869,19 @@ void map_test_upper_bound()
     {
         intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        m.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        m.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        m.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
-        m.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        m.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        m.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        m.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        m.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        m.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        m.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        m.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        m.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+        m.insert(make_pair(34, "kljd9834iuhwet"));
+        m.insert(make_pair(3468, "dfghe45sywu4hsr"));
+        m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+        m.insert(make_pair(89548945894, "jtt5454wujtjse"));
+        m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+        m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        m.insert(make_pair(4, "asdfhfjgh54w3ag"));
+        m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        m.insert(make_pair(453834782, "juytje54yaerdrj"));
+        m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+        m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         intmap::iterator b = m.upper_bound(98583944);
 
@@ -2927,7 +2927,7 @@ void map_test_upper_bound()
 
         PRINT_BOUND(b, m.end());
 
-        m.insert(NAMESPACE::make_pair(std::numeric_limits<int>::max(), "max"));
+        m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
 
         b = m.upper_bound(std::numeric_limits<int>::max());
 
@@ -2937,19 +2937,19 @@ void map_test_upper_bound()
     {
         intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        temp.insert(NAMESPACE::make_pair(34, "kljd9834iuhwet"));
-        temp.insert(NAMESPACE::make_pair(3468, "dfghe45sywu4hsr"));
-        temp.insert(NAMESPACE::make_pair(96533, "sdfghthrdfg5456ik"));
-        temp.insert(NAMESPACE::make_pair(89548945894, "jtt5454wujtjse"));
-        temp.insert(NAMESPACE::make_pair(7754322, "w4wt5u4wjhstrhj"));
-        temp.insert(NAMESPACE::make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        temp.insert(NAMESPACE::make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        temp.insert(NAMESPACE::make_pair(4, "asdfhfjgh54w3ag"));
-        temp.insert(NAMESPACE::make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        temp.insert(NAMESPACE::make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        temp.insert(NAMESPACE::make_pair(453834782, "juytje54yaerdrj"));
-        temp.insert(NAMESPACE::make_pair(19458942, "j567uysdts56y6uj5r"));
-        temp.insert(NAMESPACE::make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+        temp.insert(make_pair(34, "kljd9834iuhwet"));
+        temp.insert(make_pair(3468, "dfghe45sywu4hsr"));
+        temp.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+        temp.insert(make_pair(89548945894, "jtt5454wujtjse"));
+        temp.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+        temp.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+        temp.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+        temp.insert(make_pair(4, "asdfhfjgh54w3ag"));
+        temp.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+        temp.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+        temp.insert(make_pair(453834782, "juytje54yaerdrj"));
+        temp.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+        temp.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
         const intmap m(temp);
 
