@@ -154,7 +154,6 @@ class vector
 	explicit vector(const allocator_type& alloc = allocator_type())
 	    : allocator_(alloc), data_(NULL), size_(0), capacity_(0)
 	{
-		assign(0, value_type());
 	}
 
 	// Fill constructor
