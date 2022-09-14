@@ -132,6 +132,19 @@ class vector
 		}
 	}
 
+	void check_alloc_len_(size_type n)
+	{
+		if (n > this->max_size() - this->size())
+			throw std::length_error("vector::reserve");
+	}
+
+	void check_overflow_(size_type n)
+	{
+		if (n > n * 2)
+			throw std::length_error("size_type overflow");
+	}
+
+
   public:
 	/** INTERFACE **/
 
@@ -307,9 +320,8 @@ class vector
 
 	void reserve(size_type n)
 	{
-		if (static_cast<difference_type>(n) < 0 || n > this->max_size())
-			throw std::length_error("vector::reserve");
-		else if (n > capacity_)
+		check_alloc_len_(n);
+		if (n > capacity_)
 		{
 			pointer tmp = allocator_.allocate(n);
 			if (data_)
@@ -381,17 +393,16 @@ class vector
 	/* Modifiers */
 
   protected:
+
 	void reserve_(pointer& old_data, size_type new_capacity, size_type& old_capacity)
 	{
-		if (static_cast<difference_type>(new_capacity) < 0 || new_capacity > this->max_size())
-			throw std::length_error("vector::reserve");
-		else if (new_capacity > old_capacity)
+		check_alloc_len_(new_capacity);
+		if (new_capacity > old_capacity)
 		{
 			pointer new_data = allocator_.allocate(new_capacity);
 			if (old_data)
 			{
-				for (size_type i = 0; i < old_capacity;
-				     ++i) // Since we're calling because old buffer is full then old_capacity == old_data
+				for (size_type i = 0; i < old_capacity; ++i) // Since we're calling because old buffer is full then old_capacity == old_data
 				{
 					allocator_.construct(&new_data[i], old_data[i]);
 					allocator_.destroy(&old_data[i]);
@@ -409,12 +420,19 @@ class vector
 		pointer   tmp          = NULL;
 		size_type new_size     = 0;
 		size_type new_capacity = 0;
-		for (; first != last; ++first)
+		if (first != last)
 		{
-			if (new_capacity == new_size)
-				reserve_(tmp, new_size ? new_size * 2 : 1, new_capacity);
-			allocator_.construct(&tmp[new_size], *first);
+			reserve_(tmp, 1, new_capacity);
+			allocator_.construct(&tmp[0], *first);
 			++new_size;
+			++first;
+			for (; first != last; ++first)
+			{
+				if (new_capacity == new_size)
+					reserve_(tmp, new_size * 2, new_capacity);
+				allocator_.construct(&tmp[new_size], *first);
+				++new_size;
+			}
 		}
 
 		destroy_data_();
@@ -470,7 +488,10 @@ class vector
 	void push_back(const value_type& val)
 	{
 		if (capacity_ == size_)
+		{
+			check_overflow_(size_);
 			reserve(size_ ? size_ * 2 : 1);
+		}
 		allocator_.construct(&data_[size_], val);
 		++size_;
 	}
@@ -489,7 +510,10 @@ class vector
 		size_type       new_size = size_ + 1;
 
 		if (new_size > capacity_)
+		{
+			check_overflow_(new_size);
 			reserve(new_size * 2);
+		}
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, 1);
 		for (; size_ < new_size; ++size_, ++pos)
@@ -506,7 +530,10 @@ class vector
 		size_type       new_size = size_ + n;
 
 		if (new_size > capacity_)
+		{
+			check_overflow_(new_size);
 			reserve(new_size * 2);
+		}
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, n);
 		for (; size_ < new_size; ++size_, ++pos)
@@ -530,13 +557,16 @@ class vector
 		T*              pos;
 		difference_type n        = ft::distance(first, last);
 		difference_type idx      = &*position - data_;
-		size_type       newsize_ = size_ + n;
+		size_type       new_size = size_ + n;
 
-		if (newsize_ > capacity_)
-			reserve(newsize_ * 2);
+		if (new_size > capacity_)
+		{
+			check_overflow_(new_size);
+			reserve(new_size * 2);
+		}
 		pos = data_ + idx;
 		shift_elements_right_by_(pos, n);
-		for (; size_ < newsize_; ++size_, ++pos, ++first)
+		for (; size_ < new_size; ++size_, ++pos, ++first)
 		{
 			allocator_.construct(pos, *first);
 		}
