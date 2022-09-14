@@ -1130,36 +1130,13 @@ void test_vector_reserve()
 	}
 
 	{
-		 vector< int > my_vec;
-		 try {
-			my_vec.reserve( my_vec.max_size() - 1 );
-		} catch ( const std::exception & e ) {
-			cout << e.what() << std::endl;
-		}
+		// vector< int > my_vec;
+		// try {
+		//    my_vec.reserve( my_vec.max_size() - 1 );
+		//} catch ( const std::exception & e ) {
+		//    cout << e.what() << std::endl;
+		//}
 	}
-}
-
-void test_vector_resize()
-{
-	vector< int > my_vec;
-	for (int i = 1; i < 10; i++)
-		my_vec.push_back(i);
-	my_vec.resize(5);
-	my_vec.resize(8, 100);
-	my_vec.resize(13);
-	cout << "my vector contains:";
-	for (vector< int >::size_type i = 0; i < my_vec.size(); ++i)
-		cout << ' ' << my_vec[i];
-	cout << std::endl;
-	my_vec.resize(0);
-	cout << "my vector contains:";
-	for (vector< int >::size_type i = 0; i < my_vec.size(); ++i)
-		cout << ' ' << my_vec[i];
-	cout << std::endl;
-	my_vec.resize(0);
-	for (vector< int >::size_type i = 0; i < my_vec.size(); ++i)
-		cout << ' ' << my_vec[i];
-	cout << std::endl;
 }
 
 void test_vector_size()
@@ -2242,40 +2219,39 @@ void vec_test_swap()
 
 void test_vector()
 {
-	//test_vector_assign();
-	//test_vector_at();
-	//test_vector_back();
-	//test_vector_begin();
-	//test_vector_capacity();
-	//test_vector_clear();
-	//test_vector_constructors();
-	//test_vector_empty();
-	//test_vector_end();
-	//test_vector_erase();
-	//test_vector_front();
-	//test_vector_get_allocator();
-	//test_vector_insert();
-	//test_vector_max_size();
-	//test_vector_operator_bracket();
-	//test_vector_operator_equal();
-	//test_vector_pop_back();
-	//test_vector_push_back();
-	//test_vector_rbegin();
-	//test_vector_relational_operators();
-	//test_vector_rend();
+	test_vector_assign();
+	test_vector_at();
+	test_vector_back();
+	test_vector_begin();
+	test_vector_capacity();
+	test_vector_clear();
+	test_vector_constructors();
+	test_vector_empty();
+	test_vector_end();
+	test_vector_erase();
+	test_vector_front();
+	test_vector_get_allocator();
+	test_vector_insert();
+	test_vector_max_size();
+	test_vector_operator_bracket();
+	test_vector_operator_equal();
+	test_vector_pop_back();
+	test_vector_push_back();
+	test_vector_rbegin();
+	test_vector_relational_operators();
+	test_vector_rend();
 	test_vector_reserve();
-	//test_vector_resize();
-	//test_vector_size();
-	//test_vector_swap();
-	//test_vector_swap_overload();
-	//test_vector_assign_range();
-	//test_vector_comparisons_ge();
-	//vec_test_erase();
-	//vec_test_erase_mixed();
-	//vec_test_insert();
-	//vec_test_insert_size();
-	//vec_test_resize();
-	//vec_test_riterator();
-	//vec_test_riterator_comparisons();
-	//vec_test_swap();
+	test_vector_size();
+	test_vector_swap();
+	test_vector_swap_overload();
+	test_vector_assign_range();
+	test_vector_comparisons_ge();
+	vec_test_erase();
+	vec_test_erase_mixed();
+	vec_test_insert();
+	vec_test_insert_size();
+	vec_test_resize();
+	vec_test_riterator();
+	vec_test_riterator_comparisons();
+	vec_test_swap();
 }

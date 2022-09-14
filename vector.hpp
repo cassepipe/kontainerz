@@ -278,22 +278,9 @@ class vector
 		if (n > size_)
 		{
 			if (n > capacity_)
-			{
-				if (n > this->max_size())
-					throw std::length_error("ft::vector::resize");
-				// Then put data in bigger container
-				pointer tmp = allocator_.allocate(n);
-				for (size_type i = 0; i < size_; ++i)
-				{
-					allocator_.construct(&tmp[i], data_[i]);
-					allocator_.destroy(&data_[i]);
-				}
-				deallocate_data_();
-				data_ = tmp;
-			}
+				reserve(n);
 			for (; size_ < n; ++size_)
 				allocator_.construct(&data_[size_], val);
-			capacity_ = size_;
 		}
 		else if (size_ != 0)
 		{
