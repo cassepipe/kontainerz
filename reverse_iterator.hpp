@@ -205,22 +205,22 @@ bool operator>=(const reverse_iterator< LeftIterator >& lhs, const reverse_itera
 /// NON-MEMBER ARITHMETIC OPERATORS
 
 // To get the distance between to reverse iterators
-template < class Iterator >
-typename reverse_iterator< Iterator >::difference_type operator-(const reverse_iterator< Iterator >& lhs,
-                                                                 const reverse_iterator< Iterator >& rhs)
+template < typename LeftIterator, typename RightIterator >
+typename reverse_iterator< LeftIterator >::difference_type operator-(const reverse_iterator< LeftIterator >& lhs,
+                                                                 const reverse_iterator< RightIterator >& rhs)
 {
 	return rhs.base() - lhs.base();
 }
 
 // To support expression such as ( -n - iterator ) and have it  return an iterator
-template < class Iterator >
+template < typename Iterator >
 reverse_iterator< Iterator > operator+(typename reverse_iterator< Iterator >::difference_type n,
                                        const reverse_iterator< Iterator >&                    rev_it)
 {
 	return reverse_iterator< Iterator >(rev_it.base() - n);
 }
 
-template < class Iterator >
+template < typename Iterator >
 reverse_iterator< Iterator > operator-(typename reverse_iterator< Iterator >::difference_type n,
                                        const reverse_iterator< Iterator >&                    rev_it)
 {

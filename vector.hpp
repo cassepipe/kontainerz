@@ -649,11 +649,11 @@ bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 	return !(lhs > rhs);
 }
 
-template <typename T, typename Alloc>
-inline void swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
-{
-    lhs.swap(rhs);
-}
+//template <typename T, typename Alloc>
+//void swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
+//{
+//    lhs.swap(rhs);
+//}
 
 } // namespace ft
 
