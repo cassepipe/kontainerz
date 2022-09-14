@@ -487,9 +487,6 @@ class map
 			// Need to increment first else erase would invalidate our operator
 			++first;
 			this->erase(key_to_delete);
-#ifdef DEBUG
-			print_dot(1);
-#endif
 		}
 	}
 

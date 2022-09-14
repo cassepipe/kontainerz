@@ -26,7 +26,7 @@ CXXFLAGS		= -Wall -Wextra -std=c++98 -g3 -pedantic-errors
 LDFLAGS			=
 LDLIBS			=
 #Our beloved address sanitizer
-ASAN_FLAG		=  -fsanitize=address
+#ASAN_FLAG		=  -fsanitize=address
 CXXFLAGS		+=	$(ASAN_FLAG)
 LDFLAGS			+=	$(ASAN_FLAG)
 
