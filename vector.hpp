@@ -94,7 +94,7 @@ class vector
 	{
 		if (data_)
 			for (size_type i = 0; i < size_; ++i)
-				allocator_.destroy(&data_[i]);
+				allocator_.destroy(data_ + i);
 	}
 
 	void deallocate_data_()
@@ -206,7 +206,7 @@ class vector
 			size_ = rhs.size_;
 			for (size_type i = 0; i < size_; ++i)
 			{
-				allocator_.construct(&data_[i], rhs.data_[i]);
+				allocator_.construct(data_ + i, *(rhs.data_ + i));
 			}
 		}
 		return *this;
@@ -279,13 +279,13 @@ class vector
 			if (n > capacity_)
 				reserve(n);
 			for (; size_ < n; ++size_)
-				allocator_.construct(&data_[size_], val);
+				allocator_.construct(data_ + size_, val);
 		}
 		else if (size_ != 0)
 		{
 			for (--size_; size_ > n; --size_)
-				allocator_.destroy(&data_[size_]);
-			allocator_.destroy(&data_[size_--]);
+				allocator_.destroy(data_ + size_);
+			allocator_.destroy(data_ + size_--);
 			++size_;
 			capacity_ = size_;
 		}
@@ -314,8 +314,8 @@ class vector
 			{
 				for (size_type i = 0; i < size_; ++i)
 				{
-					allocator_.construct(&tmp[i], data_[i]);
-					allocator_.destroy(&data_[i]);
+					allocator_.construct(tmp + i, data_[i]);
+					allocator_.destroy(data_ + i);
 				}
 				deallocate_data_();
 			}
@@ -390,8 +390,8 @@ class vector
 			{
 				for (size_type i = 0; i < old_capacity; ++i) // Since we're calling because old buffer is full then old_capacity == old_data
 				{
-					allocator_.construct(&new_data[i], old_data[i]);
-					allocator_.destroy(&old_data[i]);
+					allocator_.construct(new_data + i, *(old_data + i));
+					allocator_.destroy(old_data + i);
 				}
 				allocator_.deallocate(old_data, old_capacity);
 			}
@@ -409,14 +409,14 @@ class vector
 		if (first != last)
 		{
 			reserve_(tmp, 1, new_capacity);
-			allocator_.construct(&tmp[0], *first);
+			allocator_.construct(tmp, *first);
 			++new_size;
 			++first;
 			for (; first != last; ++first)
 			{
 				if (new_capacity == new_size)
 					reserve_(tmp, new_size * 2, new_capacity);
-				allocator_.construct(&tmp[new_size], *first);
+				allocator_.construct(tmp + new_size, *first);
 				++new_size;
 			}
 		}
@@ -438,7 +438,7 @@ class vector
 		pointer tmp = allocator_.allocate(new_size);
 
 		for (size_type i = 0; i < new_size; ++i)
-			allocator_.construct(&tmp[i], first[i]);
+			allocator_.construct(tmp + i, *(first + i));
 
 		destroy_data_();
 		deallocate_data_();
@@ -468,7 +468,7 @@ class vector
 		capacity_ = size_;
 		;
 		for (size_type i = 0; i < size_; ++i)
-			allocator_.construct(&data_[i], val);
+			allocator_.construct(data_ + i, val);
 	}
 
 	void push_back(const value_type& val)
@@ -478,14 +478,14 @@ class vector
 			check_overflow_(size_);
 			reserve(size_ ? size_ * 2 : 1);
 		}
-		allocator_.construct(&data_[size_], val);
+		allocator_.construct(data_ + size_, val);
 		++size_;
 	}
 
 	void pop_back()
 	{
 		--size_;
-		allocator_.destroy(&data_[size_]);
+		allocator_.destroy(data_ + size_);
 	}
 
 	iterator insert(iterator position, const value_type& val)
@@ -602,7 +602,7 @@ class vector
 	{
 		while (size_--)
 		{
-			allocator_.destroy(&data_[size_]);
+			allocator_.destroy(data_ + size_);
 		}
 		++size_;
 	}
