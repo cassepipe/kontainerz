@@ -43,7 +43,8 @@ class stack
 
 	stack& operator=(const stack& other)
 	{
-		*this = other.container_;
+		this->container_ = other.container_;
+		return *this;
 	}
 
 	/* Element Access */

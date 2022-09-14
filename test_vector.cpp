@@ -1130,12 +1130,12 @@ void test_vector_reserve()
 	}
 
 	{
-		// vector< int > my_vec;
-		// try {
-		//    my_vec.reserve( my_vec.max_size() - 1 );
-		//} catch ( const std::exception & e ) {
-		//    cout << e.what() << std::endl;
-		//}
+		 vector< int > my_vec;
+		 try {
+			my_vec.reserve( my_vec.max_size() - 1 );
+		} catch ( const std::exception & e ) {
+			cout << e.what() << std::endl;
+		}
 	}
 }
 

@@ -118,6 +118,64 @@ void test_stack_top()
 	cout << "myStack.top() is now " << myStack.top() << endl;
 }
 
+#include "prelude.hpp"
+
+void stack_test_misc()
+{
+    {
+        NAMESPACE::stack<int, NAMESPACE::vector<int, std::allocator<int> > > st;
+
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+
+        st.push(34);
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+
+        st.push(64);
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+
+        st.top() = 1;
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+
+        st.push(128);
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Top:", st.top());
+
+        const NAMESPACE::stack<int, NAMESPACE::vector<int, std::allocator<int> > > st1(st);
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+
+        st.pop();
+        st.pop();
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+
+        st.pop();
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+
+        st = st1;
+
+        PRINT_LINE("Size:", st.size());
+        PRINT_LINE("Empty:", (st.empty() ? "true" : "false"));
+        PRINT_LINE("Top:", st.top());
+    }
+}
+
 void test_stack()
 {
 	test_stack_constructor();
