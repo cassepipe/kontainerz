@@ -1836,17 +1836,18 @@ void vec_test_resize()
 		CHECK_AND_PRINT_ALL(v);
 	}
 
-	//{
-	//    NAMESPACE::vector<big_struct, track_allocator<big_struct> > v;
+	{
+		vector<big_struct, std::allocator<big_struct> > v;
 
-	//    try {
-	//        v.resize(v.max_size() + 1);
-	//        PRINT_MSG("Bad reserve");
-	//    } catch (std::length_error&) {
-	//        PRINT_MSG("Length exception");
-	//    }
-	//    CATCH_UNHANDLED_EX();
-	//}
+		try {
+			v.resize(v.max_size() + 1);
+			cout << ("bad reserve\n");
+		} catch (std::length_error&) {
+			cout << ("length exception\n");
+		} catch (std::exception&) {
+			cout << ("unknown exception\n");
+		}
+	}
 }
 
 #include <algorithm>
@@ -2241,40 +2242,40 @@ void vec_test_swap()
 
 void test_vector()
 {
-	//test_vector_assign();
-	//test_vector_at();
-	//test_vector_back();
-	//test_vector_begin();
-	//test_vector_capacity();
-	//test_vector_clear();
-	//test_vector_constructors();
-	//test_vector_empty();
-	//test_vector_end();
-	//test_vector_erase();
-	//test_vector_front();
-	//test_vector_get_allocator();
-	//test_vector_insert();
+	test_vector_assign();
+	test_vector_at();
+	test_vector_back();
+	test_vector_begin();
+	test_vector_capacity();
+	test_vector_clear();
+	test_vector_constructors();
+	test_vector_empty();
+	test_vector_end();
+	test_vector_erase();
+	test_vector_front();
+	test_vector_get_allocator();
+	test_vector_insert();
 	test_vector_max_size();
-	//test_vector_operator_bracket();
-	//test_vector_operator_equal();
-	//test_vector_pop_back();
-	//test_vector_push_back();
-	//test_vector_rbegin();
-	//test_vector_relational_operators();
-	//test_vector_rend();
-	//test_vector_reserve();
-	//test_vector_resize();
-	//test_vector_size();
-	//test_vector_swap();
-	//test_vector_swap_overload();
-	//test_vector_assign_range();
-	//test_vector_comparisons_ge();
-	//vec_test_erase();
-	//vec_test_erase_mixed();
-	//vec_test_insert();
-	//vec_test_insert_size();
-	//vec_test_resize();
-	//vec_test_riterator();
-	//vec_test_riterator_comparisons();
-	//vec_test_swap();
+	test_vector_operator_bracket();
+	test_vector_operator_equal();
+	test_vector_pop_back();
+	test_vector_push_back();
+	test_vector_rbegin();
+	test_vector_relational_operators();
+	test_vector_rend();
+	test_vector_reserve();
+	test_vector_resize();
+	test_vector_size();
+	test_vector_swap();
+	test_vector_swap_overload();
+	test_vector_assign_range();
+	test_vector_comparisons_ge();
+	vec_test_erase();
+	vec_test_erase_mixed();
+	vec_test_insert();
+	vec_test_insert_size();
+	vec_test_resize();
+	vec_test_riterator();
+	vec_test_riterator_comparisons();
+	vec_test_swap();
 }
