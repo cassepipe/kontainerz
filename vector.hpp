@@ -306,17 +306,16 @@ class vector
 
 	void reserve(size_type n)
 	{
-		check_alloc_len_(n);
+		check_alloc_len_(n); // May throw
 		if (n > capacity_)
 		{
 			pointer tmp = allocator_.allocate(n);
 			if (data_)
 			{
 				for (size_type i = 0; i < size_; ++i)
-				{
 					allocator_.construct(tmp + i, data_[i]);
+				for (size_type i = 0; i < size_; ++i)
 					allocator_.destroy(data_ + i);
-				}
 				deallocate_data_();
 			}
 			data_     = tmp;
