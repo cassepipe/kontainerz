@@ -538,7 +538,7 @@ class vector
 
 	template < typename RandomAccessIterator >
 	void insert(iterator position, RandomAccessIterator first, RandomAccessIterator last,
-	            std::random_access_iterator_tag)
+	            std::bidirectional_iterator_tag)
 	{
 		T*              pos;
 		difference_type n        = ft::distance(first, last);
