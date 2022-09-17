@@ -590,11 +590,12 @@ class vector
 	}
 
 	template <typename A>
-	void swap(vector<T, A>& x)
+	void swap(vector<T, A>& other)
 	{
-		vector< T > tmp = *this;
-		*this           = x;
-		x               = tmp;
+		std::swap(allocator_, other.allocator_);
+		std::swap(data_, other.data_);
+		std::swap(size_, other.size_);
+		std::swap(capacity_, other.capacity_);
 	}
 
 	void clear()
@@ -647,12 +648,6 @@ bool operator<=(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	return !(lhs > rhs);
 }
-
-//template <typename T, typename Alloc>
-//void swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs)
-//{
-//    lhs.swap(rhs);
-//}
 
 } // namespace ft
 

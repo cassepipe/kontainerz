@@ -2307,44 +2307,76 @@ void		rite2(void)
 	printSize(vct, true);
 }
 
+int test_swap()
+{
+	vector<int> foo(3, 15);
+	vector<int> bar(5, 42);
+	
+	vector<int>::const_iterator it_foo = foo.begin();
+	vector<int>::const_iterator it_bar = bar.begin();
+
+	std::cout << "BEFORE SWAP" << std::endl;
+
+	std::cout << "foo contains:" << std::endl;
+	printSize(foo);
+	std::cout << "bar contains:" << std::endl;
+	printSize(bar);
+
+	foo.swap(bar);
+
+	std::cout << "AFTER SWAP" << std::endl;
+
+	std::cout << "foo contains:" << std::endl;
+	printSize(foo);
+	std::cout << "bar contains:" << std::endl;
+	printSize(bar);
+
+	std::cout << "Iterator validity:" << std::endl;
+	std::cout << (it_foo == bar.begin()) << std::endl;
+	std::cout << (it_bar == foo.begin()) << std::endl;
+
+	return (0);
+}
+
 
 void test_vector()
 {
-	test_vector_assign();
-	test_vector_at();
-	test_vector_back();
-	test_vector_begin();
-	test_vector_capacity();
-	test_vector_clear();
-	test_vector_constructors();
-	test_vector_empty();
-	test_vector_end();
-	test_vector_erase();
-	test_vector_front();
-	test_vector_get_allocator();
-	test_vector_insert();
-	test_vector_max_size();
-	test_vector_operator_bracket();
-	test_vector_operator_equal();
-	test_vector_pop_back();
-	test_vector_push_back();
-	test_vector_rbegin();
-	test_vector_relational_operators();
-	test_vector_rend();
-	test_vector_reserve();
-	test_vector_size();
-	test_vector_swap();
-	test_vector_swap_overload();
-	test_vector_assign_range();
-	test_vector_comparisons_ge();
-	vec_test_erase();
-	vec_test_erase_mixed();
-	vec_test_insert();
-	vec_test_insert_size();
-	vec_test_resize();
-	vec_test_riterator();
-	vec_test_riterator_comparisons();
-	vec_test_swap();
-	relationalite();
-	rite2();
+	//test_vector_assign();
+	//test_vector_at();
+	//test_vector_back();
+	//test_vector_begin();
+	//test_vector_capacity();
+	//test_vector_clear();
+	//test_vector_constructors();
+	//test_vector_empty();
+	//test_vector_end();
+	//test_vector_erase();
+	//test_vector_front();
+	//test_vector_get_allocator();
+	//test_vector_insert();
+	//test_vector_max_size();
+	//test_vector_operator_bracket();
+	//test_vector_operator_equal();
+	//test_vector_pop_back();
+	//test_vector_push_back();
+	//test_vector_rbegin();
+	//test_vector_relational_operators();
+	//test_vector_rend();
+	//test_vector_reserve();
+	//test_vector_size();
+	//test_vector_swap();
+	//test_vector_swap_overload();
+	//test_vector_assign_range();
+	//test_vector_comparisons_ge();
+	//vec_test_erase();
+	//vec_test_erase_mixed();
+	//vec_test_insert();
+	//vec_test_insert_size();
+	//vec_test_resize();
+	//vec_test_riterator();
+	//vec_test_riterator_comparisons();
+	//vec_test_swap();
+	//relationalite();
+	//rite2();
+	test_swap();
 }
