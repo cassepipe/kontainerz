@@ -20,6 +20,30 @@
 
 #include "prelude.hpp"
 
+static bool fncomp(const char lhs, const char rhs)
+{
+	return lhs < rhs;
+}
+
+struct classcomp
+{
+	bool operator()(const char& lhs, const char& rhs) const
+	{
+		return lhs < rhs;
+	}
+};
+
+template < typename T, typename U, typename Comp >
+static void printMap(map< T, U, Comp > const& toPrint, std::string const& name)
+{
+	cout << name << ":" << endl;
+	for (typename map< T, U >::const_iterator it = toPrint.begin(); it != toPrint.end(); it++)
+	{
+		cout << "first:\t" << it->first << " second:\t" << it->second << endl;
+	}
+	cout << endl;
+}
+
 template < typename It >
 void print_map(It first, It last)
 {
@@ -54,6 +78,13 @@ void print_map(It first, It last)
 		PRINT_LINE("Key:", (p).first);    \
 		PRINT_LINE("Value:", (p).second); \
 	}
+
+#define PRINT_INS_PAIR(p)                                                                          \
+    {                                                                                              \
+        PRINT_PAIR_REF(*p.first);                                                                  \
+        PRINT_LINE("Inserted:", p.second ? "true" : "false");                                      \
+    }
+
 
 template < typename T >
 void init_array_int_str(NAMESPACE::pair< int, std::string >* arr, std::size_t size)
@@ -129,6 +160,7 @@ void init_array_str_str(NAMESPACE::pair< std::string, std::string >* arr, std::s
 typedef NAMESPACE::map< int, std::string, std::less< int >,
                         std::allocator< NAMESPACE::pair< const int, std::string > > >
     intmap;
+
 typedef NAMESPACE::map< std::string, std::string, std::less< std::string >,
                         std::allocator< NAMESPACE::pair< const std::string, std::string > > >
     strmap;

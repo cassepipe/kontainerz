@@ -14,6 +14,7 @@
 #define TEST_H
 
 #include <stdexcept>
+#include <limits>
 
 #include "map.hpp"
 #include "stack.hpp"
