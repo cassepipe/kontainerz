@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_prelude.hpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/08 20:49:46 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/24 13:27:12 by mleblanc         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#pragma once
+#ifndef MAP_PRELUDE_HPP
+#define MAP_PRELUDE_HPP
 
 #include "map.hpp"
 #include <cstddef>
@@ -18,6 +7,7 @@
 #include <map>
 #include <string>
 
+#include "test.hpp"
 #include "prelude.hpp"
 
 static bool fncomp(const char lhs, const char rhs)
@@ -184,3 +174,5 @@ typedef NAMESPACE::map< std::string, std::string, std::less< std::string >,
 		PRINT_BOUND(p.first, end);                         \
 		PRINT_BOUND(p.second, end);                        \
 	}
+
+#endif /* MAP_PRELUDE_HPP */

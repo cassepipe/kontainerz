@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prelude.hpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/08 20:35:37 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/17 16:29:09 by mleblanc         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#pragma once
+#ifndef PRELUDE_HPP
+#define PRELUDE_HPP
 
 #include <cstdlib>
 #include <sstream>
@@ -57,16 +46,6 @@ void print_range(Iter first, Iter last)
 		PRINT_FILE_LINE();                  \
 	}
 
-template < typename ForwardIt, typename T >
-void iota(ForwardIt first, ForwardIt last, T value = T())
-{
-	while (first != last)
-	{
-		*first++ = value;
-		++value;
-	}
-}
-
 #ifndef NAMESPACE
 #define NAMESPACE ft
 #endif
@@ -82,6 +61,16 @@ void iota(ForwardIt first, ForwardIt last, T value = T())
 		leak_checker::check_all(); \
 	}
 #endif
+
+template < typename ForwardIt, typename T >
+void iota(ForwardIt first, ForwardIt last, T value = T())
+{
+	while (first != last)
+	{
+		*first++ = value;
+		++value;
+	}
+}
 
 struct true_type
 {
@@ -109,3 +98,5 @@ struct big_struct
 {
 	long data[2000];
 };
+
+#endif /* PRELUDE_HPP */

@@ -1131,10 +1131,13 @@ void test_vector_reserve()
 	}
 
 	{
-		 vector< int > my_vec;
-		 try {
-			my_vec.reserve( my_vec.max_size() - 1 );
-		} catch ( const std::exception & e ) {
+		vector< int > my_vec;
+		try
+		{
+			my_vec.reserve(my_vec.max_size() - 1);
+		}
+		catch (const std::exception& e)
+		{
 			cout << e.what() << std::endl;
 		}
 	}
@@ -1190,7 +1193,6 @@ void test_vector_swap_overload()
 }
 
 /* DANGER ZONE */
-
 
 void test_vector_assign_range()
 {
@@ -1775,12 +1777,15 @@ void vec_test_insert_size()
 	{
 		strvector v(5000, "Test");
 
-		try {
+		try
+		{
 			v.insert(v.begin() + 115, (std::size_t)PTRDIFF_MAX, "123");
-		} catch (std::length_error&) {
+		}
+		catch (std::length_error&)
+		{
 			PRINT_MSG("Length exception");
 		}
-	//    CATCH_UNHANDLED_EX();
+		//    CATCH_UNHANDLED_EX();
 	}
 }
 
@@ -1813,14 +1818,19 @@ void vec_test_resize()
 	}
 
 	{
-		vector<big_struct, std::allocator<big_struct> > v;
+		vector< big_struct, std::allocator< big_struct > > v;
 
-		try {
+		try
+		{
 			v.resize(v.max_size() + 1);
 			cout << ("bad reserve\n");
-		} catch (std::length_error&) {
+		}
+		catch (std::length_error&)
+		{
 			cout << ("length exception\n");
-		} catch (std::exception&) {
+		}
+		catch (std::exception&)
+		{
 			cout << ("unknown exception\n");
 		}
 	}
@@ -2218,21 +2228,21 @@ void vec_test_swap()
 
 #define TESTED_TYPE int
 
-template <class T, class Alloc>
-void	cmp(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+template < class T, class Alloc >
+void cmp(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
 {
 	static int i = 0;
 
-	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "############### [" << i++ << "] ###############" << std::endl;
 	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
-	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+	std::cout << "lt: " << (lhs < rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs > rhs) << " | ge: " << (lhs >= rhs) << std::endl;
 }
 
 void relationalite(void)
 {
-	vector<TESTED_TYPE> vct(4);
-	vector<TESTED_TYPE> vct2(4);
+	vector< TESTED_TYPE > vct(4);
+	vector< TESTED_TYPE > vct2(4);
 
 	cmp(vct, vct);  // 0
 	cmp(vct, vct2); // 1
@@ -2251,39 +2261,38 @@ void relationalite(void)
 
 	cmp(vct, vct2); // 6
 	cmp(vct2, vct); // 7
-
 }
 
-#define T_SIZE_TYPE typename vector<T>::size_type                                                                                   
-                                                                                
-template <typename T>                                                           
-void    printSize(vector<T> const &vct, bool print_content = true)
-{                                                                               
-    const T_SIZE_TYPE size = vct.size();                                           
-    const T_SIZE_TYPE capacity = vct.capacity();                                   
-    const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";             
-    // Cannot limit capacity's max value because it's implementation dependent  
-                                                                                   
-    std::cout << "size: " << size << std::endl;                                    
-    std::cout << "capacity: " << isCapacityOk << std::endl;                        
-    std::cout << "max_size: " << vct.max_size() << std::endl;                      
-    if (print_content)                                                             
-    {                                                                              
-        typename vector<T>::const_iterator it = vct.begin();  
-        typename vector<T>::const_iterator ite = vct.end();   
-        std::cout << std::endl << "Content is:" << std::endl;                      
-        for (; it != ite; ++it)                                                    
-            std::cout << "- " << *it << std::endl;                                 
-    }                                                                              
-    std::cout << "###############################################" << std::endl;
-}    
+#define T_SIZE_TYPE typename vector< T >::size_type
 
-void		rite2(void)
+template < typename T >
+void printSize(vector< T > const& vct, bool print_content = true)
 {
-	const int size = 5;
-	vector<TESTED_TYPE> vct(size);
-	vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
-	vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
+	const T_SIZE_TYPE size         = vct.size();
+	const T_SIZE_TYPE capacity     = vct.capacity();
+	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
+	// Cannot limit capacity's max value because it's implementation dependent
+
+	std::cout << "size: " << size << std::endl;
+	std::cout << "capacity: " << isCapacityOk << std::endl;
+	std::cout << "max_size: " << vct.max_size() << std::endl;
+	if (print_content)
+	{
+		typename vector< T >::const_iterator it  = vct.begin();
+		typename vector< T >::const_iterator ite = vct.end();
+		std::cout << std::endl << "Content is:" << std::endl;
+		for (; it != ite; ++it)
+			std::cout << "- " << *it << std::endl;
+	}
+	std::cout << "###############################################" << std::endl;
+}
+
+void rite2(void)
+{
+	const int                                     size = 5;
+	vector< TESTED_TYPE >                         vct(size);
+	vector< TESTED_TYPE >::reverse_iterator       it  = vct.rbegin();
+	vector< TESTED_TYPE >::const_reverse_iterator ite = vct.rbegin();
 
 	for (int i = 0; i < size; ++i)
 		it[i] = (size - i) * 5;
@@ -2308,11 +2317,11 @@ void		rite2(void)
 
 int test_swap()
 {
-	vector<int> foo(3, 15);
-	vector<int> bar(5, 42);
-	
-	vector<int>::const_iterator it_foo = foo.begin();
-	vector<int>::const_iterator it_bar = bar.begin();
+	vector< int > foo(3, 15);
+	vector< int > bar(5, 42);
+
+	vector< int >::const_iterator it_foo = foo.begin();
+	vector< int >::const_iterator it_bar = bar.begin();
 
 	std::cout << "BEFORE SWAP" << std::endl;
 
@@ -2337,45 +2346,44 @@ int test_swap()
 	return (0);
 }
 
-
 void test_vector()
 {
-	//test_vector_assign();
-	//test_vector_at();
-	//test_vector_back();
-	//test_vector_begin();
-	//test_vector_capacity();
-	//test_vector_clear();
-	//test_vector_constructors();
-	//test_vector_empty();
-	//test_vector_end();
-	//test_vector_erase();
-	//test_vector_front();
-	//test_vector_get_allocator();
-	//test_vector_insert();
-	//test_vector_max_size();
-	//test_vector_operator_bracket();
-	//test_vector_operator_equal();
-	//test_vector_pop_back();
-	//test_vector_push_back();
-	//test_vector_rbegin();
-	//test_vector_relational_operators();
-	//test_vector_rend();
-	//test_vector_reserve();
-	//test_vector_size();
-	//test_vector_swap();
-	//test_vector_swap_overload();
-	//test_vector_assign_range();
-	//test_vector_comparisons_ge();
-	//vec_test_erase();
-	//vec_test_erase_mixed();
-	//vec_test_insert();
-	//vec_test_insert_size();
-	//vec_test_resize();
-	//vec_test_riterator();
-	//vec_test_riterator_comparisons();
-	//vec_test_swap();
-	//relationalite();
-	//rite2();
+	// test_vector_assign();
+	// test_vector_at();
+	// test_vector_back();
+	// test_vector_begin();
+	// test_vector_capacity();
+	// test_vector_clear();
+	// test_vector_constructors();
+	// test_vector_empty();
+	// test_vector_end();
+	// test_vector_erase();
+	// test_vector_front();
+	// test_vector_get_allocator();
+	// test_vector_insert();
+	// test_vector_max_size();
+	// test_vector_operator_bracket();
+	// test_vector_operator_equal();
+	// test_vector_pop_back();
+	// test_vector_push_back();
+	// test_vector_rbegin();
+	// test_vector_relational_operators();
+	// test_vector_rend();
+	// test_vector_reserve();
+	// test_vector_size();
+	// test_vector_swap();
+	// test_vector_swap_overload();
+	// test_vector_assign_range();
+	// test_vector_comparisons_ge();
+	// vec_test_erase();
+	// vec_test_erase_mixed();
+	// vec_test_insert();
+	// vec_test_insert_size();
+	// vec_test_resize();
+	// vec_test_riterator();
+	// vec_test_riterator_comparisons();
+	// vec_test_swap();
+	// relationalite();
+	// rite2();
 	test_swap();
 }

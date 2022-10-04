@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vector_prelude.hpp                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/08 20:39:36 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/24 13:31:36 by mleblanc         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#pragma once
+#ifndef VECTOR_PRELUDE_HPP
+#define VECTOR_PRELUDE_HPP
 
 #include "vector.hpp"
 #include <vector>
@@ -119,3 +108,5 @@ void print(const T& x)
 {
 	std::cout << x << '\n';
 }
+
+#endif /* VECTOR_PRELUDE_HPP */

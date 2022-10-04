@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.hpp"
 #include "map_prelude.hpp"
+#include "test.hpp"
 
 void visual_test()
 {
@@ -48,7 +48,6 @@ void visual_test()
 #ifdef DEBUG
 	tree.print_dot(1);
 #endif
-
 }
 
 void map_begin()
@@ -92,10 +91,10 @@ void map_clear()
 		m.insert(strstr_arr, strstr_arr + 16);
 		PRINT_ALL(m);
 		m.clear();
-		PRINT_LINE("Size:", m.size()); 
-		cout << "\nMap content:\n";   
-		print_map(m.begin(), m.end()); 
-		cout << endl;            
+		PRINT_LINE("Size:", m.size());
+		cout << "\nMap content:\n";
+		print_map(m.begin(), m.end());
+		cout << endl;
 	}
 }
 
@@ -144,36 +143,36 @@ void map_count()
 			cout << "not ";
 		cout << "an element of my_map" << endl;
 	}
-    SETUP_ARRAYS();
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap::size_type c = m.count(64);
+	SETUP_ARRAYS();
+	{
+		intmap            m(intstr_arr, intstr_arr + intstr_size);
+		intmap::size_type c = m.count(64);
 
-        PRINT_LINE("Count:", c);
-        c = m.count(145);
-        PRINT_LINE("Count:", c);
-        c = m.count(11);
-        PRINT_LINE("Count:", c);
-        m.insert(make_pair(34, "aaaaaaaaaaaaa"));
-        m.insert(make_pair(2, "bbbbbbbbbbbbbbbbbbbbbbbbbbb"));
-        m.insert(make_pair(9, ""));
-        m.insert(make_pair(3, "i"));
-        m.insert(make_pair(22, "sadfkjndskfjn"));
-        m.insert(make_pair(10, "ccccccccccccccccccccccccccccccccccccccccccccc"));
-        c = m.count(34);
-        PRINT_LINE("Count:", c);
-        c = m.count(2);
-        PRINT_LINE("Count:", c);
-        c = m.count(9);
-        PRINT_LINE("Count:", c);
-        m.erase(9);
-        c = m.count(9);
-        PRINT_LINE("Count:", c);
-        c = m.count(10);
-        PRINT_LINE("Count:", c);
-        c = m.count(22);
-        PRINT_LINE("Count:", c);
-    }
+		PRINT_LINE("Count:", c);
+		c = m.count(145);
+		PRINT_LINE("Count:", c);
+		c = m.count(11);
+		PRINT_LINE("Count:", c);
+		m.insert(make_pair(34, "aaaaaaaaaaaaa"));
+		m.insert(make_pair(2, "bbbbbbbbbbbbbbbbbbbbbbbbbbb"));
+		m.insert(make_pair(9, ""));
+		m.insert(make_pair(3, "i"));
+		m.insert(make_pair(22, "sadfkjndskfjn"));
+		m.insert(make_pair(10, "ccccccccccccccccccccccccccccccccccccccccccccc"));
+		c = m.count(34);
+		PRINT_LINE("Count:", c);
+		c = m.count(2);
+		PRINT_LINE("Count:", c);
+		c = m.count(9);
+		PRINT_LINE("Count:", c);
+		m.erase(9);
+		c = m.count(9);
+		PRINT_LINE("Count:", c);
+		c = m.count(10);
+		PRINT_LINE("Count:", c);
+		c = m.count(22);
+		PRINT_LINE("Count:", c);
+	}
 }
 
 void map_empty()
@@ -189,19 +188,19 @@ void map_empty()
 		cout << my_map.begin()->first << "=>" << my_map.begin()->second << endl;
 		my_map.erase(my_map.begin());
 	}
-    SETUP_ARRAYS();
-    {
-        strmap m;
-        PRINT_LINE("Empty:", m.empty() ? "true" : "false");
-        m.insert(make_pair("Hello", "World"));
-        PRINT_LINE("Empty:", m.empty() ? "true" : "false");
-        m.erase(m.begin());
-        PRINT_LINE("Empty:", m.empty() ? "true" : "false");
-    }
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        PRINT_LINE("Empty:", m.empty() ? "true" : "false");
-    }
+	SETUP_ARRAYS();
+	{
+		strmap m;
+		PRINT_LINE("Empty:", m.empty() ? "true" : "false");
+		m.insert(make_pair("Hello", "World"));
+		PRINT_LINE("Empty:", m.empty() ? "true" : "false");
+		m.erase(m.begin());
+		PRINT_LINE("Empty:", m.empty() ? "true" : "false");
+	}
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		PRINT_LINE("Empty:", m.empty() ? "true" : "false");
+	}
 }
 
 void map_end()
@@ -237,9 +236,9 @@ void map_equal_range()
 	cout << "upper_bound points to ";
 	cout << ret.second->first << "=> " << ret.second->second << endl;
 
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
+	{
 		intmap m(intstr_arr, intstr_arr + intstr_size);
 
 		m.insert(make_pair(34, "a"));
@@ -260,25 +259,36 @@ void map_equal_range()
 		m.print_dot(1);
 #endif
 
-		pair<intmap::iterator, intmap::iterator> eq = m.equal_range(98583944);
+		pair< intmap::iterator, intmap::iterator > eq = m.equal_range(98583944);
 		PRINT_EQ_RANGE(eq, m.end());
 
-		eq = m.equal_range(209485948); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458942); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458941); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458943); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(-1); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(3); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(4); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(5); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(0); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(std::numeric_limits<int>::max()); PRINT_EQ_RANGE(eq, m.end());
-		
-		m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
+		eq = m.equal_range(209485948);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458942);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458941);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458943);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(-1);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(3);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(4);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(5);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(0);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(std::numeric_limits< int >::max());
+		PRINT_EQ_RANGE(eq, m.end());
 
-		eq = m.equal_range(std::numeric_limits<int>::max()); PRINT_EQ_RANGE(eq, m.end());
-    }
-    {
+		m.insert(make_pair(std::numeric_limits< int >::max(), "max"));
+
+		eq = m.equal_range(std::numeric_limits< int >::max());
+		PRINT_EQ_RANGE(eq, m.end());
+	}
+	{
 		intmap temp(intstr_arr, intstr_arr + intstr_size);
 
 		temp.insert(make_pair(34, "aaaaaaaaaaaaaaaa"));
@@ -297,28 +307,37 @@ void map_equal_range()
 
 		const intmap m(temp);
 
-		pair<intmap::const_iterator, intmap::const_iterator> eq = m.equal_range(98583944);
+		pair< intmap::const_iterator, intmap::const_iterator > eq = m.equal_range(98583944);
 		PRINT_EQ_RANGE(eq, m.end());
 
-		eq = m.equal_range(209485948); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458942); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458941); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(19458943); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(-1); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(3); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(4); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(5); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(0); PRINT_EQ_RANGE(eq, m.end());
-		eq = m.equal_range(std::numeric_limits<int>::max()); PRINT_EQ_RANGE(eq, m.end());
-    }
-    {
+		eq = m.equal_range(209485948);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458942);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458941);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(19458943);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(-1);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(3);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(4);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(5);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(0);
+		PRINT_EQ_RANGE(eq, m.end());
+		eq = m.equal_range(std::numeric_limits< int >::max());
+		PRINT_EQ_RANGE(eq, m.end());
+	}
+	{
 		const intmap m;
 
-		pair<intmap::const_iterator, intmap::const_iterator> eq =
-			m.equal_range(std::numeric_limits<int>::max());
+		pair< intmap::const_iterator, intmap::const_iterator > eq = m.equal_range(std::numeric_limits< int >::max());
 
 		PRINT_EQ_RANGE(eq, m.end());
-    }
+	}
 }
 
 void map_erase()
@@ -352,48 +371,49 @@ void map_erase()
 	for (it = my_map.begin(); it != my_map.end(); ++it)
 		cout << it->first << "=>" << it->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        intmap m(intstr_arr, intstr_arr + 25);
-        intmap::iterator it = m.begin();
+	SETUP_ARRAYS();
+	{
+		intmap           m(intstr_arr, intstr_arr + 25);
+		intmap::iterator it = m.begin();
 
-        m.erase(it);
-        PRINT_ALL(m);
+		m.erase(it);
+		PRINT_ALL(m);
 
-        it = m.begin();
-        std::advance(it, 21);
-        m.erase(it);
-        PRINT_ALL(m);
+		it = m.begin();
+		std::advance(it, 21);
+		m.erase(it);
+		PRINT_ALL(m);
 
-        it = m.end();
-        std::advance(it, -10);
-        m.erase(it);
-        PRINT_ALL(m);
-        it = m.end();
+		it = m.end();
+		std::advance(it, -10);
+		m.erase(it);
+		PRINT_ALL(m);
+		it = m.end();
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
-        std::advance(it, -3);
-        m.erase(it);
-        PRINT_ALL(m);
+		std::advance(it, -3);
+		m.erase(it);
+		PRINT_ALL(m);
 
-        it = m.end();
-        std::advance(it, -1);
-        m.erase(it);
-        PRINT_ALL(m);
+		it = m.end();
+		std::advance(it, -1);
+		m.erase(it);
+		PRINT_ALL(m);
 
-        it = m.begin();
-        std::advance(it, 1);
-        m.erase(it);
-        PRINT_ALL(m);
+		it = m.begin();
+		std::advance(it, 1);
+		m.erase(it);
+		PRINT_ALL(m);
 
-        for (it = m.begin(); it != m.end(); it = m.begin()) {
-            m.erase(it);
-            PRINT_ALL(m);
-        }
-    }
+		for (it = m.begin(); it != m.end(); it = m.begin())
+		{
+			m.erase(it);
+			PRINT_ALL(m);
+		}
+	}
 }
 
 void map_find()
@@ -415,100 +435,114 @@ void map_find()
 	cout << "c =>" << my_map.find('c')->second << endl;
 	cout << "d =>" << my_map.find('d')->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
-        strmap::iterator it = m.find("ABCD");
+	SETUP_ARRAYS();
+	{
+		strmap           m(strstr_arr, strstr_arr + strstr_size);
+		strmap::iterator it = m.find("ABCD");
 
-        if (it != m.end()) {
-            PRINT_PAIR_REF(*it);
-        }
+		if (it != m.end())
+		{
+			PRINT_PAIR_REF(*it);
+		}
 
-        m.insert(make_pair("12345", "etsriueruy394w"));
-        m.insert(make_pair("abcd", "sfdge4ta4tqtawefa"));
-        m.insert(make_pair("123", "adfgagrawetawtawef"));
-        m.insert(make_pair("1234", "asdfgaetfawfasdf"));
-        m.insert(make_pair("ab", "adfawtawefgzsdfg"));
-        m.insert(make_pair("yz", "gftrjr5y4agwe3ta"));
-        m.insert(make_pair("64", "mhj,i;y9o67eysetrgerg"));
+		m.insert(make_pair("12345", "etsriueruy394w"));
+		m.insert(make_pair("abcd", "sfdge4ta4tqtawefa"));
+		m.insert(make_pair("123", "adfgagrawetawtawef"));
+		m.insert(make_pair("1234", "asdfgaetfawfasdf"));
+		m.insert(make_pair("ab", "adfawtawefgzsdfg"));
+		m.insert(make_pair("yz", "gftrjr5y4agwe3ta"));
+		m.insert(make_pair("64", "mhj,i;y9o67eysetrgerg"));
 
-        it = m.find("12345");
+		it = m.find("12345");
 
-		if (it != m.end()) {
+		if (it != m.end())
+		{
 			PRINT_PAIR_REF(*it);
 		}
 
 		it = m.find("1234");
 
-		if (it != m.end()) {
+		if (it != m.end())
+		{
 			PRINT_PAIR_REF(*it);
 		}
 
 		it = m.find("123");
 
-		if (it != m.end()) {
+		if (it != m.end())
+		{
 			PRINT_PAIR_REF(*it);
 		}
 
 		it = m.find("123");
 
-		if (it != m.end()) {
+		if (it != m.end())
+		{
 			PRINT_PAIR_REF(*it);
 		}
 
 		it = m.find("z");
 
-		if (it != m.end()) {
+		if (it != m.end())
+		{
 			PRINT_PAIR_REF(*it);
 		}
 
-		const strmap cm(m);
+		const strmap           cm(m);
 		strmap::const_iterator cit = cm.find("ABCD");
 
-		if (cit != cm.end()) {
+		if (cit != cm.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = cm.find("64");
 
-		if (cit != cm.end()) {
+		if (cit != cm.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = m.find("12345");
 
-		if (cit != m.end()) {
+		if (cit != m.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = m.find("1234");
 
-		if (cit != m.end()) {
+		if (cit != m.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = m.find("123");
 
-		if (cit != m.end()) {
+		if (cit != m.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = m.find("123");
 
-		if (cit != m.end()) {
+		if (cit != m.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
 
 		cit = m.find("z");
 
-		if (cit != m.end()) {
+		if (cit != m.end())
+		{
 			PRINT_PAIR_REF(*cit);
 		}
-    }
-    {
+	}
+	{
 		const intmap cm;
 
-		if (cm.find(0) != cm.end()) {
+		if (cm.find(0) != cm.end())
+		{
 			PRINT_PAIR_PTR(cm.find(0));
 		}
 
@@ -516,13 +550,15 @@ void map_find()
 
 		m.insert(make_pair(123, "Hello"));
 
-		if (m.find(0) != m.end()) {
+		if (m.find(0) != m.end())
+		{
 			PRINT_PAIR_PTR(m.find(0));
 		}
-		if (m.find(123) != m.end()) {
+		if (m.find(123) != m.end())
+		{
 			PRINT_PAIR_PTR(m.find(123));
 		}
-    }
+	}
 }
 
 void map_get_allocator()
@@ -543,9 +579,9 @@ void map_get_allocator()
 	{
 		intmap m;
 
-		std::allocator<pair<const int, std::string> > alloc = m.get_allocator();
+		std::allocator< pair< const int, std::string > > alloc = m.get_allocator();
 
-		pair<const int, std::string>* buff = alloc.allocate(64);
+		pair< const int, std::string >* buff = alloc.allocate(64);
 
 		alloc.deallocate(buff, 64);
 	}
@@ -582,27 +618,37 @@ void map_insert()
 	for (it = anotherMap.begin(); it != anotherMap.end(); ++it)
 		cout << it->first << " => " << it->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        typedef pair<intmap::iterator, bool> ins_pair;
-        intmap m;
+	SETUP_ARRAYS();
+	{
+		typedef pair< intmap::iterator, bool > ins_pair;
+		intmap                                 m;
 
-        ins_pair p = m.insert(make_pair(64, "64str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair(64, "Double")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair(0, "0str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair(-23, "-23str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair(64, "dfgs")); PRINT_INS_PAIR(p);
-    }
-    {
-        typedef pair<strmap::iterator, bool> ins_pair;
-        strmap m;
+		ins_pair p = m.insert(make_pair(64, "64str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair(64, "Double"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair(0, "0str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair(-23, "-23str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair(64, "dfgs"));
+		PRINT_INS_PAIR(p);
+	}
+	{
+		typedef pair< strmap::iterator, bool > ins_pair;
+		strmap                                 m;
 
-        ins_pair p = m.insert(make_pair("64", "64str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair("64n", "Double")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair("0n", "0str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair("-23n", "-23str")); PRINT_INS_PAIR(p);
-        p = m.insert(make_pair("64n", "dfgs")); PRINT_INS_PAIR(p);
-    }
+		ins_pair p = m.insert(make_pair("64", "64str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair("64n", "Double"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair("0n", "0str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair("-23n", "-23str"));
+		PRINT_INS_PAIR(p);
+		p = m.insert(make_pair("64n", "dfgs"));
+		PRINT_INS_PAIR(p);
+	}
 }
 
 void map_key_comp()
@@ -628,107 +674,137 @@ void map_key_comp()
 
 	cout << endl;
 
-    SETUP_ARRAYS();
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
+	SETUP_ARRAYS();
+	{
+		strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        strmap::iterator it = m.begin();
+		strmap::iterator it = m.begin();
 
-        strmap::const_iterator cit = m.begin();
-        strmap::key_compare comp = m.key_comp();
+		strmap::const_iterator cit  = m.begin();
+		strmap::key_compare    comp = m.key_comp();
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(cit, 5);
-        std::advance(it, 14);
+		std::advance(cit, 5);
+		std::advance(it, 14);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 7);
-        std::advance(cit, 3);
+		std::advance(it, 7);
+		std::advance(cit, 3);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -3);
-        std::advance(cit, 12);
+		std::advance(it, -3);
+		std::advance(cit, 12);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -1);
-        std::advance(cit, 1);
+		std::advance(it, -1);
+		std::advance(cit, 1);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
-    }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap::iterator it = m.begin();
-        intmap::const_iterator cit = m.begin();
+	{
+		intmap                 m(intstr_arr, intstr_arr + intstr_size);
+		intmap::iterator       it  = m.begin();
+		intmap::const_iterator cit = m.begin();
 
-        intmap::key_compare comp = m.key_comp();
+		intmap::key_compare comp = m.key_comp();
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 14);
-        std::advance(cit, 5);
+		std::advance(it, 14);
+		std::advance(cit, 5);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 7);
-        std::advance(cit, 3);
+		std::advance(it, 7);
+		std::advance(cit, 3);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -3);
-        std::advance(cit, 12);
+		std::advance(it, -3);
+		std::advance(cit, 12);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -1);
-        std::advance(cit, 1);
+		std::advance(it, -1);
+		std::advance(cit, 1);
 
-        if (comp(it->first, cit->first)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
-    }
+		if (comp(it->first, cit->first))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
+	}
 }
 
 void map_lower_bound()
@@ -753,121 +829,121 @@ void map_lower_bound()
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
 		cout << it->first << " => " << it->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	SETUP_ARRAYS();
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(make_pair(34, "kljd9834iuhwet"));
-        m.insert(make_pair(3468, "dfghe45sywu4hsr"));
-        m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
-        m.insert(make_pair(89548945894, "jtt5454wujtjse"));
-        m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
-        m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        m.insert(make_pair(4, "asdfhfjgh54w3ag"));
-        m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        m.insert(make_pair(453834782, "juytje54yaerdrj"));
-        m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
-        m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+		m.insert(make_pair(34, "kljd9834iuhwet"));
+		m.insert(make_pair(3468, "dfghe45sywu4hsr"));
+		m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+		m.insert(make_pair(89548945894, "jtt5454wujtjse"));
+		m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+		m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		m.insert(make_pair(4, "asdfhfjgh54w3ag"));
+		m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		m.insert(make_pair(453834782, "juytje54yaerdrj"));
+		m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+		m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
-        intmap::iterator b = m.lower_bound(98583944);
-        PRINT_BOUND(b, m.end());
+		intmap::iterator b = m.lower_bound(98583944);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(239485948);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(239485948);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458942);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458942);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458941);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458941);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458943);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458943);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(-1);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(-1);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(3);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(3);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(4);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(4);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(5);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(5);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(0);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(0);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(std::numeric_limits<int>::max());
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(std::numeric_limits< int >::max());
+		PRINT_BOUND(b, m.end());
 
-        m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
+		m.insert(make_pair(std::numeric_limits< int >::max(), "max"));
 
-        b = m.lower_bound(std::numeric_limits<int>::max());
-        PRINT_BOUND(b, m.end());
-    }
+		b = m.lower_bound(std::numeric_limits< int >::max());
+		PRINT_BOUND(b, m.end());
+	}
 
-    {
-        intmap temp(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        temp.insert(make_pair(34, "kljd9834iuhwet"));
-        temp.insert(make_pair(3468, "dfghe45sywu4hsr"));
-        temp.insert(make_pair(96533, "sdfghthrdfg5456ik"));
-        temp.insert(make_pair(89548945894, "jtt5454wujtjse"));
-        temp.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
-        temp.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        temp.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        temp.insert(make_pair(4, "asdfhfjgh54w3ag"));
-        temp.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        temp.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        temp.insert(make_pair(453834782, "juytje54yaerdrj"));
-        temp.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
-        temp.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+		temp.insert(make_pair(34, "kljd9834iuhwet"));
+		temp.insert(make_pair(3468, "dfghe45sywu4hsr"));
+		temp.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+		temp.insert(make_pair(89548945894, "jtt5454wujtjse"));
+		temp.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+		temp.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		temp.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		temp.insert(make_pair(4, "asdfhfjgh54w3ag"));
+		temp.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		temp.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		temp.insert(make_pair(453834782, "juytje54yaerdrj"));
+		temp.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+		temp.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
-        const intmap m(temp);
+		const intmap m(temp);
 
-        intmap::const_iterator b = m.lower_bound(98583944);
-        PRINT_BOUND(b, m.end());
+		intmap::const_iterator b = m.lower_bound(98583944);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(239485948);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(239485948);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458942);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458942);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458941);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458941);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(19458943);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(19458943);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(-1);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(-1);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(3);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(3);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(4);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(4);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(5);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(5);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(0);
-        PRINT_BOUND(b, m.end());
+		b = m.lower_bound(0);
+		PRINT_BOUND(b, m.end());
 
-        b = m.lower_bound(std::numeric_limits<int>::max());
-        PRINT_BOUND(b, m.end());
-    }
-    {
-        const intmap m;
+		b = m.lower_bound(std::numeric_limits< int >::max());
+		PRINT_BOUND(b, m.end());
+	}
+	{
+		const intmap m;
 
-        intmap::const_iterator b = m.lower_bound(5);
-        PRINT_BOUND(b, m.end());
-    }
+		intmap::const_iterator b = m.lower_bound(5);
+		PRINT_BOUND(b, m.end());
+	}
 }
 
 void map_operator_bracket()
@@ -928,29 +1004,17 @@ void map_relational_operators()
 	bar['z'] = 1000;
 
 	if (foo == bar)
-	{
 		cout << "foo and bar are equal" << endl;
-	}
 	if (foo != bar)
-	{
 		cout << "foo and bar are not equal" << endl;
-	}
 	if (foo < bar)
-	{
 		cout << "foo is less than bar" << endl;
-	}
 	if (foo > bar)
-	{
 		cout << "foo is greater than bar" << endl;
-	}
 	if (foo <= bar)
-	{
 		cout << "foo is less than or equal to bar" << endl;
-	}
 	if (foo >= bar)
-	{
 		cout << "foo is greater than or equal to bar" << endl;
-	}
 }
 
 void map_rend()
@@ -1000,48 +1064,48 @@ void map_swap()
 	for (map< char, int >::iterator it = bar.begin(); it != bar.end(); ++it)
 		cout << it->first << " => " << it->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        intmap m1(intstr_arr, intstr_arr + 32);
-        intmap m2;
+	SETUP_ARRAYS();
+	{
+		intmap m1(intstr_arr, intstr_arr + 32);
+		intmap m2;
 
-        swap(m1, m2);
+		swap(m1, m2);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
 
-        m1.clear();
-        m1.swap(m2);
+		m1.clear();
+		m1.swap(m2);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
 
-        m1.clear();
-        m2.swap(m1);
+		m1.clear();
+		m2.swap(m1);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
 
-        m1.insert(make_pair(64, "N64"));
-        swap(m1, m2);
+		m1.insert(make_pair(64, "N64"));
+		swap(m1, m2);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
 
-        m2.insert(intstr_arr, intstr_arr + intstr_size);
-        m1.swap(m2);
+		m2.insert(intstr_arr, intstr_arr + intstr_size);
+		m1.swap(m2);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
 
-        m1.clear();
-        m1.swap(m2);
-        m1.clear();
-        m1.swap(m2);
+		m1.clear();
+		m1.swap(m2);
+		m1.clear();
+		m1.swap(m2);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
+	}
 }
 
 void map_swap_overload()
@@ -1086,69 +1150,69 @@ void map_upper_bound()
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
 		cout << it->first << " => " << it->second << endl;
 
-    SETUP_ARRAYS();
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	SETUP_ARRAYS();
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(make_pair(34, "kljd9834iuhwet"));
-        m.insert(make_pair(3468, "dfghe45sywu4hsr"));
-        m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
-        m.insert(make_pair(89548945894, "jtt5454wujtjse"));
-        m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
-        m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
-        m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
-        m.insert(make_pair(4, "asdfhfjgh54w3ag"));
-        m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
-        m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
-        m.insert(make_pair(453834782, "juytje54yaerdrj"));
-        m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
-        m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
+		m.insert(make_pair(34, "kljd9834iuhwet"));
+		m.insert(make_pair(3468, "dfghe45sywu4hsr"));
+		m.insert(make_pair(96533, "sdfghthrdfg5456ik"));
+		m.insert(make_pair(89548945894, "jtt5454wujtjse"));
+		m.insert(make_pair(7754322, "w4wt5u4wjhstrhj"));
+		m.insert(make_pair(3632, "dfgjjkuy56ue5uwyhry5yeh"));
+		m.insert(make_pair(3, "rtjey5w4u4u5e6kjwj5w4"));
+		m.insert(make_pair(4, "asdfhfjgh54w3ag"));
+		m.insert(make_pair(-873487, "jw56jw45jsryjsrt5u4w5"));
+		m.insert(make_pair(-95763433, "ws45uhsrtjnsrths54yh"));
+		m.insert(make_pair(453834782, "juytje54yaerdrj"));
+		m.insert(make_pair(19458942, "j567uysdts56y6uj5r"));
+		m.insert(make_pair(3245689793, "jr67e5674574668679789ruyerdtadh"));
 
-        intmap::iterator b = m.upper_bound(98583944);
-        PRINT_BOUND(b, m.end());
+		intmap::iterator b = m.upper_bound(98583944);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(239485948);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(239485948);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(19458942);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(19458942);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(19458941);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(19458941);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(19458943);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(19458943);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(-1);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(-1);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(3);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(3);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(4);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(4);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(5);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(5);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(0);
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(0);
+		PRINT_BOUND(b, m.end());
 
-        b = m.upper_bound(std::numeric_limits<int>::max());
-        PRINT_BOUND(b, m.end());
+		b = m.upper_bound(std::numeric_limits< int >::max());
+		PRINT_BOUND(b, m.end());
 
-        m.insert(make_pair(std::numeric_limits<int>::max(), "max"));
+		m.insert(make_pair(std::numeric_limits< int >::max(), "max"));
 
-        b = m.upper_bound(std::numeric_limits<int>::max());
-        PRINT_BOUND(b, m.end());
-    }
-    {
-        const intmap m;
+		b = m.upper_bound(std::numeric_limits< int >::max());
+		PRINT_BOUND(b, m.end());
+	}
+	{
+		const intmap m;
 
-        intmap::const_iterator b = m.upper_bound(5);
+		intmap::const_iterator b = m.upper_bound(5);
 
-        PRINT_BOUND(b, m.end());
-    }
+		PRINT_BOUND(b, m.end());
+	}
 }
 
 void map_value_comp()
@@ -1160,1014 +1224,1106 @@ void map_value_comp()
 	my_map['z'] = 3003;
 	cout << "my_map contains" << endl;
 
-	pair< char, int > highest = *my_map.rbegin();
-	map< char, int >::iterator it = my_map.begin();
+	pair< char, int >          highest = *my_map.rbegin();
+	map< char, int >::iterator it      = my_map.begin();
 	do
 	{
 		cout << it->first << " => " << it->second << endl;
 	} while (my_map.value_comp()(*it++, highest));
 
-    SETUP_ARRAYS();
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
+	SETUP_ARRAYS();
+	{
+		strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        strmap::iterator it = m.begin();
-        strmap::const_iterator cit = m.begin();
-        strmap::value_compare comp = m.value_comp();
+		strmap::iterator       it   = m.begin();
+		strmap::const_iterator cit  = m.begin();
+		strmap::value_compare  comp = m.value_comp();
 
-        if (comp(*it, *cit)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *cit))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(cit, 5);
-        std::advance(it, 14);
+		std::advance(cit, 5);
+		std::advance(it, 14);
 
-        if (comp(*it, *cit)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *cit))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 7);
-        std::advance(cit, 3);
+		std::advance(it, 7);
+		std::advance(cit, 3);
 
-        if (comp(*it, *cit)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *cit))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -3);
-        std::advance(cit, 12);
+		std::advance(it, -3);
+		std::advance(cit, 12);
 
-        if (comp(*it, *cit)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *cit))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -1);
-        std::advance(cit, 1);
+		std::advance(it, -1);
+		std::advance(cit, 1);
 
-        if (comp(*it, *cit)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
-    }
+		if (comp(*it, *cit))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        intmap::iterator it = m.begin();
-        intmap::iterator it2 = m.begin();
-        intmap::value_compare comp = m.value_comp();
+		intmap::iterator      it   = m.begin();
+		intmap::iterator      it2  = m.begin();
+		intmap::value_compare comp = m.value_comp();
 
-        if (comp(*it, *it2)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *it2))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 14);
-        std::advance(it2, 5);
+		std::advance(it, 14);
+		std::advance(it2, 5);
 
-        if (comp(*it, *it2)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *it2))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, 7);
-        std::advance(it2, 3);
+		std::advance(it, 7);
+		std::advance(it2, 3);
 
-        if (comp(*it, *it2)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *it2))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -3);
-        std::advance(it2, 12);
+		std::advance(it, -3);
+		std::advance(it2, 12);
 
-        if (comp(*it, *it2)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
+		if (comp(*it, *it2))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
 
-        std::advance(it, -1);
-        std::advance(it2, 1);
+		std::advance(it, -1);
+		std::advance(it2, 1);
 
-        if (comp(*it, *it2)) {
-            PRINT_MSG("Less");
-        } else {
-            PRINT_MSG("Not Less");
-        }
-    }
+		if (comp(*it, *it2))
+		{
+			PRINT_MSG("Less");
+		}
+		else
+		{
+			PRINT_MSG("Not Less");
+		}
+	}
 }
 
-//DANGER ZONE
+// DANGER ZONE
 
 #include <stdexcept>
 
 void map_at()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
+	{
+		intmap m;
 
-        try {
-            std::string& x = m.at(6);
+		try
+		{
+			std::string& x = m.at(6);
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Out of range exception", 6);
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Out of range exception", 6);
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        m.insert(make_pair(64, "64"));
+		m.insert(make_pair(64, "64"));
 
-        try {
-            std::string& x = m.at(64);
+		try
+		{
+			std::string& x = m.at(64);
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Wrong out of range exception", 64);
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Wrong out of range exception", 64);
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        m.insert(make_pair("Hello", "World"));
+		m.insert(make_pair("Hello", "World"));
 
-        try {
-            std::string& x = m.at("Hello");
+		try
+		{
+			std::string& x = m.at("Hello");
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Wrong out of range exception", "Hello");
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Wrong out of range exception", "Hello");
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        strmap m(strstr_arr, strstr_arr + 1);
+	{
+		strmap m(strstr_arr, strstr_arr + 1);
 
-        try {
-            std::string& x = m.at("");
+		try
+		{
+			std::string& x = m.at("");
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Out of range exception", "");
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Out of range exception", "");
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        const intmap m;
+	{
+		const intmap m;
 
-        try {
-            const std::string& x = m.at(6);
+		try
+		{
+			const std::string& x = m.at(6);
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Out of range exception", 6);
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Out of range exception", 6);
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        intmap temp(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap temp(intstr_arr, intstr_arr + intstr_size);
 
-        temp.insert(make_pair(64, "64"));
+		temp.insert(make_pair(64, "64"));
 
-        const intmap m(temp);
+		const intmap m(temp);
 
-        try {
-            const std::string& x = m.at(64);
+		try
+		{
+			const std::string& x = m.at(64);
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Wrong out of range exception", 64);
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Wrong out of range exception", 64);
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        strmap temp(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap temp(strstr_arr, strstr_arr + strstr_size);
 
-        temp.insert(make_pair("Hello", "World"));
+		temp.insert(make_pair("Hello", "World"));
 
-        const strmap m(temp);
+		const strmap m(temp);
 
-        try {
-            const std::string& x = m.at("Hello");
+		try
+		{
+			const std::string& x = m.at("Hello");
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Wrong out of range exception", "Hello");
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Wrong out of range exception", "Hello");
+		}
+		CATCH_UNHANDLED_EX();
+	}
 
-    {
-        const strmap m(strstr_arr, strstr_arr + 1);
+	{
+		const strmap m(strstr_arr, strstr_arr + 1);
 
-        try {
-            const std::string& x = m.at("");
+		try
+		{
+			const std::string& x = m.at("");
 
-            PRINT_LINE("At:", x);
-        } catch (std::out_of_range& e) {
-            PRINT_LINE("Out of range exception", "");
-        }
-        CATCH_UNHANDLED_EX();
-    }
+			PRINT_LINE("At:", x);
+		}
+		catch (std::out_of_range& e)
+		{
+			PRINT_LINE("Out of range exception", "");
+		}
+		CATCH_UNHANDLED_EX();
+	}
 }
 
 void map_assignment()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m1;
-        intmap m2;
+	{
+		intmap m1;
+		intmap m2;
 
-        m1 = m2;
+		m1 = m2;
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m2 = intmap(intstr_arr, intstr_arr + intstr_size);
+		m2 = intmap(intstr_arr, intstr_arr + intstr_size);
 
-        PRINT_ALL(m2);
+		PRINT_ALL(m2);
 
-        m1 = m2;
+		m1 = m2;
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m1 = intmap(intstr_arr, intstr_arr + 10);
+		m1 = intmap(intstr_arr, intstr_arr + 10);
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m2 = m1;
+		m2 = m1;
 
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m2);
+	}
 
-    {
-        strmap m1;
-        strmap m2;
+	{
+		strmap m1;
+		strmap m2;
 
-        m1 = m2;
+		m1 = m2;
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m2 = strmap(strstr_arr, strstr_arr + strstr_size);
+		m2 = strmap(strstr_arr, strstr_arr + strstr_size);
 
-        PRINT_ALL(m2);
+		PRINT_ALL(m2);
 
-        m1 = m2;
+		m1 = m2;
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m1 = strmap(strstr_arr, strstr_arr + 10);
+		m1 = strmap(strstr_arr, strstr_arr + 10);
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        m2 = m1;
+		m2 = m1;
 
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m2);
+	}
 }
 
 void map_compare()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        map<int, std::string, std::greater<int>,
-                       std::allocator<pair<const int, std::string> > >
-            m(intstr_arr, intstr_arr + intstr_size);
+	{
+		map< int, std::string, std::greater< int >, std::allocator< pair< const int, std::string > > > m(
+		    intstr_arr, intstr_arr + intstr_size);
 
-        PRINT_ALL(m);
-    }
+		PRINT_ALL(m);
+	}
 }
 
 void map_comparisons_eq()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m == n) {
-            PRINT_MSG("Equal");
-        }
-    }
+		if (m == n)
+		{
+			PRINT_MSG("Equal");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m == n) {
-            PRINT_MSG("Equal.");
-        }
-    }
+		if (m == n)
+		{
+			PRINT_MSG("Equal.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n == m) {
-            PRINT_MSG("Equal..");
-        }
-    }
+		if (n == m)
+		{
+			PRINT_MSG("Equal..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n == m) {
-            PRINT_MSG("Equal...");
-        }
-    }
+		if (n == m)
+		{
+			PRINT_MSG("Equal...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n == m) {
-            PRINT_MSG("Equal....");
-        }
-    }
+		if (n == m)
+		{
+			PRINT_MSG("Equal....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(5, "Hello"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n == m) {
-            PRINT_MSG("Equal.....");
-        }
-    }
+		if (n == m)
+		{
+			PRINT_MSG("Equal.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(5, "Hello"));
 
-        if (n == m) {
-            PRINT_MSG("Equal......");
-        }
-    }
+		if (n == m)
+		{
+			PRINT_MSG("Equal......");
+		}
+	}
 }
 
 void map_comparisons_ge()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m > n) {
-            PRINT_MSG("Greater");
-        }
-    }
+		if (m > n)
+		{
+			PRINT_MSG("Greater");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m > n) {
-            PRINT_MSG("Greater.");
-        }
-    }
+		if (m > n)
+		{
+			PRINT_MSG("Greater.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n > m) {
-            PRINT_MSG("Greater..");
-        }
-    }
+		if (n > m)
+		{
+			PRINT_MSG("Greater..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n > m) {
-            PRINT_MSG("Greater...");
-        }
-    }
+		if (n > m)
+		{
+			PRINT_MSG("Greater...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n > m) {
-            PRINT_MSG("Greater....");
-        }
-    }
+		if (n > m)
+		{
+			PRINT_MSG("Greater....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(5, "Hello"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n > m) {
-            PRINT_MSG("Greater.....");
-        }
-    }
+		if (n > m)
+		{
+			PRINT_MSG("Greater.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(5, "Hello"));
 
-        if (n > m) {
-            PRINT_MSG("Greater......");
-        }
-    }
+		if (n > m)
+		{
+			PRINT_MSG("Greater......");
+		}
+	}
 }
 
 void map_comparisons_gt()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m >= n) {
-            PRINT_MSG("Greater or Equal");
-        }
-    }
+		if (m >= n)
+		{
+			PRINT_MSG("Greater or Equal");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m >= n) {
-            PRINT_MSG("Greater or Equal.");
-        }
-    }
+		if (m >= n)
+		{
+			PRINT_MSG("Greater or Equal.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n >= m) {
-            PRINT_MSG("Greater or Equal..");
-        }
-    }
+		if (n >= m)
+		{
+			PRINT_MSG("Greater or Equal..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n >= m) {
-            PRINT_MSG("Greater or Equal...");
-        }
-    }
+		if (n >= m)
+		{
+			PRINT_MSG("Greater or Equal...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n >= m) {
-            PRINT_MSG("Greater or Equal....");
-        }
-    }
+		if (n >= m)
+		{
+			PRINT_MSG("Greater or Equal....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(5, "Hello"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n >= m) {
-            PRINT_MSG("Greater or Equal.....");
-        }
-    }
+		if (n >= m)
+		{
+			PRINT_MSG("Greater or Equal.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(5, "Hello"));
 
-        if (n >= m) {
-            PRINT_MSG("Greater or Equal......");
-        }
-    }
+		if (n >= m)
+		{
+			PRINT_MSG("Greater or Equal......");
+		}
+	}
 }
-
 
 void map_comparisons_le()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m <= n) {
-            PRINT_MSG("Less or Equal");
-        }
-    }
+		if (m <= n)
+		{
+			PRINT_MSG("Less or Equal");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m <= n) {
-            PRINT_MSG("Less or Equal.");
-        }
-    }
+		if (m <= n)
+		{
+			PRINT_MSG("Less or Equal.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n <= m) {
-            PRINT_MSG("Less or Equal..");
-        }
-    }
+		if (n <= m)
+		{
+			PRINT_MSG("Less or Equal..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n <= m) {
-            PRINT_MSG("Less or Equal...");
-        }
-    }
+		if (n <= m)
+		{
+			PRINT_MSG("Less or Equal...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n <= m) {
-            PRINT_MSG("Less or Equal....");
-        }
-    }
+		if (n <= m)
+		{
+			PRINT_MSG("Less or Equal....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(std::numeric_limits<int>::max(), "zxcvzx"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(std::numeric_limits< int >::max(), "zxcvzx"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n <= m) {
-            PRINT_MSG("Less or Equal.....");
-        }
-    }
+		if (n <= m)
+		{
+			PRINT_MSG("Less or Equal.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "zxcvxz"));
+		n.insert(make_pair(5, "zxcvxz"));
 
-        if (n <= m) {
-            PRINT_MSG("Less or Equal......");
-        }
-    }
+		if (n <= m)
+		{
+			PRINT_MSG("Less or Equal......");
+		}
+	}
 }
 
 void map_comparisons_lt()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m < n) {
-            PRINT_MSG("Less");
-        }
-    }
+		if (m < n)
+		{
+			PRINT_MSG("Less");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m < n) {
-            PRINT_MSG("Less.");
-        }
-    }
+		if (m < n)
+		{
+			PRINT_MSG("Less.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n < m) {
-            PRINT_MSG("Less..");
-        }
-    }
+		if (n < m)
+		{
+			PRINT_MSG("Less..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n < m) {
-            PRINT_MSG("Less...");
-        }
-    }
+		if (n < m)
+		{
+			PRINT_MSG("Less...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n < m) {
-            PRINT_MSG("Less....");
-        }
-    }
+		if (n < m)
+		{
+			PRINT_MSG("Less....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(5, "Hello"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n < m) {
-            PRINT_MSG("Less.....");
-        }
-    }
+		if (n < m)
+		{
+			PRINT_MSG("Less.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(5, "Hello"));
 
-        if (n < m) {
-            PRINT_MSG("Less......");
-        }
-    }
+		if (n < m)
+		{
+			PRINT_MSG("Less......");
+		}
+	}
 }
-
 
 void map_comparisons_ne()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
-        intmap n;
+	{
+		intmap m;
+		intmap n;
 
-        if (m != n) {
-            PRINT_MSG("Not Equal");
-        }
-    }
+		if (m != n)
+		{
+			PRINT_MSG("Not Equal");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (m != n) {
-            PRINT_MSG("Not Equal.");
-        }
-    }
+		if (m != n)
+		{
+			PRINT_MSG("Not Equal.");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n;
 
-        if (n != m) {
-            PRINT_MSG("Not Equal..");
-        }
-    }
+		if (n != m)
+		{
+			PRINT_MSG("Not Equal..");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 1);
-        intmap n(intstr_arr, intstr_arr + 1);
+	{
+		intmap m(intstr_arr, intstr_arr + 1);
+		intmap n(intstr_arr, intstr_arr + 1);
 
-        if (n != m) {
-            PRINT_MSG("Not Equal...");
-        }
-    }
+		if (n != m)
+		{
+			PRINT_MSG("Not Equal...");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
-        intmap n(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
+		intmap n(intstr_arr, intstr_arr + intstr_size);
 
-        if (n != m) {
-            PRINT_MSG("Not Equal....");
-        }
-    }
+		if (n != m)
+		{
+			PRINT_MSG("Not Equal....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n;
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n;
 
-        n.insert(make_pair(5, "Hello"));
-        n.insert(make_pair(7, "Hello"));
-        n.insert(make_pair(8, "Hello"));
-        n.insert(make_pair(1, "Hello"));
-        n.insert(make_pair(0, "Hello"));
+		n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(7, "Hello"));
+		n.insert(make_pair(8, "Hello"));
+		n.insert(make_pair(1, "Hello"));
+		n.insert(make_pair(0, "Hello"));
 
-        if (n != m) {
-            PRINT_MSG("Not Equal.....");
-        }
-    }
+		if (n != m)
+		{
+			PRINT_MSG("Not Equal.....");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 5);
-        intmap n(intstr_arr, intstr_arr + 4);
+	{
+		intmap m(intstr_arr, intstr_arr + 5);
+		intmap n(intstr_arr, intstr_arr + 4);
 
-        n.insert(make_pair(5, "Hello"));
+		n.insert(make_pair(5, "Hello"));
 
-        if (n != m) {
-            PRINT_MSG("Not Equal......");
-        }
-    }
+		if (n != m)
+		{
+			PRINT_MSG("Not Equal......");
+		}
+	}
 }
 
 void map_ctor()
 {
-    // Default
-    {
-        intmap m;
+	// Default
+	{
+		intmap m;
 
-        PRINT_ALL(m);
-    }
+		PRINT_ALL(m);
+	}
 
-    // Compare/Allocator
-    {
-		std::allocator<pair<const std::string, std::string> > alloc;
-        strmap m(std::less<std::string>(), alloc);
+	// Compare/Allocator
+	{
+		std::allocator< pair< const std::string, std::string > > alloc;
+		strmap                                                   m(std::less< std::string >(), alloc);
 
-        PRINT_ALL(m);
-    }
+		PRINT_ALL(m);
+	}
 }
-
 
 void map_ctor_copy()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m1(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m1(intstr_arr, intstr_arr + intstr_size);
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        intmap m2(m1);
+		intmap m2(m1);
 
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m2);
+	}
 
-    {
-        strmap m1(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap m1(strstr_arr, strstr_arr + strstr_size);
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        strmap m2(m1);
+		strmap m2(m1);
 
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m2);
+	}
 }
 
 void map_ctor_range()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-		std::allocator<pair<const int, std::string> > alloc;
-        intmap m(intstr_arr, intstr_arr + intstr_size, std::less<int>(), alloc);
+	{
+		std::allocator< pair< const int, std::string > > alloc;
+		intmap m(intstr_arr, intstr_arr + intstr_size, std::less< int >(), alloc);
 
-        PRINT_ALL(m);
+		PRINT_ALL(m);
 
-        intmap m2(m.begin(), m.end());
+		intmap m2(m.begin(), m.end());
 
-        PRINT_ALL(m);
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m);
+		PRINT_ALL(m2);
+	}
 
-    {
-        strmap m1(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap m1(strstr_arr, strstr_arr + strstr_size);
 
-        PRINT_ALL(m1);
+		PRINT_ALL(m1);
 
-        strmap m2(strstr_arr, strstr_arr + strstr_size);
+		strmap m2(strstr_arr, strstr_arr + strstr_size);
 
-        PRINT_ALL(m1);
-        PRINT_ALL(m2);
-    }
+		PRINT_ALL(m1);
+		PRINT_ALL(m2);
+	}
 }
 
 void map_erase_key()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
+	{
+		intmap m;
 
-        intmap::size_type size = m.erase(64);
+		intmap::size_type size = m.erase(64);
 
-        PRINT_LINE("Erased?:", size);
-    }
+		PRINT_LINE("Erased?:", size);
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + 16);
+	{
+		intmap m(intstr_arr, intstr_arr + 16);
 
-        intmap::size_type size = m.erase(64);
+		intmap::size_type size = m.erase(64);
 
-        PRINT_LINE("Erased?:", size);
+		PRINT_LINE("Erased?:", size);
 
-        m.erase(m.begin(), m.end());
+		m.erase(m.begin(), m.end());
 
-        m.insert(make_pair(23, "23n"));
-        m.insert(make_pair(25, "asdasdfsdfsafdsf"));
-        m.insert(make_pair(1, "asdssdfdfdffffff"));
-        m.insert(make_pair(2, "dsfdffffdfdfdsdfdffa"));
-        m.insert(make_pair(3, "sssdfs"));
-        m.insert(make_pair(75, "dfse"));
-        m.insert(make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
-        m.insert(make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
-        m.insert(make_pair(-23, "sdffgdfgrefet34thfgheewt"));
-        m.insert(make_pair(0, "98y4rtuohwidsjusdossefsse"));
+		m.insert(make_pair(23, "23n"));
+		m.insert(make_pair(25, "asdasdfsdfsafdsf"));
+		m.insert(make_pair(1, "asdssdfdfdffffff"));
+		m.insert(make_pair(2, "dsfdffffdfdfdsdfdffa"));
+		m.insert(make_pair(3, "sssdfs"));
+		m.insert(make_pair(75, "dfse"));
+		m.insert(make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+		m.insert(make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+		m.insert(make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+		m.insert(make_pair(0, "98y4rtuohwidsjusdossefsse"));
 
-        size = m.erase(64);
+		size = m.erase(64);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(0);
+		size = m.erase(0);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(75);
+		size = m.erase(75);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(1);
+		size = m.erase(1);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(2);
+		size = m.erase(2);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(3);
+		size = m.erase(3);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(23);
+		size = m.erase(23);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(23);
+		size = m.erase(23);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(30);
+		size = m.erase(30);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(-22);
+		size = m.erase(-22);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(-23);
+		size = m.erase(-23);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(-23);
+		size = m.erase(-23);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(25);
+		size = m.erase(25);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(-23);
+		size = m.erase(-23);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase(25);
+		size = m.erase(25);
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
-    }
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
+	}
 
-    {
-        strmap m;
+	{
+		strmap m;
 
-        strmap::size_type size = m.erase("");
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		strmap::size_type size = m.erase("");
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        m.insert(make_pair("", ""));
-        m.insert(make_pair("123", "kjhgfdsdffghsfghdfgh"));
-        m.insert(make_pair("1234", "gfdsadgg"));
-        m.insert(make_pair("123456789123456789123456789", "49857459898674568464"));
-        m.insert(make_pair("0", "2345456456456456"));
-        m.insert(make_pair("", ""));
-        m.insert(make_pair("", "9459845984598498"));
-        m.insert(make_pair("000000000000000000000000", "1111111111111111111111111111"));
+		m.insert(make_pair("", ""));
+		m.insert(make_pair("123", "kjhgfdsdffghsfghdfgh"));
+		m.insert(make_pair("1234", "gfdsadgg"));
+		m.insert(make_pair("123456789123456789123456789", "49857459898674568464"));
+		m.insert(make_pair("0", "2345456456456456"));
+		m.insert(make_pair("", ""));
+		m.insert(make_pair("", "9459845984598498"));
+		m.insert(make_pair("000000000000000000000000", "1111111111111111111111111111"));
 
-        size = m.erase("1");
+		size = m.erase("1");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("123");
+		size = m.erase("123");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("123");
+		size = m.erase("123");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("");
+		size = m.erase("");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("1234");
+		size = m.erase("1234");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("123456789123456789123456789");
+		size = m.erase("123456789123456789123456789");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("000000000000000000000000");
+		size = m.erase("000000000000000000000000");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("0");
+		size = m.erase("0");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
 
-        size = m.erase("000000000000000000000000");
+		size = m.erase("000000000000000000000000");
 
-        PRINT_LINE("Erased?:", size);
-        PRINT_ALL(m);
-    }
+		PRINT_LINE("Erased?:", size);
+		PRINT_ALL(m);
+	}
 }
 
 void map_erase_range()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
+	{
 		strmap m;
 
 		m.erase(m.begin(), m.end());
@@ -2177,19 +2333,19 @@ void map_erase_range()
 		m.insert(strstr_arr, strstr_arr + strstr_size);
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		m.erase(m.begin(), m.end());
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		PRINT_ALL(m);
-    }
+	}
 
-    {
+	{
 		intmap m(intstr_arr, intstr_arr + intstr_size);
 
 		intmap::iterator it(m.begin());
@@ -2198,18 +2354,18 @@ void map_erase_range()
 		std::advance(end, 1);
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		m.erase(it, end);
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		PRINT_ALL(m);
 
-		it = m.begin();
+		it  = m.begin();
 		end = it;
 		std::advance(it, 24);
 		std::advance(end, 30);
@@ -2217,12 +2373,12 @@ void map_erase_range()
 		m.erase(it, end);
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		PRINT_ALL(m);
 
-		it = m.begin();
+		it  = m.begin();
 		end = it;
 		std::advance(it, 34);
 		std::advance(end, 55);
@@ -2230,12 +2386,12 @@ void map_erase_range()
 		m.erase(it, end);
 
 #ifdef DEBUG
-	m.print_dot(1);
+		m.print_dot(1);
 #endif
 
 		PRINT_ALL(m);
 
-		it = m.begin();
+		it  = m.begin();
 		end = it;
 		std::advance(end, 1);
 
@@ -2246,316 +2402,335 @@ void map_erase_range()
 		m.erase(m.begin(), m.end());
 
 		PRINT_ALL(m);
-    }
+	}
 }
 
 void map_index_operator()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m[64]);
-        PRINT_SIZE(m);
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m[64]);
+		PRINT_SIZE(m);
 
-        m[64] = "Hello";
+		m[64] = "Hello";
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m[64]);
-        PRINT_SIZE(m);
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m[64]);
+		PRINT_SIZE(m);
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m[0]);
-        PRINT_SIZE(m);
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m[0]);
+		PRINT_SIZE(m);
 
-        m[0] = "ABCDEF";
+		m[0] = "ABCDEF";
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m[0]);
-        PRINT_SIZE(m);
-    }
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m[0]);
+		PRINT_SIZE(m);
+	}
 
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m["Index"]);
-        PRINT_SIZE(m);
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m["Index"]);
+		PRINT_SIZE(m);
 
-        m["Index"] = "World";
+		m["Index"] = "World";
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m["Index"]);
-        PRINT_SIZE(m);
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m["Index"]);
+		PRINT_SIZE(m);
 
-        m["abcd"] = "World";
+		m["abcd"] = "World";
 
-        PRINT_SIZE(m);
-        PRINT_LINE("Value:", m["abcd"]);
-        PRINT_SIZE(m);
-    }
+		PRINT_SIZE(m);
+		PRINT_LINE("Value:", m["abcd"]);
+		PRINT_SIZE(m);
+	}
 }
 
 void map_insert_hint()
 {
-    SETUP_ARRAYS();
-    {
-        intmap m;
+	SETUP_ARRAYS();
+	{
+		intmap m;
 
-        intmap::iterator it = m.insert(m.end(), make_pair(64, "Gamepak")); PRINT_PAIR_REF(*it);
-        it = m.insert(m.end(), make_pair(64, "Test")); PRINT_PAIR_REF(*it);
-        it = m.insert(m.end(), make_pair(100, "100$")); PRINT_PAIR_REF(*it);
+		intmap::iterator it = m.insert(m.end(), make_pair(64, "Gamepak"));
+		PRINT_PAIR_REF(*it);
+		it = m.insert(m.end(), make_pair(64, "Test"));
+		PRINT_PAIR_REF(*it);
+		it = m.insert(m.end(), make_pair(100, "100$"));
+		PRINT_PAIR_REF(*it);
 
-        it = m.end();
-        --it;
+		it = m.end();
+		--it;
 
-        it = m.insert(it, make_pair(100, "12345")); PRINT_PAIR_REF(*it);
-        it = m.insert(it, make_pair(69, "420")); PRINT_PAIR_REF(*it);
-    }
+		it = m.insert(it, make_pair(100, "12345"));
+		PRINT_PAIR_REF(*it);
+		it = m.insert(it, make_pair(69, "420"));
+		PRINT_PAIR_REF(*it);
+	}
 }
 
 void map_insert_range()
 {
-    SETUP_ARRAYS();
-    {
-        strmap m;
-        PRINT_ALL(m);
+	SETUP_ARRAYS();
+	{
+		strmap m;
+		PRINT_ALL(m);
 
-        m.insert(strstr_arr, strstr_arr + 5);
-        PRINT_ALL(m);
+		m.insert(strstr_arr, strstr_arr + 5);
+		PRINT_ALL(m);
 
-        m.insert(strstr_arr + 5, strstr_arr + 14);
-        PRINT_ALL(m);
+		m.insert(strstr_arr + 5, strstr_arr + 14);
+		PRINT_ALL(m);
 
-        m.insert(strstr_arr, strstr_arr + 9);
-        PRINT_ALL(m);
+		m.insert(strstr_arr, strstr_arr + 9);
+		PRINT_ALL(m);
 
-        m.insert(strstr_arr + 26, strstr_arr + strstr_size);
-        PRINT_ALL(m);
+		m.insert(strstr_arr + 26, strstr_arr + strstr_size);
+		PRINT_ALL(m);
 
-        m.insert(strstr_arr + 14, strstr_arr + 26);
-        PRINT_ALL(m);
-    }
-    {
-        intmap m;
-        PRINT_ALL(m);
+		m.insert(strstr_arr + 14, strstr_arr + 26);
+		PRINT_ALL(m);
+	}
+	{
+		intmap m;
+		PRINT_ALL(m);
 
-        m.insert(intstr_arr + 16, intstr_arr + 16);
-        PRINT_ALL(m);
+		m.insert(intstr_arr + 16, intstr_arr + 16);
+		PRINT_ALL(m);
 
-        m.insert(intstr_arr + 1, intstr_arr + 7);
-        PRINT_ALL(m);
+		m.insert(intstr_arr + 1, intstr_arr + 7);
+		PRINT_ALL(m);
 
-        m.insert(intstr_arr, intstr_arr + 1);
-        PRINT_ALL(m);
+		m.insert(intstr_arr, intstr_arr + 1);
+		PRINT_ALL(m);
 
-        m.insert(intstr_arr, intstr_arr + 17);
-        PRINT_ALL(m);
+		m.insert(intstr_arr, intstr_arr + 17);
+		PRINT_ALL(m);
 
-        m.insert(intstr_arr, intstr_arr + intstr_size);
-        PRINT_ALL(m);
-    }
+		m.insert(intstr_arr, intstr_arr + intstr_size);
+		PRINT_ALL(m);
+	}
 }
 
 void map_iterator()
 {
-    SETUP_ARRAYS();
-    {
-        intmap m;
-        PRINT_ALL(m);
-    }
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
-        strmap::iterator it = m.begin();
-        strmap::iterator it2 = m.begin();
-        strmap::const_iterator cit = m.begin();
-        strmap::const_iterator cit2 = m.begin();
+	SETUP_ARRAYS();
+	{
+		intmap m;
+		PRINT_ALL(m);
+	}
+	{
+		strmap                 m(strstr_arr, strstr_arr + strstr_size);
+		strmap::iterator       it   = m.begin();
+		strmap::iterator       it2  = m.begin();
+		strmap::const_iterator cit  = m.begin();
+		strmap::const_iterator cit2 = m.begin();
 
-        if (it == it2) {
-            PRINT_MSG("Equal");
-        }
-        if (it == cit) {
-            PRINT_MSG("Equal.");
-        }
-        if (cit == cit2) {
-            PRINT_MSG("Equal..");
-        }
-        if (it != it2) {
-            PRINT_MSG("Not Equal");
-        }
-        if (it != cit) {
-            PRINT_MSG("Not Equal.");
-        }
-        if (cit != cit2) {
-            PRINT_MSG("Not Equal..");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal");
+		}
+		if (it == cit)
+		{
+			PRINT_MSG("Equal.");
+		}
+		if (cit == cit2)
+		{
+			PRINT_MSG("Equal..");
+		}
+		if (it != it2)
+		{
+			PRINT_MSG("Not Equal");
+		}
+		if (it != cit)
+		{
+			PRINT_MSG("Not Equal.");
+		}
+		if (cit != cit2)
+		{
+			PRINT_MSG("Not Equal..");
+		}
 
-        PRINT_PAIR_PTR(++it);
-        PRINT_PAIR_PTR(++cit);
+		PRINT_PAIR_PTR(++it);
+		PRINT_PAIR_PTR(++cit);
 
-        if (it == it2) {
-            PRINT_MSG("Equal...");
-        }
-        if (it == cit) {
-            PRINT_MSG("Equal....");
-        }
-        if (cit == cit2) {
-            PRINT_MSG("Equal.....");
-        }
-        if (it != it2) {
-            PRINT_MSG("Not Equal...");
-        }
-        if (it != cit) {
-            PRINT_MSG("Not Equal....");
-        }
-        if (cit != cit2) {
-            PRINT_MSG("Not Equal.....");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal...");
+		}
+		if (it == cit)
+		{
+			PRINT_MSG("Equal....");
+		}
+		if (cit == cit2)
+		{
+			PRINT_MSG("Equal.....");
+		}
+		if (it != it2)
+		{
+			PRINT_MSG("Not Equal...");
+		}
+		if (it != cit)
+		{
+			PRINT_MSG("Not Equal....");
+		}
+		if (cit != cit2)
+		{
+			PRINT_MSG("Not Equal.....");
+		}
 
-        ++it2;
+		++it2;
 
-        if (it == it2) {
-            PRINT_MSG("Equal........");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal........");
+		}
 
-        --it;
-        --it2;
+		--it;
+		--it2;
 
-        if (it == it2) {
-            PRINT_MSG("Equal.........");
-        }
-    }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal.........");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        intmap::iterator it = m.begin();
-        intmap::iterator it2 = m.begin();
-        intmap::const_iterator cit = m.begin();
-        intmap::const_iterator cit2 = m.begin();
+		intmap::iterator       it   = m.begin();
+		intmap::iterator       it2  = m.begin();
+		intmap::const_iterator cit  = m.begin();
+		intmap::const_iterator cit2 = m.begin();
 
-        PRINT_ALL(m);
+		PRINT_ALL(m);
 
-        it->second = "Hello";
+		it->second = "Hello";
 
-        PRINT_PAIR_PTR(m.begin());
-        PRINT_PAIR_REF(*it);
-        PRINT_PAIR_PTR(++it);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_REF(*it++);
-        PRINT_PAIR_PTR(cit++);
-        PRINT_PAIR_PTR(cit2++);
-        PRINT_PAIR_PTR(++cit);
-        PRINT_PAIR_PTR(++cit2);
-        PRINT_PAIR_PTR(it2);
-        PRINT_PAIR_PTR(cit2);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_PTR(++it2);
-        PRINT_PAIR_REF(*cit);
-        PRINT_PAIR_REF(*cit--);
-        PRINT_PAIR_REF(*it--);
-        PRINT_PAIR_PTR(it--);
-        PRINT_PAIR_PTR(--it);
-        PRINT_PAIR_PTR(--cit2);
-        PRINT_PAIR_PTR(cit2);
-        PRINT_PAIR_REF(*cit2);
-        PRINT_PAIR_REF(*it2);
-        it = it2;
-        PRINT_PAIR_REF(*it);
-        PRINT_PAIR_REF(*it2);
-        cit = cit2;
-        PRINT_PAIR_REF(*cit);
-        PRINT_PAIR_REF(*cit2);
-    }
+		PRINT_PAIR_PTR(m.begin());
+		PRINT_PAIR_REF(*it);
+		PRINT_PAIR_PTR(++it);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_REF(*it++);
+		PRINT_PAIR_PTR(cit++);
+		PRINT_PAIR_PTR(cit2++);
+		PRINT_PAIR_PTR(++cit);
+		PRINT_PAIR_PTR(++cit2);
+		PRINT_PAIR_PTR(it2);
+		PRINT_PAIR_PTR(cit2);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_PTR(++it2);
+		PRINT_PAIR_REF(*cit);
+		PRINT_PAIR_REF(*cit--);
+		PRINT_PAIR_REF(*it--);
+		PRINT_PAIR_PTR(it--);
+		PRINT_PAIR_PTR(--it);
+		PRINT_PAIR_PTR(--cit2);
+		PRINT_PAIR_PTR(cit2);
+		PRINT_PAIR_REF(*cit2);
+		PRINT_PAIR_REF(*it2);
+		it = it2;
+		PRINT_PAIR_REF(*it);
+		PRINT_PAIR_REF(*it2);
+		cit = cit2;
+		PRINT_PAIR_REF(*cit);
+		PRINT_PAIR_REF(*cit2);
+	}
 }
 
 void map_random()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        //strmap m(strstr_arr, strstr_arr + 16);
+	{
+	    // strmap m(strstr_arr, strstr_arr + 16);
 
-        //strmap::iterator it = m.find("Hello");
+	    // strmap::iterator it = m.find("Hello");
 
-        //if (it != m.end()) {
-        //    PRINT_PAIR_REF(*it);
-        //}
+	    // if (it != m.end()) {
+	    //    PRINT_PAIR_REF(*it);
+	    //}
 
-        //try {
-        //    std::string& ref = m.at("World!");
+	    // try {
+	    //    std::string& ref = m.at("World!");
 
-        //    PRINT_LINE("Val:", ref);
-        //} catch (std::out_of_range& e) {
-        //    PRINT_MSG("Exception");
-        //}
-        //CATCH_UNHANDLED_EX();
+	    //    PRINT_LINE("Val:", ref);
+	    //} catch (std::out_of_range& e) {
+	    //    PRINT_MSG("Exception");
+	    //}
+	    // CATCH_UNHANDLED_EX();
 
-        //PRINT_ALL(m);
+	    // PRINT_ALL(m);
 
-        //m.insert(strstr_arr, strstr_arr + strstr_size);
+	    // m.insert(strstr_arr, strstr_arr + strstr_size);
 
-        //PRINT_ALL(m);
+	    // PRINT_ALL(m);
 
-        //m.erase(m.begin());
+	    // m.erase(m.begin());
 
-        //PRINT_ALL(m);
+	    // PRINT_ALL(m);
 
-        //it = m.begin();
-        //std::advance(it, 10);
+	    // it = m.begin();
+	    // std::advance(it, 10);
 
-        //m.erase(it, m.end());
+	    // m.erase(it, m.end());
 
-        //PRINT_ALL(m);
+	    // PRINT_ALL(m);
 
-        //strmap::size_type s = m.erase("1234");
+	    // strmap::size_type s = m.erase("1234");
 
-        //PRINT_ALL(m);
-        //PRINT_LINE("S:", s);
+	    // PRINT_ALL(m);
+	    // PRINT_LINE("S:", s);
 
-        //m.clear();
+	    // m.clear();
 
-        //PRINT_ALL(m);
+	    // PRINT_ALL(m);
 
-        //it = m.insert(m.begin(), make_pair("", "test"));
+	    // it = m.insert(m.begin(), make_pair("", "test"));
 
-        //PRINT_LINE("Count:", m.count(""));
+	    // PRINT_LINE("Count:", m.count(""));
 
-        //PRINT_PAIR_REF(*it);
-        //PRINT_ALL(m);
+	    // PRINT_PAIR_REF(*it);
+	    // PRINT_ALL(m);
 
-        //m.insert(strstr_arr, strstr_arr + strstr_size);
+	    // m.insert(strstr_arr, strstr_arr + strstr_size);
 
-        //strmap n(strstr_arr, strstr_arr + 10);
+	    // strmap n(strstr_arr, strstr_arr + 10);
 
-        //m.swap(n);
+	    // m.swap(n);
 
-        //PRINT_ALL(m);
-        //PRINT_ALL(n);
+	    // PRINT_ALL(m);
+	    // PRINT_ALL(n);
 
-        //PRINT_EQ_RANGE(m.equal_range("abcd"), m.end());
-        //PRINT_BOUND(m.lower_bound("123"), m.end());
-        //PRINT_BOUND(m.upper_bound("jhg456"), m.end());
+	    // PRINT_EQ_RANGE(m.equal_range("abcd"), m.end());
+	    // PRINT_BOUND(m.lower_bound("123"), m.end());
+	    // PRINT_BOUND(m.upper_bound("jhg456"), m.end());
 
-        //PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
+	    // PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
 
-        //m["hello"] = "world";
+	    // m["hello"] = "world";
 
-        //PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
-    }
+	    // PRINT_LINE("Find:", m.find("hello") != m.end() ? m.find("hello")->first : "End");
+	}
 
-    {
-		map<int, int, std::less<int>, std::allocator<pair<const int, int> > >
-			m;
+	{
+		map< int, int, std::less< int >, std::allocator< pair< const int, int > > > m;
 
-		for (int i = 0; i < 500000; ++i) {
-			//m.insert(make_pair(rand(), rand()));
+		for (int i = 0; i < 500000; ++i)
+		{
+			// m.insert(make_pair(rand(), rand()));
 			m.insert(make_pair(i, i));
 		}
 
@@ -2563,167 +2738,180 @@ void map_random()
 
 		m.erase(m.begin(), m.end());
 
-		//PRINT_ALL(m);
-    }
+		// PRINT_ALL(m);
+	}
 }
 
 void map_riterator()
 {
-    SETUP_ARRAYS();
+	SETUP_ARRAYS();
 
-    {
-        intmap m;
+	{
+		intmap m;
 
-        PRINT_ALL(m);
-    }
+		PRINT_ALL(m);
+	}
 
-    {
-        strmap m(strstr_arr, strstr_arr + strstr_size);
+	{
+		strmap m(strstr_arr, strstr_arr + strstr_size);
 
-        strmap::reverse_iterator it = m.rbegin();
-        strmap::reverse_iterator it2 = m.rbegin();
-        strmap::const_reverse_iterator cit = m.rbegin();
-        strmap::const_reverse_iterator cit2 = m.rbegin();
+		strmap::reverse_iterator       it   = m.rbegin();
+		strmap::reverse_iterator       it2  = m.rbegin();
+		strmap::const_reverse_iterator cit  = m.rbegin();
+		strmap::const_reverse_iterator cit2 = m.rbegin();
 
-        if (it == it2) {
-            PRINT_MSG("Equal");
-        }
-        if (it == cit) {
-            PRINT_MSG("Equal.");
-        }
-        if (cit == cit2) {
-            PRINT_MSG("Equal..");
-        }
-        if (it != it2) {
-            PRINT_MSG("Not Equal");
-        }
-        if (it != cit) {
-            PRINT_MSG("Not Equal.");
-        }
-        if (cit != cit2) {
-            PRINT_MSG("Not Equal..");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal");
+		}
+		if (it == cit)
+		{
+			PRINT_MSG("Equal.");
+		}
+		if (cit == cit2)
+		{
+			PRINT_MSG("Equal..");
+		}
+		if (it != it2)
+		{
+			PRINT_MSG("Not Equal");
+		}
+		if (it != cit)
+		{
+			PRINT_MSG("Not Equal.");
+		}
+		if (cit != cit2)
+		{
+			PRINT_MSG("Not Equal..");
+		}
 
-        PRINT_PAIR_PTR(++it);
-        PRINT_PAIR_PTR(++cit);
+		PRINT_PAIR_PTR(++it);
+		PRINT_PAIR_PTR(++cit);
 
-        if (it == it2) {
-            PRINT_MSG("Equal...");
-        }
-        if (it == cit) {
-            PRINT_MSG("Equal....");
-        }
-        if (cit == cit2) {
-            PRINT_MSG("Equal.....");
-        }
-        if (it != it2) {
-            PRINT_MSG("Not Equal...");
-        }
-        if (it != cit) {
-            PRINT_MSG("Not Equal....");
-        }
-        if (cit != cit2) {
-            PRINT_MSG("Not Equal.....");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal...");
+		}
+		if (it == cit)
+		{
+			PRINT_MSG("Equal....");
+		}
+		if (cit == cit2)
+		{
+			PRINT_MSG("Equal.....");
+		}
+		if (it != it2)
+		{
+			PRINT_MSG("Not Equal...");
+		}
+		if (it != cit)
+		{
+			PRINT_MSG("Not Equal....");
+		}
+		if (cit != cit2)
+		{
+			PRINT_MSG("Not Equal.....");
+		}
 
-        ++it2;
+		++it2;
 
-        if (it == it2) {
-            PRINT_MSG("Equal........");
-        }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal........");
+		}
 
-        --it;
-        --it2;
+		--it;
+		--it2;
 
-        if (it == it2) {
-            PRINT_MSG("Equal.........");
-        }
-    }
+		if (it == it2)
+		{
+			PRINT_MSG("Equal.........");
+		}
+	}
 
-    {
-        intmap m(intstr_arr, intstr_arr + intstr_size);
+	{
+		intmap m(intstr_arr, intstr_arr + intstr_size);
 
-        intmap::reverse_iterator it = m.rbegin();
-        intmap::reverse_iterator it2 = m.rbegin();
-        intmap::const_reverse_iterator cit = m.rbegin();
-        intmap::const_reverse_iterator cit2 = m.rbegin();
+		intmap::reverse_iterator       it   = m.rbegin();
+		intmap::reverse_iterator       it2  = m.rbegin();
+		intmap::const_reverse_iterator cit  = m.rbegin();
+		intmap::const_reverse_iterator cit2 = m.rbegin();
 
-        for (intmap::reverse_iterator i = m.rbegin(); i != m.rend(); ++i) {
-            PRINT_PAIR_REF(*i);
-        }
+		for (intmap::reverse_iterator i = m.rbegin(); i != m.rend(); ++i)
+		{
+			PRINT_PAIR_REF(*i);
+		}
 
-        PRINT_ALL(m);
+		PRINT_ALL(m);
 
-        it->second = "Hello";
+		it->second = "Hello";
 
-        PRINT_PAIR_PTR(m.rbegin());
-        PRINT_PAIR_REF(*it);
-        PRINT_PAIR_PTR(++it);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_REF(*it++);
-        PRINT_PAIR_PTR(cit++);
-        PRINT_PAIR_PTR(cit2++);
-        PRINT_PAIR_PTR(++cit);
-        PRINT_PAIR_PTR(++cit2);
-        PRINT_PAIR_PTR(it2);
-        PRINT_PAIR_PTR(cit2);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it++);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_PTR(it2++);
-        PRINT_PAIR_PTR(++it2);
-        PRINT_PAIR_REF(*cit);
-        PRINT_PAIR_REF(*cit--);
-        PRINT_PAIR_REF(*it--);
-        PRINT_PAIR_PTR(it--);
-        PRINT_PAIR_PTR(--it);
-        PRINT_PAIR_PTR(--cit2);
-        PRINT_PAIR_PTR(cit2);
-        PRINT_PAIR_REF(*cit2);
-        PRINT_PAIR_REF(*it2);
-        it = it2;
-        PRINT_PAIR_REF(*it);
-        PRINT_PAIR_REF(*it2);
-        cit = cit2;
-        PRINT_PAIR_REF(*cit);
-        PRINT_PAIR_REF(*cit2);
-    }
+		PRINT_PAIR_PTR(m.rbegin());
+		PRINT_PAIR_REF(*it);
+		PRINT_PAIR_PTR(++it);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_REF(*it++);
+		PRINT_PAIR_PTR(cit++);
+		PRINT_PAIR_PTR(cit2++);
+		PRINT_PAIR_PTR(++cit);
+		PRINT_PAIR_PTR(++cit2);
+		PRINT_PAIR_PTR(it2);
+		PRINT_PAIR_PTR(cit2);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it++);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_PTR(it2++);
+		PRINT_PAIR_PTR(++it2);
+		PRINT_PAIR_REF(*cit);
+		PRINT_PAIR_REF(*cit--);
+		PRINT_PAIR_REF(*it--);
+		PRINT_PAIR_PTR(it--);
+		PRINT_PAIR_PTR(--it);
+		PRINT_PAIR_PTR(--cit2);
+		PRINT_PAIR_PTR(cit2);
+		PRINT_PAIR_REF(*cit2);
+		PRINT_PAIR_REF(*it2);
+		it = it2;
+		PRINT_PAIR_REF(*it);
+		PRINT_PAIR_REF(*it2);
+		cit = cit2;
+		PRINT_PAIR_REF(*cit);
+		PRINT_PAIR_REF(*cit2);
+	}
 }
 
-#define CHECK_TYPEDEF(type)                                                                        \
-    {                                                                                              \
-        map<int, unsigned int>::type a = map<int, unsigned int>::type();     \
-        (void)a;                                                                                   \
-    }
+#define CHECK_TYPEDEF(type)                                                  \
+	{                                                                        \
+		map< int, unsigned int >::type a = map< int, unsigned int >::type(); \
+		(void)a;                                                             \
+	}
 
 void map_check_typedefs()
 {
-    CHECK_TYPEDEF(key_type);
-    CHECK_TYPEDEF(mapped_type);
-    CHECK_TYPEDEF(value_type);
-    CHECK_TYPEDEF(allocator_type);
-    CHECK_TYPEDEF(key_compare);
-    CHECK_TYPEDEF(size_type);
-    CHECK_TYPEDEF(difference_type);
-    CHECK_TYPEDEF(pointer);
-    CHECK_TYPEDEF(const_pointer);
-    CHECK_TYPEDEF(iterator);
-    CHECK_TYPEDEF(const_iterator);
-    CHECK_TYPEDEF(reverse_iterator);
-    CHECK_TYPEDEF(const_reverse_iterator);
+	CHECK_TYPEDEF(key_type);
+	CHECK_TYPEDEF(mapped_type);
+	CHECK_TYPEDEF(value_type);
+	CHECK_TYPEDEF(allocator_type);
+	CHECK_TYPEDEF(key_compare);
+	CHECK_TYPEDEF(size_type);
+	CHECK_TYPEDEF(difference_type);
+	CHECK_TYPEDEF(pointer);
+	CHECK_TYPEDEF(const_pointer);
+	CHECK_TYPEDEF(iterator);
+	CHECK_TYPEDEF(const_iterator);
+	CHECK_TYPEDEF(reverse_iterator);
+	CHECK_TYPEDEF(const_reverse_iterator);
 
-    {
-        map<int, unsigned int>::value_type b =
-            map<int, unsigned int>::value_type(-11, 85);
-        map<int, unsigned int>::reference c = b;
-        map<int, unsigned int>::const_reference d = b;
-        (void)b;
-        (void)c;
-        (void)d;
-    }
+	{
+		map< int, unsigned int >::value_type      b = map< int, unsigned int >::value_type(-11, 85);
+		map< int, unsigned int >::reference       c = b;
+		map< int, unsigned int >::const_reference d = b;
+		(void)b;
+		(void)c;
+		(void)d;
+	}
 }
-
 
 void test_map()
 {

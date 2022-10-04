@@ -13,6 +13,10 @@
 #ifndef TEST_H
 #define TEST_H
 
+#ifndef NAMESPACE
+#define NAMESPACE ft
+#endif
+
 #include <stdexcept>
 #include <limits>
 
@@ -25,10 +29,6 @@
 #include <vector>
 
 #include <memory>
-
-#ifndef NAMESPACE
-#define NAMESPACE ft
-#endif
 
 using NAMESPACE::make_pair;
 using NAMESPACE::map;
