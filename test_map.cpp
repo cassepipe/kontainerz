@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "test.hpp"
+#include "map_prelude.hpp"
 
 void visual_test()
 {
@@ -57,10 +58,8 @@ void test_map_begin()
 	tree['a'] = 200;
 	tree['c'] = 300;
 
-	// tree.print_dot();
-
 	for (map< char, int >::iterator it = tree.begin(); it != tree.end(); ++it)
-		std::cout << it->first << "=>" << it->second << std::endl;
+		cout << it->first << "=>" << it->second << endl;
 }
 
 void test_map_clear()
@@ -71,17 +70,17 @@ void test_map_clear()
 	my_map['y'] = 200;
 	my_map['z'] = 300;
 
-	std::cout << "my_map contains:" << std::endl;
+	cout << "my_map contains:" << endl;
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << "=>" << it->second << std::endl;
+		cout << it->first << "=>" << it->second << endl;
 
 	my_map.clear();
 	my_map['a'] = 1101;
 	my_map['b'] = 2202;
 
-	std::cout << "my_map contains:" << std::endl;
+	cout << "my_map contains:" << endl;
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << "=>" << it->second << std::endl;
+		cout << it->first << "=>" << it->second << endl;
 }
 
 static bool fncomp(const char lhs, const char rhs)
@@ -91,7 +90,6 @@ static bool fncomp(const char lhs, const char rhs)
 
 struct classcomp
 {
-
 	bool operator()(const char& lhs, const char& rhs) const
 	{
 		return lhs < rhs;
@@ -102,12 +100,12 @@ template < typename T, typename U, typename Comp >
 static void printMap(map< T, U, Comp > const& toPrint, std::string const& name)
 {
 
-	std::cout << name << ":" << std::endl;
+	cout << name << ":" << endl;
 	for (typename map< T, U >::const_iterator it = toPrint.begin(); it != toPrint.end(); it++)
 	{
-		std::cout << "\tfirst: " << it->first << " second: " << it->second << std::endl;
+		cout << "\tfirst: " << it->first << " second: " << it->second << endl;
 	}
-	std::cout << std::endl;
+	cout << endl;
 }
 
 void test_map_constructor()
@@ -150,11 +148,10 @@ void test_map_count()
 
 	for (c = 'a'; c < 'h'; c++)
 	{
-
-		std::cout << c << " is ";
+		cout << c << " is ";
 		if (my_map.count(c) == 0)
-			std::cout << "not ";
-		std::cout << "an element of my_map" << std::endl;
+			cout << "not ";
+		cout << "an element of my_map" << endl;
 	}
 }
 
@@ -169,14 +166,13 @@ void test_map_empty()
 	while (!my_map.empty())
 	{
 
-		std::cout << my_map.begin()->first << "=>" << my_map.begin()->second << std::endl;
+		cout << my_map.begin()->first << "=>" << my_map.begin()->second << endl;
 		my_map.erase(my_map.begin());
 	}
 }
 
 void test_map_end()
 {
-
 	map< char, int > my_map;
 
 	my_map['b'] = 100;
@@ -184,12 +180,11 @@ void test_map_end()
 	my_map['c'] = 300;
 
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << "=>" << it->second << std::endl;
+		cout << it->first << "=>" << it->second << endl;
 }
 
 void test_map_equal_range()
 {
-
 	map< char, int > my_map;
 
 	my_map['a'] = 10;
@@ -203,11 +198,11 @@ void test_map_equal_range()
 	pair< map< char, int >::iterator, map< char, int >::iterator > ret;
 	ret = my_map.equal_range('b');
 
-	std::cout << "lower_bound points to ";
-	std::cout << ret.first->first << "=> " << ret.first->second << std::endl;
+	cout << "lower_bound points to ";
+	cout << ret.first->first << "=> " << ret.first->second << endl;
 
-	std::cout << "upper_bound points to ";
-	std::cout << ret.second->first << "=> " << ret.second->second << std::endl;
+	cout << "upper_bound points to ";
+	cout << ret.second->first << "=> " << ret.second->second << endl;
 }
 
 void test_map_erase()
@@ -239,7 +234,7 @@ void test_map_erase()
 #endif
 
 	for (it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << "=>" << it->second << std::endl;
+		cout << it->first << "=>" << it->second << endl;
 }
 
 void test_map_find()
@@ -256,10 +251,10 @@ void test_map_find()
 	if (it != my_map.end())
 		my_map.erase(it);
 
-	std::cout << "elements in my_map:" << std::endl;
-	std::cout << "a =>" << my_map.find('a')->second << std::endl;
-	std::cout << "c =>" << my_map.find('c')->second << std::endl;
-	std::cout << "d =>" << my_map.find('d')->second << std::endl;
+	cout << "elements in my_map:" << endl;
+	cout << "a =>" << my_map.find('a')->second << endl;
+	cout << "c =>" << my_map.find('c')->second << endl;
+	cout << "d =>" << my_map.find('d')->second << endl;
 }
 
 void test_map_get_allocator()
@@ -274,7 +269,7 @@ void test_map_get_allocator()
 	// assing some values to array
 	psize = sizeof(map< char, int >::value_type) * 5;
 
-	std::cout << "The allocated array has a size of " << psize << " bytes" << std::endl;
+	cout << "The allocated array has a size of " << psize << " bytes" << endl;
 
 	my_map.get_allocator().deallocate(p, 5);
 }
@@ -291,8 +286,8 @@ void test_map_insert()
 	ret = my_map.insert(pair< char, int >('z', 500));
 	if (ret.second == false)
 	{
-		std::cout << "element 'z' already existed";
-		std::cout << " with a value of " << ret.first->second << std::endl;
+		cout << "element 'z' already existed";
+		cout << " with a value of " << ret.first->second << endl;
 	}
 
 	map< char, int >::iterator it = my_map.begin();
@@ -302,13 +297,13 @@ void test_map_insert()
 	map< char, int > anotherMap;
 	anotherMap.insert(my_map.begin(), my_map.find('c'));
 
-	std::cout << "my_map contains:" << std::endl;
+	cout << "my_map contains:" << endl;
 	for (it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 
-	std::cout << "anotherMap contains:" << std::endl;
+	cout << "anotherMap contains:" << endl;
 	for (it = anotherMap.begin(); it != anotherMap.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 }
 
 void test_map_key_comp()
@@ -321,7 +316,7 @@ void test_map_key_comp()
 	my_map['b'] = 200;
 	my_map['c'] = 300;
 
-	std::cout << "my_map contains" << std::endl;
+	cout << "my_map contains" << endl;
 
 	char highest = my_map.rbegin()->first;
 
@@ -329,10 +324,10 @@ void test_map_key_comp()
 	do
 	{
 
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 	} while (myComp((*it++).first, highest));
 
-	std::cout << std::endl;
+	cout << endl;
 }
 
 void test_map_lower_bound()
@@ -355,7 +350,7 @@ void test_map_lower_bound()
 	my_map.erase(itlow, itup);
 
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 }
 
 void test_map_operator_bracket()
@@ -366,12 +361,12 @@ void test_map_operator_bracket()
 	my_map['b'] = "another element";
 	my_map['c'] = my_map['b'];
 
-	std::cout << "my_map['a'] is " << my_map['a'] << std::endl;
-	std::cout << "my_map['b'] is " << my_map['b'] << std::endl;
-	std::cout << "my_map['c'] is " << my_map['c'] << std::endl;
-	std::cout << "my_map['d'] is " << my_map['d'] << std::endl;
+	cout << "my_map['a'] is " << my_map['a'] << endl;
+	cout << "my_map['b'] is " << my_map['b'] << endl;
+	cout << "my_map['c'] is " << my_map['c'] << endl;
+	cout << "my_map['d'] is " << my_map['d'] << endl;
 
-	std::cout << "my_map now contains " << my_map.size() << " elements" << std::endl;
+	cout << "my_map now contains " << my_map.size() << " elements" << endl;
 }
 
 void test_map_operator_equal()
@@ -386,8 +381,8 @@ void test_map_operator_equal()
 	second = first;
 	first  = map< char, int >();
 
-	std::cout << "Size of first: " << first.size() << std::endl;
-	std::cout << "Size of second: " << second.size() << std::endl;
+	cout << "Size of first: " << first.size() << endl;
+	cout << "Size of second: " << second.size() << endl;
 }
 
 void test_map_rbegin()
@@ -401,7 +396,7 @@ void test_map_rbegin()
 
 	map< char, int >::reverse_iterator rit;
 	for (rit = my_map.rbegin(); rit != my_map.rend(); ++rit)
-		std::cout << rit->first << "=>" << rit->second << std::endl;
+		cout << rit->first << "=>" << rit->second << endl;
 }
 
 void test_map_relational_operators()
@@ -417,27 +412,27 @@ void test_map_relational_operators()
 
 	if (foo == bar)
 	{
-		std::cout << "foo and bar are equal" << std::endl;
+		cout << "foo and bar are equal" << endl;
 	}
 	if (foo != bar)
 	{
-		std::cout << "foo and bar are not equal" << std::endl;
+		cout << "foo and bar are not equal" << endl;
 	}
 	if (foo < bar)
 	{
-		std::cout << "foo is less than bar" << std::endl;
+		cout << "foo is less than bar" << endl;
 	}
 	if (foo > bar)
 	{
-		std::cout << "foo is greater than bar" << std::endl;
+		cout << "foo is greater than bar" << endl;
 	}
 	if (foo <= bar)
 	{
-		std::cout << "foo is less than or equal to bar" << std::endl;
+		cout << "foo is less than or equal to bar" << endl;
 	}
 	if (foo >= bar)
 	{
-		std::cout << "foo is greater than or equal to bar" << std::endl;
+		cout << "foo is greater than or equal to bar" << endl;
 	}
 }
 
@@ -452,7 +447,7 @@ void test_map_rend()
 
 	map< char, int >::reverse_iterator rit;
 	for (rit = my_map.rbegin(); rit != my_map.rend(); ++rit)
-		std::cout << rit->first << "=>" << rit->second << std::endl;
+		cout << rit->first << "=>" << rit->second << endl;
 }
 
 void test_map_size()
@@ -464,7 +459,7 @@ void test_map_size()
 	my_map['b'] = 202;
 	my_map['c'] = 302;
 
-	std::cout << "my_map.size() is " << my_map.size() << std::endl;
+	cout << "my_map.size() is " << my_map.size() << endl;
 }
 
 void test_map_swap()
@@ -481,13 +476,13 @@ void test_map_swap()
 
 	foo.swap(bar);
 
-	std::cout << "foo contains:" << std ::endl;
+	cout << "foo contains:" << std ::endl;
 	for (map< char, int >::iterator it = foo.begin(); it != foo.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 
-	std::cout << "bar contains:" << std ::endl;
+	cout << "bar contains:" << std ::endl;
 	for (map< char, int >::iterator it = bar.begin(); it != bar.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 }
 
 void test_map_swap_overload()
@@ -504,13 +499,13 @@ void test_map_swap_overload()
 
 	std::swap(foo, bar);
 
-	std::cout << "foo contains:" << std ::endl;
+	cout << "foo contains:" << std ::endl;
 	for (map< char, int >::iterator it = foo.begin(); it != foo.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 
-	std::cout << "bar contains:" << std ::endl;
+	cout << "bar contains:" << std ::endl;
 	for (map< char, int >::iterator it = bar.begin(); it != bar.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 }
 
 void test_map_upper_bound()
@@ -530,7 +525,7 @@ void test_map_upper_bound()
 	my_map.erase(itlow, itup);
 
 	for (map< char, int >::iterator it = my_map.begin(); it != my_map.end(); ++it)
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 }
 
 void test_map_value_comp()
@@ -541,7 +536,7 @@ void test_map_value_comp()
 	my_map['y'] = 2002;
 	my_map['z'] = 3003;
 
-	std::cout << "my_map contains" << std::endl;
+	cout << "my_map contains" << endl;
 
 	pair< char, int > highest = *my_map.rbegin();
 
@@ -549,14 +544,12 @@ void test_map_value_comp()
 	do
 	{
 
-		std::cout << it->first << " => " << it->second << std::endl;
+		cout << it->first << " => " << it->second << endl;
 	} while (my_map.value_comp()(*it++, highest));
 }
 
 //DANGER ZONE
 
-#include "prelude.hpp"
-#include "map_prelude.hpp"
 #include <stdexcept>
 
 void map_test_at()
@@ -758,9 +751,9 @@ void map_test_clear()
 		PRINT_LINE("Size:", m.size()); 
 	}
 	{                                      
-		std::cout << "\nMap content:\n";   
+		cout << "\nMap content:\n";   
 		print_map(m.begin(), m.end()); 
-		std::cout << std::endl;            
+		cout << endl;            
 	}
 
     }
@@ -3115,6 +3108,7 @@ void map_test_value_comp()
 void test_map()
 {
 	visual_test();
+
 	test_map_begin();
 	test_map_clear();
 	test_map_constructor();
@@ -3138,6 +3132,7 @@ void test_map()
 	test_map_swap_overload();
 	test_map_upper_bound();
 	test_map_value_comp();
+
 	map_test_at();
 	map_test_assignment();
 	map_test_clear();

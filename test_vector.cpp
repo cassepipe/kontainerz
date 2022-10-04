@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "test.hpp"
+#include "vector_prelude.hpp"
 
 void test_vector_assign()
 {
@@ -1190,8 +1191,6 @@ void test_vector_swap_overload()
 
 /* DANGER ZONE */
 
-#include "prelude.hpp"
-#include "vector_prelude.hpp"
 
 void test_vector_assign_range()
 {

@@ -13,6 +13,8 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <stdexcept>
+
 #include "map.hpp"
 #include "stack.hpp"
 #include "vector.hpp"
@@ -41,5 +43,7 @@ using std::swap;
 void test_vector();
 void test_stack();
 void test_map();
+
+#include "prelude.hpp"
 
 #endif /* TEST_H */
