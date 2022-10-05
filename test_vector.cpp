@@ -1049,21 +1049,71 @@ void test_vector_rbegin()
 
 void test_vector_relational_operators()
 {
-	vector< int > foo(3, 100);
-	vector< int > bar(5, 200);
+	{
+		vector< int > foo(3, 100);
+		vector< int > bar(5, 200);
 
-	if (foo == bar)
-		cout << "foo and bar are equal" << endl;
-	if (foo != bar)
-		cout << "foo and bar are not equal" << endl;
-	if (foo < bar)
-		cout << "foo is less than bar" << endl;
-	if (foo > bar)
-		cout << "foo is greater than bar" << endl;
-	if (foo <= bar)
-		cout << "foo is less than or equal to bar" << endl;
-	if (foo >= bar)
-		cout << "foo is greater than or equal to bar" << endl;
+		if (foo == bar)
+			cout << "foo and bar are equal" << endl;
+		if (foo != bar)
+			cout << "foo and bar are not equal" << endl;
+		if (foo < bar)
+			cout << "foo is less than bar" << endl;
+		if (foo > bar)
+			cout << "foo is greater than bar" << endl;
+		if (foo <= bar)
+			cout << "foo is less than or equal to bar" << endl;
+		if (foo >= bar)
+			cout << "foo is greater than or equal to bar" << endl;
+	}
+	{
+		vector< int > vct(4);
+		vector< int > vct2(4);
+
+		cmp(vct, vct);  // 0
+		cmp(vct, vct2); // 1
+
+		vct2.resize(10);
+
+		cmp(vct, vct2); // 2
+		cmp(vct2, vct); // 3
+
+		vct[2] = 42;
+
+		cmp(vct, vct2); // 4
+		cmp(vct2, vct); // 5
+
+		swap(vct, vct2);
+
+		cmp(vct, vct2); // 6
+		cmp(vct2, vct); // 7
+	}
+	{
+		const int                                     size = 5;
+		vector< int >                         vct(size);
+		vector< int >::reverse_iterator       it  = vct.rbegin();
+		vector< int >::const_reverse_iterator ite = vct.rbegin();
+
+		for (int i = 0; i < size; ++i)
+			it[i] = (size - i) * 5;
+
+		it = it + 5;
+		it = 1 + it;
+		it = it - 4;
+		std::cout << *(it += 2) << std::endl;
+		std::cout << *(it -= 1) << std::endl;
+
+		*(it -= 2) = 42;
+		*(it += 2) = 21;
+
+		std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+
+		std::cout << "(it == const_it): " << (ite == it) << std::endl;
+		std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+		std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+
+		printSize(vct, true);
+	}
 }
 
 void test_vector_rend()
@@ -2192,198 +2242,99 @@ void vec_test_riterator_comparisons()
 	}
 }
 
-void vec_test_swap()
+int vec_test_swap()
 {
-	SETUP_ARRAYS();
+	{
+		vector< int > foo(3, 15);
+		vector< int > bar(5, 42);
 
+		vector< int >::const_iterator it_foo = foo.begin();
+		vector< int >::const_iterator it_bar = bar.begin();
+
+		std::cout << "BEFORE SWAP" << std::endl;
+
+		std::cout << "foo contains:" << std::endl;
+		printSize(foo);
+		std::cout << "bar contains:" << std::endl;
+		printSize(bar);
+
+		foo.swap(bar);
+
+		std::cout << "AFTER SWAP" << std::endl;
+
+		std::cout << "foo contains:" << std::endl;
+		printSize(foo);
+		std::cout << "bar contains:" << std::endl;
+		printSize(bar);
+
+		std::cout << "Iterator validity:" << std::endl;
+		std::cout << (it_foo == bar.begin()) << std::endl;
+		std::cout << (it_bar == foo.begin()) << std::endl;
+
+		return (0);
+	}
+	SETUP_ARRAYS();
 	{
 		strvector v1(s_string, s_string + s_size);
 		strvector v2(b_string, b_string + b_size);
 
 		v1.swap(v2);
-
 		CHECK_AND_PRINT_ALL(v1);
 		CHECK_AND_PRINT_ALL(v2);
 
 		std::swap(v1, v2);
-
 		CHECK_AND_PRINT_ALL(v1);
 		CHECK_AND_PRINT_ALL(v2);
 
 		v1.resize(0);
 
 		v1.swap(v2);
-
 		CHECK_AND_PRINT_ALL(v1);
 		CHECK_AND_PRINT_ALL(v2);
 
 		v1.resize(0);
 
 		std::swap(v1, v2);
-
 		CHECK_AND_PRINT_ALL(v1);
 		CHECK_AND_PRINT_ALL(v2);
 	}
 }
 
-#define TESTED_TYPE int
-
-template < class T, class Alloc >
-void cmp(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
-{
-	static int i = 0;
-
-	std::cout << "############### [" << i++ << "] ###############" << std::endl;
-	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-	std::cout << "lt: " << (lhs < rhs) << " | le: " << (lhs <= rhs) << std::endl;
-	std::cout << "gt: " << (lhs > rhs) << " | ge: " << (lhs >= rhs) << std::endl;
-}
-
-void relationalite(void)
-{
-	vector< TESTED_TYPE > vct(4);
-	vector< TESTED_TYPE > vct2(4);
-
-	cmp(vct, vct);  // 0
-	cmp(vct, vct2); // 1
-
-	vct2.resize(10);
-
-	cmp(vct, vct2); // 2
-	cmp(vct2, vct); // 3
-
-	vct[2] = 42;
-
-	cmp(vct, vct2); // 4
-	cmp(vct2, vct); // 5
-
-	swap(vct, vct2);
-
-	cmp(vct, vct2); // 6
-	cmp(vct2, vct); // 7
-}
-
-#define T_SIZE_TYPE typename vector< T >::size_type
-
-template < typename T >
-void printSize(vector< T > const& vct, bool print_content = true)
-{
-	const T_SIZE_TYPE size         = vct.size();
-	const T_SIZE_TYPE capacity     = vct.capacity();
-	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
-
-	std::cout << "size: " << size << std::endl;
-	std::cout << "capacity: " << isCapacityOk << std::endl;
-	std::cout << "max_size: " << vct.max_size() << std::endl;
-	if (print_content)
-	{
-		typename vector< T >::const_iterator it  = vct.begin();
-		typename vector< T >::const_iterator ite = vct.end();
-		std::cout << std::endl << "Content is:" << std::endl;
-		for (; it != ite; ++it)
-			std::cout << "- " << *it << std::endl;
-	}
-	std::cout << "###############################################" << std::endl;
-}
-
-void rite2(void)
-{
-	const int                                     size = 5;
-	vector< TESTED_TYPE >                         vct(size);
-	vector< TESTED_TYPE >::reverse_iterator       it  = vct.rbegin();
-	vector< TESTED_TYPE >::const_reverse_iterator ite = vct.rbegin();
-
-	for (int i = 0; i < size; ++i)
-		it[i] = (size - i) * 5;
-
-	it = it + 5;
-	it = 1 + it;
-	it = it - 4;
-	std::cout << *(it += 2) << std::endl;
-	std::cout << *(it -= 1) << std::endl;
-
-	*(it -= 2) = 42;
-	*(it += 2) = 21;
-
-	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
-
-	std::cout << "(it == const_it): " << (ite == it) << std::endl;
-	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
-	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
-
-	printSize(vct, true);
-}
-
-int test_swap()
-{
-	vector< int > foo(3, 15);
-	vector< int > bar(5, 42);
-
-	vector< int >::const_iterator it_foo = foo.begin();
-	vector< int >::const_iterator it_bar = bar.begin();
-
-	std::cout << "BEFORE SWAP" << std::endl;
-
-	std::cout << "foo contains:" << std::endl;
-	printSize(foo);
-	std::cout << "bar contains:" << std::endl;
-	printSize(bar);
-
-	foo.swap(bar);
-
-	std::cout << "AFTER SWAP" << std::endl;
-
-	std::cout << "foo contains:" << std::endl;
-	printSize(foo);
-	std::cout << "bar contains:" << std::endl;
-	printSize(bar);
-
-	std::cout << "Iterator validity:" << std::endl;
-	std::cout << (it_foo == bar.begin()) << std::endl;
-	std::cout << (it_bar == foo.begin()) << std::endl;
-
-	return (0);
-}
-
 void test_vector()
 {
-	// test_vector_assign();
-	// test_vector_at();
-	// test_vector_back();
-	// test_vector_begin();
-	// test_vector_capacity();
-	// test_vector_clear();
-	// test_vector_constructors();
-	// test_vector_empty();
-	// test_vector_end();
-	// test_vector_erase();
-	// test_vector_front();
-	// test_vector_get_allocator();
-	// test_vector_insert();
-	// test_vector_max_size();
-	// test_vector_operator_bracket();
-	// test_vector_operator_equal();
-	// test_vector_pop_back();
-	// test_vector_push_back();
-	// test_vector_rbegin();
-	// test_vector_relational_operators();
-	// test_vector_rend();
-	// test_vector_reserve();
-	// test_vector_size();
-	// test_vector_swap();
-	// test_vector_swap_overload();
-	// test_vector_assign_range();
-	// test_vector_comparisons_ge();
-	// vec_test_erase();
-	// vec_test_erase_mixed();
-	// vec_test_insert();
-	// vec_test_insert_size();
-	// vec_test_resize();
-	// vec_test_riterator();
-	// vec_test_riterator_comparisons();
-	// vec_test_swap();
-	// relationalite();
-	// rite2();
-	test_swap();
+	 test_vector_assign();
+	 test_vector_at();
+	 test_vector_back();
+	 test_vector_begin();
+	 test_vector_capacity();
+	 test_vector_clear();
+	 test_vector_constructors();
+	 test_vector_empty();
+	 test_vector_end();
+	 test_vector_erase();
+	 test_vector_front();
+	 test_vector_get_allocator();
+	 test_vector_insert();
+	 test_vector_max_size();
+	 test_vector_operator_bracket();
+	 test_vector_operator_equal();
+	 test_vector_pop_back();
+	 test_vector_push_back();
+	 test_vector_rbegin();
+	 test_vector_relational_operators();
+	 test_vector_rend();
+	 test_vector_reserve();
+	 test_vector_size();
+	 test_vector_swap();
+	 test_vector_swap_overload();
+	 test_vector_assign_range();
+	 test_vector_comparisons_ge();
+	 vec_test_erase();
+	 vec_test_erase_mixed();
+	 vec_test_insert();
+	 vec_test_insert_size();
+	 vec_test_resize();
+	 vec_test_riterator();
+	 vec_test_riterator_comparisons();
+	 vec_test_swap();
 }

@@ -37,6 +37,17 @@
 		PRINT_ALL(vec);          \
 	}
 
+template < class T, class Alloc >
+void cmp(const vector< T, Alloc >& lhs, const vector< T, Alloc >& rhs)
+{
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############" << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs < rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs > rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
+
 template < typename T >
 void init_array(T* arr, std::size_t size)
 {
@@ -107,6 +118,28 @@ template < typename T >
 void print(const T& x)
 {
 	std::cout << x << '\n';
+}
+
+template < typename T >
+void printSize(vector< T > const& vct, bool print_content = true)
+{
+	const typename vector< T >::size_type size         = vct.size();
+	const typename vector< T >::size_type capacity     = vct.capacity();
+	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
+	// Cannot limit capacity's max value because it's implementation dependent
+
+	std::cout << "size: " << size << std::endl;
+	std::cout << "capacity: " << isCapacityOk << std::endl;
+	std::cout << "max_size: " << vct.max_size() << std::endl;
+	if (print_content)
+	{
+		typename vector< T >::const_iterator it  = vct.begin();
+		typename vector< T >::const_iterator ite = vct.end();
+		std::cout << std::endl << "Content is:" << std::endl;
+		for (; it != ite; ++it)
+			std::cout << "- " << *it << std::endl;
+	}
+	std::cout << "###############################################" << std::endl;
 }
 
 #endif /* VECTOR_PRELUDE_HPP */
